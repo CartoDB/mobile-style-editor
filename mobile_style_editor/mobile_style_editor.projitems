@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{0E98F186-1F61-4C7A-AC64-739590A9CE99}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>mobile_style_editor</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)EditorApplication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Base\BaseView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Base\" />
+    <Folder Include="$(MSBuildThisFileDirectory)New Folder\" />
+  </ItemGroup>
+</Project>

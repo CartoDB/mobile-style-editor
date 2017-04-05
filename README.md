@@ -9,7 +9,7 @@ ___________
 
 _Draft plan:_
 
-1. <del>Test Xamarin Forms text editor field - is it usable? if yes, use xamarin forms. if no, use native text control</del> **Forms Entry field does not support formatted text (on top of everything else that might go wrong), going native**
+1. <del>Test Xamarin Forms text editor field - is it usable? if yes, use xamarin forms. if no, use native text control</del> **Forms Entry field does not support formatted text. Still doing it in Forms, but need to use native text view**
 
 2. Style Viewer 
   - Tablet-oriented UI - left map, right css editor field
