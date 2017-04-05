@@ -13,9 +13,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Base\BaseView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EditorView\CSSEditor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Base\" />
-    <Folder Include="$(MSBuildThisFileDirectory)New Folder\" />
+    <Folder Include="$(MSBuildThisFileDirectory)EditorView\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
   </ItemGroup>
 </Project>

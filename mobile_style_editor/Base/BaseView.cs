@@ -4,22 +4,28 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class BaseView : AbsoluteLayout
+	public class BaseView : RelativeLayout
 	{
 		public BaseView()
 		{
-
 			SizeChanged += OnSizeChanged;
 		}
 
 		void OnSizeChanged(object sender, EventArgs e)
 		{
+			Children.Clear();
+
 			LayoutSubviews();
 		}
 
-		public void AddSubview(View view)
+		public void AddSubview(View view, Rectangle bounds)
 		{
-			Children.Add(view);
+			Children.Add(view, 
+			             Constraint.Constant(bounds.X), 
+			             Constraint.Constant(bounds.Y), 
+			             Constraint.Constant(bounds.Width), 
+			             Constraint.Constant(bounds.Height)
+			            );
 		}
 
 		public virtual void LayoutSubviews() { }

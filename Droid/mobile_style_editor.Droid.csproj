@@ -82,6 +82,9 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\packages\Xamarin.Forms.2.3.3.193\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+    <Reference Include="CartoMobileSDK.Android">
+      <HintPath>..\packages\CartoMobileSDK.Android.4.0.1\lib\MonoAndroid230\CartoMobileSDK.Android.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
