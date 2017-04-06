@@ -15,10 +15,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Base\BaseView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EditorView\CSSEditor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parser\Parser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Base\" />
     <Folder Include="$(MSBuildThisFileDirectory)EditorView\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Parser\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\cartodark.zip" />
   </ItemGroup>
 </Project>

@@ -10,6 +10,8 @@ namespace mobile_style_editor
 
 		public MainController()
 		{
+			new Parser();
+
 			ContentView = new MainView();
 			Content = ContentView;
 		}

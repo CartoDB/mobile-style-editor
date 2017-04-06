@@ -250,3 +250,22 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Mac/Xamarin
+
+*/bin/*
+*/obj/*
+packages/*
+Components/*
+*.userprefs
+
+.DS_Store
+
+.gradle
+*.iml
+.idea
+local.properties
+build
+
+*DS_Store
+app/libs/
