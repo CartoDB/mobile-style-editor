@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\Parser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parser\ZipData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Base\" />

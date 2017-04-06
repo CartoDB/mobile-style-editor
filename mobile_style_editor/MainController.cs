@@ -10,11 +10,16 @@ namespace mobile_style_editor
 
 		public MainController()
 		{
-			new Parser();
-
 			ContentView = new MainView();
 			Content = ContentView;
 		}
 
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
+			ZipData data = Parser.GetZipData();
+			ContentView.UpdateEditor(data);
+		}
 	}
 }

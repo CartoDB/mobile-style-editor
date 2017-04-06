@@ -17,8 +17,12 @@ namespace mobile_style_editor
 
 		static string Path;
 
-		public Parser()
+		public static ZipData GetZipData()
 		{
+			/* TODO
+			 * Loading from assets is a temporary solution
+			 * Eventually it will be a network query
+			 */
 			Assembly assembly = Assembly.GetAssembly(typeof(Parser));
 			string[] resources = assembly.GetManifestResourceNames();
 
@@ -30,15 +34,11 @@ namespace mobile_style_editor
 				}
 			}
 
-			if (Path == null)
-			{
-				// TODO Error handling
-				return;
-			}
-
 			string fileName = Style + ZipExtension;
 			string applicationFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 			string appFolder = System.IO.Path.Combine(applicationFolder, fileName);
+
+			ZipData data = new ZipData();
 
 			using (var output = File.Create(appFolder))
 			using (var input = assembly.GetManifestResourceStream(Path))
@@ -48,21 +48,24 @@ namespace mobile_style_editor
 
 			string newPath = applicationFolder;
 
+			data.ZipFile = Path;
+
 			List<string> paths = Decompress(appFolder, newPath);
+
 
 			foreach (string path in paths)
 			{
-				Console.WriteLine(".mss file path: " + path);
+				using (var streamReader = new StreamReader(path))
+				{
+					string content = streamReader.ReadToEnd();
+					data.DecompressedFiles.Add(content);
+				}
 			}
 
-			using (var streamReader = new StreamReader(paths[0]))
-			{
-				string content = streamReader.ReadToEnd();
-				System.Diagnostics.Debug.WriteLine(content);
-			}
+			return data;
 		}
 
-		public List<string> Decompress(string archiveFilenameIn, string outFolder)
+		public static List<string> Decompress(string archiveFilenameIn, string outFolder)
 		{
 			List<string> paths = new List<string>();
 
@@ -76,7 +79,8 @@ namespace mobile_style_editor
 				{
 					if (!zipEntry.IsFile)
 					{
-						continue;           // Ignore directories
+						// Ignore directories
+						continue;
 					}
 
 					string entryFileName = zipEntry.Name;
@@ -87,8 +91,8 @@ namespace mobile_style_editor
 						Console.WriteLine("Unzipped .mss file: " + entryFileName);
 					}
 
-					// to remove the folder from the entry:- entryFileName = Path.GetFileName(entryFileName);
-					// Optionally match entrynames against a selection list here to skip as desired.
+					// To remove the folder from the entry:- entryFileName = Path.GetFileName(entryFileName);
+					// Optionally, match entrynames against a selection list here to skip as desired.
 					// The unpacked length is available in the zipEntry.Size property.
 
 					byte[] buffer = new byte[4096];     // 4K is optimum
@@ -97,6 +101,7 @@ namespace mobile_style_editor
 					// Manipulate the output filename here as desired.
 					string fullZipToPath = System.IO.Path.Combine(outFolder, entryFileName);
 					string directoryName = System.IO.Path.GetDirectoryName(fullZipToPath);
+
 					if (directoryName.Length > 0)
 					{
 						Directory.CreateDirectory(directoryName);

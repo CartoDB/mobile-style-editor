@@ -25,7 +25,6 @@ namespace mobile_style_editor
 			MapView = new MapView(Forms.Context);
 #endif
 			Editor = new CSSEditor();
-			Editor.BackgroundColor = Color.Black;
 		}
 
 		public override void LayoutSubviews()
@@ -40,6 +39,13 @@ namespace mobile_style_editor
 			x += w;
 
 			AddSubview(Editor.ToView(), new Rectangle(x, y, w, h));
+		}
+
+
+		public void UpdateEditor(ZipData data)
+		{
+			// TODO All .mss files in tabs
+			Editor.Update(data.DecompressedFiles[0]);
 		}
 
 	}

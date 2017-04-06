@@ -13,7 +13,7 @@ namespace mobile_style_editor
 #elif __ANDROID__
 		public static Android.Graphics.Color ToNativeColor(this Color color)
 		{
-			var native = Android.Graphics.Color.Argb((int)color.A * 255, (int)color.R, (int)color.G, (int)color.B);
+			var native = Android.Graphics.Color.Argb((int)color.A * 255, (int)color.R * 255, (int)color.G * 255, (int)color.B * 255);
 			return native;
 		}
 #endif
