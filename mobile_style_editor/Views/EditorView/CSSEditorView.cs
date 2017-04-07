@@ -12,43 +12,36 @@ namespace mobile_style_editor
 {
 	public class CSSEditorView : BaseView
 	{
-		public BaseView Tabs { get; private set;}
-		public BaseView LineCount { get; private set; }
+		ZipData items;
+
 		public EditorField Field { get; private set; }
 
 		public CSSEditorView()
 		{
-			Tabs = new BaseView();
-			Tabs.BackgroundColor = Color.Yellow;
-
-			LineCount = new BaseView();
-			LineCount.BackgroundColor = Color.Red;
-
 			Field = new EditorField();
 		}
 
 		public override void LayoutSubviews()
 		{
-			double tabHeight = Height / 10;
+			base.LayoutSubviews();
 
 			double x = 0;
 			double y = 0;
 			double w = Width;
-			double h = tabHeight;
-
-			AddSubview(Tabs, x, y, w, h);
-
-			y += h;
-			w = 0;//Width / 15;
-			h = Height - tabHeight;
-
-			AddSubview(LineCount, x, y, w, h);
-
-			x += w;
-			w = Width - w;
+			double h = Height;
 
 			AddSubview(Field.ToView(), x, y, w, h);
+		}
 
+		public void Initialize(ZipData items)
+		{
+			this.items = items;
+			Update(0);
+		}
+
+		public void Update(int index)
+		{
+			Field.Update(items.DecompressedFiles[index]);
 		}
 	}
 }

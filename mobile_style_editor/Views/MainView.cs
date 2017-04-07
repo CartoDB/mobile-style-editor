@@ -13,12 +13,16 @@ namespace mobile_style_editor
 {
 	public class MainView : BaseView
 	{
+		public Toolbar Toolbar { get; private set; }
+
 		public MapView MapView { get; private set; }
 
 		public CSSEditorView Editor { get; private set; }
 
 		public MainView()
 		{
+			Toolbar = new Toolbar();
+			Toolbar.Tabs.OnTabTap += OnTabTapped;
 #if __IOS__
 			MapView = new MapView();
 #elif __ANDROID__
@@ -31,8 +35,14 @@ namespace mobile_style_editor
 		{
 			double x = 0;
 			double y = 0;
-			double w = Width / 3 * 1.9;
-			double h = Height;
+			double w = Width;
+			double h = Height / 7;
+
+			AddSubview(Toolbar, x, y, w, h);
+
+			y += h;
+			w = Width / 3 * 1.9;
+			h = Height - h;
 
 			AddSubview(MapView.ToView(), new Rectangle(x, y, w, h));
 
@@ -40,13 +50,28 @@ namespace mobile_style_editor
 			w = Width - w;
 
 			AddSubview(Editor, new Rectangle(x, y, w, h));
+
+			if (Data != null)
+			{
+				Editor.Initialize(Data);
+				Toolbar.Initialize(Data);
+			}
 		}
 
+		ZipData Data;
 
-		public void UpdateEditor(ZipData data)
+		public void Initialize(ZipData data)
 		{
-			// TODO All .mss files in tabs
-			Editor.Field.Update(data.DecompressedFiles[0]);
+			Data = data;
+			Editor.Initialize(Data);
+			Toolbar.Initialize(Data);
+		}
+
+		void OnTabTapped(object sender, EventArgs e)
+		{
+			FileTab tab = (FileTab)sender;
+
+			Editor.Update(tab.Index);
 		}
 
 	}

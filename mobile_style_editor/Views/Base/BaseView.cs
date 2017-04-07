@@ -38,6 +38,6 @@ namespace mobile_style_editor
 						);
 		}
 
-		public virtual void LayoutSubviews() { }
+		public virtual void LayoutSubviews() { Children.Clear(); }
 	}
 }

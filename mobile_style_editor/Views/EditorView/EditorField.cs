@@ -160,15 +160,13 @@ namespace mobile_style_editor
 #endif
 			System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
 			watch.Stop();
-
-
 		}
+
 #if __ANDROID__
 		public int ContentHeight
 		{
 			get
 			{
-
 				int padding = CompoundPaddingTop + CompoundPaddingBottom;
 
 				if ((int)Android.OS.Build.VERSION.SdkInt >= 16)

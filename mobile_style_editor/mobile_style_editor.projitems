@@ -11,20 +11,27 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)EditorApplication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainController.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MainView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Base\BaseView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EditorView\EditorField.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\Parser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\ZipData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EditorView\CSSEditorView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\EditorView\CSSEditorView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\EditorView\EditorField.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ToolbarView\FileTab.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ToolbarView\FileTabs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MainView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ToolbarView\Toolbar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeLabel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Base\" />
-    <Folder Include="$(MSBuildThisFileDirectory)EditorView\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
     <Folder Include="$(MSBuildThisFileDirectory)Parser\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\EditorView\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\ToolbarView\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\cartodark.zip" />

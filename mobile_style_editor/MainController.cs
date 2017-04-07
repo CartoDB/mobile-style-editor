@@ -18,8 +18,10 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
+			// TODO decompress on background thread
 			ZipData data = Parser.GetZipData();
-			ContentView.UpdateEditor(data);
+			ContentView.Initialize(data);
+
 		}
 	}
 }

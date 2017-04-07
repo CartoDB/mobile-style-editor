@@ -15,7 +15,12 @@ namespace mobile_style_editor
 		const string MSSExtension = ".mss";
 		const string ZipExtension = ".zip";
 
-		static string Path;
+		static string FileName { get { return Style + ZipExtension; } }
+		static string ApplicationFolder { get { return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); } }
+
+		static string FullFilePath { get { return Path.Combine(ApplicationFolder, FileName); } }
+
+		static string assetPath;
 
 		public static ZipData GetZipData()
 		{
@@ -30,28 +35,25 @@ namespace mobile_style_editor
 			{
 				if (resource.Contains(Style))
 				{
-					Path = resource;
+					assetPath = resource;
 				}
 			}
 
-			string fileName = Style + ZipExtension;
-			string applicationFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-			string appFolder = System.IO.Path.Combine(applicationFolder, fileName);
-
 			ZipData data = new ZipData();
 
-			using (var output = File.Create(appFolder))
-			using (var input = assembly.GetManifestResourceStream(Path))
+			using (var output = File.Create(FullFilePath))
+			using (var input = assembly.GetManifestResourceStream(assetPath))
 			{
 				input.CopyTo(output);
 			}
 
-			string newPath = applicationFolder;
+			string newPath = ApplicationFolder;
 
-			data.ZipFile = Path;
+			data.ZipFile = assetPath;
 
-			List<string> paths = Decompress(appFolder, newPath);
+			List<string> paths = Decompress(FullFilePath, newPath);
 
+			data.FilePaths = paths;
 
 			foreach (string path in paths)
 			{
@@ -105,8 +107,8 @@ namespace mobile_style_editor
 					Stream zipStream = zf.GetInputStream(zipEntry);
 
 					// Manipulate the output filename here as desired.
-					string fullZipToPath = System.IO.Path.Combine(outFolder, entryFileName);
-					string directoryName = System.IO.Path.GetDirectoryName(fullZipToPath);
+					string fullZipToPath = Path.Combine(outFolder, entryFileName);
+					string directoryName = Path.GetDirectoryName(fullZipToPath);
 
 					if (directoryName.Length > 0)
 					{
