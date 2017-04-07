@@ -8,6 +8,8 @@ namespace mobile_style_editor
 	{
 		MainView ContentView;
 
+		ZipData data;
+
 		public MainController()
 		{
 			ContentView = new MainView();
@@ -19,8 +21,43 @@ namespace mobile_style_editor
 			base.OnAppearing();
 
 			// TODO decompress on background thread
-			ZipData data = Parser.GetZipData();
+			data = Parser.GetZipData();
 			ContentView.Initialize(data);
+
+			ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
+			ContentView.Editor.SaveButton.Clicked += OnSave;
 		}
+
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
+
+			ContentView.Toolbar.Tabs.OnTabTap -= OnTabTapped;
+			ContentView.Editor.SaveButton.Clicked -= OnSave;
+		}
+
+		void OnSave(object sender, EventArgs e)
+		{
+			int index = ContentView.Toolbar.Tabs.ActiveIndex;
+			string text = ContentView.Editor.Text;
+
+			if (index == -1)
+			{
+				System.Diagnostics.Debug.WriteLine("Couldn't find a single active tab");
+				return;
+			}
+
+			string path = data.FilePaths[index];
+
+			FileWriter.ToPath(path, text);
+		}
+
+		void OnTabTapped(object sender, EventArgs e)
+		{
+			FileTab tab = (FileTab)sender;
+
+			ContentView.Editor.Update(tab.Index);
+		}
+
 	}
 }

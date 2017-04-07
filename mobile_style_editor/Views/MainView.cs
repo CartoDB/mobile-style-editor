@@ -22,7 +22,6 @@ namespace mobile_style_editor
 		public MainView()
 		{
 			Toolbar = new Toolbar();
-			Toolbar.Tabs.OnTabTap += OnTabTapped;
 #if __IOS__
 			MapView = new MapView();
 #elif __ANDROID__
@@ -33,8 +32,10 @@ namespace mobile_style_editor
 
 		public override void LayoutSubviews()
 		{
+			int iosPadding = 20;
+
 			double x = 0;
-			double y = Device.OnPlatform(20, 0, 0);
+			double y = Device.OnPlatform(iosPadding, 0, 0);
 			double w = Width;
 			double h = Height / 7;
 
@@ -42,7 +43,7 @@ namespace mobile_style_editor
 
 			y += h;
 			w = Width / 3 * 1.9;
-			h = Height - h;
+			h = Height - (h + iosPadding);
 
 			AddSubview(MapView.ToView(), new Rectangle(x, y, w, h));
 
@@ -66,13 +67,5 @@ namespace mobile_style_editor
 			Editor.Initialize(Data);
 			Toolbar.Initialize(Data);
 		}
-
-		void OnTabTapped(object sender, EventArgs e)
-		{
-			FileTab tab = (FileTab)sender;
-
-			Editor.Update(tab.Index);
-		}
-
 	}
 }

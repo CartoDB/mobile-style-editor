@@ -16,9 +16,16 @@ namespace mobile_style_editor
 
 		public EditorField Field { get; private set; }
 
+		public Button SaveButton { get; private set; }
+
+		public string Text { get { return Field.Text; } }
+
 		public CSSEditorView()
 		{
 			Field = new EditorField();
+
+			SaveButton = new Button();
+			SaveButton.BackgroundColor = Color.Red;
 		}
 
 		public override void LayoutSubviews()
@@ -31,6 +38,15 @@ namespace mobile_style_editor
 			double h = Height;
 
 			AddSubview(Field.ToView(), x, y, w, h);
+
+			double padding = 10;
+
+			w = 50;
+			h = w;
+			x = Width - (w + padding);
+			y = Height - (h + padding);
+
+			AddSubview(SaveButton, x, y, w, h);
 		}
 
 		public void Initialize(ZipData items)

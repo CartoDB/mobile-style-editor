@@ -9,6 +9,14 @@ namespace mobile_style_editor
 
 		public EventHandler<EventArgs> Tapped;
 
+		Color highlightedColor = Color.White;
+		Color normalizedColor = Color.Gray;
+
+		public bool IsHighlighted
+		{
+			get { return TextColor.Equals(highlightedColor); }
+		}
+
 		public FileTab(string text, int index)
 		{
 			Index = index;
@@ -35,12 +43,12 @@ namespace mobile_style_editor
 
 		public void Highlight()
 		{
-			TextColor = Color.White;
+			TextColor = highlightedColor;
 		}
 
 		public void Normalize()
 		{
-			TextColor = Color.Gray;
+			TextColor = normalizedColor;
 		}
 	}
 }

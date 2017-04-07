@@ -7,6 +7,22 @@ namespace mobile_style_editor
 {
 	public class FileTabs : BaseView
 	{
+		public int ActiveIndex 
+		{
+			get
+			{
+				foreach (FileTab tab in items)
+				{
+					if (tab.IsHighlighted)
+					{
+						return tab.Index;
+					}
+				}
+
+				return -1;
+			}
+		}
+
 		public EventHandler OnTabTap;
 
 		List<FileTab> items;
