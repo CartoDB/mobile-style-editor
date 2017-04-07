@@ -11,7 +11,7 @@ using Xamarin.Forms.Platform.Android;
 namespace mobile_style_editor
 {
 #if __IOS__
-	public class CSSEditor : UIKit.UITextField
+	public class CSSEditor : UIKit.UITextView
 #elif __ANDROID__
 	public class CSSEditor : Android.Widget.EditText
 #endif

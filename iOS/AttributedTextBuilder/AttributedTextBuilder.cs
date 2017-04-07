@@ -10,28 +10,29 @@ namespace mobile_style_editor.iOS
 	{
 		public string Text { get; private set; }
 
-		public Dictionary<NSDictionary, NSRange> Attributes { get; private set; }
+		public List<AttributeSection> Attributes { get; private set; }
 
 		public AttributedTextBuilder()
 		{
 			Text = "";
-			Attributes = new Dictionary<NSDictionary, NSRange>();
+			Attributes = new List<AttributeSection>();
 		}
 
 		public AttributedTextBuilder Append(string text, UIColor color, float size)
 		{
-			Text += text;
-			//Attributes.Add(GetColorAttributes(color), new NSRange(0
-			return this;	
+			Console.WriteLine(text);
+			Attributes.Add(new AttributeSection { Dictionary = GetColorAttributes(color), Range = new NSRange(Text.Length, text.Length) });
+           	Text += text;
+			return this;
 		}
 
 		public NSMutableAttributedString Build()
 		{
 			var result = new NSMutableAttributedString(Text);
 
-			foreach (KeyValuePair<NSDictionary, NSRange> item in Attributes)
+			foreach (AttributeSection item in Attributes)
 			{
-				result.SetAttributes(item.Key, item.Value);	
+				result.SetAttributes(item.Dictionary, item.Range);	
 			}
 
 			return result;
@@ -41,5 +42,12 @@ namespace mobile_style_editor.iOS
 		{
 			return new UIStringAttributes { ForegroundColor = color }.Dictionary;
 		}
+	}
+
+	public class AttributeSection
+	{
+		public NSDictionary Dictionary { get; set; }
+
+		public NSRange Range { get; set; }
 	}
 }
