@@ -31,12 +31,13 @@ namespace mobile_style_editor
 		{
 			double x = 0;
 			double y = 0;
-			double w = Width / 2;
+			double w = Width / 3 * 1.9;
 			double h = Height;
 
 			AddSubview(MapView.ToView(), new Rectangle(x, y, w, h));
 
 			x += w;
+			w = Width - w;
 
 			AddSubview(Editor.ToView(), new Rectangle(x, y, w, h));
 		}

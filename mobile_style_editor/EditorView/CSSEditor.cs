@@ -119,15 +119,21 @@ namespace mobile_style_editor
 				}
 				else
 				{
-					if (trimmed.Contains("["))
+					if (trimmed.Contains("#") || trimmed.Contains("["))
 					{
-						int firstIndex = trimmed.IndexOf('[');
-						int lastIndex = trimmed.LastIndexOf(']');
-						string blockHeader = trimmed.Substring(firstIndex, lastIndex + 1);
-						string remaining = trimmed.Substring(lastIndex + 1, trimmed.Length - (lastIndex + 1));
+						if (trimmed.Contains("{"))
+						{
+							int bracketIndex = line.IndexOf("{", StringComparison.Ordinal);
+							string blockHeader = line.Substring(0, bracketIndex);
+							string remaining = line.Substring(bracketIndex - 1, line.Length - (bracketIndex - 1));
 
-						builder.Append(blockHeader, blockHeaderColor.ToNativeColor(), size);
-						builder.Append(remaining + "\n", generalColor.ToNativeColor(), size);
+							builder.Append(blockHeader, blockHeaderColor.ToNativeColor(), size);
+							builder.Append(remaining + "\n", generalColor.ToNativeColor(), size);
+						}
+						else
+						{
+							builder.Append(withNewLine, blockHeaderColor.ToNativeColor(), size);
+						}
 					}
 					else
 					{
