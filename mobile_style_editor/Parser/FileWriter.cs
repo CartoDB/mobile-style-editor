@@ -7,7 +7,7 @@ namespace mobile_style_editor
 	{
 		public static void ToPath(string path, string text)
 		{
-			using (var streamWriter = new StreamWriter(path, true))
+			using (var streamWriter = new StreamWriter(path, false))
 			{
 				streamWriter.Write(text);
 			}
