@@ -13,11 +13,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Base\BaseView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EditorView\CSSEditor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EditorView\EditorField.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\Parser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\ZipData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EditorView\CSSEditorView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Base\" />

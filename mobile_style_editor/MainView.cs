@@ -15,7 +15,7 @@ namespace mobile_style_editor
 	{
 		public MapView MapView { get; private set; }
 
-		public CSSEditor Editor { get; private set; }
+		public CSSEditorView Editor { get; private set; }
 
 		public MainView()
 		{
@@ -24,7 +24,7 @@ namespace mobile_style_editor
 #elif __ANDROID__
 			MapView = new MapView(Forms.Context);
 #endif
-			Editor = new CSSEditor();
+			Editor = new CSSEditorView();
 		}
 
 		public override void LayoutSubviews()
@@ -39,14 +39,14 @@ namespace mobile_style_editor
 			x += w;
 			w = Width - w;
 
-			AddSubview(Editor.ToView(), new Rectangle(x, y, w, h));
+			AddSubview(Editor, new Rectangle(x, y, w, h));
 		}
 
 
 		public void UpdateEditor(ZipData data)
 		{
 			// TODO All .mss files in tabs
-			Editor.Update(data.DecompressedFiles[0]);
+			Editor.Field.Update(data.DecompressedFiles[0]);
 		}
 
 	}

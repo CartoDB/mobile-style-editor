@@ -11,9 +11,9 @@ using Xamarin.Forms.Platform.Android;
 namespace mobile_style_editor
 {
 #if __IOS__
-	public class CSSEditor : UIKit.UITextView
+	public class EditorField : UIKit.UITextView
 #elif __ANDROID__
-	public class CSSEditor : Android.Widget.EditText
+	public class EditorField : Android.Widget.EditText
 #endif
 	{
 		Color textColor;
@@ -46,7 +46,7 @@ namespace mobile_style_editor
 			}
 		}
 
-		public CSSEditor()
+		public EditorField()
 #if __ANDROID__
 		: base(Forms.Context)
 #endif
@@ -81,7 +81,7 @@ namespace mobile_style_editor
 			for (int i = 0; i < LineCount; i++)
 			{
 				int number = i + 1;
-				string text =  " ";
+				string text = " ";
 
 				if (number < 10)
 				{
@@ -160,6 +160,27 @@ namespace mobile_style_editor
 #endif
 			System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
 			watch.Stop();
+
+
 		}
+#if __ANDROID__
+		public int ContentHeight
+		{
+			get
+			{
+
+				int padding = CompoundPaddingTop + CompoundPaddingBottom;
+
+				if ((int)Android.OS.Build.VERSION.SdkInt >= 16)
+				{
+
+					return (int)Math.Round((LineCount * (LineHeight + LineSpacingExtra) * LineSpacingMultiplier)) + padding;
+				}
+
+				return LineCount * LineHeight + padding;
+			}
+		}
+#elif __IOS_
+#endif
 	}
 }

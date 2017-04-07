@@ -28,6 +28,16 @@ namespace mobile_style_editor
 			            );
 		}
 
+		public void AddSubview(View view, double x, double y, double w, double h)
+		{
+			Children.Add(view,
+						 Constraint.Constant(x),
+						 Constraint.Constant(y),
+			             Constraint.Constant(w),
+			             Constraint.Constant(h)
+						);
+		}
+
 		public virtual void LayoutSubviews() { }
 	}
 }
