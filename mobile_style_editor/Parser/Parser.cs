@@ -52,6 +52,7 @@ namespace mobile_style_editor
 			string newPath = Path.Combine(ApplicationFolder, BaseStyle);
 
 			data.ZipFile = assetPath;
+			data.FolderPath = newPath;
 
 			List<string> paths = Decompress(FullFilePath, newPath);
 

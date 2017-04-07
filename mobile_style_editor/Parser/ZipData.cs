@@ -8,6 +8,8 @@ namespace mobile_style_editor
 	{
 		public string ZipFile { get; set; }
 
+		public string FolderPath { get; set; }
+
 		public List<string> DecompressedFiles { get; set; }
 
 		public List<string> FilePaths { get; set; }
