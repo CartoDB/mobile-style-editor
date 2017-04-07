@@ -54,6 +54,7 @@ namespace mobile_style_editor
 			BackgroundColor = Color.FromRgb(50, 50, 50);
 			TextColor = Color.White;
 
+#if __ANDROID__
 			TextSize = 13f;
 
 			rect = new Android.Graphics.Rect();
@@ -66,8 +67,10 @@ namespace mobile_style_editor
 			paint.TextSize = paintSize;
 
 			SetPadding(2 * (int)paintSize, 0, 0, 0);
+#elif __IOS__
+#endif
 		}
-
+#if __ANDROID__
 		Android.Graphics.Rect rect;
 		Android.Graphics.Paint paint;
 
@@ -94,11 +97,17 @@ namespace mobile_style_editor
 			base.OnDraw(canvas);
 		}
 
+#elif __IOS__
+#endif
 		public void Update(string text)
 		{
 			string[] lines = text.Split('\n');
 
+#if __ANDROID__
 			var builder = new Droid.SimpleSpanBuilder();
+#elif __IOS__
+			var builder = new iOS.AttributedTextBuilder();
+#endif
 			float size = 1f;
 
 			// White
@@ -141,8 +150,11 @@ namespace mobile_style_editor
 					}
 				}
 			}
-
+#if __ANDROID__
 			TextFormatted = builder.Build();
+#elif __IOS__
+			AttributedText = builder.Build();
+#endif
 		}
 	}
 }

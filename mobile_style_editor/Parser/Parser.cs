@@ -67,12 +67,18 @@ namespace mobile_style_editor
 
 		public static List<string> Decompress(string archiveFilenameIn, string outFolder)
 		{
+			/* NB Need to manually link encoding for iOS:
+			 * Options -> iOS Build -> Additional mtouch aruments: -i18n=west
+			 * (http://stackoverflow.com/questions/4600923/monotouch-icsharpcode-sharpziplib-giving-an-error)
+			 */
+
 			List<string> paths = new List<string>();
 
 			ZipFile zf = null;
 			try
 			{
 				FileStream fs = File.OpenRead(archiveFilenameIn);
+
 				zf = new ZipFile(fs);
 
 				foreach (ZipEntry zipEntry in zf)
