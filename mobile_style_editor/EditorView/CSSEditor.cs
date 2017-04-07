@@ -96,7 +96,47 @@ namespace mobile_style_editor
 
 		public void Update(string text)
 		{
-			Text = text;
+			string[] lines = text.Split('\n');
+
+			var builder = new Droid.SimpleSpanBuilder();
+			float size = 1f;
+
+			// White
+			Color generalColor = Color.White;
+			// Light gray
+			Color commentColor = Color.FromRgb(120, 120, 120);
+			// Carto green
+			Color blockHeaderColor = Color.FromRgb(145, 198, 112);
+
+			foreach (string line in lines)
+			{
+				string trimmed = line.Trim();
+				string withNewLine = line + "\n";
+
+				if (trimmed.StartsWith("//", StringComparison.Ordinal))
+				{
+					builder.Append(withNewLine, commentColor.ToNativeColor(), size);
+				}
+				else
+				{
+					if (trimmed.Contains("["))
+					{
+						int firstIndex = trimmed.IndexOf('[');
+						int lastIndex = trimmed.LastIndexOf(']');
+						string blockHeader = trimmed.Substring(firstIndex, lastIndex + 1);
+						string remaining = trimmed.Substring(lastIndex + 1, trimmed.Length - (lastIndex + 1));
+
+						builder.Append(blockHeader, blockHeaderColor.ToNativeColor(), size);
+						builder.Append(remaining + "\n", generalColor.ToNativeColor(), size);
+					}
+					else
+					{
+						builder.Append(withNewLine, generalColor.ToNativeColor(), size);
+					}
+				}
+			}
+
+			TextFormatted = builder.Build();
 		}
 	}
 }
