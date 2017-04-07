@@ -21,7 +21,6 @@ namespace mobile_style_editor
 			// TODO decompress on background thread
 			ZipData data = Parser.GetZipData();
 			ContentView.Initialize(data);
-
 		}
 	}
 }

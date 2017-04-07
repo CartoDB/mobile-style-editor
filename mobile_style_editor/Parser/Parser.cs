@@ -75,29 +75,11 @@ namespace mobile_style_editor
 			instance.CreateEmptyDirectories = true;
 
 			string source = Path.Combine(ApplicationFolder, BaseStyle);
-			//string destination = Path.Combine(ApplicationFolder, "ZipTest.zip");
-			string destination = Path.Combine(ApplicationFolder, "ZipTest2.zip");
-			instance.CreateZip(destination, source, false, "");
+			string destination = Path.Combine(ApplicationFolder, UpdatedStyle + ZipExtension);
 
-			//if (File.Exists(destination))
-			//{
+			instance.CreateZip(destination, source, true, "");
 
-			//	Console.WriteLine("Done");
-			//}
-			//else
-			//{
-			//	Console.WriteLine("Failed");
-			//}
-			
-			//string outFile = UpdatedStyle + ZipExtension;
-			//string outPath = ApplicationFolder;
-
-			//int folderOffset = outPath.Length + (outPath.EndsWith("\\", StringComparison.Ordinal) ? 0 : 1);
-
-			FileStream fsOut = File.Create(destination);
-			ZipOutputStream zipStream = new ZipOutputStream(fsOut);
-
-			Compress(source + "/", zipStream, 0);
+			//Compress(source + "/", zipStream, 0);
 		}
 
 		public static List<string> Decompress(string archiveFilenameIn, string outFolder)
@@ -181,6 +163,8 @@ namespace mobile_style_editor
 				entryName = ZipEntry.CleanName(entryName); // Removes drive from name and fixes slash direction
 				ZipEntry newEntry = new ZipEntry(entryName);
 				newEntry.DateTime = fi.LastWriteTime; // Note the zip format stores 2 second granularity
+
+				newEntry.CompressionMethod = CompressionMethod.Deflated;
 
 				// Specifying the AESKeySize triggers AES encryption. Allowable values are 0 (off), 128 or 256.
 				// A password on the ZipOutputStream is required if using AES.
