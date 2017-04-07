@@ -20,7 +20,6 @@ namespace mobile_style_editor.iOS
 
 		public AttributedTextBuilder Append(string text, UIColor color, float size)
 		{
-			Console.WriteLine(text);
 			Attributes.Add(new AttributeSection { Dictionary = GetColorAttributes(color), Range = new NSRange(Text.Length, text.Length) });
            	Text += text;
 			return this;

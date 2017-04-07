@@ -101,6 +101,9 @@ namespace mobile_style_editor
 #endif
 		public void Update(string text)
 		{
+			var watch = new System.Diagnostics.Stopwatch();
+			watch.Start();
+
 			string[] lines = text.Split('\n');
 
 #if __ANDROID__
@@ -155,6 +158,8 @@ namespace mobile_style_editor
 #elif __IOS__
 			AttributedText = builder.Build();
 #endif
+			System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
+			watch.Stop();
 		}
 	}
 }
