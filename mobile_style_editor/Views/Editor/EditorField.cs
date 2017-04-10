@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 #if __IOS__
 using Xamarin.Forms.Platform.iOS;
+using UIKit;
 #elif __ANDROID__
 using Xamarin.Forms.Platform.Android;
 #endif
@@ -11,7 +12,7 @@ using Xamarin.Forms.Platform.Android;
 namespace mobile_style_editor
 {
 #if __IOS__
-	public class EditorField : UIKit.UITextView
+	public class EditorField : UITextView
 #elif __ANDROID__
 	public class EditorField : Android.Widget.EditText
 #endif
@@ -98,6 +99,43 @@ namespace mobile_style_editor
 		}
 
 #elif __IOS__
+		public override void Draw(CoreGraphics.CGRect rect)
+		{
+			Console.WriteLine(ContentSize.Height);
+
+			CoreGraphics.CGContext context = UIGraphics.GetCurrentContext();
+
+			foreach (UIView view in Subviews)
+			{
+				var type = view.GetType();
+				Console.WriteLine(type);
+			}
+
+			if (Font == null)
+			{
+				base.Draw(rect);
+				return;
+			}
+
+			nfloat lineHeight = Font.LineHeight;
+			nfloat lineCount = (ContentSize.Height - (ContentInset.Top + ContentInset.Bottom)) / lineHeight;
+			                    
+			for (int i = 0; i < lineCount; i++) {
+				//context.SaveState();
+
+				string text = i + ".";
+				var font = UIFont.SystemFontOfSize(12.0f);
+				var textRect = new CoreGraphics.CGPoint(1.0f, lineHeight * i);
+
+				text.DrawString(textRect, font);
+
+				//context.RestoreState();
+			}
+
+			UIGraphics.EndImageContext();
+
+			base.Draw(rect);
+		}
 #endif
 		public void Update(string text)
 		{
@@ -157,6 +195,7 @@ namespace mobile_style_editor
 			TextFormatted = builder.Build();
 #elif __IOS__
 			AttributedText = builder.Build();
+			this.SetNeedsDisplay();
 #endif
 			System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
 			watch.Stop();
