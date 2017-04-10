@@ -7,6 +7,10 @@ using Xamarin.Forms.Platform.iOS;
 using UIKit;
 #elif __ANDROID__
 using Xamarin.Forms.Platform.Android;
+using Android.Runtime;
+using Android.Views;
+using Android.Views.InputMethods;
+using Android.Widget;
 #endif
 
 namespace mobile_style_editor
@@ -14,7 +18,7 @@ namespace mobile_style_editor
 #if __IOS__
 	public class EditorField : UITextView, IUITextViewDelegate
 #elif __ANDROID__
-	public class EditorField : Android.Widget.EditText
+	public class EditorField : EditText
 #endif
 	{
 		public EventHandler<EventArgs> EditingEnded;
@@ -78,9 +82,12 @@ namespace mobile_style_editor
 			paint.TextSize = paintSize;
 
 			SetPadding(2 * (int)paintSize, 0, 0, 0);
+
+			ImeOptions = ImeAction.Done;
+			SetRawInputType(Android.Text.InputTypes.ClassText);
+
 #elif __IOS__
 			ReturnKeyType = UIReturnKeyType.Done;
-
 			Delegate = this;
 #endif
 		}
@@ -109,6 +116,19 @@ namespace mobile_style_editor
 				baseline += LineHeight;
 			}
 			base.OnDraw(canvas);
+		}
+
+		public override void OnEditorAction(ImeAction actionCode)
+		{
+			if (actionCode == ImeAction.Done)
+			{
+				if (EditingEnded != null)
+				{
+					var manager = (InputMethodManager)Context.GetSystemService("input_method");
+					manager.ToggleSoftInput(ShowFlags.Forced, 0);
+					EditingEnded(this, EventArgs.Empty);
+				}
+			}
 		}
 #elif __IOS__
 
