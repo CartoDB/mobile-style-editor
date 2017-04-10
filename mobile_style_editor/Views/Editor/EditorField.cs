@@ -12,11 +12,13 @@ using Xamarin.Forms.Platform.Android;
 namespace mobile_style_editor
 {
 #if __IOS__
-	public class EditorField : UITextView
+	public class EditorField : UITextView, IUITextViewDelegate
 #elif __ANDROID__
 	public class EditorField : Android.Widget.EditText
 #endif
 	{
+		public EventHandler<EventArgs> EditingEnded;
+
 		Color textColor;
 		public 
 #if __IOS__
@@ -77,6 +79,9 @@ namespace mobile_style_editor
 
 			SetPadding(2 * (int)paintSize, 0, 0, 0);
 #elif __IOS__
+			ReturnKeyType = UIReturnKeyType.Done;
+
+			Delegate = this;
 #endif
 		}
 #if __ANDROID__
@@ -104,6 +109,24 @@ namespace mobile_style_editor
 				baseline += LineHeight;
 			}
 			base.OnDraw(canvas);
+		}
+#elif __IOS__
+
+		[Foundation.Export("textView:shouldChangeTextInRange:replacementText:")]
+		public bool ShouldChangeText(UITextView textView, Foundation.NSRange range, string text)
+		{
+			if (text.Equals("\n"))
+			{
+				if (EditingEnded != null)
+				{
+					EditingEnded(this, EventArgs.Empty);	
+				}
+
+				ResignFirstResponder();
+				return false;
+			}
+
+			return true;
 		}
 #endif
 		public void Update(string text)

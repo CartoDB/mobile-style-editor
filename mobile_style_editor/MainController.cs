@@ -30,6 +30,7 @@ namespace mobile_style_editor
 			
 			ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
 			ContentView.Editor.SaveButton.Clicked += OnSave;
+			ContentView.Editor.Field.EditingEnded += OnSave;
 		}
 
 		protected override void OnDisappearing()
@@ -38,6 +39,7 @@ namespace mobile_style_editor
 
 			ContentView.Toolbar.Tabs.OnTabTap -= OnTabTapped;
 			ContentView.Editor.SaveButton.Clicked -= OnSave;
+			ContentView.Editor.Field.EditingEnded -= OnSave;
 		}
 
 		void OnSave(object sender, EventArgs e)
