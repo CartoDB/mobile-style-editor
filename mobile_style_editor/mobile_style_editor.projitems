@@ -15,13 +15,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Parser\Parser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\ZipData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\EditorView\CSSEditorView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\EditorView\EditorField.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\ToolbarView\FileTab.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\ToolbarView\FileTabs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Editor\CSSEditorView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Editor\EditorField.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\FileTab.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\FileTabs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\ToolbarView\Toolbar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\Toolbar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\FileUtils.cs" />
@@ -31,8 +31,8 @@
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
     <Folder Include="$(MSBuildThisFileDirectory)Parser\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Views\EditorView\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Views\ToolbarView\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Toolbar\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
   </ItemGroup>
   <ItemGroup>
