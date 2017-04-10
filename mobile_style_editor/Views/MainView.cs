@@ -80,13 +80,11 @@ namespace mobile_style_editor
 		{
 			MapView.Layers.Clear();
 
-			//BinaryData styleAsset = AssetUtils.LoadAsset("bright-cartocss-style.zip");
 			BinaryData styleAsset = new BinaryData(data);
 
 			var package = new ZippedAssetPackage(styleAsset);
 			CompiledStyleSet styleSet = new CompiledStyleSet(package);
 
-			// Create datasource and style decoder
 			var source = new CartoOnlineTileDataSource(OSM);
 			var decoder = new MBVectorTileDecoder(styleSet);
 

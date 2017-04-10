@@ -18,7 +18,6 @@ namespace mobile_style_editor
 		public Toolbar()
 		{
 			Tabs = new FileTabs();
-			BackgroundColor = Colors.CartoNavy;
 		}
 
 		public override void LayoutSubviews()
