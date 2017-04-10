@@ -13,7 +13,7 @@ namespace mobile_style_editor
 	{
 		//const string BaseStyle = "cartodark";
 		const string BaseStyle = "bright-cartocss-style";
-		const string UpdatedStyle = "updated_" + BaseStyle;
+		const string UpdatedStyle = "updated-" + BaseStyle;
 
 		const string MSSExtension = ".mss";
 		public const string ZipExtension = ".zip";
@@ -80,6 +80,10 @@ namespace mobile_style_editor
 			string destination = Path.Combine(ApplicationFolder, UpdatedStyle + ZipExtension);
 
 			instance.CreateZip(destination, source, true, "");
+
+			//FileStream baseStream = File.Create(destination);
+			//ZipOutputStream stream = new ZipOutputStream(baseStream);
+			//Compress(source, stream, 0);
 
 			return destination;
 		}
