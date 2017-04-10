@@ -24,6 +24,7 @@ _Draft plan:_
  - Support connect/browse/read/write file from Google Drive
 
 5. "Maybe future"
+ - define layer list (project.json) - create style from scratch use case
  - CSS style highlighting
  - CSS style helpers (precomplete, color selectors etc)
  - Xml style editor
