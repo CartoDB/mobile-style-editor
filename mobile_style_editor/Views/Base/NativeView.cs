@@ -19,7 +19,11 @@ namespace mobile_style_editor
 		}
 
 		Color backgroundColor;
-		public Color BackgroundColor
+		public
+#if __IOS__
+		new
+#endif
+		Color BackgroundColor
 		{
 			get { return backgroundColor; }
 			set
@@ -33,20 +37,25 @@ namespace mobile_style_editor
 			}
 		}
 
+#if __IOS__
 		public double Width { get { return (double)Frame.Width; } }
 		public double Height { get { return (double)Frame.Height; } }
+#elif __ANDROID__
+#endif
 
 #if __ANDROID__
-		public void AddSubview(UIKit.UIView view,
+		public void AddSubview(Android.Views.View view)
+		{
+			
+		}
 #elif __IOS__
-		public void AddSubview(UIKit.UIView view,
-#endif
-							   double x, double y, double w, double h)
+		public void AddSubview(UIKit.UIView view, double x, double y, double w, double h)
 		{
 			view.Frame = new CoreGraphics.CGRect(x, y, w, h);
 			AddSubview(view);
 		}
-
+#endif
+		                       
 		public virtual void OnTap(int x, int y)
 		{
 

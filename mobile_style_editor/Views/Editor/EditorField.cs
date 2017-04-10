@@ -18,7 +18,11 @@ namespace mobile_style_editor
 #endif
 	{
 		Color textColor;
-		public Color TextColor
+		public 
+#if __IOS__
+		new
+#endif
+		Color TextColor
 		{
 			get { return textColor; }
 			set
@@ -33,7 +37,11 @@ namespace mobile_style_editor
 		}
 
 		Color backgroundColor;
-		public Color BackgroundColor
+		public 
+#if __IOS__
+		new
+#endif
+		Color BackgroundColor
 		{
 			get { return backgroundColor; }
 			set
@@ -96,45 +104,6 @@ namespace mobile_style_editor
 				baseline += LineHeight;
 			}
 			base.OnDraw(canvas);
-		}
-
-#elif __IOS__
-		public override void Draw(CoreGraphics.CGRect rect)
-		{
-			Console.WriteLine(ContentSize.Height);
-
-			CoreGraphics.CGContext context = UIGraphics.GetCurrentContext();
-
-			foreach (UIView view in Subviews)
-			{
-				var type = view.GetType();
-				Console.WriteLine(type);
-			}
-
-			if (Font == null)
-			{
-				base.Draw(rect);
-				return;
-			}
-
-			nfloat lineHeight = Font.LineHeight;
-			nfloat lineCount = (ContentSize.Height - (ContentInset.Top + ContentInset.Bottom)) / lineHeight;
-			                    
-			for (int i = 0; i < lineCount; i++) {
-				//context.SaveState();
-
-				string text = i + ".";
-				var font = UIFont.SystemFontOfSize(12.0f);
-				var textRect = new CoreGraphics.CGPoint(1.0f, lineHeight * i);
-
-				text.DrawString(textRect, font);
-
-				//context.RestoreState();
-			}
-
-			UIGraphics.EndImageContext();
-
-			base.Draw(rect);
 		}
 #endif
 		public void Update(string text)

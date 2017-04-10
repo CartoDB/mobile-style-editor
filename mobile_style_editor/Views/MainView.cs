@@ -38,10 +38,10 @@ namespace mobile_style_editor
 
 		public override void LayoutSubviews()
 		{
-			int iosPadding = 20;
+			int platformPadding = Device.OnPlatform(20, 0, 0);
 
 			double x = 0;
-			double y = Device.OnPlatform(iosPadding, 0, 0);
+			double y = platformPadding;
 			double w = Width;
 			double h = Height / 7;
 
@@ -49,7 +49,7 @@ namespace mobile_style_editor
 
 			y += h;
 			w = Width / 3 * 1.9;
-			h = Height - (h + iosPadding);
+			h = Height - (h + platformPadding);
 
 			AddSubview(MapView.ToView(), new Rectangle(x, y, w, h));
 
