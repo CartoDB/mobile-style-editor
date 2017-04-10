@@ -1,5 +1,6 @@
 ﻿
 using System;
+using Carto.Core;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -24,6 +25,9 @@ namespace mobile_style_editor
 			data = Parser.GetZipData();
 			ContentView.Initialize(data);
 
+			byte[] zipBytes = FileUtils.PathToByteData(data.FolderPath + Parser.ZipExtension);
+			ContentView.UpdateMap(zipBytes);
+			
 			ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
 			ContentView.Editor.SaveButton.Clicked += OnSave;
 		}
@@ -48,8 +52,11 @@ namespace mobile_style_editor
 			}
 
 			string path = data.FilePaths[index];
+			string zipPath = Parser.ZipData();
 
-			FileWriter.ToPath(path, text);
+			byte[] zipBytes = FileUtils.PathToByteData(zipPath);
+
+			ContentView.UpdateMap(zipBytes);
 		}
 
 		void OnTabTapped(object sender, EventArgs e)

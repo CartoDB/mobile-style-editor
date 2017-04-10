@@ -13,7 +13,7 @@ namespace mobile_style_editor
 #endif
 		public EditorApplication()
 		{
-#if __IOS
+#if __IOS__
 			MapView.RegisterLicense(CartoLicense);
 #elif __ANDROID__
 			MapView.RegisterLicense(CartoLicense, Forms.Context);

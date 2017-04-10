@@ -1,6 +1,12 @@
 ﻿
 using System;
+using Carto.Core;
+using Carto.DataSources;
+using Carto.Layers;
+using Carto.Styles;
 using Carto.Ui;
+using Carto.Utils;
+using Carto.VectorTiles;
 using Xamarin.Forms;
 
 #if __IOS__
@@ -66,6 +72,27 @@ namespace mobile_style_editor
 			Data = data;
 			Editor.Initialize(Data);
 			Toolbar.Initialize(Data);
+		}
+
+		const string OSM = "nutiteq.osm";
+
+		public void UpdateMap(byte[] data)
+		{
+			MapView.Layers.Clear();
+
+			BinaryData styleAsset = AssetUtils.LoadAsset("cartodark.zip");
+			//BinaryData styleAsset = new BinaryData(data);
+
+			var package = new ZippedAssetPackage(styleAsset);
+			CompiledStyleSet styleSet = new CompiledStyleSet(package);
+
+			// Create datasource and style decoder
+			var source = new CartoOnlineTileDataSource(OSM);
+			var decoder = new MBVectorTileDecoder(styleSet);
+
+			var layer = new VectorTileLayer(source, decoder);
+
+			MapView.Layers.Add(layer);
 		}
 	}
 }

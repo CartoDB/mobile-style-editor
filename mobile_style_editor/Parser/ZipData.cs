@@ -6,7 +6,7 @@ namespace mobile_style_editor
 {
 	public class ZipData
 	{
-		public string ZipFile { get; set; }
+		public string AssetZipFile { get; set; }
 
 		public string FolderPath { get; set; }
 

@@ -15,7 +15,7 @@ namespace mobile_style_editor
 		const string UpdatedStyle = "updated_cartodark";
 
 		const string MSSExtension = ".mss";
-		const string ZipExtension = ".zip";
+		public const string ZipExtension = ".zip";
 
 		static string FileName { get { return BaseStyle + ZipExtension; } }
 		static string ApplicationFolder { get { return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); } }
@@ -51,7 +51,7 @@ namespace mobile_style_editor
 
 			string newPath = Path.Combine(ApplicationFolder, BaseStyle);
 
-			data.ZipFile = assetPath;
+			data.AssetZipFile = assetPath;
 			data.FolderPath = newPath;
 
 			List<string> paths = Decompress(FullFilePath, newPath);
@@ -70,7 +70,7 @@ namespace mobile_style_editor
 			return data;
 		}
 
-		public static void ZipData()
+		public static string ZipData()
 		{
 			FastZip instance = new FastZip();
 			instance.CreateEmptyDirectories = true;
@@ -80,7 +80,7 @@ namespace mobile_style_editor
 
 			instance.CreateZip(destination, source, true, "");
 
-			//Compress(source + "/", zipStream, 0);
+			return destination;
 		}
 
 		public static List<string> Decompress(string archiveFilenameIn, string outFolder)

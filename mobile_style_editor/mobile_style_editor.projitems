@@ -24,7 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\ToolbarView\Toolbar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeLabel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Parser\FileWriter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parser\FileUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />

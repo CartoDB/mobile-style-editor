@@ -37,5 +37,19 @@ namespace mobile_style_editor
 			Tabs.Highlight(0);
 		}
 
+		public async void Expand()
+		{
+			Rectangle rect = new Rectangle(X, Y, Width, 1000);
+			Console.WriteLine(Width + " - " + Height);
+			//await this.LayoutTo(rect, 300, Easing.CubicIn);
+			HeightRequest = 1000;
+			//LayoutTo(rect, 300, Easing.CubicIn);
+		}
+
+		public void Collapse()
+		{
+			
+		}
+
 	}
 }
