@@ -1,0 +1,55 @@
+{
+  "name": "nutibright",
+  "layers": [
+    "housenum_label",
+    "waterway_label",
+    "road_label",
+    "poi_label",
+    "water_label",
+    "place_label",
+    "state_label",
+    "marine_label",
+    "country_label",
+    "country_label_line",
+    "admin",
+    "bridge",
+    "road",
+    "tunnel",
+    "landuse_overlay",
+    "building",
+    "barrier_line",
+    "aeroway",
+    "water",
+    "waterway",
+    "landuse"
+  ],
+  "styles": [
+    "style.mss",
+    "road.mss",
+    "labels.mss"
+  ],
+
+  "nutiparameters": {
+     "texts3d": { "default": "point", "values": {
+        "0": "point",
+        "1": "nutibillboard"
+     } },
+     "markers3d": { "default": "point", "values": {
+        "0": "point",
+        "1": "nutibillboard"
+     } },
+     "shields3d": { "default": "point", "values": {
+        "0": "point",
+        "1": "nutibillboard"
+     } },
+     "buildings3d": { "default": false, "values": {
+        "0": false,
+        "1": true
+     } },
+     "_pixelscale" : { "default": 1.0 },
+     "_fontscale" : { "default": 1.2 }
+    }
+}
+
+
+

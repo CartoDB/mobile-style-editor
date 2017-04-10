@@ -36,6 +36,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style-with-params.zip" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style.zip" />
   </ItemGroup>
 </Project>

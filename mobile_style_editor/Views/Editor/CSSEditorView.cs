@@ -25,7 +25,10 @@ namespace mobile_style_editor
 			Field = new EditorField();
 
 			SaveButton = new Button();
-			SaveButton.BackgroundColor = Color.Red;
+			SaveButton.BackgroundColor = Colors.CartoRed;
+
+			var source = new FileImageSource { File = "icon_save_white.png" };
+			SaveButton.Image = source;
 		}
 
 		public override void LayoutSubviews()
@@ -46,6 +49,7 @@ namespace mobile_style_editor
 			x = Width - (w + padding);
 			y = Height - (h + padding);
 
+			SaveButton.BorderRadius = (int)(w / 2);
 			AddSubview(SaveButton, x, y, w, h);
 		}
 

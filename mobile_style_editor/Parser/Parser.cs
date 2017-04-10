@@ -36,7 +36,7 @@ namespace mobile_style_editor
 
 			foreach (var resource in resources)
 			{
-				if (resource.Contains(BaseStyle))
+				if (resource.Contains(BaseStyle) && !resource.Contains("width-params"))
 				{
 					assetPath = resource;
 				}
