@@ -24,7 +24,7 @@ namespace mobile_style_editor
 		public EventHandler<EventArgs> EditingEnded;
 
 		Color textColor;
-		public 
+		public
 #if __IOS__
 		new
 #endif
@@ -43,7 +43,7 @@ namespace mobile_style_editor
 		}
 
 		Color backgroundColor;
-		public 
+		public
 #if __IOS__
 		new
 #endif
@@ -139,7 +139,7 @@ namespace mobile_style_editor
 			{
 				if (EditingEnded != null)
 				{
-					EditingEnded(this, EventArgs.Empty);	
+					EditingEnded(this, EventArgs.Empty);
 				}
 
 				ResignFirstResponder();
@@ -148,6 +148,7 @@ namespace mobile_style_editor
 
 			return true;
 		}
+
 #endif
 		public void Update(string text)
 		{
@@ -229,7 +230,7 @@ namespace mobile_style_editor
 				return LineCount * LineHeight + padding;
 			}
 		}
-#elif __IOS_
+#elif __IOS__
 #endif
 	}
 }
