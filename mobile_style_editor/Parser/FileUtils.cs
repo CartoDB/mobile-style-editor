@@ -16,7 +16,6 @@ namespace mobile_style_editor
 		public static byte[] PathToByteData(string path)
 		{
 			return File.ReadAllBytes(path);
-
 		}
 	}
 }

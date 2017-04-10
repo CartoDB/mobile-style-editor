@@ -175,7 +175,7 @@ namespace mobile_style_editor
 						{
 							int bracketIndex = line.IndexOf("{", StringComparison.Ordinal);
 							string blockHeader = line.Substring(0, bracketIndex);
-							string remaining = line.Substring(bracketIndex - 1, line.Length - (bracketIndex - 1));
+							string remaining = line.Substring(bracketIndex, line.Length - bracketIndex);
 
 							builder.Append(blockHeader, blockHeaderColor.ToNativeColor(), size);
 							builder.Append(remaining + "\n", generalColor.ToNativeColor(), size);
