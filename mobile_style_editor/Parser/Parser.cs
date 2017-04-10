@@ -11,8 +11,9 @@ namespace mobile_style_editor
 {
 	public class Parser
 	{
-		const string BaseStyle = "cartodark";
-		const string UpdatedStyle = "updated_cartodark";
+		//const string BaseStyle = "cartodark";
+		const string BaseStyle = "bright-cartocss-style";
+		const string UpdatedStyle = "updated_" + BaseStyle;
 
 		const string MSSExtension = ".mss";
 		public const string ZipExtension = ".zip";

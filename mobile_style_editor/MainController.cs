@@ -52,6 +52,9 @@ namespace mobile_style_editor
 			}
 
 			string path = data.FilePaths[index];
+
+			FileUtils.OverwriteFileAtPath(path, text);
+
 			string zipPath = Parser.ZipData();
 
 			byte[] zipBytes = FileUtils.PathToByteData(zipPath);

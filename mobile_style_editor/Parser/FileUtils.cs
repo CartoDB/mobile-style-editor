@@ -5,7 +5,7 @@ namespace mobile_style_editor
 {
 	public class FileUtils
 	{
-		public static void ToPath(string path, string text)
+		public static void OverwriteFileAtPath(string path, string text)
 		{
 			using (var streamWriter = new StreamWriter(path, false))
 			{

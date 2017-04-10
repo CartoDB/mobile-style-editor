@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\FileUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Colors.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
@@ -36,5 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\cartodark.zip" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style.zip" />
   </ItemGroup>
 </Project>
