@@ -11,6 +11,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+#elif __UWP__
+
 #endif
 
 namespace mobile_style_editor
@@ -19,8 +21,10 @@ namespace mobile_style_editor
 	public class EditorField : UITextView, IUITextViewDelegate
 #elif __ANDROID__
 	public class EditorField : EditText
+#elif __UWP__
+        public class EditorField : TextBox
 #endif
-	{
+    {
 		public EventHandler<EventArgs> EditingEnded;
 
 		Color textColor;
