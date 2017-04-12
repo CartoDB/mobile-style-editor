@@ -57,14 +57,20 @@ namespace mobile_style_editor
 
 		public void OnConnected(Bundle connectionHint)
 		{
-			//IDriveApiDriveIdResult result = DriveClass.DriveApi.FetchDriveId(client, "0B0Ei_rDifAKORGkzTjZ6VnZnUW8")
-			//                                          .JavaCast<IDriveApiDriveIdResult>();
-			DriveClass.DriveApi.FetchDriveId(client, "0B0Ei_rDifAKORGkzTjZ6VnZnUW8").SetResultCallback(new FetchIdCallback());
-			Query();
+			Test();
 		}
 
-		public async void Query()
+		public async void Test()
 		{
+			IntentSender intentSender = DriveClass.DriveApi
+				.NewOpenFileActivityBuilder()
+				.SetMimeType(new string[] { "application/zip" })
+				.Build(client);
+			((Activity)context).StartIntentSenderForResult(
+					intentSender, RequestCode_OPENER, null, 0, 0, 0);
+			return;
+
+			// Method for creating a folder. Non-functional
 			MetadataChangeSet.Builder changeset = new MetadataChangeSet.Builder();
 			changeset.SetTitle("testTitle");
 			changeset.SetDescription("testDescription");
@@ -107,6 +113,9 @@ namespace mobile_style_editor
 		}
 
 		public const int RequestCode_RESOLUTION = 1;
+		public const int RequestCode_OPENER = 2;
+
+		public const string Response_DRIVEID = "response_drive_id";
 
 		public void OnConnectionFailed(ConnectionResult result)
 		{

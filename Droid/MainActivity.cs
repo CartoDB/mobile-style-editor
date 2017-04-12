@@ -34,6 +34,14 @@ namespace mobile_style_editor.Droid
 					DriveClient.Instance.Connect();
 				}
 			}
+			else if (requestCode == DriveClient.RequestCode_OPENER)
+			{
+				if (resultCode == Result.Ok)
+				{
+					var driveId = (Android.Gms.Drive.DriveId)data.GetParcelableExtra(DriveClient.Response_DRIVEID);
+					Console.WriteLine("Drive id: " + driveId);
+				}
+			}
 		}
 
 	}
