@@ -1,6 +1,6 @@
 ﻿
 using System;
-using Carto.Core;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -21,13 +21,22 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
-			// TODO decompress on background thread
-			data = Parser.GetZipData();
-			ContentView.Initialize(data);
+			Task.Run(delegate
+			{
+				data = Parser.GetZipData();
+				Device.BeginInvokeOnMainThread(delegate
+				{
+					ContentView.Initialize(data);
+				});
 
-			byte[] zipBytes = FileUtils.PathToByteData(data.FolderPath + Parser.ZipExtension);
-			ContentView.UpdateMap(zipBytes);
-			
+				byte[] zipBytes = FileUtils.PathToByteData(data.FolderPath + Parser.ZipExtension);
+
+				Device.BeginInvokeOnMainThread(delegate
+				{
+					ContentView.UpdateMap(zipBytes);
+				});
+			});
+
 			ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
 			ContentView.Editor.SaveButton.Clicked += OnSave;
 			ContentView.Editor.Field.EditingEnded += OnSave;
@@ -53,15 +62,21 @@ namespace mobile_style_editor
 				return;
 			}
 
-			string path = data.FilePaths[index];
+			Task.Run(delegate
+			{
+				string path = data.FilePaths[index];
 
-			FileUtils.OverwriteFileAtPath(path, text);
+				FileUtils.OverwriteFileAtPath(path, text);
 
-			string zipPath = Parser.ZipData();
+				string zipPath = Parser.ZipData();
 
-			byte[] zipBytes = FileUtils.PathToByteData(zipPath);
+				byte[] zipBytes = FileUtils.PathToByteData(zipPath);
 
-			ContentView.UpdateMap(zipBytes);
+				Device.BeginInvokeOnMainThread(delegate
+				{
+					ContentView.UpdateMap(zipBytes);
+				});
+			});
 		}
 
 		void OnTabTapped(object sender, EventArgs e)

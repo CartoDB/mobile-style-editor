@@ -80,17 +80,24 @@ namespace mobile_style_editor
 		{
 			MapView.Layers.Clear();
 
-			BinaryData styleAsset = new BinaryData(data);
+			System.Threading.Tasks.Task.Run(delegate
+			{
+				Console.WriteLine("Update map: starting");
+				BinaryData styleAsset = new BinaryData(data);
 
-			var package = new ZippedAssetPackage(styleAsset);
-			CompiledStyleSet styleSet = new CompiledStyleSet(package);
+				var package = new ZippedAssetPackage(styleAsset);
+				var styleSet = new CompiledStyleSet(package);
 
-			var source = new CartoOnlineTileDataSource(OSM);
-			var decoder = new MBVectorTileDecoder(styleSet);
+				var source = new CartoOnlineTileDataSource(OSM);
+				var decoder = new MBVectorTileDecoder(styleSet);
 
-			var layer = new VectorTileLayer(source, decoder);
-
-			MapView.Layers.Add(layer);
+				var layer = new VectorTileLayer(source, decoder);
+				Device.BeginInvokeOnMainThread(delegate
+				{
+					MapView.Layers.Add(layer);
+					Console.WriteLine("Update map: complete");
+				});
+			});
 		}
 	}
 }

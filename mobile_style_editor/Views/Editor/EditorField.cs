@@ -155,63 +155,69 @@ namespace mobile_style_editor
 			var watch = new System.Diagnostics.Stopwatch();
 			watch.Start();
 
-			string[] lines = text.Split('\n');
+			System.Threading.Tasks.Task.Run(delegate
+			{
+				string[] lines = text.Split('\n');
 
 #if __ANDROID__
-			var builder = new Droid.SimpleSpanBuilder();
+				var builder = new Droid.SimpleSpanBuilder();
 #elif __IOS__
-			var builder = new iOS.AttributedTextBuilder();
+				var builder = new iOS.AttributedTextBuilder();
 #endif
-			float size = 1f;
+				float size = 1f;
 
-			// White
-			Color generalColor = Color.White;
-			// Light gray
-			Color commentColor = Color.FromRgb(120, 120, 120);
-			// Carto green
-			Color blockHeaderColor = Color.FromRgb(145, 198, 112);
+				// White
+				Color generalColor = Color.White;
+				// Light gray
+				Color commentColor = Color.FromRgb(120, 120, 120);
+				// Carto green
+				Color blockHeaderColor = Color.FromRgb(145, 198, 112);
 
-			foreach (string line in lines)
-			{
-				string trimmed = line.Trim();
-				string withNewLine = line + "\n";
-
-				if (trimmed.StartsWith("//", StringComparison.Ordinal))
+				foreach (string line in lines)
 				{
-					builder.Append(withNewLine, commentColor.ToNativeColor(), size);
-				}
-				else
-				{
-					if (trimmed.Contains("#") || trimmed.Contains("["))
+					string trimmed = line.Trim();
+					string withNewLine = line + "\n";
+
+					if (trimmed.StartsWith("//", StringComparison.Ordinal))
 					{
-						if (trimmed.Contains("{"))
-						{
-							int bracketIndex = line.IndexOf("{", StringComparison.Ordinal);
-							string blockHeader = line.Substring(0, bracketIndex);
-							string remaining = line.Substring(bracketIndex, line.Length - bracketIndex);
-
-							builder.Append(blockHeader, blockHeaderColor.ToNativeColor(), size);
-							builder.Append(remaining + "\n", generalColor.ToNativeColor(), size);
-						}
-						else
-						{
-							builder.Append(withNewLine, blockHeaderColor.ToNativeColor(), size);
-						}
+						builder.Append(withNewLine, commentColor.ToNativeColor(), size);
 					}
 					else
 					{
-						builder.Append(withNewLine, generalColor.ToNativeColor(), size);
+						if (trimmed.Contains("#") || trimmed.Contains("["))
+						{
+							if (trimmed.Contains("{"))
+							{
+								int bracketIndex = line.IndexOf("{", StringComparison.Ordinal);
+								string blockHeader = line.Substring(0, bracketIndex);
+								string remaining = line.Substring(bracketIndex, line.Length - bracketIndex);
+
+								builder.Append(blockHeader, blockHeaderColor.ToNativeColor(), size);
+								builder.Append(remaining + "\n", generalColor.ToNativeColor(), size);
+							}
+							else
+							{
+								builder.Append(withNewLine, blockHeaderColor.ToNativeColor(), size);
+							}
+						}
+						else
+						{
+							builder.Append(withNewLine, generalColor.ToNativeColor(), size);
+						}
 					}
 				}
-			}
+				Device.BeginInvokeOnMainThread(delegate
+				{
 #if __ANDROID__
-			TextFormatted = builder.Build();
+					TextFormatted = builder.Build();
 #elif __IOS__
-			AttributedText = builder.Build();
-			this.SetNeedsDisplay();
+					AttributedText = builder.Build();
 #endif
-			System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
-			watch.Stop();
+				});
+
+				System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
+				watch.Stop();
+			});
 		}
 
 #if __ANDROID__
