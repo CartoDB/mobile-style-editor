@@ -17,6 +17,8 @@ namespace mobile_style_editor
 			MapView.RegisterLicense(CartoLicense);
 #elif __ANDROID__
 			MapView.RegisterLicense(CartoLicense, Forms.Context);
+			DriveClient.Instance.Register(Forms.Context);
+			DriveClient.Instance.Connect();
 #endif
 			MainPage = new MainController();
 		}

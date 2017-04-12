@@ -24,5 +24,17 @@ namespace mobile_style_editor.Droid
 
 			LoadApplication(new EditorApplication());
 		}
+
+		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+		{
+			if (requestCode == DriveClient.RequestCode_RESOLUTION)
+			{
+				if (resultCode == Result.Ok)
+				{
+					DriveClient.Instance.Connect();
+				}
+			}
+		}
+
 	}
 }

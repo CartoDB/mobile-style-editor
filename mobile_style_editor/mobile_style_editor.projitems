@@ -26,6 +26,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\FileUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Colors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\GoogleExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
@@ -34,6 +36,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Toolbar\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Google\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style-with-params.zip" />
