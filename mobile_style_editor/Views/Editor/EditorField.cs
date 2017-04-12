@@ -133,7 +133,7 @@ namespace mobile_style_editor
 #elif __IOS__
 
 		[Foundation.Export("textView:shouldChangeTextInRange:replacementText:")]
-		public bool ShouldChangeText(UITextView textView, Foundation.NSRange range, string text)
+		public new bool ShouldChangeText(UITextView textView, Foundation.NSRange range, string text)
 		{
 			if (text.Equals("\n"))
 			{
