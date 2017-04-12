@@ -38,8 +38,6 @@ namespace mobile_style_editor
 
 		public bool IsConnecting { get { return client.IsConnecting; } }
 
-		public ResultCallback Result { get; private set; }
-
 		public void Register(Context context)
 		{
 			this.context = context;
@@ -47,6 +45,7 @@ namespace mobile_style_editor
 			GoogleApiClient.Builder builder = new GoogleApiClient.Builder(context, this, this);
 			builder.AddApi(DriveClass.API);
 			builder.AddScope(DriveClass.ScopeFile);
+			//builder.AddScope(new Scope("https://www.googleapis.com/auth/drive"));
 
 			client = builder.Build();
 		}
@@ -58,16 +57,32 @@ namespace mobile_style_editor
 
 		public void OnConnected(Bundle connectionHint)
 		{
+			//IDriveApiDriveIdResult result = DriveClass.DriveApi.FetchDriveId(client, "0B0Ei_rDifAKORGkzTjZ6VnZnUW8")
+			//                                          .JavaCast<IDriveApiDriveIdResult>();
+			DriveClass.DriveApi.FetchDriveId(client, "0B0Ei_rDifAKORGkzTjZ6VnZnUW8").SetResultCallback(new FetchIdCallback());
 			Query();
 		}
 
 		public async void Query()
 		{
+			MetadataChangeSet.Builder changeset = new MetadataChangeSet.Builder();
+			changeset.SetTitle("testTitle");
+			changeset.SetDescription("testDescription");
+
+			IDriveFolder appFolder = DriveClass.DriveApi.GetAppFolder(client);
+			if (appFolder != null)
+			{
+				await appFolder.CreateFolder(client, changeset.Build());
+			}
+			else
+			{
+				Console.WriteLine(":( appFolder is still null");
+			}
+
 			QueryClass query = new QueryClass.Builder().Build();
 
 			// Method 1 for getting Drive files/folders
-			Result = new ResultCallback();
-			DriveClass.DriveApi.Query(client, query).SetResultCallback(Result);
+			DriveClass.DriveApi.Query(client, query).SetResultCallback(new QueryCallback());
 
 			// Method 2 for getting Drive files/folders
 			IDriveFolder folder = DriveClass.DriveApi.GetRootFolder(client);
@@ -118,11 +133,20 @@ namespace mobile_style_editor
 		}
 	}
 
-	public class ResultCallback : Java.Lang.Object, IResultCallback
+	public class QueryCallback : Java.Lang.Object, IResultCallback
 	{
 		public void OnResult(Java.Lang.Object result)
 		{
 			IDriveApiMetadataBufferResult parsed = result.JavaCast<IDriveApiMetadataBufferResult>();
+			Console.WriteLine(parsed);
+		}
+	}
+
+	public class FetchIdCallback : Java.Lang.Object, IResultCallback
+	{
+		public void OnResult(Java.Lang.Object result)
+		{
+			IDriveApiDriveIdResult parsed = result.JavaCast<IDriveApiDriveIdResult>();
 			Console.WriteLine(parsed);
 		}
 	}
