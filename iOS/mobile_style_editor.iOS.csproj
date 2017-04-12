@@ -132,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon_save_white%402x.png" />
+    <BundleResource Include="Resources\icon_drive.png" />
   </ItemGroup>
   <Import Project="..\mobile_style_editor\mobile_style_editor.projitems" Label="Shared" Condition="Exists('..\mobile_style_editor\mobile_style_editor.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

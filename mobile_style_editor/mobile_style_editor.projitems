@@ -28,6 +28,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Colors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\GoogleExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PickerController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\PickerView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\PickerViewItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
@@ -37,6 +40,8 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Toolbar\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
     <Folder Include="$(MSBuildThisFileDirectory)Google\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Picker\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style-with-params.zip" />
