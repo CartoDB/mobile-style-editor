@@ -115,9 +115,34 @@ namespace mobile_style_editor
 				var layer = new VectorTileLayer(source, decoder);
 				Device.BeginInvokeOnMainThread(delegate
 				{
-					//MapView.Layers.Add(layer);
+					MapView.Layers.Add(layer);
 					Console.WriteLine("Update map: complete");
 				});
+
+				// TODO just set new compiled style set, not recreate the layer.
+				// But for some reason this does not change the style set
+
+				//if (MapView.Layers.Count == 0)
+				//{
+				//	var source = new CartoOnlineTileDataSource(OSM);
+				//	var decoder = new MBVectorTileDecoder(styleSet);
+
+				//	var layer = new VectorTileLayer(source, decoder);
+				//	Device.BeginInvokeOnMainThread(delegate
+				//	{
+				//		MapView.Layers.Add(layer);
+				//		Console.WriteLine("Update map: complete");
+				//	});
+				//}
+				//else
+				//{
+				//	var decoder = (MBVectorTileDecoder)(MapView.Layers[0] as VectorTileLayer).TileDecoder;
+
+				//	Device.BeginInvokeOnMainThread(delegate
+				//	{
+				//		decoder.CompiledStyle = styleSet;
+				//	});
+				//}
 			});
 		}
 	}
