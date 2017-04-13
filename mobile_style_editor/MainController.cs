@@ -29,6 +29,7 @@ namespace mobile_style_editor
 #if __ANDROID__
 			(Forms.Context as Droid.MainActivity).SetIsLandscape(true);
 #endif
+			ContentView.ShowLoading();
 			Task.Run(delegate
 			{
 				data = Parser.GetZipData(folder, filename);
@@ -42,6 +43,7 @@ namespace mobile_style_editor
 				Device.BeginInvokeOnMainThread(delegate
 				{
 					ContentView.UpdateMap(zipBytes);
+					ContentView.HideLoading();
 				});
 			});
 
@@ -70,6 +72,8 @@ namespace mobile_style_editor
 				return;
 			}
 
+			ContentView.ShowLoading();
+
 			Task.Run(delegate
 			{
 				string path = data.FilePaths[index];
@@ -83,6 +87,7 @@ namespace mobile_style_editor
 				Device.BeginInvokeOnMainThread(delegate
 				{
 					ContentView.UpdateMap(zipBytes);
+					ContentView.HideLoading();
 				});
 			});
 		}

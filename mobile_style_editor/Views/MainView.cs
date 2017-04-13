@@ -19,6 +19,8 @@ namespace mobile_style_editor
 {
 	public class MainView : BaseView
 	{
+		public ActivityIndicator Loader { get; private set; }
+
 		public Toolbar Toolbar { get; private set; }
 
 		public MapView MapView { get; private set; }
@@ -27,6 +29,8 @@ namespace mobile_style_editor
 
 		public MainView()
 		{
+			Loader = new ActivityIndicator();
+
 			Toolbar = new Toolbar();
 #if __IOS__
 			MapView = new MapView();
@@ -63,6 +67,23 @@ namespace mobile_style_editor
 				Editor.Initialize(Data);
 				Toolbar.Initialize(Data);
 			}
+
+			w = 50;
+			h = 50;
+			x = Width / 2 - w / 2;
+			y = Height / 2 - h / 2;
+
+			AddSubview(Loader, x, y, w, h);
+		}
+
+		public void ShowLoading()
+		{
+			Loader.IsRunning = true;
+		}
+
+		public void HideLoading()
+		{
+			Loader.IsRunning = false;
 		}
 
 		ZipData Data;
@@ -94,7 +115,7 @@ namespace mobile_style_editor
 				var layer = new VectorTileLayer(source, decoder);
 				Device.BeginInvokeOnMainThread(delegate
 				{
-					MapView.Layers.Add(layer);
+					//MapView.Layers.Add(layer);
 					Console.WriteLine("Update map: complete");
 				});
 			});
