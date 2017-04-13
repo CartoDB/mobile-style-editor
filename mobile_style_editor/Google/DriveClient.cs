@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 #if __ANDROID__
 using Android.App;
@@ -10,7 +12,6 @@ using Android.Gms.Drive;
 using Android.Gms.Drive.Query;
 using Android.OS;
 using Android.Runtime;
-using Java.Lang;
 #elif __IOS__
 #endif
 
@@ -27,10 +28,11 @@ namespace mobile_style_editor
 		 * else it'll just return "Canceled" (0) in OnActivityResult without any additional error message.
 		 * cf. https://developer.xamarin.com/guides/android/deployment,_testing,_and_metrics/MD5_SHA1/#OSX for Xamarin defaults
 		 * 
-		 * 
 		 */
 
 		public static DriveClient Instance = new DriveClient();
+
+		public EventHandler<DownloadEventArgs> DownloadComplete;
 
 		Context context;
 
@@ -110,6 +112,27 @@ namespace mobile_style_editor
 				Metadata current = list2.Current;
 				Console.WriteLine(current);
 			}
+		}
+
+		public void Download(DriveId driveId)
+		{
+			/*
+			 * Download snippet from:
+			 * http://stackoverflow.com/questions/37407368/android-drive-api-download-file
+			 */
+
+			Task.Run(delegate
+			{
+				IDriveFile file = DriveClass.DriveApi.GetFile(client, driveId);
+				IDriveApiDriveContentsResult result = file.Open(client, DriveFile.ModeReadOnly, null).Await().JavaCast<IDriveApiDriveContentsResult>();
+
+				Stream stream = result.DriveContents.InputStream;
+
+				if (DownloadComplete != null)
+				{
+					DownloadComplete(null, new DownloadEventArgs { Stream = stream });
+				}
+			});
 		}
 
 		public const int RequestCode_RESOLUTION = 1;

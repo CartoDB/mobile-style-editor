@@ -39,7 +39,7 @@ namespace mobile_style_editor.Droid
 				if (resultCode == Result.Ok)
 				{
 					var driveId = (Android.Gms.Drive.DriveId)data.GetParcelableExtra(DriveClient.Response_DRIVEID);
-					Console.WriteLine("Drive id: " + driveId);
+					DriveClient.Instance.Download(driveId);
 				}
 			}
 		}

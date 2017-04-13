@@ -31,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PickerController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\PickerView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\PickerViewItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\DownloadEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />

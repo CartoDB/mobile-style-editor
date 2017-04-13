@@ -18,6 +18,8 @@ namespace mobile_style_editor
 			base.OnAppearing();
 
 			ContentView.Drive.Click += OnDriveButtonClick;
+
+			DriveClient.Instance.DownloadComplete += OnDownloadComplete;
 		}
 
 		protected override void OnDisappearing()
@@ -25,6 +27,13 @@ namespace mobile_style_editor
 			base.OnDisappearing();
 
 			ContentView.Drive.Click -= OnDriveButtonClick;
+
+			DriveClient.Instance.DownloadComplete -= OnDownloadComplete;
+		}
+
+		void OnDownloadComplete(object sender, DownloadEventArgs e)
+		{
+			Console.WriteLine(e.Stream);
 		}
 
 		void OnDriveButtonClick(object sender, EventArgs e)
