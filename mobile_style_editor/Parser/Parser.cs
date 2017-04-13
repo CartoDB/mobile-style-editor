@@ -18,9 +18,9 @@ namespace mobile_style_editor
 		const string MSSExtension = ".mss";
 		public const string ZipExtension = ".zip";
 
-		static string FileName { get { return BaseStyle + ZipExtension; } }
-		static string ApplicationFolder { get { return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); } }
+		public static string ApplicationFolder { get { return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); } }
 
+		static string FileName { get { return BaseStyle + ZipExtension; } }
 		static string FullFilePath { get { return Path.Combine(ApplicationFolder, FileName); } }
 
 		static string assetPath;

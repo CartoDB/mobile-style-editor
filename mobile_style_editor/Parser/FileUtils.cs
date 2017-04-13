@@ -17,5 +17,16 @@ namespace mobile_style_editor
 		{
 			return File.ReadAllBytes(path);
 		}
+
+		internal static void SaveToAppFolder(Stream input)
+		{
+			string path = Parser.ApplicationFolder;
+
+			using (Stream output = File.Create(path))
+			{
+				input.Seek(0, SeekOrigin.Begin);
+				input.CopyTo(output);
+			}
+		}
 	}
 }

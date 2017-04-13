@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -34,6 +35,7 @@ namespace mobile_style_editor
 		void OnDownloadComplete(object sender, DownloadEventArgs e)
 		{
 			Console.WriteLine(e.Stream);
+			FileUtils.SaveToAppFolder(e.Stream);
 		}
 
 		void OnDriveButtonClick(object sender, EventArgs e)
