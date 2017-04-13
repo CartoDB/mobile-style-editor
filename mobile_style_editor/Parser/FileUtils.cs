@@ -21,8 +21,9 @@ namespace mobile_style_editor
 		internal static void SaveToAppFolder(Stream input)
 		{
 			string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-			path = Path.Combine(path, "filename.zip");
-			using (Stream output = File.Create(path))
+			string filename = "filename.zip";
+
+			using (Stream output = File.Create(Path.Combine(path, filename)))
 			{
 				input.CopyTo(output);
 			}

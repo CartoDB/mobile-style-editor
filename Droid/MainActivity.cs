@@ -44,5 +44,17 @@ namespace mobile_style_editor.Droid
 			}
 		}
 
+		public void SetIsLandscape(bool landcape)
+		{
+			if (landcape)
+			{
+				RequestedOrientation = ScreenOrientation.Landscape;
+			}
+			else
+			{
+				RequestedOrientation = ScreenOrientation.Portrait;
+			}
+		}
+
 	}
 }

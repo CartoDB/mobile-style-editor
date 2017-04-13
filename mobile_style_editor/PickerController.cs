@@ -12,6 +12,10 @@ namespace mobile_style_editor
 		{
 			ContentView = new PickerView();
 			Content = ContentView;
+
+#if __ANDROID__
+			(Forms.Context as Droid.MainActivity).SetIsLandscape(false);
+#endif
 		}
 
 		protected override void OnAppearing()
