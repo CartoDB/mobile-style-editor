@@ -11,8 +11,13 @@ namespace mobile_style_editor
 
 		ZipData data;
 
-		public MainController()
+		string folder, filename;
+
+		public MainController(string folder, string filename)
 		{
+			this.folder = folder;
+			this.filename = filename;
+
 			ContentView = new MainView();
 			Content = ContentView;
 		}
@@ -26,13 +31,13 @@ namespace mobile_style_editor
 #endif
 			Task.Run(delegate
 			{
-				data = Parser.GetZipData();
+				data = Parser.GetZipData(folder, filename);
 				Device.BeginInvokeOnMainThread(delegate
 				{
 					ContentView.Initialize(data);
 				});
 
-				byte[] zipBytes = FileUtils.PathToByteData(data.FolderPath + Parser.ZipExtension);
+				byte[] zipBytes = FileUtils.PathToByteData(data.DecompressedPath + Parser.ZipExtension);
 
 				Device.BeginInvokeOnMainThread(delegate
 				{
@@ -71,7 +76,7 @@ namespace mobile_style_editor
 
 				FileUtils.OverwriteFileAtPath(path, text);
 
-				string zipPath = Parser.ZipData();
+				string zipPath = Parser.ZipData(data.DecompressedPath, "updated_" + data.Filename);
 
 				byte[] zipBytes = FileUtils.PathToByteData(zipPath);
 

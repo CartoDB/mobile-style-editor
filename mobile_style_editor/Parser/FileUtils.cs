@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace mobile_style_editor
@@ -18,15 +19,23 @@ namespace mobile_style_editor
 			return File.ReadAllBytes(path);
 		}
 
-		internal static void SaveToAppFolder(Stream input)
+		/*
+		 * Always returns a list of strings where:
+		 * 0: filename
+		 * 1: folder
+		 * 2: combined full path
+		 */
+		public static List<string> SaveToAppFolder(Stream input, string filename)
 		{
-			string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-			string filename = "filename.zip";
+			string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+			string path = Path.Combine(folder, filename);
 
-			using (Stream output = File.Create(Path.Combine(path, filename)))
+			using (Stream output = File.Create(path))
 			{
 				input.CopyTo(output);
 			}
+
+			return new List<string> { filename, folder, path};
 		}
 	}
 }

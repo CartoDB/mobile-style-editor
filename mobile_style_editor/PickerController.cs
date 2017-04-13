@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Xamarin.Forms;
 
@@ -38,11 +39,12 @@ namespace mobile_style_editor
 		void OnDownloadComplete(object sender, DownloadEventArgs e)
 		{
 			Console.WriteLine(e.Stream);
-			FileUtils.SaveToAppFolder(e.Stream);
+
+			List<string> result = FileUtils.SaveToAppFolder(e.Stream, e.Name);
 
 			Device.BeginInvokeOnMainThread(async delegate
 			{
-				await Navigation.PushAsync(new MainController());
+				await Navigation.PushAsync(new MainController(result[1], result[0]));
 			});
 		}
 

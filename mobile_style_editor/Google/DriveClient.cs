@@ -88,11 +88,14 @@ namespace mobile_style_editor
 				IDriveFile file = DriveClass.DriveApi.GetFile(client, driveId);
 				IDriveApiDriveContentsResult result = file.Open(client, DriveFile.ModeReadOnly, null).Await().JavaCast<IDriveApiDriveContentsResult>();
 
+				IDriveResourceMetadataResult metadataResult = file.GetMetadata(client).Await().JavaCast<IDriveResourceMetadataResult>();
+				
 				Stream stream = result.DriveContents.InputStream;
 
 				if (DownloadComplete != null)
 				{
-					DownloadComplete(null, new DownloadEventArgs { Stream = stream });
+					string name = metadataResult.Metadata.Title;
+					DownloadComplete(null, new DownloadEventArgs { Stream = stream, Name = name });
 				}
 			});
 		}

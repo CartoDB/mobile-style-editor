@@ -25,38 +25,44 @@ namespace mobile_style_editor
 
 		static string assetPath;
 
-		public static ZipData GetZipData()
+		public static ZipData GetZipData(string folder, string filename)
 		{
 			/* TODO
 			 * Loading from assets is a temporary solution
 			 * Eventually it will be a network query
 			 */
-			Assembly assembly = Assembly.GetAssembly(typeof(Parser));
-			string[] resources = assembly.GetManifestResourceNames();
+			//Assembly assembly = Assembly.GetAssembly(typeof(Parser));
+			//string[] resources = assembly.GetManifestResourceNames();
 
-			foreach (var resource in resources)
-			{
-				if (resource.Contains(BaseStyle) && !resource.Contains("width-params"))
-				{
-					assetPath = resource;
-				}
-			}
+			//foreach (var resource in resources)
+			//{
+			//	if (resource.Contains(BaseStyle) && !resource.Contains("width-params"))
+			//	{
+			//		assetPath = resource;
+			//	}
+			//}
 
 			ZipData data = new ZipData();
 
-			using (var output = File.Create(FullFilePath))
-			using (var input = assembly.GetManifestResourceStream(assetPath))
-			{
-				input.CopyTo(output);
-			}
+			//using (var output = File.Create(FullFilePath))
+			//using (var input = assembly.GetManifestResourceStream(assetPath))
+			//{
+			//	input.CopyTo(output);
+			//}
 
-			string newPath = Path.Combine(ApplicationFolder, BaseStyle);
+			//string newPath = Path.Combine(ApplicationFolder, BaseStyle);
 
-			data.AssetZipFile = assetPath;
-			data.FolderPath = newPath;
+			//data.AssetZipFile = assetPath;
+			//data.FolderPath = newPath;
 
-			List<string> paths = Decompress(FullFilePath, newPath);
+			string fullPath = Path.Combine(folder, filename);
+			string newFolder = filename.Replace(ZipExtension, "");
+			string decompressedPath = Path.Combine(folder, newFolder);
 
+			List<string> paths = Decompress(fullPath, decompressedPath);
+
+			data.Filename = filename;
+			data.DecompressedPath = decompressedPath;
 			data.FilePaths = paths;
 
 			foreach (string path in paths)
@@ -71,13 +77,13 @@ namespace mobile_style_editor
 			return data;
 		}
 
-		public static string ZipData()
+		public static string ZipData(string source, string newFilename)
 		{
 			FastZip instance = new FastZip();
 			instance.CreateEmptyDirectories = true;
 
-			string source = Path.Combine(ApplicationFolder, BaseStyle);
-			string destination = Path.Combine(ApplicationFolder, UpdatedStyle + ZipExtension);
+			//string source = Path.Combine(ApplicationFolder, BaseStyle);
+			string destination = Path.Combine(ApplicationFolder, newFilename + ZipExtension);
 
 			instance.CreateZip(destination, source, true, "");
 
