@@ -20,11 +20,10 @@ namespace mobile_style_editor
 
 		internal static void SaveToAppFolder(Stream input)
 		{
-			string path = Parser.ApplicationFolder;
-
+			string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+			path = Path.Combine(path, "filename.zip");
 			using (Stream output = File.Create(path))
 			{
-				input.Seek(0, SeekOrigin.Begin);
 				input.CopyTo(output);
 			}
 		}
