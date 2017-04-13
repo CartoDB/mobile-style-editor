@@ -12,16 +12,15 @@ namespace mobile_style_editor
 		{
 			ContentView = new PickerView();
 			Content = ContentView;
-
-#if __ANDROID__
-			(Forms.Context as Droid.MainActivity).SetIsLandscape(false);
-#endif
 		}
 
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-
+	
+#if __ANDROID__
+			(Forms.Context as Droid.MainActivity).SetIsLandscape(true);
+#endif
 			ContentView.Drive.Click += OnDriveButtonClick;
 
 			DriveClient.Instance.DownloadComplete += OnDownloadComplete;
@@ -40,6 +39,11 @@ namespace mobile_style_editor
 		{
 			Console.WriteLine(e.Stream);
 			FileUtils.SaveToAppFolder(e.Stream);
+
+			Device.BeginInvokeOnMainThread(async delegate
+			{
+				await Navigation.PushAsync(new MainController());
+			});
 		}
 
 		void OnDriveButtonClick(object sender, EventArgs e)

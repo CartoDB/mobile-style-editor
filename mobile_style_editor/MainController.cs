@@ -21,6 +21,9 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
+#if __ANDROID__
+			(Forms.Context as Droid.MainActivity).SetIsLandscape(true);
+#endif
 			Task.Run(delegate
 			{
 				data = Parser.GetZipData();

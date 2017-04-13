@@ -18,7 +18,7 @@ namespace mobile_style_editor
 #elif __ANDROID__
 			MapView.RegisterLicense(CartoLicense, Forms.Context);
 #endif
-			MainPage = new PickerController();
+			MainPage = new NavigationPage(new PickerController());
 		}
 
 		protected override void OnStart()
