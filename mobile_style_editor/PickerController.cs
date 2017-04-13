@@ -51,7 +51,7 @@ namespace mobile_style_editor
 		void OnDriveButtonClick(object sender, EventArgs e)
 		{
 			DriveClient.Instance.Register(
-#if __ANDROID
+#if __ANDROID__
 				Forms.Context
 #endif
 				);
