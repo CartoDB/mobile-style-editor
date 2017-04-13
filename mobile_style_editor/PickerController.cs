@@ -18,7 +18,7 @@ namespace mobile_style_editor
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-	
+
 #if __ANDROID__
 			(Forms.Context as Droid.MainActivity).SetIsLandscape(true);
 #endif
@@ -50,7 +50,11 @@ namespace mobile_style_editor
 
 		void OnDriveButtonClick(object sender, EventArgs e)
 		{
-			DriveClient.Instance.Register(Forms.Context);
+			DriveClient.Instance.Register(
+#if __ANDROID
+				Forms.Context
+#endif
+				);
 			DriveClient.Instance.Connect();
 		}
 	}

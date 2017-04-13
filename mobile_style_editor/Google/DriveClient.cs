@@ -17,8 +17,13 @@ using Android.Runtime;
 
 namespace mobile_style_editor
 {
+
+	public class DriveClient
 #if __ANDROID__
-	public class DriveClient : Java.Lang.Object, GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener
+	 : Java.Lang.Object, GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener
+#elif __IOS__
+
+#endif
 	{
 		public static DriveClient Instance = new DriveClient();
 
@@ -39,6 +44,7 @@ namespace mobile_style_editor
 
 		public EventHandler<DownloadEventArgs> DownloadComplete;
 
+#if __ANDROID__
 		Context context;
 
 		GoogleApiClient client;
@@ -124,11 +130,20 @@ namespace mobile_style_editor
 			// TODO When is this called?
 			throw new NotImplementedException();
 		}
-	}
 
 #elif __IOS__
 
+		public void Register()
+		{
+
+		}
+
+		public void Connect()
+		{
+			
+		}
 #endif
+	}
 }
 
 // TODO REMOVE old, unused logic

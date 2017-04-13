@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Carto.Ui;
 using Xamarin.Forms;
 
@@ -18,7 +20,15 @@ namespace mobile_style_editor
 #elif __ANDROID__
 			MapView.RegisterLicense(CartoLicense, Forms.Context);
 #endif
+
+#if __ANDROID__
 			MainPage = new NavigationPage(new PickerController());
+#elif __IOS__
+			List<string> data = CopyToAppData();
+			string folder = data[1];
+			string filename = data[0];
+			MainPage = new NavigationPage(new MainController(folder, filename));
+#endif
 		}
 
 		protected override void OnStart()
@@ -34,6 +44,31 @@ namespace mobile_style_editor
 		protected override void OnResume()
 		{
 			// Handle when your app resumes
+		}
+
+		// TODO Remove when iOS has Drive integration
+
+		public List<string> CopyToAppData()
+		{
+			string styleName = "bright-cartocss-style";
+			string stylePath = "";
+
+			Assembly assembly = Assembly.GetAssembly(typeof(Parser));
+			string[] resources = assembly.GetManifestResourceNames();
+
+			foreach (var resource in resources)
+			{
+				if (resource.Contains(styleName) && !resource.Contains("with-params"))
+				{
+					stylePath = resource;
+				}
+			}
+
+			using (var stream = assembly.GetManifestResourceStream(stylePath))
+			{
+				string filename = styleName + Parser.ZipExtension;
+				return FileUtils.SaveToAppFolder(stream, filename);
+			}
 		}
 	}
 }
