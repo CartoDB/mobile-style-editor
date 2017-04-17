@@ -6,6 +6,7 @@ using Carto.Core;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;
+using Google.Apis.Download;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 
@@ -14,6 +15,8 @@ namespace mobile_style_editor.iOS
 	public class GoogleClient
 	{
 		public static GoogleClient Instance { get; set; } = new GoogleClient();
+
+		public EventHandler<DownloadEventArgs> DownloadComplete { get; set; }
 
 		const string CLIENTID_KEY = "client_id";
 		const string CLIENTSECRET_KEY = "client_secret";
@@ -41,7 +44,26 @@ namespace mobile_style_editor.iOS
 		 * Allow the user to authenticate via basic webview, HTTPRequest to retrieve refresh_token after that
 		 */
 
+		/*
+		 * Additional Notes:
+		 * (1) For now, no additional errorhandling is done, meaning that
+		 * we assume authentication is successful, so credentials and service will be available
+		 */
+
 		UserCredential credentials;
+
+		DriveService Service
+		{
+			get
+			{
+				return new DriveService(new BaseClientService.Initializer()
+				{
+					HttpClientInitializer = credentials,
+					/* ApplicationName doesn't necessarily have to be package id / bundle identifier */
+					ApplicationName = "com.carto.style.editor",
+				});
+			}
+		}
 
 		public void Authenticate()
 		{
@@ -71,15 +93,8 @@ namespace mobile_style_editor.iOS
 		{
 			List<DriveFile> items = new List<DriveFile>();
 
-			var service = new DriveService(new BaseClientService.Initializer()
-			{
-				HttpClientInitializer = credentials,
-				/* ApplicationName doesn't necessarily have to be package id / bundle identifier */
-				ApplicationName = "com.carto.style.editor",
-			});
-
 			// Define parameters of request
-			FilesResource.ListRequest listRequest = service.Files.List();
+			FilesResource.ListRequest listRequest = Service.Files.List();
 			listRequest.PageSize = 10;
 			listRequest.Fields = "nextPageToken, files(id, name)";
 
@@ -105,5 +120,26 @@ namespace mobile_style_editor.iOS
 
 			return items;
 		}
+
+		public void DownloadStyle(string id)
+		{
+			FilesResource.GetRequest request = Service.Files.Get(id);
+			Google.Apis.Drive.v3.Data.File file = request.Execute();
+
+			var stream = new MemoryStream();
+
+			request.MediaDownloader.ProgressChanged += (IDownloadProgress obj) => {
+				if (obj.Status == DownloadStatus.Completed)
+				{
+					if (DownloadComplete != null)
+					{
+	                    DownloadComplete(null, new DownloadEventArgs { Stream = stream });
+					}
+				}	
+			};
+
+			request.Download(stream);
+		}
+
 	}
 }
