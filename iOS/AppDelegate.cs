@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
+using Carto.Core;
 using Foundation;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
@@ -29,9 +31,13 @@ namespace mobile_style_editor.iOS
 			return base.FinishedLaunching(app, options);
 		}
 
-		const string RefreshToken = "";
-		const string ClientId = "";
-		const string ClientSecret = "";
+		const string CLIENTID_KEY = "client_id";
+		const string CLIENTSECRET_KEY = "client_secret";
+		const string REFRESHTOKEN_KEY = "refresh_token";
+
+		static string RefreshToken = "";
+		static string ClientId = "";
+		static string ClientSecret = "";
 
 		/*
 		 * (1) Register "Other" application to get both clientId and clientSecret
@@ -44,7 +50,7 @@ namespace mobile_style_editor.iOS
          * http://stackoverflow.com/questions/5850287/youtube-api-single-user-scenario-with-oauth-uploading-videos/8876027#8876027
          *
 		 * Finally:
-		 * Constructed.json file for in-house use. Contect aare@carto.com to get a hold of it,
+		 * Constructed.json file for in-house use. Contect aare@carto.com to get a hold of file drive_client_ids.json,
 		 * otherwise you need to go through the entire application registration process
 		 * 
 		 * Milestone TODO (probably not worth it to implement in the near future):
@@ -53,21 +59,25 @@ namespace mobile_style_editor.iOS
 
 		void AuthenticateDrive()
 		{
-			ClientSecrets secrets = new ClientSecrets()
+			using (var stream = new FileStream("drive_client_ids.json", FileMode.Open, FileAccess.Read))
 			{
-				ClientId = ClientId,
-				ClientSecret = ClientSecret
-			};
+				using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+			    {
+					Variant data = Variant.FromString(reader.ReadToEnd());
+
+					ClientId = data.GetObjectElement(CLIENTID_KEY).String;
+					ClientSecret = data.GetObjectElement(CLIENTSECRET_KEY).String;
+					RefreshToken = data.GetObjectElement(REFRESHTOKEN_KEY).String;
+			    }	
+			}
+
+			var secrets = new ClientSecrets() { ClientId = ClientId, ClientSecret = ClientSecret };
+			var initializer = new GoogleAuthorizationCodeFlow.Initializer { ClientSecrets = secrets };
+			var flow = new GoogleAuthorizationCodeFlow(initializer);
 
 			var token = new TokenResponse { RefreshToken = RefreshToken };
-			var credentials = new UserCredential(new GoogleAuthorizationCodeFlow(
-				new GoogleAuthorizationCodeFlow.Initializer
-				{
-					ClientSecrets = secrets
 
-				}),
-				"user",
-				token);
+			var credentials = new UserCredential(flow, "user", token);
 			
 			var service = new DriveService(new BaseClientService.Initializer()
 			{
