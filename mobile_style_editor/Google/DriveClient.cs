@@ -91,6 +91,11 @@ namespace mobile_style_editor
 
 			Task.Run(delegate
 			{
+				/*
+				 * All "Result" variables are under Android.Gms.Drive, search for "result".
+				 * Be sure to await, else it'll return cast failure
+				 */
+
 				IDriveFile file = DriveClass.DriveApi.GetFile(client, driveId);
 				IDriveApiDriveContentsResult result = file.Open(client, DriveFile.ModeReadOnly, null).Await().JavaCast<IDriveApiDriveContentsResult>();
 
