@@ -121,21 +121,22 @@ namespace mobile_style_editor.iOS
 			return items;
 		}
 
-		public void DownloadStyle(string id)
+		public void DownloadStyle(string id, string name)
 		{
 			FilesResource.GetRequest request = Service.Files.Get(id);
-			Google.Apis.Drive.v3.Data.File file = request.Execute();
+			//Google.Apis.Drive.v3.Data.File file = request.Execute();
 
 			var stream = new MemoryStream();
 
-			request.MediaDownloader.ProgressChanged += (IDownloadProgress obj) => {
+			request.MediaDownloader.ProgressChanged += (IDownloadProgress obj) =>
+			{
 				if (obj.Status == DownloadStatus.Completed)
 				{
 					if (DownloadComplete != null)
 					{
-	                    DownloadComplete(null, new DownloadEventArgs { Stream = stream });
+						DownloadComplete(null, new DownloadEventArgs { Stream = stream, Name = name });
 					}
-				}	
+				}
 			};
 
 			request.Download(stream);

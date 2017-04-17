@@ -142,13 +142,13 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="AttributedTextBuilder\AttributedTextBuilder.cs" />
-    <Compile Include="Google\DriveFile.cs" />
     <Compile Include="Google\GoogleClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon_save_white%402x.png" />
     <BundleResource Include="Resources\icon_drive.png" />
     <BundleResource Include="Resources\drive_client_ids.json" />
+    <BundleResource Include="Resources\icon_zip.png" />
   </ItemGroup>
   <Import Project="..\mobile_style_editor\mobile_style_editor.projitems" Label="Shared" Condition="Exists('..\mobile_style_editor\mobile_style_editor.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

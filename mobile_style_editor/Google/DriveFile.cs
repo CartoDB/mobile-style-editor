@@ -1,5 +1,7 @@
-﻿using System;
-namespace mobile_style_editor.iOS
+﻿
+using System;
+
+namespace mobile_style_editor
 {
 	public class DriveFile
 	{
@@ -7,9 +9,11 @@ namespace mobile_style_editor.iOS
 
 		public string Name { get; set; }
 
+#if __IOS__
 		public static DriveFile FromGoogleApiDriveFile(Google.Apis.Drive.v3.Data.File file)
 		{
 			return new DriveFile { Id = file.Id, Name = file.Name };
 		}
+#endif
 	}
 }

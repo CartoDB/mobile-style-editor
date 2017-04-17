@@ -97,7 +97,7 @@ namespace mobile_style_editor
 				 */
 
 				IDriveFile file = DriveClass.DriveApi.GetFile(client, driveId);
-				IDriveApiDriveContentsResult result = file.Open(client, DriveFile.ModeReadOnly, null).Await().JavaCast<IDriveApiDriveContentsResult>();
+				IDriveApiDriveContentsResult result = file.Open(client, Android.Gms.Drive.DriveFile.ModeReadOnly, null).Await().JavaCast<IDriveApiDriveContentsResult>();
 
 				IDriveResourceMetadataResult metadataResult = file.GetMetadata(client).Await().JavaCast<IDriveResourceMetadataResult>();
 				

@@ -11,5 +11,7 @@ namespace mobile_style_editor
 		public static Color CartoNavy = Color.FromRgb(22, 41, 69);
 
 		public static Color CartoGreen = Color.FromRgb(145, 198, 112);
+
+		public static Color TransparentGray = Color.FromRgba(100, 100, 100, 180);
 	}
 }
