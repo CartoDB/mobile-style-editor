@@ -128,6 +128,7 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="AttributedTextBuilder\" />
+    <Folder Include="Google\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -141,6 +142,8 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="AttributedTextBuilder\AttributedTextBuilder.cs" />
+    <Compile Include="Google\DriveFile.cs" />
+    <Compile Include="Google\GoogleClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon_save_white%402x.png" />
