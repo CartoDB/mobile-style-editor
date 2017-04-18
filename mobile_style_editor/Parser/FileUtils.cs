@@ -32,10 +32,16 @@ namespace mobile_style_editor
 
 			using (Stream output = File.Create(path))
 			{
+#if __ANDROID__
+				// Do nothing, as it's already a FileInputStream
+#else
+				// Move to 0 position, may not always be the case when dealing with MemoryStreams
+				input.Seek(0, SeekOrigin.Begin);
+#endif
 				input.CopyTo(output);
 			}
 
-			return new List<string> { filename, folder, path};
+			return new List<string> { filename, folder, path };
 		}
 	}
 }

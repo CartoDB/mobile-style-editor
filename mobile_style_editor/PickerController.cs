@@ -52,8 +52,6 @@ namespace mobile_style_editor
 
 		void OnDownloadComplete(object sender, DownloadEventArgs e)
 		{
-			Console.WriteLine(e.Stream);
-
 			List<string> result = FileUtils.SaveToAppFolder(e.Stream, e.Name);
 
 			Device.BeginInvokeOnMainThread(async delegate

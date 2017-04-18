@@ -21,15 +21,7 @@ namespace mobile_style_editor
 			MapView.RegisterLicense(CartoLicense, Forms.Context);
 #endif
 
-
-//#if __ANDROID__
 			MainPage = new NavigationPage(new PickerController());
-//#elif __IOS__
-//			List<string> data = CopyToAppData();
-//			string folder = data[1];
-//			string filename = data[0];
-//			MainPage = new NavigationPage(new MainController(folder, filename));
-//#endif
 		}
 
 		protected override void OnStart()
