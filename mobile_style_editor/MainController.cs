@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -68,7 +69,11 @@ namespace mobile_style_editor
 		void OnUploadButtonClicked(object sender, EventArgs e)
 		{
 			ContentView.UploadPopup.Show();
+			iOS.GoogleClient.Instance.Upload(currentWorkingName, currentWorkingStream);
 		}
+
+		string currentWorkingName;
+		MemoryStream currentWorkingStream;
 
 		void OnSave(object sender, EventArgs e)
 		{
@@ -88,13 +93,20 @@ namespace mobile_style_editor
 				string path = data.FilePaths[index];
 
 				FileUtils.OverwriteFileAtPath(path, text);
+				string name = "updated_" + data.Filename;
 
-				string zipPath = Parser.ZipData(data.DecompressedPath, "updated_" + data.Filename);
+				string zipPath = Parser.ZipData(data.DecompressedPath, name);
 
+				// Get bytes to update style
 				byte[] zipBytes = FileUtils.PathToByteData(zipPath);
 
 				Device.BeginInvokeOnMainThread(delegate
 				{
+					// Save current working data (name & bytes as stream) to conveniently upload
+					// Doing this on the main thread to assure thread safety
+					currentWorkingName = name;
+					currentWorkingStream = new MemoryStream(zipBytes);
+
 					ContentView.UpdateMap(zipBytes);
 					ContentView.HideLoading();
 				});

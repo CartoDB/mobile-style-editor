@@ -142,8 +142,10 @@ namespace mobile_style_editor.iOS
 			request.Download(stream);
 		}
 
-		public void Upload(Stream stream, string name)
+		public void Upload(string name, MemoryStream stream)
 		{
+			stream.Seek(0, SeekOrigin.Begin);
+
 			Google.Apis.Drive.v3.Data.File body = new Google.Apis.Drive.v3.Data.File();
 			body.Name = name;
 
