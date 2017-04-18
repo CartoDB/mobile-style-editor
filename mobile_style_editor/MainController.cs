@@ -69,7 +69,11 @@ namespace mobile_style_editor
 		void OnUploadButtonClicked(object sender, EventArgs e)
 		{
 			ContentView.UploadPopup.Show();
+#if __ANDROID__
+			DriveClient.Instance.Upload(currentWorkingName, currentWorkingStream);
+#elif __IOS__
 			iOS.GoogleClient.Instance.Upload(currentWorkingName, currentWorkingStream);
+#endif
 		}
 
 		string currentWorkingName;

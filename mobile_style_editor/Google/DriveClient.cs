@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -62,6 +62,30 @@ namespace mobile_style_editor
 			client = builder.Build();
 		}
 
+		public void Upload(string currentWorkingName, MemoryStream currentWorkingStream)
+		{
+			Task.Run(delegate
+			{
+				currentWorkingStream.Seek(0, SeekOrigin.Begin);
+				var result = DriveClass.DriveApi.NewDriveContents(client).Await().JavaCast<IDriveApiDriveContentsResult>();
+
+				var metaBuilder = new MetadataChangeSet.Builder();
+				metaBuilder.SetMimeType(Type_Zip);
+				metaBuilder.SetTitle(currentWorkingName);
+
+				using (StreamWriter writer = new StreamWriter(result.DriveContents.OutputStream))
+				{
+					writer.Write(currentWorkingStream);
+					writer.Close();
+				}
+
+				//CreateFileActivityBuilder fileBuilder = DriveClass.DriveApi.NewCreateFileActivityBuilder();
+				//fileBuilder.SetInitialMetadata(metaBuilder.Build());
+
+				DriveClass.DriveApi.GetRootFolder(client).CreateFile(client, metaBuilder.Build(), result.DriveContents);
+			});
+		}
+
 		public void Connect()
 		{
 			client.Connect();
@@ -72,7 +96,8 @@ namespace mobile_style_editor
 			OpenPicker();
 		}
 
-		static readonly string[] MimeType = { "application/zip" };
+		const string Type_Zip = "application/zip";
+		static readonly string[] MimeType = { Type_Zip };
 
 		public void OpenPicker()
 		{
