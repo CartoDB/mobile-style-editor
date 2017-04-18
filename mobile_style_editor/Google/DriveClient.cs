@@ -66,23 +66,17 @@ namespace mobile_style_editor
 		{
 			Task.Run(delegate
 			{
-				currentWorkingStream.Seek(0, SeekOrigin.Begin);
 				var result = DriveClass.DriveApi.NewDriveContents(client).Await().JavaCast<IDriveApiDriveContentsResult>();
 
 				var metaBuilder = new MetadataChangeSet.Builder();
 				metaBuilder.SetMimeType(Type_Zip);
 				metaBuilder.SetTitle(currentWorkingName);
 
-				using (StreamWriter writer = new StreamWriter(result.DriveContents.OutputStream))
-				{
-					writer.Write(currentWorkingStream);
-					writer.Close();
-				}
-
-				//CreateFileActivityBuilder fileBuilder = DriveClass.DriveApi.NewCreateFileActivityBuilder();
-				//fileBuilder.SetInitialMetadata(metaBuilder.Build());
+				byte[] bytes = currentWorkingStream.ToByteArray();
+				result.DriveContents.OutputStream.Write(bytes, 0, bytes.Length);
 
 				DriveClass.DriveApi.GetRootFolder(client).CreateFile(client, metaBuilder.Build(), result.DriveContents);
+
 			});
 		}
 
