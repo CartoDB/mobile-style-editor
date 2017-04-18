@@ -142,5 +142,13 @@ namespace mobile_style_editor.iOS
 			request.Download(stream);
 		}
 
+		public void Upload(Stream stream, string name)
+		{
+			Google.Apis.Drive.v3.Data.File body = new Google.Apis.Drive.v3.Data.File();
+			body.Name = name;
+
+			FilesResource.CreateMediaUpload request = Service.Files.Create(body, stream, "application/zip");
+			request.Upload();
+		}
 	}
 }
