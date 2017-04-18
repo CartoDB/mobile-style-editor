@@ -33,6 +33,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\PickerViewItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DownloadEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\BasePopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\BasePopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\UploadButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
@@ -44,6 +52,9 @@
     <Folder Include="$(MSBuildThisFileDirectory)Google\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Picker\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style-with-params.zip" />

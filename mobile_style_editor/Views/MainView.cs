@@ -27,6 +27,8 @@ namespace mobile_style_editor
 
 		public CSSEditorView Editor { get; private set; }
 
+		public UploadPopup UploadPopup { get; private set; }
+
 		public MainView()
 		{
 			Loader = new ActivityIndicator();
@@ -38,17 +40,22 @@ namespace mobile_style_editor
 			MapView = new MapView(Forms.Context);
 #endif
 			Editor = new CSSEditorView();
+
+			UploadPopup = new UploadPopup();
 		}
 
 		public override void LayoutSubviews()
 		{
-			int platformPadding = Device.OnPlatform(20, 0, 0);
+			base.LayoutSubviews();
+
+			// Platform padding isn't required when navigation bar is visible
+			int platformPadding = 0; //Device.OnPlatform(20, 0, 0);
 
 			double x = 0;
 			double y = platformPadding;
 			double w = Width;
 			double h = Height / 7;
-
+            
 			AddSubview(Toolbar, x, y, w, h);
 
 			y += h;
@@ -74,6 +81,10 @@ namespace mobile_style_editor
 			y = Height / 2 - h / 2;
 
 			AddSubview(Loader, x, y, w, h);
+
+			// Finally add popup view so it would cover other views
+			AddSubview(UploadPopup, 0, platformPadding, Width, Height);
+			UploadPopup.Hide();
 		}
 
 		public void ShowLoading()

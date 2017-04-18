@@ -32,7 +32,7 @@ namespace mobile_style_editor
 			DriveClient.Instance.DownloadComplete += OnDownloadComplete;
 #elif __IOS__
 			iOS.GoogleClient.Instance.DownloadComplete += OnDownloadComplete;
-			ContentView.Popup.Content.ItemClick += OnItemClicked;
+			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 #endif
 		}
 
@@ -46,7 +46,7 @@ namespace mobile_style_editor
 			DriveClient.Instance.DownloadComplete -= OnDownloadComplete;
 #elif __IOS__
 			iOS.GoogleClient.Instance.DownloadComplete -= OnDownloadComplete;
-			ContentView.Popup.Content.ItemClick -= OnItemClicked;
+			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 #endif
 		}
 

@@ -48,6 +48,8 @@ namespace mobile_style_editor
 			});
 
 			ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
+			ContentView.Toolbar.UploadButton.Click += OnUploadButtonClicked;
+
 			ContentView.Editor.SaveButton.Clicked += OnSave;
 			ContentView.Editor.Field.EditingEnded += OnSave;
 		}
@@ -57,8 +59,15 @@ namespace mobile_style_editor
 			base.OnDisappearing();
 
 			ContentView.Toolbar.Tabs.OnTabTap -= OnTabTapped;
+			ContentView.Toolbar.UploadButton.Click -= OnUploadButtonClicked;
+
 			ContentView.Editor.SaveButton.Clicked -= OnSave;
 			ContentView.Editor.Field.EditingEnded -= OnSave;
+		}
+
+		void OnUploadButtonClicked(object sender, EventArgs e)
+		{
+			ContentView.UploadPopup.Show();
 		}
 
 		void OnSave(object sender, EventArgs e)
