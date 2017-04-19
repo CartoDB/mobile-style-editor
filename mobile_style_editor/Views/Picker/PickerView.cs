@@ -12,7 +12,6 @@ namespace mobile_style_editor
 
 		public PickerView()
 		{
-            BackgroundColor = Color.Red;
 			Drive = new PickerViewItem("icon_drive.png");
 
 			Popup = new FileListPopup();
