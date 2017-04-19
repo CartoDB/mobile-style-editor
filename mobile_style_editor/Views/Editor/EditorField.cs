@@ -22,7 +22,7 @@ namespace mobile_style_editor
 #elif __ANDROID__
 	public class EditorField : EditText
 #elif __UWP__
-        public class EditorField : TextBox
+        public class EditorField : Windows.UI.Xaml.Controls.TextBox
 #endif
     {
 		public EventHandler<EventArgs> EditingEnded;
@@ -165,8 +165,10 @@ namespace mobile_style_editor
 			var builder = new Droid.SimpleSpanBuilder();
 #elif __IOS__
 			var builder = new iOS.AttributedTextBuilder();
+#elif __UWP__
+            var builder = new UWP.SimpleSpanBuilder();
 #endif
-			float size = 1f;
+            float size = 1f;
 
 			// White
 			Color generalColor = Color.White;
@@ -213,8 +215,10 @@ namespace mobile_style_editor
 #elif __IOS__
 			AttributedText = builder.Build();
 			this.SetNeedsDisplay();
+#elif __UWP__
+            Text = builder.Build();
 #endif
-			System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
+            System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
 			watch.Stop();
 		}
 

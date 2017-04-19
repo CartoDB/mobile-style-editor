@@ -16,6 +16,11 @@ namespace mobile_style_editor
 			var native = Android.Graphics.Color.Argb((int)(color.A * 255), (int)(color.R * 255), (int)(color.G * 255), (int)(color.B * 255));
 			return native;
 		}
+#elif __UWP__
+        public static Windows.UI.Color ToNativeColor(this Color color)
+        {
+            return Windows.UI.Color.FromArgb((byte)(color.A * 255), (byte)(color.R * 255), (byte)(color.G * 255), (byte)(color.B * 255));
+        }
 #endif
-	}
+    }
 }

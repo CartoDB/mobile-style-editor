@@ -33,7 +33,7 @@ namespace mobile_style_editor
 			 */
 			Assembly assembly = Assembly.GetAssembly(typeof(Parser));
 			string[] resources = assembly.GetManifestResourceNames();
-
+            
 			foreach (var resource in resources)
 			{
 				if (resource.Contains(BaseStyle) && !resource.Contains("width-params"))
