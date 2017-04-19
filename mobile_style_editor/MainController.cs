@@ -53,6 +53,8 @@ namespace mobile_style_editor
 
 			ContentView.Editor.SaveButton.Clicked += OnSave;
 			ContentView.Editor.Field.EditingEnded += OnSave;
+
+			ContentView.UploadPopup.Content.Confirm.Clicked += OnConfirmButtonClicked;
 		}
 
 		protected override void OnDisappearing()
@@ -64,15 +66,24 @@ namespace mobile_style_editor
 
 			ContentView.Editor.SaveButton.Clicked -= OnSave;
 			ContentView.Editor.Field.EditingEnded -= OnSave;
+
+			ContentView.UploadPopup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
 		}
 
 		void OnUploadButtonClicked(object sender, EventArgs e)
 		{
 			ContentView.UploadPopup.Show();
+			ContentView.UploadPopup.Content.Text = currentWorkingName;
+		}
+
+		void OnConfirmButtonClicked(object sender, EventArgs e)
+		{
+			string name = ContentView.UploadPopup.Content.Text;
+
 #if __ANDROID__
-			DriveClient.Instance.Upload(currentWorkingName, currentWorkingStream);
+			DriveClient.Instance.Upload(name, currentWorkingStream);
 #elif __IOS__
-			iOS.GoogleClient.Instance.Upload(currentWorkingName, currentWorkingStream);
+			iOS.GoogleClient.Instance.Upload(name, currentWorkingStream);
 #endif
 		}
 

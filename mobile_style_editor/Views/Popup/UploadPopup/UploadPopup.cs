@@ -3,9 +3,11 @@ namespace mobile_style_editor
 {
 	public class UploadPopup : BasePopup
 	{
+		public new UploadPopupContent Content { get { return (UploadPopupContent)base.Content; } }
+
 		public UploadPopup()
 		{
-			Content = new UploadPopupContent();
+			base.Content = new UploadPopupContent();
 		}
 
 		public override void LayoutSubviews()
