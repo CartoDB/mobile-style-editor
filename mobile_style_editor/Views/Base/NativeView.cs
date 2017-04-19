@@ -14,9 +14,13 @@ namespace mobile_style_editor
 	{
 		public NativeView()
 		{
-
+#elif __UWP__
+    public class NativeView : Windows.UI.Xaml.Controls.Control
+    {
+        public NativeView()
+        {
 #endif
-		}
+        }
 
 		Color backgroundColor;
 		public
