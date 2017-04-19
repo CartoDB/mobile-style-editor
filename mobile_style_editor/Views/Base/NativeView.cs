@@ -46,7 +46,7 @@ namespace mobile_style_editor
 #if __ANDROID__
 		public void AddSubview(Android.Views.View view)
 		{
-			
+
 		}
 #elif __IOS__
 		public void AddSubview(UIKit.UIView view, double x, double y, double w, double h)
@@ -55,39 +55,115 @@ namespace mobile_style_editor
 			AddSubview(view);
 		}
 #endif
-		                       
+
 		public virtual void OnTap(int x, int y)
 		{
 
 		}
 
+		public virtual void OnTouchDown(int x, int y)
+		{
+
+		}
+
+		public virtual void OnTouchCancel(int x, int y)
+		{
+
+		}
+
+		public virtual void OnTouchMoved(int x, int y)
+		{
+
+		}
 #if __ANDROID__
 		public override bool OnTouchEvent(Android.Views.MotionEvent e)
 		{
 			int x = (int)e.GetX();
 			int y = (int)e.GetY();
 
-			if (e.Action == Android.Views.MotionEventActions.Up)
+			if (e.Action == Android.Views.MotionEventActions.Down)
+			{
+				OnTouchDown(x, y);
+				return true;
+			}
+			else if (e.Action == Android.Views.MotionEventActions.Move)
+			{
+				OnTouchMoved(x, y);
+				return true;
+			}
+			else if (e.Action == Android.Views.MotionEventActions.Up)
 			{
 				OnTap(x, y);
+				return true;
+			}
+			else if (e.Action == Android.Views.MotionEventActions.Cancel)
+			{
+				OnTouchCancel(x, y);
 				return true;
 			}
 
 			return false;
 		}
 #elif __IOS__
+
+		public override void TouchesBegan(Foundation.NSSet touches, UIKit.UIEvent evt)
+		{
+			base.TouchesBegan(touches, evt);
+
+			CoreGraphics.CGPoint point = touches.GetTouchPont(this);
+
+			int x = (int)point.X;
+			int y = (int)point.Y;
+
+			OnTouchDown(x, y);
+		}
+
+		public override void TouchesMoved(Foundation.NSSet touches, UIKit.UIEvent evt)
+		{
+			base.TouchesMoved(touches, evt);
+
+			CoreGraphics.CGPoint point = touches.GetTouchPont(this);
+
+			int x = (int)point.X;
+			int y = (int)point.Y;
+
+			OnTouchMoved(x, y);
+		}
+
 		public override void TouchesEnded(Foundation.NSSet touches, UIKit.UIEvent evt)
 		{
 			base.TouchesEnded(touches, evt);
 
-			CoreGraphics.CGPoint point = (touches.AnyObject as UIKit.UITouch).LocationInView(this);
+			CoreGraphics.CGPoint point = touches.GetTouchPont(this);
 
 			int x = (int)point.X;
 			int y = (int)point.Y;
 
 			OnTap(x, y);
 		}
-#endif
 
+		public override void TouchesCancelled(Foundation.NSSet touches, UIKit.UIEvent evt)
+		{
+			base.TouchesCancelled(touches, evt);
+
+			CoreGraphics.CGPoint point = touches.GetTouchPont(this);
+
+			int x = (int)point.X;
+			int y = (int)point.Y;
+
+			OnTouchCancel(x, y);
+		}
+#endif
 	}
+
+#if __ANDROID__
+#elif __IOS__
+	public static class NativeViewExtensions
+	{
+		public static CoreGraphics.CGPoint GetTouchPont(this Foundation.NSSet touches, UIKit.UIView inView)
+		{
+			return (touches.AnyObject as UIKit.UITouch).LocationInView(inView);
+		}
+	}
+#endif
 }
