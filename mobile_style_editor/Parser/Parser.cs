@@ -23,37 +23,9 @@ namespace mobile_style_editor
 		static string FileName { get { return BaseStyle + ZipExtension; } }
 		static string FullFilePath { get { return Path.Combine(ApplicationFolder, FileName); } }
 
-		static string assetPath;
-
 		public static ZipData GetZipData(string folder, string filename)
 		{
-			/* TODO
-			 * Loading from assets is a temporary solution
-			 * Eventually it will be a network query
-			 */
-			//Assembly assembly = Assembly.GetAssembly(typeof(Parser));
-			//string[] resources = assembly.GetManifestResourceNames();
-
-			//foreach (var resource in resources)
-			//{
-			//	if (resource.Contains(BaseStyle) && !resource.Contains("width-params"))
-			//	{
-			//		assetPath = resource;
-			//	}
-			//}
-
 			ZipData data = new ZipData();
-
-			//using (var output = File.Create(FullFilePath))
-			//using (var input = assembly.GetManifestResourceStream(assetPath))
-			//{
-			//	input.CopyTo(output);
-			//}
-
-			//string newPath = Path.Combine(ApplicationFolder, BaseStyle);
-
-			//data.AssetZipFile = assetPath;
-			//data.FolderPath = newPath;
 
 			string fullPath = Path.Combine(folder, filename);
 			string newFolder = filename.Replace(ZipExtension, "");
@@ -82,14 +54,9 @@ namespace mobile_style_editor
 			FastZip instance = new FastZip();
 			instance.CreateEmptyDirectories = true;
 
-			//string source = Path.Combine(ApplicationFolder, BaseStyle);
 			string destination = Path.Combine(ApplicationFolder, newFilename + ZipExtension);
 
 			instance.CreateZip(destination, source, true, "");
-
-			//FileStream baseStream = File.Create(destination);
-			//ZipOutputStream stream = new ZipOutputStream(baseStream);
-			//Compress(source, stream, 0);
 
 			return destination;
 		}

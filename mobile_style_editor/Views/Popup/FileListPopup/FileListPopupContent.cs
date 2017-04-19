@@ -8,13 +8,9 @@ namespace mobile_style_editor
 	{
 		public EventHandler<EventArgs> ItemClick;
 
-		List<DriveFile> files;
-
 		public void Populate(List<DriveFile> files)
 		{
 			Children.Clear();
-
-			this.files = files;
 
 			double topPadding = 10;
 
