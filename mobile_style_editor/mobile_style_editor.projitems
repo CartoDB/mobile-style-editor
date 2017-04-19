@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -11,14 +11,17 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)EditorApplication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PickerController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\Parser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\ZipData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\UWPHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Editor\CSSEditorView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Editor\EditorField.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\FileTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\FileTabs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\UploadButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\Toolbar.cs" />
@@ -26,14 +29,32 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\FileUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Colors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\BasePopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\BasePopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\DownloadEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\DriveFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\GoogleExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\PickerView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\PickerViewItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
     <Folder Include="$(MSBuildThisFileDirectory)Parser\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Toolbar\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Picker\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup" />
+    <Folder Include="$(MSBuildThisFileDirectory)Google\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style-with-params.zip" />

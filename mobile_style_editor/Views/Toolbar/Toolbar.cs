@@ -15,9 +15,13 @@ namespace mobile_style_editor
 	{
 		public FileTabs Tabs { get; private set; }
 
+		public UploadButton UploadButton { get; private set; }
+
 		public Toolbar()
 		{
 			Tabs = new FileTabs();
+
+			UploadButton = new UploadButton();
 		}
 
 		public override void LayoutSubviews()
@@ -28,6 +32,15 @@ namespace mobile_style_editor
 			double h = Height;
 
 			AddSubview(Tabs, x, y, w, h);
+
+			double padding = 10;
+
+			w = 100;
+			h = w / 3;
+			x = Width - (w + padding);
+			y = padding;
+
+			AddSubview(UploadButton, x, y, w, h);
 		}
 
 		public void Initialize(ZipData data)

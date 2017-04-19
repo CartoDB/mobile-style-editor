@@ -6,6 +6,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 #elif __ANDROID__
 using Xamarin.Forms.Platform.Android;
+#elif __UWP__
+using Xamarin.Forms.Platform.UWP;
 #endif
 
 namespace mobile_style_editor

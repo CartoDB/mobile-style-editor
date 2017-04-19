@@ -18,79 +18,73 @@ namespace mobile_style_editor
 		const string MSSExtension = ".mss";
 		public const string ZipExtension = ".zip";
 
-		static string FileName { get { return BaseStyle + ZipExtension; } }
-		static string ApplicationFolder { get { return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); } }
+		public static string ApplicationFolder {
+            get
+            {
+#if __UWP__
+                return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+#else
+                return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+#endif
+            }
+        }
 
+		static string FileName { get { return BaseStyle + ZipExtension; } }
 		static string FullFilePath { get { return Path.Combine(ApplicationFolder, FileName); } }
 
-		static string assetPath;
-
-		public static ZipData GetZipData()
+		public static ZipData GetZipData(string folder, string filename)
 		{
-			/* TODO
-			 * Loading from assets is a temporary solution
-			 * Eventually it will be a network query
-			 */
-			Assembly assembly = Assembly.GetAssembly(typeof(Parser));
-			string[] resources = assembly.GetManifestResourceNames();
-            
-			foreach (var resource in resources)
-			{
-				if (resource.Contains(BaseStyle) && !resource.Contains("width-params"))
-				{
-					assetPath = resource;
-				}
-			}
-
 			ZipData data = new ZipData();
 
-			using (var output = File.Create(FullFilePath))
-			using (var input = assembly.GetManifestResourceStream(assetPath))
-			{
-				input.CopyTo(output);
-			}
+			string fullPath = Path.Combine(folder, filename);
+			string newFolder = filename.Replace(ZipExtension, "");
+			string decompressedPath = Path.Combine(folder, newFolder);
 
-			string newPath = Path.Combine(ApplicationFolder, BaseStyle);
+			List<string> paths = Decompress(fullPath, decompressedPath);
 
-			data.AssetZipFile = assetPath;
-			data.FolderPath = newPath;
-
-			List<string> paths = Decompress(FullFilePath, newPath);
-
+			data.Filename = filename;
+			data.DecompressedPath = decompressedPath;
 			data.FilePaths = paths;
 
 			foreach (string path in paths)
 			{
-				using (var streamReader = new StreamReader(path))
-				{
-					string content = streamReader.ReadToEnd();
-					data.DecompressedFiles.Add(content);
-				}
-			}
+#if __UWP__
+                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                {
+                    using (var streamReader = new StreamReader(stream))
+                    {
+                        string content = streamReader.ReadToEnd();
+                        data.DecompressedFiles.Add(content);
+                    }
+                }
+#else
+                using (var streamReader = new StreamReader(path))
+                {
+                    string content = streamReader.ReadToEnd();
+                    data.DecompressedFiles.Add(content);
+                }
+#endif
+            }
 
-			return data;
+            return data;
 		}
 
-		public static string ZipData()
+		public static string ZipData(string source, string newFilename)
 		{
 			FastZip instance = new FastZip();
 			instance.CreateEmptyDirectories = true;
 
-			string source = Path.Combine(ApplicationFolder, BaseStyle);
-			string destination = Path.Combine(ApplicationFolder, UpdatedStyle + ZipExtension);
+			string destination = Path.Combine(ApplicationFolder, newFilename + ZipExtension);
 
 			instance.CreateZip(destination, source, true, "");
-
-			//FileStream baseStream = File.Create(destination);
-			//ZipOutputStream stream = new ZipOutputStream(baseStream);
-			//Compress(source, stream, 0);
 
 			return destination;
 		}
 
 		public static List<string> Decompress(string archiveFilenameIn, string outFolder)
 		{
-			/* NB Need to manually link encoding for iOS:
+			/* 
+             * NB Need to manually link encoding for iOS:
 			 * Options -> iOS Build -> Additional mtouch aruments: -i18n=west
 			 * (http://stackoverflow.com/questions/4600923/monotouch-icsharpcode-sharpziplib-giving-an-error)
 			 */

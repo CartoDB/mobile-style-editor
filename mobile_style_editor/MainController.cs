@@ -1,6 +1,7 @@
 ﻿
 using System;
-using Carto.Core;
+using System.IO;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -11,8 +12,13 @@ namespace mobile_style_editor
 
 		ZipData data;
 
-		public MainController()
+		string folder, filename;
+
+		public MainController(string folder, string filename)
 		{
+			this.folder = folder;
+			this.filename = filename;
+
 			ContentView = new MainView();
 			Content = ContentView;
 		}
@@ -21,16 +27,34 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
-			// TODO decompress on background thread
-			data = Parser.GetZipData();
-			ContentView.Initialize(data);
+#if __ANDROID__
+			(Forms.Context as Droid.MainActivity).SetIsLandscape(true);
+#endif
+			ContentView.ShowLoading();
+			Task.Run(delegate
+			{
+				data = Parser.GetZipData(folder, filename);
+				Device.BeginInvokeOnMainThread(delegate
+				{
+					ContentView.Initialize(data);
+				});
 
-			byte[] zipBytes = FileUtils.PathToByteData(data.FolderPath + Parser.ZipExtension);
-			ContentView.UpdateMap(zipBytes);
-			
+				byte[] zipBytes = FileUtils.PathToByteData(data.DecompressedPath + Parser.ZipExtension);
+
+				Device.BeginInvokeOnMainThread(delegate
+				{
+					ContentView.UpdateMap(zipBytes);
+					ContentView.HideLoading();
+				});
+			});
+
 			ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
+			ContentView.Toolbar.UploadButton.Click += OnUploadButtonClicked;
+
 			ContentView.Editor.SaveButton.Clicked += OnSave;
 			ContentView.Editor.Field.EditingEnded += OnSave;
+
+			ContentView.UploadPopup.Content.Confirm.Clicked += OnConfirmButtonClicked;
 		}
 
 		protected override void OnDisappearing()
@@ -38,9 +62,33 @@ namespace mobile_style_editor
 			base.OnDisappearing();
 
 			ContentView.Toolbar.Tabs.OnTabTap -= OnTabTapped;
+			ContentView.Toolbar.UploadButton.Click -= OnUploadButtonClicked;
+
 			ContentView.Editor.SaveButton.Clicked -= OnSave;
 			ContentView.Editor.Field.EditingEnded -= OnSave;
+
+			ContentView.UploadPopup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
 		}
+
+		void OnUploadButtonClicked(object sender, EventArgs e)
+		{
+			ContentView.UploadPopup.Show();
+			ContentView.UploadPopup.Content.Text = currentWorkingName;
+		}
+
+		void OnConfirmButtonClicked(object sender, EventArgs e)
+		{
+			string name = ContentView.UploadPopup.Content.Text;
+
+#if __ANDROID__
+			DriveClient.Instance.Upload(name, currentWorkingStream);
+#elif __IOS__
+			iOS.GoogleClient.Instance.Upload(name, currentWorkingStream);
+#endif
+		}
+
+		string currentWorkingName;
+		MemoryStream currentWorkingStream;
 
 		void OnSave(object sender, EventArgs e)
 		{
@@ -53,15 +101,31 @@ namespace mobile_style_editor
 				return;
 			}
 
-			string path = data.FilePaths[index];
+			ContentView.ShowLoading();
 
-			FileUtils.OverwriteFileAtPath(path, text);
+			Task.Run(delegate
+			{
+				string path = data.FilePaths[index];
 
-			string zipPath = Parser.ZipData();
+				FileUtils.OverwriteFileAtPath(path, text);
+				string name = "updated_" + data.Filename;
 
-			byte[] zipBytes = FileUtils.PathToByteData(zipPath);
+				string zipPath = Parser.ZipData(data.DecompressedPath, name);
 
-			ContentView.UpdateMap(zipBytes);
+				// Get bytes to update style
+				byte[] zipBytes = FileUtils.PathToByteData(zipPath);
+
+				Device.BeginInvokeOnMainThread(delegate
+				{
+					// Save current working data (name & bytes as stream) to conveniently upload
+					// Doing this on the main thread to assure thread safety
+					currentWorkingName = name;
+					currentWorkingStream = new MemoryStream(zipBytes);
+
+					ContentView.UpdateMap(zipBytes);
+					ContentView.HideLoading();
+				});
+			});
 		}
 
 		void OnTabTapped(object sender, EventArgs e)

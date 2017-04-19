@@ -258,14 +258,15 @@ paket-files/
 packages/*
 Components/*
 *.userprefs
-
 .DS_Store
-
 .gradle
 *.iml
 .idea
 local.properties
 build
-
 *DS_Store
 app/libs/
+
+# Project-specific
+**/drive_client_ids.json
+

@@ -6,9 +6,9 @@ namespace mobile_style_editor
 {
 	public class ZipData
 	{
-		public string AssetZipFile { get; set; }
+		public string Filename { get; set; }
 
-		public string FolderPath { get; set; }
+		public string DecompressedPath { get; set; }
 
 		public List<string> DecompressedFiles { get; set; }
 

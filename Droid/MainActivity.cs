@@ -24,5 +24,37 @@ namespace mobile_style_editor.Droid
 
 			LoadApplication(new EditorApplication());
 		}
+
+		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+		{
+			if (requestCode == DriveClient.RequestCode_RESOLUTION)
+			{
+				if (resultCode == Result.Ok)
+				{
+					DriveClient.Instance.Connect();
+				}
+			}
+			else if (requestCode == DriveClient.RequestCode_OPENER)
+			{
+				if (resultCode == Result.Ok)
+				{
+					var driveId = (Android.Gms.Drive.DriveId)data.GetParcelableExtra(DriveClient.Response_DRIVEID);
+					DriveClient.Instance.Download(driveId);
+				}
+			}
+		}
+
+		public void SetIsLandscape(bool landcape)
+		{
+			if (landcape)
+			{
+				RequestedOrientation = ScreenOrientation.Landscape;
+			}
+			else
+			{
+				RequestedOrientation = ScreenOrientation.Portrait;
+			}
+		}
+
 	}
 }

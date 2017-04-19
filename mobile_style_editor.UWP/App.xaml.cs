@@ -47,6 +47,8 @@ namespace mobile_style_editor.UWP
 #endif
             Frame rootFrame = Window.Current.Content as Frame;
 
+            Xamarin.Forms.Forms.Init(e);
+
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)

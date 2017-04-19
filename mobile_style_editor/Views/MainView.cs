@@ -13,20 +13,28 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 #elif __ANDROID__
 using Xamarin.Forms.Platform.Android;
+#elif __UWP__
+using Xamarin.Forms.Platform.UWP;
 #endif
 
 namespace mobile_style_editor
 {
 	public class MainView : BaseView
 	{
+		public ActivityIndicator Loader { get; private set; }
+
 		public Toolbar Toolbar { get; private set; }
 
 		public MapView MapView { get; private set; }
 
 		public CSSEditorView Editor { get; private set; }
 
+		public UploadPopup UploadPopup { get; private set; }
+
 		public MainView()
 		{
+			Loader = new ActivityIndicator();
+
 			Toolbar = new Toolbar();
 #if __IOS__
 			MapView = new MapView();
@@ -34,17 +42,22 @@ namespace mobile_style_editor
 			MapView = new MapView(Forms.Context);
 #endif
 			Editor = new CSSEditorView();
+
+			UploadPopup = new UploadPopup();
 		}
 
 		public override void LayoutSubviews()
 		{
-			int platformPadding = Device.OnPlatform(20, 0, 0);
+			base.LayoutSubviews();
+
+			// Platform padding isn't required when navigation bar is visible
+			int platformPadding = 0; //Device.OnPlatform(20, 0, 0);
 
 			double x = 0;
 			double y = platformPadding;
 			double w = Width;
 			double h = Height / 7;
-
+            
 			AddSubview(Toolbar, x, y, w, h);
 
 			y += h;
@@ -63,6 +76,27 @@ namespace mobile_style_editor
 				Editor.Initialize(Data);
 				Toolbar.Initialize(Data);
 			}
+
+			w = 50;
+			h = 50;
+			x = Width / 2 - w / 2;
+			y = Height / 2 - h / 2;
+
+			AddSubview(Loader, x, y, w, h);
+
+			// Finally add popup view so it would cover other views
+			AddSubview(UploadPopup, 0, platformPadding, Width, Height);
+			UploadPopup.Hide();
+		}
+
+		public void ShowLoading()
+		{
+			Loader.IsRunning = true;
+		}
+
+		public void HideLoading()
+		{
+			Loader.IsRunning = false;
 		}
 
 		ZipData Data;
@@ -80,17 +114,49 @@ namespace mobile_style_editor
 		{
 			MapView.Layers.Clear();
 
-			BinaryData styleAsset = new BinaryData(data);
+			System.Threading.Tasks.Task.Run(delegate
+			{
+				Console.WriteLine("Update map: starting");
+				BinaryData styleAsset = new BinaryData(data);
 
-			var package = new ZippedAssetPackage(styleAsset);
-			CompiledStyleSet styleSet = new CompiledStyleSet(package);
+				var package = new ZippedAssetPackage(styleAsset);
+				var styleSet = new CompiledStyleSet(package);
 
-			var source = new CartoOnlineTileDataSource(OSM);
-			var decoder = new MBVectorTileDecoder(styleSet);
+				var source = new CartoOnlineTileDataSource(OSM);
+				var decoder = new MBVectorTileDecoder(styleSet);
 
-			var layer = new VectorTileLayer(source, decoder);
+				var layer = new VectorTileLayer(source, decoder);
+				Device.BeginInvokeOnMainThread(delegate
+				{
+					MapView.Layers.Add(layer);
+					Console.WriteLine("Update map: complete");
+				});
 
-			MapView.Layers.Add(layer);
+				// TODO just set new compiled style set, not recreate the layer.
+				// But for some reason this does not change the style set
+
+				//if (MapView.Layers.Count == 0)
+				//{
+				//	var source = new CartoOnlineTileDataSource(OSM);
+				//	var decoder = new MBVectorTileDecoder(styleSet);
+
+				//	var layer = new VectorTileLayer(source, decoder);
+				//	Device.BeginInvokeOnMainThread(delegate
+				//	{
+				//		MapView.Layers.Add(layer);
+				//		Console.WriteLine("Update map: complete");
+				//	});
+				//}
+				//else
+				//{
+				//	var decoder = (MBVectorTileDecoder)(MapView.Layers[0] as VectorTileLayer).TileDecoder;
+
+				//	Device.BeginInvokeOnMainThread(delegate
+				//	{
+				//		decoder.CompiledStyle = styleSet;
+				//	});
+				//}
+			});
 		}
 	}
 }
