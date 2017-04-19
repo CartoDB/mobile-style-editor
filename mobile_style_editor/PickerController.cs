@@ -15,7 +15,7 @@ namespace mobile_style_editor
 			Content = ContentView;
 
 #if __IOS__
-			iOS.GoogleClient.Instance.Authenticate();
+			GoogleClient.Instance.Authenticate();
 #endif
 		}
 
@@ -31,7 +31,7 @@ namespace mobile_style_editor
 #if __ANDROID__
 			DriveClient.Instance.DownloadComplete += OnDownloadComplete;
 #elif __IOS__
-			iOS.GoogleClient.Instance.DownloadComplete += OnDownloadComplete;
+			GoogleClient.Instance.DownloadComplete += OnDownloadComplete;
 			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 #endif
 		}
@@ -45,7 +45,7 @@ namespace mobile_style_editor
 #if __ANDROID__
 			DriveClient.Instance.DownloadComplete -= OnDownloadComplete;
 #elif __IOS__
-			iOS.GoogleClient.Instance.DownloadComplete -= OnDownloadComplete;
+			GoogleClient.Instance.DownloadComplete -= OnDownloadComplete;
 			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 #endif
 		}
@@ -66,7 +66,7 @@ namespace mobile_style_editor
 			DriveClient.Instance.Register(Forms.Context);
 			DriveClient.Instance.Connect();
 #elif __IOS__
-			List<DriveFile> files = iOS.GoogleClient.Instance.GetStyleList();
+			List<DriveFile> files = GoogleClient.Instance.GetStyleList();
 			ContentView.Popup.Show(files);
 #endif
 		}
@@ -75,7 +75,7 @@ namespace mobile_style_editor
 		void OnItemClicked(object sender, EventArgs e)
 		{
 			FileListPopupItem item = (FileListPopupItem)sender;
-			iOS.GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
+			GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
 		}
 #endif
 

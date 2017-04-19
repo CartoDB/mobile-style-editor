@@ -42,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Google\GoogleExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\PickerView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\PickerViewItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\GoogleClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Parser\" />

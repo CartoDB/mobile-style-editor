@@ -83,7 +83,7 @@ namespace mobile_style_editor
 #if __ANDROID__
 			DriveClient.Instance.Upload(name, currentWorkingStream);
 #elif __IOS__
-			iOS.GoogleClient.Instance.Upload(name, currentWorkingStream);
+			GoogleClient.Instance.Upload(name, currentWorkingStream);
 #endif
 		}
 

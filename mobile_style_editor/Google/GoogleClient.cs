@@ -10,7 +10,7 @@ using Google.Apis.Download;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 
-namespace mobile_style_editor.iOS
+namespace mobile_style_editor
 {
 	public class GoogleClient
 	{
