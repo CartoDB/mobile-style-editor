@@ -3,16 +3,16 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class UploadButton : BaseView
+	public class ToolbarButton : BaseView
 	{
 		public EventHandler<EventArgs> Click;
 
 		Label label;
 
-		public UploadButton()
+		public ToolbarButton(string text)
 		{
 			label = new Label();
-			label.Text = "UPLOAD";
+			label.Text = text;
 			label.FontFamily = "Helvetica Neue";
 			label.FontSize = 13;
 			label.VerticalTextAlignment = TextAlignment.Center;

@@ -50,11 +50,12 @@ namespace mobile_style_editor
 
 			ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
 			ContentView.Toolbar.UploadButton.Click += OnUploadButtonClicked;
+			ContentView.Toolbar.SaveButton.Click += OnSaveButtonClicked;
 
 			ContentView.Editor.SaveButton.Clicked += OnSave;
 			ContentView.Editor.Field.EditingEnded += OnSave;
 
-			ContentView.UploadPopup.Content.Confirm.Clicked += OnConfirmButtonClicked;
+			ContentView.Popup.Content.Confirm.Clicked += OnConfirmButtonClicked;
 		}
 
 		protected override void OnDisappearing()
@@ -63,28 +64,42 @@ namespace mobile_style_editor
 
 			ContentView.Toolbar.Tabs.OnTabTap -= OnTabTapped;
 			ContentView.Toolbar.UploadButton.Click -= OnUploadButtonClicked;
+			ContentView.Toolbar.SaveButton.Click -= OnSaveButtonClicked;
 
 			ContentView.Editor.SaveButton.Clicked -= OnSave;
 			ContentView.Editor.Field.EditingEnded -= OnSave;
 
-			ContentView.UploadPopup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
+			ContentView.Popup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
 		}
 
 		void OnUploadButtonClicked(object sender, EventArgs e)
 		{
-			ContentView.UploadPopup.Show();
-			ContentView.UploadPopup.Content.Text = currentWorkingName;
+			ContentView.Popup.Show(PopupType.Upload);
+			ContentView.Popup.Content.Text = currentWorkingName;
+		}
+
+		void OnSaveButtonClicked(object sender, EventArgs e)
+		{
+			ContentView.Popup.Show(PopupType.Save);
+			ContentView.Popup.Content.Text = currentWorkingName.Replace(Parser.ZipExtension, "");
 		}
 
 		void OnConfirmButtonClicked(object sender, EventArgs e)
 		{
-			string name = ContentView.UploadPopup.Content.Text;
+			string name = ContentView.Popup.Content.Text + Parser.ZipExtension;
 
+			if (ContentView.Popup.Type == PopupType.Upload)
+			{
 #if __ANDROID__
-			DriveClient.Instance.Upload(name, currentWorkingStream);
+				DriveClient.Instance.Upload(name, currentWorkingStream);
 #elif __IOS__
-			iOS.GoogleClient.Instance.Upload(name, currentWorkingStream);
+				iOS.GoogleClient.Instance.Upload(name, currentWorkingStream);
 #endif
+			}
+			else
+			{
+				LocalStorage.Instance.AddStyle(name, Parser.LocalStyleLocation);
+			}
 		}
 
 		string currentWorkingName;

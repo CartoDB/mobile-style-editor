@@ -15,6 +15,8 @@ namespace mobile_style_editor
 
 		public static string ApplicationFolder { get { return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); } }
 
+		public static string LocalStyleLocation { get { return Path.Combine(ApplicationFolder, "local-styles"); } }
+
 		public static ZipData GetZipData(string folder, string filename)
 		{
 			ZipData data = new ZipData();

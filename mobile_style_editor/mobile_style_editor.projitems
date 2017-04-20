@@ -40,9 +40,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\BasePopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopupContent.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\UploadButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\ToolbarButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\LocalStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\StoredStyle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\PopupType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />

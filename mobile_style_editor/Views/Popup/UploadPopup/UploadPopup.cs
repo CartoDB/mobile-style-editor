@@ -3,6 +3,8 @@ namespace mobile_style_editor
 {
 	public class UploadPopup : BasePopup
 	{
+		public PopupType Type;
+
 		public new UploadPopupContent Content { get { return (UploadPopupContent)base.Content; } }
 
 		public UploadPopup()
@@ -31,6 +33,12 @@ namespace mobile_style_editor
 			double w = Width - 2 * horizontalPadding;
 
 			AddSubview(Content, x, y, w, h);
+		}
+
+		public void Show(PopupType type)
+		{
+			Type = type;
+			base.Show();
 		}
 	}
 }

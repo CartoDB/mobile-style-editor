@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using Carto.Core;
 using Carto.DataSources;
@@ -27,7 +27,7 @@ namespace mobile_style_editor
 
 		public CSSEditorView Editor { get; private set; }
 
-		public UploadPopup UploadPopup { get; private set; }
+		public UploadPopup Popup { get; private set; }
 
 		public MainView()
 		{
@@ -41,7 +41,7 @@ namespace mobile_style_editor
 #endif
 			Editor = new CSSEditorView();
 
-			UploadPopup = new UploadPopup();
+			Popup = new UploadPopup();
 		}
 
 		public override void LayoutSubviews()
@@ -83,8 +83,8 @@ namespace mobile_style_editor
 			AddSubview(Loader, x, y, w, h);
 
 			// Finally add popup view so it would cover other views
-			AddSubview(UploadPopup, 0, platformPadding, Width, Height);
-			UploadPopup.Hide();
+			AddSubview(Popup, 0, platformPadding, Width, Height);
+			Popup.Hide();
 		}
 
 		public void ShowLoading()
