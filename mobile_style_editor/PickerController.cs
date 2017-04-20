@@ -23,12 +23,10 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
-#if __ANDROID__
-			(Forms.Context as Droid.MainActivity).SetIsLandscape(true);
-#endif
 			ContentView.Drive.Click += OnDriveButtonClick;
 
 #if __ANDROID__
+			DriveClient.Instance.DownloadStarted += OnDownloadStarted;
 			DriveClient.Instance.DownloadComplete += OnDownloadComplete;
 #elif __IOS__
 			iOS.GoogleClient.Instance.DownloadComplete += OnDownloadComplete;
@@ -43,11 +41,20 @@ namespace mobile_style_editor
 			ContentView.Drive.Click -= OnDriveButtonClick;
 
 #if __ANDROID__
+			DriveClient.Instance.DownloadStarted -= OnDownloadStarted;
 			DriveClient.Instance.DownloadComplete -= OnDownloadComplete;
 #elif __IOS__
 			iOS.GoogleClient.Instance.DownloadComplete -= OnDownloadComplete;
 			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 #endif
+		}
+
+		void OnDownloadStarted(object sender, EventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.ShowLoading();
+			});
 		}
 
 		void OnDownloadComplete(object sender, DownloadEventArgs e)
@@ -56,6 +63,7 @@ namespace mobile_style_editor
 
 			Device.BeginInvokeOnMainThread(async delegate
 			{
+				ContentView.HideLoading();
 				await Navigation.PushAsync(new MainController(result[1], result[0]));
 			});
 		}
