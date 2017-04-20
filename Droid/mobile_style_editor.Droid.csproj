@@ -154,6 +154,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_save_white.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_drive.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\icon_refresh.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SpanBuilder\" />

@@ -16,7 +16,7 @@ namespace mobile_style_editor
 
 		public EditorField Field { get; private set; }
 
-		public Button SaveButton { get; private set; }
+		public Button RefreshButton { get; private set; }
 
 		public string Text { get { return Field.Text; } }
 
@@ -24,11 +24,11 @@ namespace mobile_style_editor
 		{
 			Field = new EditorField();
 
-			SaveButton = new Button();
-			SaveButton.BackgroundColor = Colors.CartoRed;
+			RefreshButton = new Button();
+			RefreshButton.BackgroundColor = Colors.CartoRed;
 
-			var source = new FileImageSource { File = "icon_save_white.png" };
-			SaveButton.Image = source;
+			var source = new FileImageSource { File = "icon_refresh.png" };
+			RefreshButton.Image = source;
 		}
 
 		public override void LayoutSubviews()
@@ -49,8 +49,8 @@ namespace mobile_style_editor
 			x = Width - (w + padding);
 			y = Height - (h + padding);
 
-			SaveButton.BorderRadius = (int)(w / 2);
-			AddSubview(SaveButton, x, y, w, h);
+			RefreshButton.BorderRadius = (int)(w / 2);
+			AddSubview(RefreshButton, x, y, w, h);
 		}
 
 		public void Initialize(ZipData items)

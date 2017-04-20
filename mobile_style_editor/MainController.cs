@@ -52,8 +52,8 @@ namespace mobile_style_editor
 			ContentView.Toolbar.UploadButton.Click += OnUploadButtonClicked;
 			ContentView.Toolbar.SaveButton.Click += OnSaveButtonClicked;
 
-			ContentView.Editor.SaveButton.Clicked += OnSave;
-			ContentView.Editor.Field.EditingEnded += OnSave;
+			ContentView.Editor.RefreshButton.Clicked += OnRefresh;
+			ContentView.Editor.Field.EditingEnded += OnRefresh;
 
 			ContentView.Popup.Content.Confirm.Clicked += OnConfirmButtonClicked;
 		}
@@ -66,19 +66,23 @@ namespace mobile_style_editor
 			ContentView.Toolbar.UploadButton.Click -= OnUploadButtonClicked;
 			ContentView.Toolbar.SaveButton.Click -= OnSaveButtonClicked;
 
-			ContentView.Editor.SaveButton.Clicked -= OnSave;
-			ContentView.Editor.Field.EditingEnded -= OnSave;
+			ContentView.Editor.RefreshButton.Clicked -= OnRefresh;
+			ContentView.Editor.Field.EditingEnded -= OnRefresh;
 
 			ContentView.Popup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
 		}
 
 		void OnUploadButtonClicked(object sender, EventArgs e)
 		{
-			ContentView.Popup.Show(PopupType.Upload);
-			ContentView.Popup.Content.Text = currentWorkingName;
+			ShowPopup(PopupType.Upload);
 		}
 
 		void OnSaveButtonClicked(object sender, EventArgs e)
+		{
+			ShowPopup(PopupType.Save);
+		}
+
+		void ShowPopup(PopupType type)
 		{
 			if (currentWorkingName == null)
 			{
@@ -86,13 +90,20 @@ namespace mobile_style_editor
 				return;
 			}
 
-			ContentView.Popup.Show(PopupType.Save);
-			ContentView.Popup.Content.Text = currentWorkingName.Replace(Parser.ZipExtension, "");
+			ContentView.Popup.Show(type);
 		}
 
 		void OnConfirmButtonClicked(object sender, EventArgs e)
 		{
-			string name = ContentView.Popup.Content.Text + Parser.ZipExtension;
+			string name = ContentView.Popup.Content.Text;
+
+			if (string.IsNullOrWhiteSpace(name))
+			{
+				// TODO Alert -> name cannot be empty
+				return;
+			}
+
+			name += Parser.ZipExtension;
 
 			if (ContentView.Popup.Type == PopupType.Upload)
 			{
@@ -111,7 +122,7 @@ namespace mobile_style_editor
 		string currentWorkingName;
 		MemoryStream currentWorkingStream;
 
-		void OnSave(object sender, EventArgs e)
+		void OnRefresh(object sender, EventArgs e)
 		{
 			int index = ContentView.Toolbar.Tabs.ActiveIndex;
 			string text = ContentView.Editor.Text;
