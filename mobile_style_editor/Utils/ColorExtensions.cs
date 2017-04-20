@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public static class Extensions
+	public static class ColorExtensions
 	{
 #if __IOS__
 		public static UIKit.UIColor ToNativeColor(this Color Color)

@@ -11,7 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)EditorApplication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainController.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utils\Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ColorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\Parser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\ZipData.cs" />
@@ -44,6 +44,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\StoredStyle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\PopupType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\ConfirmationPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Toast.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />

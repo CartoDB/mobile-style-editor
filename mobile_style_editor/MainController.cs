@@ -86,7 +86,7 @@ namespace mobile_style_editor
 		{
 			if (currentWorkingName == null)
 			{
-				// TODO Alert -> You don't seem to have made any changes
+				Toast.Show("You don't seem to have made any changes");
 				return;
 			}
 
@@ -99,7 +99,7 @@ namespace mobile_style_editor
 
 			if (string.IsNullOrWhiteSpace(name))
 			{
-				// TODO Alert -> name cannot be empty
+				Toast.Show("Please provide a name for your style");
 				return;
 			}
 
