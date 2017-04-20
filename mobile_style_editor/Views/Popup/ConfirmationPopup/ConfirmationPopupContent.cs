@@ -1,10 +1,10 @@
-﻿
+
 using System;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class UploadPopupContent : BasePopupContent
+	public class ConfirmationPopupContent : BasePopupContent
 	{
 		Label nameLabel;
 		Entry nameInput;
@@ -16,7 +16,7 @@ namespace mobile_style_editor
 			set { nameInput.Text = value; }
 		}
 
-		public UploadPopupContent()
+		public ConfirmationPopupContent()
 		{
 			nameLabel = new Label();
 			nameLabel.VerticalTextAlignment = TextAlignment.End;

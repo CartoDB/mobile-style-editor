@@ -80,6 +80,12 @@ namespace mobile_style_editor
 
 		void OnSaveButtonClicked(object sender, EventArgs e)
 		{
+			if (currentWorkingName == null)
+			{
+				// TODO Alert -> You don't seem to have made any changes
+				return;
+			}
+
 			ContentView.Popup.Show(PopupType.Save);
 			ContentView.Popup.Content.Text = currentWorkingName.Replace(Parser.ZipExtension, "");
 		}

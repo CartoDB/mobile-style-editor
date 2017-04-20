@@ -38,12 +38,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\BasePopupContent.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopup.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\ConfirmationPopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\ToolbarButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\LocalStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\StoredStyle.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\PopupType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\PopupType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\ConfirmationPopup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
@@ -57,7 +57,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
   </ItemGroup>
   <ItemGroup>

@@ -27,7 +27,7 @@ namespace mobile_style_editor
 
 		public CSSEditorView Editor { get; private set; }
 
-		public UploadPopup Popup { get; private set; }
+		public ConfirmationPopup Popup { get; private set; }
 
 		public MainView()
 		{
@@ -41,7 +41,7 @@ namespace mobile_style_editor
 #endif
 			Editor = new CSSEditorView();
 
-			Popup = new UploadPopup();
+			Popup = new ConfirmationPopup();
 		}
 
 		public override void LayoutSubviews()
