@@ -41,6 +41,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\UploadButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\LocalStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\StoredStyle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
@@ -55,6 +57,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\" />
+    <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style-with-params.zip" />
