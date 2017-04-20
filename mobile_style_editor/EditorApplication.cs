@@ -21,7 +21,10 @@ namespace mobile_style_editor
 			MapView.RegisterLicense(CartoLicense, Forms.Context);
 #endif
 
-			MainPage = new NavigationPage(new PickerController());
+			MainPage = new NavigationPage(new PickerController()) { 
+				BarBackgroundColor = Color.Navy, 
+				BarTextColor = Color.White
+			};
 		}
 
 		protected override void OnStart()

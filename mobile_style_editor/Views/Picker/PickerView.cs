@@ -6,13 +6,25 @@ namespace mobile_style_editor
 {
 	public class PickerView : BaseView
 	{
+		Label titleLabel;
+
 		public PickerViewItem Drive { get; private set; }
+		public PickerViewItem Database { get; private set; }
 
 		public FileListPopup Popup { get; private set; }
 
 		public PickerView()
 		{
-			Drive = new PickerViewItem("icon_drive.png", "CHOOSE FROM GOOGLE DRIVE");
+			titleLabel = new Label();
+			titleLabel.TextColor = Colors.CartoNavy;
+			titleLabel.FontSize = 20f;
+
+			titleLabel.VerticalTextAlignment = TextAlignment.Center;
+			titleLabel.HorizontalTextAlignment = TextAlignment.Center;
+			titleLabel.Text = "CHOOSE STYLE SOURCE";
+
+			Drive = new PickerViewItem("icon_drive.png", "FROM GOOGLE DRIVE");
+			Database = new PickerViewItem("icon_database.png", "FROM LOCAL DATABASE");
 
 			Popup = new FileListPopup();
 		}
@@ -20,19 +32,32 @@ namespace mobile_style_editor
 		public override void LayoutSubviews()
 		{
 			Popup.Hide();
-			double h = Height / 2;
 
-			double max = 250;
-			if (h > max)
-			{
-				h = max;
-			}
+			double x = 0;
+			double y = 0;
+			double h = Height / 8;
+			double w = Width;
 
-			double w = h;
-			double y = Height / 2 - h / 2;
-			double x = Width / 2 - w / 2;
+			AddSubview(titleLabel, x, y, w, h);
+
+			double itemSize = 200;
+			double itemPadding = 10;
+
+			h = itemSize;
+			w = itemSize;
+			y = Height / 2 - h / 2;
+			x = Width / 2 - w / 2;
+
+			// PickerViewItem count
+			int count = 2;
+
+			x = Width / 2 - (count * itemSize + (count + 1) * itemPadding) / 2;
 
 			AddSubview(Drive, x, y, w, h);
+
+			x += itemSize + itemPadding;
+
+			AddSubview(Database, x, y, w, h);
 
 			AddSubview(Popup, 0, 0, Width, Height);
 		}

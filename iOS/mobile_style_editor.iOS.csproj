@@ -159,6 +159,7 @@
     <BundleResource Include="Resources\drive_client_ids.json" />
     <BundleResource Include="Resources\icon_zip.png" />
     <BundleResource Include="Resources\icon_refresh.png" />
+    <BundleResource Include="Resources\icon_database.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="sqlite-net">

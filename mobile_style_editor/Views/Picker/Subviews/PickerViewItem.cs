@@ -21,8 +21,6 @@ namespace mobile_style_editor
 			label.Text = text;
 			label.TextColor = Colors.CartoNavy;
 			label.FontSize = 12f;
-
-			label.VerticalTextAlignment = TextAlignment.Center;
 			label.HorizontalTextAlignment = TextAlignment.Center;
 
 			TapGestureRecognizer recognizer = new TapGestureRecognizer();
@@ -40,7 +38,7 @@ namespace mobile_style_editor
 		public override void LayoutSubviews()
 		{
 			double padding = Height / 10;
-			double size = Width / 3 * 2;
+			double size = (Width / 3 * 2);
 
 			double x = Width / 2 - size / 2;
 			double y = padding;
@@ -49,7 +47,7 @@ namespace mobile_style_editor
 
 			AddSubview(Image, x, y, w, h);
 
-			y += h;
+			y += h + padding / 2;
 			x = padding;
 			w = Width - 2 * padding;
 			h = Height - (h + 2 * padding);
