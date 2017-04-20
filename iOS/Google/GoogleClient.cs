@@ -114,7 +114,7 @@ namespace mobile_style_editor.iOS
 
 				foreach (var file in files)
 				{
-					if (file.Name.EndsWith("-style.zip", StringComparison.Ordinal))
+					if (file.Name.EndsWith(".zip", StringComparison.Ordinal))
 					{
 						items.Add(DriveFile.FromGoogleApiDriveFile(file));
 					}
