@@ -85,14 +85,19 @@ namespace mobile_style_editor
 #endif
 		}
 
-		void OnUploadComplete(object sender, EventArgs e)
+		void NormalizeView(string text)
 		{
 			Device.BeginInvokeOnMainThread(delegate
 			{
 				ContentView.HideLoading();
 				ContentView.Popup.Hide();
-				Toast.Show("Upload of " + (string)sender + " complete");
+				Toast.Show(text);
 			});
+		}
+
+		void OnUploadComplete(object sender, EventArgs e)
+		{
+			NormalizeView("Upload of " + (string)sender + " complete");
 		}
 
 		void OnUploadButtonClicked(object sender, EventArgs e)
@@ -145,6 +150,7 @@ namespace mobile_style_editor
 					else
 					{
 						LocalStorage.Instance.AddStyle(name, Parser.LocalStyleLocation);
+						NormalizeView(name + " saved to local database");
 					}
 				});
 			});

@@ -19,8 +19,6 @@ namespace mobile_style_editor
 {
 	public class MainView : BaseView
 	{
-		public ActivityIndicator Loader { get; private set; }
-
 		public Toolbar Toolbar { get; private set; }
 
 		public MapView MapView { get; private set; }
@@ -31,8 +29,6 @@ namespace mobile_style_editor
 
 		public MainView()
 		{
-			Loader = new ActivityIndicator();
-
 			Toolbar = new Toolbar();
 #if __IOS__
 			MapView = new MapView();
@@ -83,19 +79,6 @@ namespace mobile_style_editor
 			// Finally add popup view so it would cover other views
 			AddSubview(Popup, 0, platformPadding, Width, Height);
 			Popup.Hide();
-
-			// Except loader. Loader should be above all!
-			AddSubview(Loader, x, y, w, h);
-		}
-
-		public void ShowLoading()
-		{
-			Loader.IsRunning = true;
-		}
-
-		public void HideLoading()
-		{
-			Loader.IsRunning = false;
 		}
 
 		ZipData Data;
