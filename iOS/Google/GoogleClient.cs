@@ -9,6 +9,7 @@ using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Download;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
+using Google.Apis.Upload;
 
 namespace mobile_style_editor.iOS
 {
@@ -17,6 +18,7 @@ namespace mobile_style_editor.iOS
 		public static GoogleClient Instance { get; set; } = new GoogleClient();
 
 		public EventHandler<DownloadEventArgs> DownloadComplete { get; set; }
+		public EventHandler<EventArgs> UploadComplete { get; set; }
 
 		const string CLIENTID_KEY = "client_id";
 		const string CLIENTSECRET_KEY = "client_secret";
@@ -150,6 +152,18 @@ namespace mobile_style_editor.iOS
 			body.Name = name;
 
 			FilesResource.CreateMediaUpload request = Service.Files.Create(body, stream, "application/zip");
+
+			request.ProgressChanged += (IUploadProgress obj) =>
+			{
+				if (obj.Status == UploadStatus.Completed)
+				{
+					if (UploadComplete != null)
+					{
+						UploadComplete(name, null);
+					}
+				}
+			};
+
 			request.Upload();
 		}
 	}

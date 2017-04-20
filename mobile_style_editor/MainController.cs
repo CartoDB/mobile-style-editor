@@ -56,6 +56,12 @@ namespace mobile_style_editor
 			ContentView.Editor.Field.EditingEnded += OnRefresh;
 
 			ContentView.Popup.Content.Confirm.Clicked += OnConfirmButtonClicked;
+#if __ANDROID__
+			DriveClient.Instance.UploadComplete += OnUploadComplete;
+#elif __IOS__
+			iOS.GoogleClient.Instance.UploadComplete += OnUploadComplete;
+#elif __UWP__
+#endif
 		}
 
 		protected override void OnDisappearing()
@@ -70,6 +76,23 @@ namespace mobile_style_editor
 			ContentView.Editor.Field.EditingEnded -= OnRefresh;
 
 			ContentView.Popup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
+
+#if __ANDROID__
+			DriveClient.Instance.UploadComplete += OnUploadComplete;
+#elif __IOS__
+			iOS.GoogleClient.Instance.UploadComplete -= OnUploadComplete;
+#elif __UWP__
+#endif
+		}
+
+		void OnUploadComplete(object sender, EventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.HideLoading();
+				ContentView.Popup.Hide();
+				Toast.Show("Upload of " + (string)sender + " complete");
+			});
 		}
 
 		void OnUploadButtonClicked(object sender, EventArgs e)
@@ -95,28 +118,37 @@ namespace mobile_style_editor
 
 		void OnConfirmButtonClicked(object sender, EventArgs e)
 		{
-			string name = ContentView.Popup.Content.Text;
-
-			if (string.IsNullOrWhiteSpace(name))
+			Device.BeginInvokeOnMainThread(delegate
 			{
-				Toast.Show("Please provide a name for your style");
-				return;
-			}
+				ContentView.ShowLoading();
 
-			name += Parser.ZipExtension;
+				Task.Run(delegate
+				{
+					string name = ContentView.Popup.Content.Text;
 
-			if (ContentView.Popup.Type == PopupType.Upload)
-			{
+					if (string.IsNullOrWhiteSpace(name))
+					{
+						Toast.Show("Please provide a name for your style");
+						return;
+					}
+
+					name += Parser.ZipExtension;
+
+					if (ContentView.Popup.Type == PopupType.Upload)
+					{
 #if __ANDROID__
-				DriveClient.Instance.Upload(name, currentWorkingStream);
+						DriveClient.Instance.Upload(name, currentWorkingStream);
 #elif __IOS__
-				iOS.GoogleClient.Instance.Upload(name, currentWorkingStream);
+						iOS.GoogleClient.Instance.Upload(name, currentWorkingStream);
 #endif
-			}
-			else
-			{
-				LocalStorage.Instance.AddStyle(name, Parser.LocalStyleLocation);
-			}
+					}
+					else
+					{
+						LocalStorage.Instance.AddStyle(name, Parser.LocalStyleLocation);
+					}
+				});
+			});
+
 		}
 
 		string currentWorkingName;

@@ -8,7 +8,7 @@ namespace mobile_style_editor
 #if __ANDROID__
 			Android.Widget.Toast.MakeText(Xamarin.Forms.Forms.Context, text, Android.Widget.ToastLength.Short).Show();
 #elif __IOS__
-			ToastIOS.Toast.MakeText(text).Show();
+			ToastIOS.Toast.MakeText(text).SetFontSize(12f).Show();
 #elif __UWP__
 #endif
 		}

@@ -43,6 +43,7 @@ namespace mobile_style_editor
 		public const string Response_DRIVEID = "response_drive_id";
 
 		public EventHandler<DownloadEventArgs> DownloadComplete;
+		public EventHandler<EventArgs> UploadComplete;
 
 #if __ANDROID__
 		Context context;
@@ -77,6 +78,10 @@ namespace mobile_style_editor
 
 				DriveClass.DriveApi.GetRootFolder(client).CreateFile(client, metaBuilder.Build(), result.DriveContents);
 
+				if (UploadComplete != null)
+				{
+					UploadComplete(currentWorkingName, EventArgs.Empty);
+				}
 			});
 		}
 

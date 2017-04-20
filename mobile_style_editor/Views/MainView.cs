@@ -80,11 +80,12 @@ namespace mobile_style_editor
 			x = Width / 2 - w / 2;
 			y = Height / 2 - h / 2;
 
-			AddSubview(Loader, x, y, w, h);
-
 			// Finally add popup view so it would cover other views
 			AddSubview(Popup, 0, platformPadding, Width, Height);
 			Popup.Hide();
+
+			// Except loader. Loader should be above all!
+			AddSubview(Loader, x, y, w, h);
 		}
 
 		public void ShowLoading()
