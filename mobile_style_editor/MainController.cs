@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -110,7 +110,7 @@ namespace mobile_style_editor
 				FileUtils.OverwriteFileAtPath(path, text);
 				string name = "updated_" + data.Filename;
 
-				string zipPath = Parser.ZipData(data.DecompressedPath, name);
+				string zipPath = Parser.Compress(data.DecompressedPath, name);
 
 				// Get bytes to update style
 				byte[] zipBytes = FileUtils.PathToByteData(zipPath);
