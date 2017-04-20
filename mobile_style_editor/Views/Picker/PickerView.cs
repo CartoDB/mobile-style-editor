@@ -12,7 +12,7 @@ namespace mobile_style_editor
 
 		public PickerView()
 		{
-			Drive = new PickerViewItem("icon_drive.png");
+			Drive = new PickerViewItem("icon_drive.png", "CHOOSE FROM GOOGLE DRIVE");
 
 			Popup = new FileListPopup();
 		}
@@ -22,7 +22,7 @@ namespace mobile_style_editor
 			Popup.Hide();
 			double h = Height / 2;
 
-			double max = 300;
+			double max = 250;
 			if (h > max)
 			{
 				h = max;

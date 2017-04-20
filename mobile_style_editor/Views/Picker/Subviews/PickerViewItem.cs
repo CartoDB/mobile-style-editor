@@ -8,13 +8,22 @@ namespace mobile_style_editor
 		public EventHandler<EventArgs> Click;
 
 		public Image Image { get; private set; }
+		Label label;
 
-		public PickerViewItem(string resource)
+		public PickerViewItem(string resource, string text)
 		{
-			BackgroundColor = Color.FromRgb(230, 230, 230);
+			BackgroundColor = Color.FromRgb(240, 240, 240);
 
 			Image = new Image();
 			Image.Source = ImageSource.FromFile(resource);
+
+			label = new Label();
+			label.Text = text;
+			label.TextColor = Colors.CartoNavy;
+			label.FontSize = 12f;
+
+			label.VerticalTextAlignment = TextAlignment.Center;
+			label.HorizontalTextAlignment = TextAlignment.Center;
 
 			TapGestureRecognizer recognizer = new TapGestureRecognizer();
 			recognizer.Tapped += delegate
@@ -31,12 +40,21 @@ namespace mobile_style_editor
 		public override void LayoutSubviews()
 		{
 			double padding = Height / 10;
-			double x = padding;
+			double size = Width / 3 * 2;
+
+			double x = Width / 2 - size / 2;
 			double y = padding;
-			double w = Width - 2 * padding;
-			double h = Height - 2 * padding;
+			double w = size;
+			double h = size;
 
 			AddSubview(Image, x, y, w, h);
+
+			y += h;
+			x = padding;
+			w = Width - 2 * padding;
+			h = Height - (h + 2 * padding);
+
+			AddSubview(label, x, y, w, h);
 		}
 	}
 }
