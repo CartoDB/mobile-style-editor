@@ -42,5 +42,12 @@ namespace mobile_style_editor
 			(Content as FileListPopupContent).Populate(files);
 		}
 
+		public void Show(List<StoredStyle> files)
+		{
+			Show();
+			// TODO
+			//(Content as FileListPopupContent).Populate(files);
+		}
+
 	}
 }

@@ -24,6 +24,7 @@ namespace mobile_style_editor
 			base.OnAppearing();
 
 			ContentView.Drive.Click += OnDriveButtonClick;
+			ContentView.Database.Click += OnDatabaseButtonClick;
 
 #if __ANDROID__
 			DriveClient.Instance.DownloadStarted += OnDownloadStarted;
@@ -40,6 +41,7 @@ namespace mobile_style_editor
 			base.OnDisappearing();
 
 			ContentView.Drive.Click -= OnDriveButtonClick;
+			ContentView.Database.Click -= OnDatabaseButtonClick;
 
 #if __ANDROID__
 			DriveClient.Instance.DownloadStarted -= OnDownloadStarted;
@@ -80,6 +82,16 @@ namespace mobile_style_editor
 			ContentView.ShowLoading();
 			iOS.GoogleClient.Instance.DownloadStyleList();
 #endif
+		}
+
+		void OnDatabaseButtonClick(object sender, EventArgs e)
+		{
+			List<StoredStyle> styles = LocalStorage.Instance.Styles;
+
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.Popup.Show(styles);
+			});
 		}
 
 		void OnListDownloadComplete(object sender, ListDownloadEventArgs e)
