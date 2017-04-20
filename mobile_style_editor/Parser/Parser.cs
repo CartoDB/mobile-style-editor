@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Carto.Core;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace mobile_style_editor
 {
 	public class Parser
 	{
+		const string ProjectFile = "project.json";
+
 		const string MSSExtension = ".mss";
 		public const string ZipExtension = ".zip";
 
@@ -24,14 +27,42 @@ namespace mobile_style_editor
 
 			data.Filename = filename;
 			data.DecompressedPath = decompressedPath;
-			data.FilePaths = paths;
+			data.AllFilePaths = paths;
 
+			/*
+			 * The Zip itself can contain extra .mss files and presents them in the wrong order.
+			 * Read the necessary .mss files and their order from project.json
+			 */
 			foreach (string path in paths)
 			{
-				using (var streamReader = new StreamReader(path))
+				if (path.Contains(ProjectFile))
 				{
-					string content = streamReader.ReadToEnd();
-					data.DecompressedFiles.Add(content);
+					using (var streamReader = new StreamReader(path))
+					{
+						string content = streamReader.ReadToEnd();
+						Variant json = Variant.FromString(content);
+						Variant styles = json.GetObjectElement("styles");
+
+						for (int i = 0; i < styles.ArraySize; i++)
+						{
+							string styleFileName = styles.GetArrayElement(i).String;
+
+							foreach (string mssPath in paths)
+							{
+								if (mssPath.Contains(styleFileName))
+								{
+									using (var mssReader = new StreamReader(mssPath))
+									{
+										string styleContent = mssReader.ReadToEnd();
+										data.DecompressedFiles.Add(styleContent);
+									}
+
+									data.StyleFileNames.Add(styleFileName);
+									data.StyleFilePaths.Add(mssPath);
+								}
+							}
+						}
+					}
 				}
 			}
 
@@ -76,12 +107,8 @@ namespace mobile_style_editor
 
 					string entryFileName = zipEntry.Name;
 
-					if (entryFileName.Contains(MSSExtension))
-					{
-						paths.Add(Path.Combine(outFolder, entryFileName));
-						Console.WriteLine("Unzipped .mss file: " + entryFileName);
-					}
-
+					paths.Add(Path.Combine(outFolder, entryFileName));
+				
 					// To remove the folder from the entry:- entryFileName = Path.GetFileName(entryFileName);
 					// Optionally, match entrynames against a selection list here to skip as desired.
 					// The unpacked length is available in the zipEntry.Size property.

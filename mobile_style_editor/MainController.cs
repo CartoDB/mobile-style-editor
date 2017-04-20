@@ -105,7 +105,7 @@ namespace mobile_style_editor
 
 			Task.Run(delegate
 			{
-				string path = data.FilePaths[index];
+				string path = data.StyleFilePaths[index];
 
 				FileUtils.OverwriteFileAtPath(path, text);
 				string name = "updated_" + data.Filename;

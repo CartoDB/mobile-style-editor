@@ -10,29 +10,21 @@ namespace mobile_style_editor
 
 		public string DecompressedPath { get; set; }
 
+		public List<string> AllFilePaths { get; set; }
+
 		public List<string> DecompressedFiles { get; set; }
 
-		public List<string> FilePaths { get; set; }
+		public List<string> StyleFilePaths { get; set; }
 
-		public List<string> FileNames { 
-			get
-			{
-				List<string> names = new List<string>();
-
-				foreach (string path in FilePaths)
-				{
-					string[] split = path.Split('/');
-					string name = split[split.Length - 1];
-					names.Add(name);	
-				}
-
-				return names;
-			}
-		}
+		public List<string> StyleFileNames { get; set; }
 
 		public ZipData()
 		{
 			DecompressedFiles = new List<string>();
+
+			StyleFilePaths = new List<string>();
+
+			StyleFileNames = new List<string>();
 		}
 	}
 }
