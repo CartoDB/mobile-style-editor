@@ -102,6 +102,7 @@ namespace mobile_style_editor.iOS
 
 				// Define parameters of request
 				FilesResource.ListRequest listRequest = Service.Files.List();
+				// TODO: Currently 10 files max(?) Snipper copied from sample code
 				listRequest.PageSize = 10;
 				listRequest.Fields = "nextPageToken, files(id, name)";
 
