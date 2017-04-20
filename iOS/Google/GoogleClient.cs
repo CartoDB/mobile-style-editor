@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Carto.Core;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
@@ -19,6 +20,8 @@ namespace mobile_style_editor.iOS
 
 		public EventHandler<DownloadEventArgs> DownloadComplete { get; set; }
 		public EventHandler<EventArgs> UploadComplete { get; set; }
+
+		public EventHandler<ListDownloadEventArgs> ListDownloadComplete { get; set; }
 
 		const string CLIENTID_KEY = "client_id";
 		const string CLIENTSECRET_KEY = "client_secret";
@@ -91,57 +94,60 @@ namespace mobile_style_editor.iOS
 
 		}
 
-		public List<DriveFile> GetStyleList()
+		public void DownloadStyleList()
 		{
-			List<DriveFile> items = new List<DriveFile>();
-
-			// Define parameters of request
-			FilesResource.ListRequest listRequest = Service.Files.List();
-			listRequest.PageSize = 10;
-			listRequest.Fields = "nextPageToken, files(id, name)";
-
-			IList<Google.Apis.Drive.v3.Data.File> files = listRequest.Execute().Files;
-
-			if (files == null || files.Count == 0)
+			Task.Run(delegate
 			{
-				return items;
-			}
+				List<DriveFile> items = new List<DriveFile>();
 
-			/*
-			 * The listRequest.Execute() retrieves all files and folders from Drive, recursively
-			 * Filter out irrelevant data, the requirement of a style file is that it ends with "-style.zip"
-			 */
+				// Define parameters of request
+				FilesResource.ListRequest listRequest = Service.Files.List();
+				listRequest.PageSize = 10;
+				listRequest.Fields = "nextPageToken, files(id, name)";
 
-			foreach (var file in files)
-			{
-				if (file.Name.EndsWith("-style.zip", StringComparison.Ordinal))
+				IList<Google.Apis.Drive.v3.Data.File> files = listRequest.Execute().Files;
+
+				/*
+				 * The listRequest.Execute() retrieves all files and folders from Drive, recursively
+				 * Filter out irrelevant data, the requirement of a style file is that it ends with "-style.zip"
+				 */
+
+				foreach (var file in files)
 				{
-					items.Add(DriveFile.FromGoogleApiDriveFile(file));
+					if (file.Name.EndsWith("-style.zip", StringComparison.Ordinal))
+					{
+						items.Add(DriveFile.FromGoogleApiDriveFile(file));
+					}
 				}
-			}
 
-			return items;
+				if (ListDownloadComplete != null)
+				{
+					ListDownloadComplete(null, new ListDownloadEventArgs { Items = items });
+				}
+			});
 		}
 
 		public void DownloadStyle(string id, string name)
 		{
-			FilesResource.GetRequest request = Service.Files.Get(id);
-			//Google.Apis.Drive.v3.Data.File file = request.Execute();
-
-			var stream = new MemoryStream();
-
-			request.MediaDownloader.ProgressChanged += (IDownloadProgress obj) =>
+			Task.Run(delegate
 			{
-				if (obj.Status == DownloadStatus.Completed)
-				{
-					if (DownloadComplete != null)
-					{
-						DownloadComplete(null, new DownloadEventArgs { Stream = stream, Name = name });
-					}
-				}
-			};
+				FilesResource.GetRequest request = Service.Files.Get(id);
 
-			request.Download(stream);
+				var stream = new MemoryStream();
+
+				request.MediaDownloader.ProgressChanged += (IDownloadProgress obj) =>
+				{
+					if (obj.Status == DownloadStatus.Completed)
+					{
+						if (DownloadComplete != null)
+						{
+							DownloadComplete(null, new DownloadEventArgs { Stream = stream, Name = name });
+						}
+					}
+				};
+
+				request.Download(stream);
+			});
 		}
 
 		public void Upload(string name, MemoryStream stream)

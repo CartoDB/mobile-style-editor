@@ -27,9 +27,10 @@ namespace mobile_style_editor
 
 #if __ANDROID__
 			DriveClient.Instance.DownloadStarted += OnDownloadStarted;
-			DriveClient.Instance.DownloadComplete += OnDownloadComplete;
+			DriveClient.Instance.DownloadComplete += OnFileDownloadComplete;
 #elif __IOS__
-			iOS.GoogleClient.Instance.DownloadComplete += OnDownloadComplete;
+			iOS.GoogleClient.Instance.DownloadComplete += OnFileDownloadComplete;
+			iOS.GoogleClient.Instance.ListDownloadComplete += OnListDownloadComplete;
 			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 #endif
 		}
@@ -42,9 +43,10 @@ namespace mobile_style_editor
 
 #if __ANDROID__
 			DriveClient.Instance.DownloadStarted -= OnDownloadStarted;
-			DriveClient.Instance.DownloadComplete -= OnDownloadComplete;
+			DriveClient.Instance.DownloadComplete -= OnFileDownloadComplete;
 #elif __IOS__
-			iOS.GoogleClient.Instance.DownloadComplete -= OnDownloadComplete;
+			iOS.GoogleClient.Instance.DownloadComplete -= OnFileDownloadComplete;
+			iOS.GoogleClient.Instance.ListDownloadComplete -= OnListDownloadComplete;
 			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 #endif
 		}
@@ -53,11 +55,12 @@ namespace mobile_style_editor
 		{
 			Device.BeginInvokeOnMainThread(delegate
 			{
+				ContentView.Popup.Hide();
 				ContentView.ShowLoading();
 			});
 		}
 
-		void OnDownloadComplete(object sender, DownloadEventArgs e)
+		void OnFileDownloadComplete(object sender, DownloadEventArgs e)
 		{
 			List<string> result = FileUtils.SaveToAppFolder(e.Stream, e.Name);
 
@@ -74,14 +77,29 @@ namespace mobile_style_editor
 			DriveClient.Instance.Register(Forms.Context);
 			DriveClient.Instance.Connect();
 #elif __IOS__
-			List<DriveFile> files = iOS.GoogleClient.Instance.GetStyleList();
-			ContentView.Popup.Show(files);
+			ContentView.ShowLoading();
+			iOS.GoogleClient.Instance.DownloadStyleList();
 #endif
+		}
+
+		void OnListDownloadComplete(object sender, ListDownloadEventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.Popup.Show(e.Items);
+				ContentView.HideLoading();
+			});
 		}
 
 #if __IOS__
 		void OnItemClicked(object sender, EventArgs e)
 		{
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.Popup.Hide();
+				ContentView.ShowLoading();
+			});
+
 			FileListPopupItem item = (FileListPopupItem)sender;
 			iOS.GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
 		}
