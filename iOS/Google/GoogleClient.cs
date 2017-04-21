@@ -113,7 +113,7 @@ namespace mobile_style_editor.iOS
 
 				foreach (var file in files)
 				{
-					if (((bool)file.Trashed) && file.Name.EndsWith(".zip", StringComparison.Ordinal))
+					if (!((bool)file.Trashed) && file.Name.EndsWith(".zip", StringComparison.Ordinal))
 					{
 						items.Add(DriveFile.FromGoogleApiDriveFile(file));
 					}
