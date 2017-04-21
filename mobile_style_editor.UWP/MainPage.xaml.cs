@@ -28,5 +28,8 @@ namespace mobile_style_editor.UWP
 
             LoadApplication(new EditorApplication());
         }
+
+		// TODO make basic requests via REST api:
+		// http://stackoverflow.com/questions/32288641/how-can-i-create-a-http-rest-request-to-upload-something-to-google-drive
     }
 }
