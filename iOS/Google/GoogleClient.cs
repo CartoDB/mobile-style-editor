@@ -102,9 +102,7 @@ namespace mobile_style_editor.iOS
 
 				// Define parameters of request
 				FilesResource.ListRequest listRequest = Service.Files.List();
-				// TODO: Currently 10 files max(?) Snipper copied from sample code
-				listRequest.PageSize = 10;
-				listRequest.Fields = "nextPageToken, files(id, name)";
+				listRequest.Fields = "nextPageToken, files(id, name, trashed)";
 
 				IList<Google.Apis.Drive.v3.Data.File> files = listRequest.Execute().Files;
 
@@ -115,7 +113,7 @@ namespace mobile_style_editor.iOS
 
 				foreach (var file in files)
 				{
-					if (file.Name.EndsWith(".zip", StringComparison.Ordinal))
+					if (((bool)file.Trashed) && file.Name.EndsWith(".zip", StringComparison.Ordinal))
 					{
 						items.Add(DriveFile.FromGoogleApiDriveFile(file));
 					}
