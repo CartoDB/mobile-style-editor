@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -50,11 +50,18 @@ namespace mobile_style_editor
 
 			ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
 			ContentView.Toolbar.UploadButton.Click += OnUploadButtonClicked;
+			ContentView.Toolbar.SaveButton.Click += OnSaveButtonClicked;
 
-			ContentView.Editor.SaveButton.Clicked += OnSave;
-			ContentView.Editor.Field.EditingEnded += OnSave;
+			ContentView.Editor.RefreshButton.Clicked += OnRefresh;
+			ContentView.Editor.Field.EditingEnded += OnRefresh;
 
-			ContentView.UploadPopup.Content.Confirm.Clicked += OnConfirmButtonClicked;
+			ContentView.Popup.Content.Confirm.Clicked += OnConfirmButtonClicked;
+#if __ANDROID__
+			DriveClient.Instance.UploadComplete += OnUploadComplete;
+#elif __IOS__
+			iOS.GoogleClient.Instance.UploadComplete += OnUploadComplete;
+#elif __UWP__
+#endif
 		}
 
 		protected override void OnDisappearing()
@@ -63,34 +70,107 @@ namespace mobile_style_editor
 
 			ContentView.Toolbar.Tabs.OnTabTap -= OnTabTapped;
 			ContentView.Toolbar.UploadButton.Click -= OnUploadButtonClicked;
+			ContentView.Toolbar.SaveButton.Click -= OnSaveButtonClicked;
 
-			ContentView.Editor.SaveButton.Clicked -= OnSave;
-			ContentView.Editor.Field.EditingEnded -= OnSave;
+			ContentView.Editor.RefreshButton.Clicked -= OnRefresh;
+			ContentView.Editor.Field.EditingEnded -= OnRefresh;
 
-			ContentView.UploadPopup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
+			ContentView.Popup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
+
+#if __ANDROID__
+			DriveClient.Instance.UploadComplete += OnUploadComplete;
+#elif __IOS__
+			iOS.GoogleClient.Instance.UploadComplete -= OnUploadComplete;
+#elif __UWP__
+#endif
+		}
+
+		void NormalizeView(string text)
+		{
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.HideLoading();
+				ContentView.Popup.Hide();
+				Toast.Show(text);
+			});
+		}
+
+		void OnUploadComplete(object sender, EventArgs e)
+		{
+			NormalizeView("Upload of " + (string)sender + " complete");
 		}
 
 		void OnUploadButtonClicked(object sender, EventArgs e)
 		{
-			ContentView.UploadPopup.Show();
-			ContentView.UploadPopup.Content.Text = currentWorkingName;
+			ShowPopup(PopupType.Upload);
+		}
+
+		void OnSaveButtonClicked(object sender, EventArgs e)
+		{
+			ShowPopup(PopupType.Save);
+		}
+
+		void ShowPopup(PopupType type)
+		{
+			if (currentWorkingName == null)
+			{
+				Toast.Show("You don't seem to have made any changes");
+				return;
+			}
+
+			ContentView.Popup.Show(type);
 		}
 
 		void OnConfirmButtonClicked(object sender, EventArgs e)
 		{
-			string name = ContentView.UploadPopup.Content.Text;
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.ShowLoading();
 
+				Task.Run(delegate
+				{
+					string name = ContentView.Popup.Content.Text;
+
+					if (string.IsNullOrWhiteSpace(name))
+					{
+						Toast.Show("Please provide a name for your style");
+						return;
+					}
+
+					name += Parser.ZipExtension;
+
+					if (ContentView.Popup.Type == PopupType.Upload)
+					{
 #if __ANDROID__
-			DriveClient.Instance.Upload(name, currentWorkingStream);
+						DriveClient.Instance.Upload(name, currentWorkingStream);
 #elif __IOS__
-			GoogleClient.Instance.Upload(name, currentWorkingStream);
+
+						GoogleClient.Instance.Upload(name, currentWorkingStream);
 #endif
+					}
+					else
+					{
+						if (!Directory.Exists(Parser.LocalStyleLocation))
+						{
+							Directory.CreateDirectory(Parser.LocalStyleLocation);
+						}
+
+						LocalStorage.Instance.AddStyle(name, Parser.LocalStyleLocation);
+						string source = Path.Combine(Parser.ApplicationFolder, currentWorkingName);
+						string destination = Path.Combine(Parser.LocalStyleLocation, name);
+						File.Copy(source, destination);
+
+						NormalizeView(name + " saved to local database");
+					}
+				});
+			});
+
 		}
 
 		string currentWorkingName;
 		MemoryStream currentWorkingStream;
 
-		void OnSave(object sender, EventArgs e)
+		void OnRefresh(object sender, EventArgs e)
 		{
 			int index = ContentView.Toolbar.Tabs.ActiveIndex;
 			string text = ContentView.Editor.Text;
@@ -105,12 +185,12 @@ namespace mobile_style_editor
 
 			Task.Run(delegate
 			{
-				string path = data.FilePaths[index];
+				string path = data.StyleFilePaths[index];
 
 				FileUtils.OverwriteFileAtPath(path, text);
-				string name = "updated_" + data.Filename;
+				string name = "temporary-" + data.Filename;
 
-				string zipPath = Parser.ZipData(data.DecompressedPath, name);
+				string zipPath = Parser.Compress(data.DecompressedPath, name);
 
 				// Get bytes to update style
 				byte[] zipBytes = FileUtils.PathToByteData(zipPath);

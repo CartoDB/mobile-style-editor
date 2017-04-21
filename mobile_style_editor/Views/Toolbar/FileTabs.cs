@@ -43,7 +43,7 @@ namespace mobile_style_editor
 			double w = Width / 7;
 			double h = Height / 4;
 
-			List<string> names = data.FileNames;
+			List<string> names = data.StyleFileNames;
 			int index = 0;
 
 			foreach (string name in names)

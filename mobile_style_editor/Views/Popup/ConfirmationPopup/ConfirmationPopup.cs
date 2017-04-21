@@ -1,13 +1,15 @@
 ﻿using System;
 namespace mobile_style_editor
 {
-	public class UploadPopup : BasePopup
+	public class ConfirmationPopup : BasePopup
 	{
-		public new UploadPopupContent Content { get { return (UploadPopupContent)base.Content; } }
+		public PopupType Type;
 
-		public UploadPopup()
+		public new ConfirmationPopupContent Content { get { return (ConfirmationPopupContent)base.Content; } }
+
+		public ConfirmationPopup()
 		{
-			base.Content = new UploadPopupContent();
+			base.Content = new ConfirmationPopupContent();
 		}
 
 		public override void LayoutSubviews()
@@ -31,6 +33,12 @@ namespace mobile_style_editor
 			double w = Width - 2 * horizontalPadding;
 
 			AddSubview(Content, x, y, w, h);
+		}
+
+		public void Show(PopupType type)
+		{
+			Type = type;
+			base.Show();
 		}
 	}
 }

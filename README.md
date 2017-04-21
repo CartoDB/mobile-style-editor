@@ -1,31 +1,18 @@
-## CARTO Mobile SDK style editor app
+## CARTOMobileSDK Style Editor
 
-Minimal mobile app to preview/fix base map style CSS with mobile SDK
+* Mobile app to preview & fix base map style CSS with Mobile SDK written (mainly) in Xamarin.Forms
 
-Cross-platform, done with Xamarin. Meant for tablets, may work on phones.
+### FEATURES
 
-### Development plan/features
-___________
+* CartoMobileSDK MapView
+* Download zipped style files from Google Drive
+* .zip Compression/Decompression
+* .mss (.css) file reading & parsing into readable code blocks
+* Editing .mss files and uploading MapView with edited style file
+* Store style locally
+* Upload style to Google Drive
 
-_Draft plan:_
+### TODO
 
-1. <del>Test Xamarin Forms text editor field - is it usable? if yes, use xamarin forms. if no, use native text control</del> **Forms Entry field does not support formatted text. Still doing it in Forms, but need to use native text view**
-
-2. Style Viewer 
-  - Tablet-oriented UI - left map, right css editor field
-  - Read style css from style.zip package, show list of css (mss) files, selected file contents in text editor, show map in map view
-
-3. Minimal editor:
- - Enable changing css, 
- - Save style button -> updates zip file, reconfigures map to show changed style
-
-4. Next features
- - Change tile source. Start with hardcoded nutiteq.osm, enable changing it as text field to use OMT, mapzen etc.
- - Support connect/browse/read/write file from Google Drive
-
-5. "Maybe future"
- - define layer list (project.json) - create style from scratch use case
- - CSS style highlighting
- - CSS style helpers (precomplete, color selectors etc)
- - Xml style editor
- - Build as desktop app for Windows 10 and/or OSX (Xamarin Forms supports that in principle)
+* **UWP Support**: Currently the aforementioned features are functional only in Android and iOS
+* Integration with other data storage services (incl. search phone?)

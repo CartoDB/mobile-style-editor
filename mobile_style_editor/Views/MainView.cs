@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using Carto.Core;
 using Carto.DataSources;
@@ -21,20 +21,16 @@ namespace mobile_style_editor
 {
 	public class MainView : BaseView
 	{
-		public ActivityIndicator Loader { get; private set; }
-
 		public Toolbar Toolbar { get; private set; }
 
 		public MapView MapView { get; private set; }
 
 		public CSSEditorView Editor { get; private set; }
 
-		public UploadPopup UploadPopup { get; private set; }
+		public ConfirmationPopup Popup { get; private set; }
 
 		public MainView()
 		{
-			Loader = new ActivityIndicator();
-
 			Toolbar = new Toolbar();
 #if __IOS__
 			MapView = new MapView();
@@ -43,7 +39,7 @@ namespace mobile_style_editor
 #endif
 			Editor = new CSSEditorView();
 
-			UploadPopup = new UploadPopup();
+			Popup = new ConfirmationPopup();
 		}
 
 		public override void LayoutSubviews()
@@ -82,21 +78,9 @@ namespace mobile_style_editor
 			x = Width / 2 - w / 2;
 			y = Height / 2 - h / 2;
 
-			AddSubview(Loader, x, y, w, h);
-
 			// Finally add popup view so it would cover other views
-			AddSubview(UploadPopup, 0, platformPadding, Width, Height);
-			UploadPopup.Hide();
-		}
-
-		public void ShowLoading()
-		{
-			Loader.IsRunning = true;
-		}
-
-		public void HideLoading()
-		{
-			Loader.IsRunning = false;
+			AddSubview(Popup, 0, platformPadding, Width, Height);
+			Popup.Hide();
 		}
 
 		ZipData Data;

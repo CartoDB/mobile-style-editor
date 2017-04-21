@@ -23,15 +23,16 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
-#if __ANDROID__
-			(Forms.Context as Droid.MainActivity).SetIsLandscape(true);
-#endif
 			ContentView.Drive.Click += OnDriveButtonClick;
+			ContentView.Database.Click += OnDatabaseButtonClick;
 
 #if __ANDROID__
-			DriveClient.Instance.DownloadComplete += OnDownloadComplete;
+			DriveClient.Instance.DownloadStarted += OnDownloadStarted;
+			DriveClient.Instance.DownloadComplete += OnFileDownloadComplete;
 #elif __IOS__
-			GoogleClient.Instance.DownloadComplete += OnDownloadComplete;
+
+			GoogleClient.Instance.DownloadComplete += OnFileDownloadComplete;
+			GoogleClient.Instance.ListDownloadComplete += OnListDownloadComplete;
 			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 #endif
 		}
@@ -41,21 +42,34 @@ namespace mobile_style_editor
 			base.OnDisappearing();
 
 			ContentView.Drive.Click -= OnDriveButtonClick;
+			ContentView.Database.Click -= OnDatabaseButtonClick;
 
 #if __ANDROID__
-			DriveClient.Instance.DownloadComplete -= OnDownloadComplete;
+			DriveClient.Instance.DownloadStarted -= OnDownloadStarted;
+			DriveClient.Instance.DownloadComplete -= OnFileDownloadComplete;
 #elif __IOS__
-			GoogleClient.Instance.DownloadComplete -= OnDownloadComplete;
+			GoogleClient.Instance.DownloadComplete -= OnFileDownloadComplete;
+			GoogleClient.Instance.ListDownloadComplete -= OnListDownloadComplete;
 			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 #endif
 		}
 
-		void OnDownloadComplete(object sender, DownloadEventArgs e)
+		void OnDownloadStarted(object sender, EventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.Popup.Hide();
+				ContentView.ShowLoading();
+			});
+		}
+
+		void OnFileDownloadComplete(object sender, DownloadEventArgs e)
 		{
 			List<string> result = FileUtils.SaveToAppFolder(e.Stream, e.Name);
 
 			Device.BeginInvokeOnMainThread(async delegate
 			{
+				ContentView.HideLoading();
 				await Navigation.PushAsync(new MainController(result[1], result[0]));
 			});
 		}
@@ -66,16 +80,49 @@ namespace mobile_style_editor
 			DriveClient.Instance.Register(Forms.Context);
 			DriveClient.Instance.Connect();
 #elif __IOS__
-			List<DriveFile> files = GoogleClient.Instance.GetStyleList();
-			ContentView.Popup.Show(files);
+			ContentView.ShowLoading();
+			GoogleClient.Instance.DownloadStyleList();
 #endif
 		}
 
-#if __IOS__
-		void OnItemClicked(object sender, EventArgs e)
+		void OnDatabaseButtonClick(object sender, EventArgs e)
 		{
+			List<StoredStyle> styles = LocalStorage.Instance.Styles;
+
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.Popup.Show(styles);
+			});
+		}
+
+		void OnListDownloadComplete(object sender, ListDownloadEventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.Popup.Show(e.Items);
+				ContentView.HideLoading();
+			});
+		}
+
+#if __IOS__
+		async void OnItemClicked(object sender, EventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.Popup.Hide();
+				ContentView.ShowLoading();
+			});
+
 			FileListPopupItem item = (FileListPopupItem)sender;
-			GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
+
+			if (item.File == null)
+			{
+				await Navigation.PushAsync(new MainController(item.Style.Path, item.Style.Name));
+			}
+			else
+			{
+				GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
+			}
 		}
 #endif
 

@@ -42,7 +42,9 @@ namespace mobile_style_editor
 
 		public const string Response_DRIVEID = "response_drive_id";
 
+		public EventHandler<EventArgs> DownloadStarted;
 		public EventHandler<DownloadEventArgs> DownloadComplete;
+		public EventHandler<EventArgs> UploadComplete;
 
 #if __ANDROID__
 		Context context;
@@ -77,6 +79,10 @@ namespace mobile_style_editor
 
 				DriveClass.DriveApi.GetRootFolder(client).CreateFile(client, metaBuilder.Build(), result.DriveContents);
 
+				if (UploadComplete != null)
+				{
+					UploadComplete(currentWorkingName, EventArgs.Empty);
+				}
 			});
 		}
 
@@ -110,6 +116,11 @@ namespace mobile_style_editor
 
 			Task.Run(delegate
 			{
+				if (DownloadStarted != null)
+				{
+	                DownloadStarted(null, null);
+				}
+
 				/*
 				 * All "Result" variables are under Android.Gms.Drive, search for "result".
 				 * Be sure to await, else it'll return cast failure

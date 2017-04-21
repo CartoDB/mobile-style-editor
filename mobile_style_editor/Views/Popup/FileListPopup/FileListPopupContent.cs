@@ -8,42 +8,44 @@ namespace mobile_style_editor
 	{
 		public EventHandler<EventArgs> ItemClick;
 
-		public void Populate(List<DriveFile> files)
+		public void Populate(List<object> items)
 		{
 			Children.Clear();
 
-			double topPadding = 10;
+			double padding = 0;
 
-			double x = topPadding;
-			double y = topPadding;
-			double w;
+			int itemsPerRow = 6;
 
-			if (Width > Height)
+			double x = padding;
+			double y = padding;
+			double w = Width / itemsPerRow;
+			double h = w * 1.2;
+
+			foreach (object item in items)
 			{
-				w = Height / 6;
-			}
-			else
-			{
-				w = Width / 6;
-			}
+				FileListPopupItem view;
 
-			double h = w * 1.3;
-
-			foreach (DriveFile file in files)
-			{
-				FileListPopupItem item = new FileListPopupItem(file);
-				item.Click += OnItemClick;
-
-				AddSubview(item, x, y, w, h);
-
-				if (w - y < 1)
+				if (item is DriveFile)
 				{
-					x = topPadding;
-					y += h + topPadding;
+					view = new FileListPopupItem((DriveFile)item);
 				}
 				else
 				{
-					x += w + topPadding;
+					view = new FileListPopupItem((StoredStyle)item);
+				}
+
+				view.Click += OnItemClick;
+
+				AddSubview(view, x, y, w, h);
+
+				if (Width - (x + w)  < 1)
+				{
+					x = padding;
+					y += h + padding;
+				}
+				else
+				{
+					x += w + padding;
 				}
 			}
 		}

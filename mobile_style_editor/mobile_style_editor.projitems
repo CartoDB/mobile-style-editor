@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PickerController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ColorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\Parser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\ZipData.cs" />
@@ -21,7 +22,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Editor\EditorField.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\FileTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\FileTabs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\UploadButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\Toolbar.cs" />
@@ -34,15 +34,21 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopup.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup\UploadPopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\ConfirmationPopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\ToolbarButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\LocalStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\StoredStyle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\PopupType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\ConfirmationPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Toast.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DownloadEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\GoogleClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\GoogleExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\ListDownloadEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\PickerView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\PickerViewItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Google\GoogleClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Parser\" />
@@ -53,9 +59,9 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Picker\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup" />
-    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\UploadPopup" />
-    <Folder Include="$(MSBuildThisFileDirectory)Google\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\" />
+    <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style-with-params.zip" />
