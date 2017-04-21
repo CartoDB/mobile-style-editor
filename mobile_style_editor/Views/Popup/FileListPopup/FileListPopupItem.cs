@@ -8,12 +8,27 @@ namespace mobile_style_editor
 		public EventHandler<EventArgs> Click;
 
 		public DriveFile File { get; private set; }
+		public new StoredStyle Style { get; private set; }
+
 		Image image;
 		Label text;
 
 		public FileListPopupItem(DriveFile file)
 		{
 			File = file;
+
+			Initialize();
+		}
+
+		public FileListPopupItem(StoredStyle style)
+		{
+			Style = style;
+
+            Initialize();
+		}
+
+		void Initialize()
+		{
 
 			TapGestureRecognizer recognizer = new TapGestureRecognizer();
 			recognizer.Tapped += delegate
@@ -33,10 +48,18 @@ namespace mobile_style_editor
 			image.Source = ImageSource.FromFile("icon_zip.png");
 
 			text = new Label();
-			text.Text = file.Name;
 			text.FontSize = 12f;
 			text.HorizontalTextAlignment = TextAlignment.Center;
 			text.VerticalTextAlignment = TextAlignment.Center;
+
+			if (File == null)
+			{
+				text.Text = Style.Name;
+			}
+			else
+			{
+				text.Text = File.Name;
+			}
 		}
 
 		public override void LayoutSubviews()

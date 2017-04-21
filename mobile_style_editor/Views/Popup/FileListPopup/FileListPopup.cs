@@ -39,14 +39,13 @@ namespace mobile_style_editor
 		public void Show(List<DriveFile> files)
 		{
 			Show();
-			(Content as FileListPopupContent).Populate(files);
+			(Content as FileListPopupContent).Populate(files.ToObjects());
 		}
 
-		public void Show(List<StoredStyle> files)
+		public void Show(List<StoredStyle> styles)
 		{
 			Show();
-			// TODO
-			//(Content as FileListPopupContent).Populate(files);
+			(Content as FileListPopupContent).Populate(styles.ToObjects());
 		}
 
 	}

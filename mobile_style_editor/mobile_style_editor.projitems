@@ -46,6 +46,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\ConfirmationPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Toast.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\ListDownloadEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
