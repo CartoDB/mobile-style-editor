@@ -45,9 +45,6 @@ namespace mobile_style_editor
 
 			container = new BaseView();
 
-			Color color = Color.FromRgb(240, 240, 240);
-			container.BackgroundColor = color;
-
 			image = new Image();
 			image.Source = ImageSource.FromFile("icon_zip.png");
 
