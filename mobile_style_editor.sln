@@ -13,6 +13,7 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		mobile_style_editor\mobile_style_editor.projitems*{0e98f186-1f61-4c7a-ac64-739590a9ce99}*SharedItemsImports = 13
+		mobile_style_editor\mobile_style_editor.projitems*{2390b2b9-05e0-4de9-a968-671a1ddec104}*SharedItemsImports = 4
 		mobile_style_editor\mobile_style_editor.projitems*{ce6fed75-9c73-44fb-a2fb-1331ccb1fb03}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
