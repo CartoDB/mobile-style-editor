@@ -76,7 +76,7 @@ namespace mobile_style_editor
 			FastZip instance = new FastZip();
 			instance.CreateEmptyDirectories = true;
 
-			string destination = Path.Combine(ApplicationFolder, newFilename + ZipExtension);
+			string destination = Path.Combine(ApplicationFolder, newFilename);
 
 			instance.CreateZip(destination, source, true, "");
 

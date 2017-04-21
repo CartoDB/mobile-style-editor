@@ -149,7 +149,16 @@ namespace mobile_style_editor
 					}
 					else
 					{
+						if (!Directory.Exists(Parser.LocalStyleLocation))
+						{
+							Directory.CreateDirectory(Parser.LocalStyleLocation);
+						}
+
 						LocalStorage.Instance.AddStyle(name, Parser.LocalStyleLocation);
+						string source = Path.Combine(Parser.ApplicationFolder, currentWorkingName);
+						string destination = Path.Combine(Parser.LocalStyleLocation, name);
+						File.Copy(source, destination);
+
 						NormalizeView(name + " saved to local database");
 					}
 				});
@@ -178,7 +187,7 @@ namespace mobile_style_editor
 				string path = data.StyleFilePaths[index];
 
 				FileUtils.OverwriteFileAtPath(path, text);
-				string name = "updated_" + data.Filename;
+				string name = "temporary" + data.Filename;
 
 				string zipPath = Parser.Compress(data.DecompressedPath, name);
 

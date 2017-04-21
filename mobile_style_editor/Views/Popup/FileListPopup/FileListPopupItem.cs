@@ -79,7 +79,6 @@ namespace mobile_style_editor
 			double imagePadding = container.Width / 5;
 			double textPadding = container.Width / 20;
 
-			Console.WriteLine(X + " - " + Y);
 			x = imagePadding;
 
 			y = textPadding; // doesn't need that much y

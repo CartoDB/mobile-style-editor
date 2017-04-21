@@ -104,7 +104,7 @@ namespace mobile_style_editor
 		}
 
 #if __IOS__
-		void OnItemClicked(object sender, EventArgs e)
+		async void OnItemClicked(object sender, EventArgs e)
 		{
 			Device.BeginInvokeOnMainThread(delegate
 			{
@@ -113,7 +113,15 @@ namespace mobile_style_editor
 			});
 
 			FileListPopupItem item = (FileListPopupItem)sender;
-			iOS.GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
+
+			if (item.File == null)
+			{
+				await Navigation.PushAsync(new MainController(item.Style.Path, item.Style.Name));
+			}
+			else
+			{
+				iOS.GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
+			}
 		}
 #endif
 
