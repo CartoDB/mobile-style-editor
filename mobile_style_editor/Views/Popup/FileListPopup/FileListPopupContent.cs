@@ -12,22 +12,14 @@ namespace mobile_style_editor
 		{
 			Children.Clear();
 
-			double topPadding = 10;
+			double padding = 0;
 
-			double x = topPadding;
-			double y = topPadding;
-			double w;
+			int itemsPerRow = 6;
 
-			if (Width > Height)
-			{
-				w = Height / 6;
-			}
-			else
-			{
-				w = Width / 6;
-			}
-
-			double h = w * 1.3;
+			double x = padding;
+			double y = padding;
+			double w = Width / itemsPerRow;
+			double h = w * 1.2;
 
 			foreach (object item in items)
 			{
@@ -46,14 +38,14 @@ namespace mobile_style_editor
 
 				AddSubview(view, x, y, w, h);
 
-				if (Width - (x + w + topPadding) < 1)
+				if (Width - (x + w)  < 1)
 				{
-					x = topPadding;
-					y += h + topPadding;
+					x = padding;
+					y += h + padding;
 				}
 				else
 				{
-					x += w + topPadding;
+					x += w + padding;
 				}
 			}
 		}

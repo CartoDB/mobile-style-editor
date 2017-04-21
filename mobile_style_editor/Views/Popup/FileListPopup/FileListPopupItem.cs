@@ -10,6 +10,8 @@ namespace mobile_style_editor
 		public DriveFile File { get; private set; }
 		public new StoredStyle Style { get; private set; }
 
+		BaseView container;
+
 		Image image;
 		Label text;
 
@@ -41,8 +43,10 @@ namespace mobile_style_editor
 
 			GestureRecognizers.Add(recognizer);
 
+			container = new BaseView();
+
 			Color color = Color.FromRgb(240, 240, 240);
-			BackgroundColor = color;
+			container.BackgroundColor = color;
 
 			image = new Image();
 			image.Source = ImageSource.FromFile("icon_zip.png");
@@ -50,7 +54,6 @@ namespace mobile_style_editor
 			text = new Label();
 			text.FontSize = 12f;
 			text.HorizontalTextAlignment = TextAlignment.Center;
-			text.VerticalTextAlignment = TextAlignment.Center;
 
 			if (File == null)
 			{
@@ -64,23 +67,34 @@ namespace mobile_style_editor
 
 		public override void LayoutSubviews()
 		{
-			double imagePadding = Width / 5;
-			double textPadding = Width / 20;
+			double containerPadding = Width / 20;
 
-			double x = imagePadding;
-			double y = textPadding; // doesn't need that much y
-			double w = Width - 2 * imagePadding;
-			double h = w;
+			double x = containerPadding;
+			double y = containerPadding;
+			double w = Width - 2 * containerPadding;
+			double h = Height - 2 * containerPadding;
 
-			AddSubview(image, x, y, w, h);
+			AddSubview(container, x, y, w, h);
 
-			y += h;
+			double imagePadding = container.Width / 5;
+			double textPadding = container.Width / 20;
 
-			x = textPadding;
+			Console.WriteLine(X + " - " + Y);
+			x = imagePadding;
+
+			y = textPadding; // doesn't need that much y
+			w = Width - 2 * imagePadding;
+			h = w;
+
+			container.AddSubview(image, x, y, w, h);
+
+			y += h + textPadding;
+
+			x = 0;
 			h = Height - (h + textPadding);
-			w = Width - 2 * textPadding;
+			w = container.Width;
 
-			AddSubview(text, x, y, w, h);
+			container.AddSubview(text, x, y, w, h);
 		}
 	}
 }
