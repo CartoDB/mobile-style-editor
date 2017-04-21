@@ -59,7 +59,7 @@ namespace mobile_style_editor
 #if __ANDROID__
 			DriveClient.Instance.UploadComplete += OnUploadComplete;
 #elif __IOS__
-			iOS.GoogleClient.Instance.UploadComplete += OnUploadComplete;
+			GoogleClient.Instance.UploadComplete += OnUploadComplete;
 #elif __UWP__
 #endif
 		}
@@ -80,7 +80,7 @@ namespace mobile_style_editor
 #if __ANDROID__
 			DriveClient.Instance.UploadComplete += OnUploadComplete;
 #elif __IOS__
-			iOS.GoogleClient.Instance.UploadComplete -= OnUploadComplete;
+			GoogleClient.Instance.UploadComplete -= OnUploadComplete;
 #elif __UWP__
 #endif
 		}

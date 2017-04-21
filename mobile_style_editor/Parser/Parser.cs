@@ -73,7 +73,7 @@ namespace mobile_style_editor
                                         {
                                             using (var mssReader = new StreamReader(stream2))
 #else
-                                            using (var mssReader = new StreamReader(path))
+											using (var mssReader = new StreamReader(mssPath))
 #endif
                                             {
                                                 string styleContent = mssReader.ReadToEnd();
