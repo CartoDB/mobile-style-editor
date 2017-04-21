@@ -187,7 +187,7 @@ namespace mobile_style_editor
 				string path = data.StyleFilePaths[index];
 
 				FileUtils.OverwriteFileAtPath(path, text);
-				string name = "temporary" + data.Filename;
+				string name = "temporary-" + data.Filename;
 
 				string zipPath = Parser.Compress(data.DecompressedPath, name);
 
