@@ -118,6 +118,10 @@ namespace mobile_style_editor
 			if (item.File == null)
 			{
 				await Navigation.PushAsync(new MainController(item.Style.Path, item.Style.Name));
+				Device.BeginInvokeOnMainThread(delegate
+				{
+					ContentView.HideLoading();
+				});
 			}
 			else
 			{

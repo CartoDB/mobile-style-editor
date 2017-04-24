@@ -126,6 +126,7 @@ namespace mobile_style_editor
 				{
 					var manager = (InputMethodManager)Context.GetSystemService("input_method");
 					manager.ToggleSoftInput(ShowFlags.Forced, 0);
+
 					EditingEnded(this, EventArgs.Empty);
 				}
 			}
