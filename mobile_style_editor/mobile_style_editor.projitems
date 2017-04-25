@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)EditorApplication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parser\UWPVFS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PickerController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ColorExtensions.cs" />
@@ -51,7 +52,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\PickerViewItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Parser\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Toolbar\" />

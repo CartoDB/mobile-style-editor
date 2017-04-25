@@ -105,9 +105,14 @@ namespace mobile_style_editor
 
 			string destination = Path.Combine(ApplicationFolder, newFilename);
 
-			instance.CreateZip(destination, source, true, "");
+#if __UWP__
+            // Need to Set Virtual File System on UWP
+            // More information at: https://github.com/ygrenier/SharpZipLib.Portable#virtual-file-system
+            ICSharpCode.SharpZipLib.VFS.SetCurrent(new UWPVFS());
+#endif
+            instance.CreateZip(destination, source, true, "");
 
-			return destination;
+            return destination;
 		}
 
 		public static List<string> Decompress(string archiveFilenameIn, string outFolder)
