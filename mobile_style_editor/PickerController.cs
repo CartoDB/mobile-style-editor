@@ -17,6 +17,7 @@ namespace mobile_style_editor
 #if __IOS__
 			GoogleClient.Instance.Authenticate();
 #endif
+			Title = "CARTO STYLE EDITOR";
 		}
 
 		protected override void OnAppearing()
@@ -26,14 +27,14 @@ namespace mobile_style_editor
 			ContentView.Drive.Click += OnDriveButtonClick;
 			ContentView.Database.Click += OnDatabaseButtonClick;
 
+			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
+
 #if __ANDROID__
 			DriveClient.Instance.DownloadStarted += OnDownloadStarted;
 			DriveClient.Instance.DownloadComplete += OnFileDownloadComplete;
 #elif __IOS__
-
 			GoogleClient.Instance.DownloadComplete += OnFileDownloadComplete;
 			GoogleClient.Instance.ListDownloadComplete += OnListDownloadComplete;
-			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 #endif
 		}
 
@@ -44,13 +45,14 @@ namespace mobile_style_editor
 			ContentView.Drive.Click -= OnDriveButtonClick;
 			ContentView.Database.Click -= OnDatabaseButtonClick;
 
+			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
+
 #if __ANDROID__
 			DriveClient.Instance.DownloadStarted -= OnDownloadStarted;
 			DriveClient.Instance.DownloadComplete -= OnFileDownloadComplete;
 #elif __IOS__
 			GoogleClient.Instance.DownloadComplete -= OnFileDownloadComplete;
 			GoogleClient.Instance.ListDownloadComplete -= OnListDownloadComplete;
-			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 #endif
 		}
 
@@ -104,7 +106,6 @@ namespace mobile_style_editor
 			});
 		}
 
-#if __IOS__
 		async void OnItemClicked(object sender, EventArgs e)
 		{
 			Device.BeginInvokeOnMainThread(delegate
@@ -118,13 +119,18 @@ namespace mobile_style_editor
 			if (item.File == null)
 			{
 				await Navigation.PushAsync(new MainController(item.Style.Path, item.Style.Name));
+				Device.BeginInvokeOnMainThread(delegate
+				{
+					ContentView.HideLoading();
+				});
 			}
 			else
 			{
+#if __IOS__
 				GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
+#endif
 			}
 		}
-#endif
 
 	}
 }

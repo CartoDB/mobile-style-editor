@@ -52,8 +52,15 @@ namespace mobile_style_editor
 			double x = 0;
 			double y = platformPadding;
 			double w = Width;
-			double h = Height / 7;
-            
+			//double h = Height / 7;
+			double h = Height / 12;
+			double min = 50;
+
+			if (h < min)
+			{
+				h = min;
+			}
+
 			AddSubview(Toolbar, x, y, w, h);
 
 			y += h;

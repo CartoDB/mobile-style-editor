@@ -24,7 +24,7 @@ namespace mobile_style_editor
 #elif __UWP__
         public class EditorField : Windows.UI.Xaml.Controls.TextBox
 #endif
-    {
+	{
 		public EventHandler<EventArgs> EditingEnded;
 
 		Color textColor;
@@ -70,7 +70,11 @@ namespace mobile_style_editor
 		: base(Forms.Context)
 #endif
 		{
+#if __IOS__
+			BackgroundColor = Color.FromRgb(20, 20, 20);
+#else
 			BackgroundColor = Color.FromRgb(50, 50, 50);
+#endif
 			TextColor = Color.White;
 
 #if __ANDROID__
@@ -130,10 +134,12 @@ namespace mobile_style_editor
 				{
 					var manager = (InputMethodManager)Context.GetSystemService("input_method");
 					manager.ToggleSoftInput(ShowFlags.Forced, 0);
+
 					EditingEnded(this, EventArgs.Empty);
 				}
 			}
 		}
+
 #elif __IOS__
 
 		[Foundation.Export("textView:shouldChangeTextInRange:replacementText:")]
@@ -152,8 +158,8 @@ namespace mobile_style_editor
 
 			return true;
 		}
-
 #endif
+
 		public void Update(string text)
 		{
 			var watch = new System.Diagnostics.Stopwatch();
@@ -179,33 +185,67 @@ namespace mobile_style_editor
 				Color commentColor = Color.FromRgb(120, 120, 120);
 				// Carto green
 				Color blockHeaderColor = Color.FromRgb(145, 198, 112);
+				// Dark magenta
+				Color constantColor = Color.FromRgb(150, 0, 150);
+
+				bool isInCommentBlock = false;
 
 				foreach (string line in lines)
 				{
 					string trimmed = line.Trim();
 					string withNewLine = line + "\n";
 
+					if (isInCommentBlock)
+					{
+						if (trimmed.Contains("*/"))
+						{
+							int nonCommentIndex = line.IndexOf("*/", StringComparison.Ordinal) + 2;
+							string comment = line.Substring(0, nonCommentIndex);
+							string nonComment = line.Substring(nonCommentIndex, line.Length - nonCommentIndex);
+
+							builder.Append(comment, commentColor.ToNativeColor(), size);
+							builder.Append(nonComment + "\n", generalColor.ToNativeColor(), size);
+							isInCommentBlock = false;
+						}
+						else
+						{
+							builder.Append(withNewLine, commentColor.ToNativeColor(), size);
+						}
+						continue;
+					}
+
 					if (trimmed.StartsWith("//", StringComparison.Ordinal))
 					{
 						builder.Append(withNewLine, commentColor.ToNativeColor(), size);
 					}
+					else if (trimmed.StartsWith("@", StringComparison.Ordinal))
+					{
+						builder.Append(withNewLine, constantColor.ToNativeColor(), size);
+					}
+					else if (trimmed.Contains("/*"))
+					{
+						int commentIndex = line.IndexOf("/*", StringComparison.Ordinal);
+						string nonComment = line.Substring(0, commentIndex);
+						string comment = line.Substring(commentIndex, line.Length - commentIndex);
+
+						builder.Append(nonComment, generalColor.ToNativeColor(), size);
+						builder.Append(comment + "\n", commentColor.ToNativeColor(), size);
+						isInCommentBlock = true;
+					}
 					else
 					{
-						if (trimmed.Contains("#") || trimmed.Contains("["))
+						if (trimmed.Contains("{"))
 						{
-							if (trimmed.Contains("{"))
-							{
-								int bracketIndex = line.IndexOf("{", StringComparison.Ordinal);
-								string blockHeader = line.Substring(0, bracketIndex);
-								string remaining = line.Substring(bracketIndex, line.Length - bracketIndex);
+							int bracketIndex = line.IndexOf("{", StringComparison.Ordinal);
+							string blockHeader = line.Substring(0, bracketIndex);
+							string remaining = line.Substring(bracketIndex, line.Length - bracketIndex);
 
-								builder.Append(blockHeader, blockHeaderColor.ToNativeColor(), size);
-								builder.Append(remaining + "\n", generalColor.ToNativeColor(), size);
-							}
-							else
-							{
-								builder.Append(withNewLine, blockHeaderColor.ToNativeColor(), size);
-							}
+							builder.Append(blockHeader, blockHeaderColor.ToNativeColor(), size);
+							builder.Append(remaining + "\n", generalColor.ToNativeColor(), size);
+						}
+						else if (trimmed.Contains("#") || trimmed.Contains("["))
+						{
+							builder.Append(withNewLine, blockHeaderColor.ToNativeColor(), size);
 						}
 						else
 						{
@@ -244,9 +284,11 @@ namespace mobile_style_editor
 				}
 
 				return LineCount * LineHeight + padding;
+
 			}
 		}
 #elif __IOS__
 #endif
 	}
+
 }
