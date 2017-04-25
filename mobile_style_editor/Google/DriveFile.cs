@@ -10,8 +10,9 @@ namespace mobile_style_editor
 		public string Name { get; set; }
 
 #if __ANDROID__
+#elif __UWP__
 #else
-		public static DriveFile FromGoogleApiDriveFile(Google.Apis.Drive.v3.Data.File file)
+        public static DriveFile FromGoogleApiDriveFile(Google.Apis.Drive.v3.Data.File file)
 		{
 			return new DriveFile { Id = file.Id, Name = file.Name };
 		}

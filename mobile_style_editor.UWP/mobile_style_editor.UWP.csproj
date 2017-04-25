@@ -132,6 +132,11 @@
       <Name>Carto Mobile SDK for Windows Phone 10</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SQLite-net">
+      <HintPath>.\SQLite-net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <Import Project="..\mobile_style_editor\mobile_style_editor.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

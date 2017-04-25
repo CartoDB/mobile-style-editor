@@ -20,7 +20,6 @@ namespace mobile_style_editor
 #else
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 #endif
-
             const string file = "mobile_styles.db";
 
 			db = new SQLiteConnection(System.IO.Path.Combine(folder, file));
