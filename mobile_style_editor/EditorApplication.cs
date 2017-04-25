@@ -22,7 +22,7 @@ namespace mobile_style_editor
 #endif
 
 			MainPage = new NavigationPage(new PickerController()) { 
-				BarBackgroundColor = Color.Navy, 
+				BarBackgroundColor = Colors.CartoNavyLight, 
 				BarTextColor = Color.White
 			};
 		}

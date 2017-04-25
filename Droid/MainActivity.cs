@@ -20,6 +20,11 @@ namespace mobile_style_editor.Droid
 			global::Xamarin.Forms.Forms.Init(this, bundle);
 
 			LoadApplication(new EditorApplication());
+
+			if (((int)Build.VERSION.SdkInt) > 21)
+			{
+				Window.SetStatusBarColor(Colors.CartoRedDark.ToNativeColor());
+			}
 		}
 
 		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)

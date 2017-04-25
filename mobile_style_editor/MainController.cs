@@ -21,6 +21,8 @@ namespace mobile_style_editor
 
 			ContentView = new MainView();
 			Content = ContentView;
+
+			Title = "CARTO STYLE EDITOR";
 		}
 
 		protected override void OnAppearing()

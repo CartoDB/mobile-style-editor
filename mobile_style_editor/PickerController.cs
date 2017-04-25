@@ -17,6 +17,7 @@ namespace mobile_style_editor
 #if __IOS__
 			iOS.GoogleClient.Instance.Authenticate();
 #endif
+			Title = "CARTO STYLE EDITOR";
 		}
 
 		protected override void OnAppearing()
