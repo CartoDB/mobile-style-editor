@@ -30,6 +30,9 @@ namespace mobile_style_editor
             {
                 // TODO UWP Throws:
                 // Unable to load DLL 'sqlite3': The specified module could not be found. (Exception from HRESULT: 0x8007007E)
+                
+                // Probably LocalStorage isn't necessary at this point anyway.
+                // Should fix so it wouldn't save style urls, but rather read all files from stored styles directory
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
 
