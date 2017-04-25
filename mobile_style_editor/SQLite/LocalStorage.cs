@@ -13,8 +13,8 @@ namespace mobile_style_editor
 
 		public List<StoredStyle> Styles { get { return db.Query<StoredStyle>("select * from StoredStyle"); } }
 
-		LocalStorage()
-		{
+        LocalStorage()
+        {
 #if __UWP__
             string folder = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #else
@@ -22,10 +22,19 @@ namespace mobile_style_editor
 #endif
             const string file = "mobile_styles.db";
 
-			db = new SQLiteConnection(System.IO.Path.Combine(folder, file));
+            try
+            {
+                db = new SQLiteConnection(System.IO.Path.Combine(folder, file));
+            }
+            catch (Exception e)
+            {
+                // TODO UWP Throws:
+                // Unable to load DLL 'sqlite3': The specified module could not be found. (Exception from HRESULT: 0x8007007E)
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
 
-			db.CreateTable<StoredStyle>();
-		}
+            db.CreateTable<StoredStyle>();
+        }
 
 		public void AddStyle(string name, string path)
 		{

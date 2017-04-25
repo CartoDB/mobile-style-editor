@@ -136,6 +136,9 @@
     <Reference Include="SQLite-net">
       <HintPath>.\SQLite-net.dll</HintPath>
     </Reference>
+    <Reference Include="SQLitePCL.raw">
+      <HintPath>.\SQLitePCL.raw.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="..\mobile_style_editor\mobile_style_editor.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
