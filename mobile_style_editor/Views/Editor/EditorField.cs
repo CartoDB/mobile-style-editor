@@ -12,7 +12,9 @@ using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 #elif __UWP__
-
+using Windows.System;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
 #endif
 
 namespace mobile_style_editor
@@ -118,7 +120,17 @@ namespace mobile_style_editor
 			ReturnKeyType = UIReturnKeyType.Done;
 			Delegate = this;
 #elif __UWP__
-            
+            Window.Current.CoreWindow.KeyDown += (s, e) =>
+            {
+                var ctrl = Window.Current.CoreWindow.GetKeyState(VirtualKey.Control);
+                if (ctrl.HasFlag(CoreVirtualKeyStates.Down) && e.VirtualKey == VirtualKey.S)
+                {
+                    if (EditingEnded != null)
+                    {
+                        EditingEnded(this, EventArgs.Empty);
+                    }
+                }
+            };
 #endif
         }
 #if __ANDROID__
