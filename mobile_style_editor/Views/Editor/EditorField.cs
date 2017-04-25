@@ -131,6 +131,7 @@ namespace mobile_style_editor
 				}
 			}
 		}
+
 #elif __IOS__
 
 		[Foundation.Export("textView:shouldChangeTextInRange:replacementText:")]
@@ -149,8 +150,8 @@ namespace mobile_style_editor
 
 			return true;
 		}
-
 #endif
+
 		public void Update(string text)
 		{
 			var watch = new System.Diagnostics.Stopwatch();
@@ -174,7 +175,7 @@ namespace mobile_style_editor
 				// Carto green
 				Color blockHeaderColor = Color.FromRgb(145, 198, 112);
 				// Magenta
-				Color constantColor = Color.FromRgb(139,0,139);
+				Color constantColor = Color.FromRgb(139, 0, 139);
 
 				bool isInCommentBlock = false;
 
@@ -269,9 +270,11 @@ namespace mobile_style_editor
 				}
 
 				return LineCount * LineHeight + padding;
+
 			}
 		}
 #elif __IOS__
 #endif
 	}
+
 }

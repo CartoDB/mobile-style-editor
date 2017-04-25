@@ -23,9 +23,6 @@ namespace mobile_style_editor
 			Content = ContentView;
 		}
 
-		// TODO Remove cursor from edittext after editing is cancelled:
-		// http://stackoverflow.com/questions/5582702/disable-edittext-blinking-cursor
-
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
