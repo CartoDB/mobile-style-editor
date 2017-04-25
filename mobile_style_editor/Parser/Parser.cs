@@ -69,7 +69,7 @@ namespace mobile_style_editor
                                     if (mssPath.Contains(styleFileName))
                                     {
 #if __UWP__
-                                        using (var stream2 = new FileStream(path, FileMode.Open, FileAccess.Read))
+                                        using (var stream2 = new FileStream(mssPath, FileMode.Open, FileAccess.Read))
                                         {
                                             using (var mssReader = new StreamReader(stream2))
 #else

@@ -21,10 +21,15 @@ namespace mobile_style_editor
 			MapView.RegisterLicense(CartoLicense, Forms.Context);
 #endif
 
-			MainPage = new NavigationPage(new PickerController()) { 
+#if __UWP__
+            List<string> paths = CopyToAppData();
+            MainPage = new NavigationPage(new MainController(paths[1], paths[0]));
+#else
+            MainPage = new NavigationPage(new PickerController()) { 
 				BarBackgroundColor = Colors.CartoNavyLight, 
 				BarTextColor = Color.White
 			};
+#endif
 		}
 
 		protected override void OnStart()
@@ -46,13 +51,14 @@ namespace mobile_style_editor
 
 		public List<string> CopyToAppData()
 		{
-#if __UWP__
-            return null;
-#else
             string styleName = "bright-cartocss-style";
 			string stylePath = "";
 
-			Assembly assembly = Assembly.GetAssembly(typeof(Parser));
+#if __UWP__
+            Assembly assembly = typeof(Parser).GetTypeInfo().Assembly;
+#else
+            Assembly assembly = Assembly.GetAssembly(typeof(Parser));
+#endif
 			string[] resources = assembly.GetManifestResourceNames();
 
 			foreach (var resource in resources)
@@ -68,7 +74,7 @@ namespace mobile_style_editor
 				string filename = styleName + Parser.ZipExtension;
 				return FileUtils.SaveToAppFolder(stream, filename);
 			}
-#endif
+//#endif
 		}
 	}
 }

@@ -22,7 +22,7 @@ namespace mobile_style_editor
 #elif __ANDROID__
 	public class EditorField : EditText
 #elif __UWP__
-        public class EditorField : Windows.UI.Xaml.Controls.TextBox
+        public class EditorField : Windows.UI.Xaml.Controls.RichEditBox
 #endif
 	{
 		public EventHandler<EventArgs> EditingEnded;
@@ -42,8 +42,10 @@ namespace mobile_style_editor
 				base.TextColor = backgroundColor.ToNativeColor();
 #elif __ANDROID__
 				SetTextColor(textColor.ToNativeColor());
+#elif __UWP__
+                       
 #endif
-			}
+            }
 		}
 
 		Color backgroundColor;
@@ -61,11 +63,29 @@ namespace mobile_style_editor
 				base.BackgroundColor = backgroundColor.ToNativeColor();
 #elif __ANDROID__
 				SetBackgroundColor(backgroundColor.ToNativeColor());
+#elif __UWP__
+                // TODO This does nothing
+                Background = new Windows.UI.Xaml.Media.SolidColorBrush(value.ToNativeColor());
 #endif
-			}
+            }
 		}
 
-		public EditorField()
+#if __UWP__
+        public string Text
+        {
+            get
+            {
+                string content = "";
+                Document.GetText(Windows.UI.Text.TextGetOptions.None, out content);
+                return content;
+            }
+            set
+            {
+                Document.SetText(Windows.UI.Text.TextSetOptions.None, value);
+            }
+        }
+#endif
+        public EditorField()
 #if __ANDROID__
 		: base(Forms.Context)
 #endif
@@ -75,7 +95,7 @@ namespace mobile_style_editor
 #else
 			BackgroundColor = Color.FromRgb(50, 50, 50);
 #endif
-			TextColor = Color.White;
+            TextColor = Color.White;
 
 #if __ANDROID__
 			TextSize = 13f;
@@ -97,8 +117,10 @@ namespace mobile_style_editor
 #elif __IOS__
 			ReturnKeyType = UIReturnKeyType.Done;
 			Delegate = this;
+#elif __UWP__
+            
 #endif
-		}
+        }
 #if __ANDROID__
 		Android.Graphics.Rect rect;
 		Android.Graphics.Paint paint;

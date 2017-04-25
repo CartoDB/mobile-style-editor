@@ -36,8 +36,10 @@ namespace mobile_style_editor
 			MapView = new MapView();
 #elif __ANDROID__
 			MapView = new MapView(Forms.Context);
+#elif __UWP__
+            MapView = new MapView();
 #endif
-			Editor = new CSSEditorView();
+            Editor = new CSSEditorView();
 
 			Popup = new ConfirmationPopup();
 		}
