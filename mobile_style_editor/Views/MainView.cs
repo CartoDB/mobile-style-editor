@@ -50,7 +50,7 @@ namespace mobile_style_editor
 
 			// Platform padding isn't required when navigation bar is visible
 			int platformPadding = 0; //Device.OnPlatform(20, 0, 0);
-
+            
 			double x = 0;
 			double y = platformPadding;
 			double w = Width;
@@ -66,17 +66,20 @@ namespace mobile_style_editor
 			AddSubview(Toolbar, x, y, w, h);
 
 			y += h;
-			w = Width / 3 * 1.9;
+            w = Width / 3 * 1.9;
 			h = Height - (h + platformPadding);
-
-			AddSubview(MapView.ToView(), new Rectangle(x, y, w, h));
+#if __UWP__
+            double watPadding = 4;
+            y += watPadding;
+            h -= watPadding;
+#endif
+            AddSubview(MapView.ToView(), new Rectangle(x, y, w, h));
 
 			x += w;
 			w = Width - w;
+            AddSubview(Editor, new Rectangle(x, y, w, h));
 
-			AddSubview(Editor, new Rectangle(x, y, w, h));
-
-			if (Data != null)
+            if (Data != null)
 			{
 				Editor.Initialize(Data);
 				Toolbar.Initialize(Data);

@@ -45,7 +45,7 @@ namespace mobile_style_editor
 #elif __ANDROID__
 				SetTextColor(textColor.ToNativeColor());
 #elif __UWP__
-                       
+               
 #endif
             }
 		}
@@ -131,6 +131,21 @@ namespace mobile_style_editor
                     }
                 }
             };
+
+            BorderThickness = new Windows.UI.Xaml.Thickness(0, 0, 0, 0);
+
+            Console.WriteLine(Resources);
+
+            string hover = "PointerOver";
+
+            string textColor = "ffffff";
+            string backgroundColor = "2a2a2a";
+            
+            //Resources["TextControlForeground"] = textColor;
+            //Resources["TextControlForeground" + hover] = textColor;
+
+            //Resources["TextControlBackground"] = backgroundColor;
+            //Resources["TextControlBackground" + hover] = backgroundColor;
 
             IsSpellCheckEnabled = false;
 #endif
