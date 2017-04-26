@@ -17,6 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace mobile_style_editor.UWP
 {
+    // TODO | Signing:
+    // https://msdn.microsoft.com/en-us/library/windows/desktop/jj835832(v=vs.85).aspx
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>

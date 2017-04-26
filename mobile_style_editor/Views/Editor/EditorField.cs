@@ -131,7 +131,7 @@ namespace mobile_style_editor
                     }
                 }
             };
-
+            
             BorderThickness = new Windows.UI.Xaml.Thickness(0, 0, 0, 0);
 
             Console.WriteLine(Resources);
