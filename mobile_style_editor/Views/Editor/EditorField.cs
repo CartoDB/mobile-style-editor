@@ -131,6 +131,8 @@ namespace mobile_style_editor
                     }
                 }
             };
+
+            IsSpellCheckEnabled = false;
 #endif
         }
 #if __ANDROID__
