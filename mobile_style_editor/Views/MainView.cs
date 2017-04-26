@@ -75,7 +75,14 @@ namespace mobile_style_editor
 #endif
             AddSubview(MapView.ToView(), new Rectangle(x, y, w, h));
 
-			x += w;
+#if __UWP__
+            y -= watPadding;
+            h += watPadding + 2;
+
+            double headerHeight = 50;
+            h -= headerHeight;
+#endif
+            x += w;
 			w = Width - w;
             AddSubview(Editor, new Rectangle(x, y, w, h));
 

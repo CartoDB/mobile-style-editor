@@ -137,15 +137,18 @@ namespace mobile_style_editor
             Console.WriteLine(Resources);
 
             string hover = "PointerOver";
+            string focused = "Focused";
 
-            string textColor = "ffffff";
-            string backgroundColor = "2a2a2a";
-            
-            //Resources["TextControlForeground"] = textColor;
-            //Resources["TextControlForeground" + hover] = textColor;
+            string textColor = "#ffffff";
+            string backgroundColor = "#2a2a2a";
 
-            //Resources["TextControlBackground"] = backgroundColor;
-            //Resources["TextControlBackground" + hover] = backgroundColor;
+            Resources["TextControlForeground"] = textColor;
+            Resources["TextControlForeground" + hover] = textColor;
+            Resources["TextControlForeground" + focused] = textColor;
+
+            Resources["TextControlBackground"] = backgroundColor;
+            Resources["TextControlBackground" + hover] = backgroundColor;
+            Resources["TextControlBackground" + focused] = backgroundColor;
 
             IsSpellCheckEnabled = false;
 #endif
