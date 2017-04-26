@@ -89,11 +89,13 @@ namespace mobile_style_editor
 
 		void OnDatabaseButtonClick(object sender, EventArgs e)
 		{
-			List<StoredStyle> styles = LocalStorage.Instance.Styles;
+			string path = Parser.LocalStyleLocation;
+
+			string[] files = Directory.GetFiles(path);
 
 			Device.BeginInvokeOnMainThread(delegate
 			{
-				ContentView.Popup.Show(styles);
+				ContentView.Popup.Show(files.ToStoredStyles());
 			});
 		}
 
