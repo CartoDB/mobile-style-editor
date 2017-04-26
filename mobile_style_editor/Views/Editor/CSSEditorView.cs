@@ -52,7 +52,12 @@ namespace mobile_style_editor
 			y = Height - (h + padding);
 
 			RefreshButton.BorderRadius = (int)(w / 2);
-			AddSubview(RefreshButton, x, y, w, h);
+
+#if __UWP__
+            // Accommodate for wide scrollbar
+            x -= 12;
+#endif
+            AddSubview(RefreshButton, x, y, w, h);
 		}
 
 		public void Initialize(ZipData items)
