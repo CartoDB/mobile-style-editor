@@ -1,4 +1,5 @@
-﻿using ICSharpCode.SharpZipLib.VirtualFileSystem;
+﻿#if __UWP__
+using ICSharpCode.SharpZipLib.VirtualFileSystem;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,9 +7,10 @@ using System.Text;
 
 namespace mobile_style_editor
 {
-    /* Universal Windows Platform Virtual File System */
-    public class UWPVFS : ICSharpCode.SharpZipLib.VirtualFileSystem.IVirtualFileSystem
-    {
+	/* Universal Windows Platform Virtual File System */
+	public class UWPVFS : ICSharpCode.SharpZipLib.VirtualFileSystem.IVirtualFileSystem
+	{
+		
         class ElementInfo : IVfsElement
         {
             protected FileSystemInfo Info;
@@ -168,3 +170,4 @@ namespace mobile_style_editor
         }
     }
 }
+#endif
