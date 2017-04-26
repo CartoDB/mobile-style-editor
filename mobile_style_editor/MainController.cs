@@ -157,7 +157,6 @@ namespace mobile_style_editor
 							Directory.CreateDirectory(Parser.LocalStyleLocation);
 						}
 
-						LocalStorage.Instance.AddStyle(name, Parser.LocalStyleLocation);
 						string source = Path.Combine(Parser.ApplicationFolder, currentWorkingName);
 						string destination = Path.Combine(Parser.LocalStyleLocation, name);
 						File.Copy(source, destination);
