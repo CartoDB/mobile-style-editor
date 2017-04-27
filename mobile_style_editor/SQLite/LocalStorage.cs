@@ -1,4 +1,6 @@
 ﻿
+#if __UWP__
+#else
 using System;
 using System.Collections.Generic;
 using SQLite;
@@ -45,3 +47,4 @@ namespace mobile_style_editor
 		}
 	}
 }
+#endif
