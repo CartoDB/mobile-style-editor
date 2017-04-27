@@ -125,7 +125,27 @@ namespace mobile_style_editor
 			 */ 
 		}
 
-		void ParseKeysFromFile()
+        public async Task<Stream> DownloadStyle(string id, string name)
+        {
+            string url = "https://drive.google.com/uc?export=download&id=";
+            url += id;
+            // TODO Can currently only download file that have been made shareable via Drive's web client
+            //url += "&confirm=" + AccessToken;
+            
+            using (var client = new HttpClient())
+            {
+                var stream = await client.GetStreamAsync(url);
+                return stream;
+
+                var response = await client.GetAsync(url);
+                
+                var content = (StreamContent)response.Content;
+                var message = await response.Content.ReadAsStringAsync();
+                return await response.Content.ReadAsStreamAsync();
+            }
+        }
+
+        void ParseKeysFromFile()
 		{
 			using (var stream = new FileStream("Assets/drive_client_ids.json", FileMode.Open, FileAccess.Read))
 			{

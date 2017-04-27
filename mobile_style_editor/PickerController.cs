@@ -140,11 +140,15 @@ namespace mobile_style_editor
 				});
 			}
 			else
-			{
-#if __IOS__
-				GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
+            {
+#if __ANDROID__
+#elif __IOS__
+                GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
+#elif __UWP__
+                Stream stream = await DriveClientUWP.Instance.DownloadStyle(item.File.Id, item.File.Name);
+                OnFileDownloadComplete(null, new DownloadEventArgs { Name = item.File.Name, Stream = stream });
 #endif
-			}
+            }
 		}
 
 	}
