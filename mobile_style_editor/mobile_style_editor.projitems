@@ -50,6 +50,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Google\ListDownloadEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\PickerView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\PickerViewItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClientUWP.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />

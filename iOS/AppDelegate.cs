@@ -26,10 +26,6 @@ namespace mobile_style_editor.iOS
 
 			LoadApplication(new EditorApplication());
 
-			//GoogleClient.Instance.Authenticate();
-			//List<DriveFile> items = GoogleClient.Instance.GetStyleList();
-			//GoogleClient.Instance.DownloadStyle(items[0].Id);
-
 			return base.FinishedLaunching(app, options);
 		}
 
