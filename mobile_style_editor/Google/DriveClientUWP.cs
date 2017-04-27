@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -50,8 +51,10 @@ namespace mobile_style_editor
 
 		string MimeType = "q=mimeType='application/zip'";
 
-		public async void DownloadFileList()
+		public async Task<List<DriveFile>> DownloadFileList()
 		{
+			List<DriveFile> driveFiles = new List<DriveFile>();
+
 			// TODO AccessToken lifespan is 60 minutes. Re-request when 60 minutes have passed
 			if (AccessToken == null)
 			{
@@ -59,6 +62,7 @@ namespace mobile_style_editor
 				AccessToken = response.Token;
 			}
 
+			// Set mime time as application/zip so it would only return zip files
 			string url = "https://www.googleapis.com/drive/v3/files?" + MimeType;
 
 			using (var client = new HttpClient())
@@ -67,8 +71,58 @@ namespace mobile_style_editor
 				client.DefaultRequestHeaders.Add("Authorization", "Bearer " + AccessToken);
 
 				string result = await client.GetStringAsync(url);
-				Console.WriteLine(result);
+
+				Variant variant = Variant.FromString(result);
+
+				Variant files = variant.GetObjectElement("files");
+
+				for (int i = 0; i < files.ArraySize; i++)
+				{
+					Variant file = files.GetArrayElement(i);
+					driveFiles.Add(DriveFile.FromVariant(file));
+				}
 			}
+
+			return driveFiles;
+
+			/*
+			   {
+				 "kind": "drive#fileList",
+				 "incompleteSearch": false,
+				 "files": [
+					  {
+					   "kind": "drive#file",
+					   "id": "0By9YoP-GLAu8ZzlsM08yLUtIZkU",
+					   "name": "bright-with-params-updated.zip",
+					   "mimeType": "application/zip"
+					  },
+					  {
+					   "kind": "drive#file",
+					   "id": "0By9YoP-GLAu8WWdlVGZfemVZVzQ",
+					   "name": "bright-cartocss-style-with-params.zip",
+					   "mimeType": "application/zip"
+					  },
+					  {
+					   "kind": "drive#file",
+					   "id": "0By9YoP-GLAu8TktwcHk1X3VZZVk",
+					   "name": "Magenta-Style.zip",
+					   "mimeType": "application/zip"
+					  },
+					  {
+					   "kind": "drive#file",
+					   "id": "0By9YoP-GLAu8QkxlYTBSZDBEaUk",
+					   "name": "blue-cartocss-style.zip",
+					   "mimeType": "application/zip"
+					  },
+					  {
+					   "kind": "drive#file",
+					   "id": "0By9YoP-GLAu8LUhfQlVCQTNGMWc",
+					   "name": "bright-cartocss-style.zip",
+					   "mimeType": "application/zip"
+					  }
+				 ]
+				}
+			 */ 
 		}
 
 		void ParseKeysFromFile()
