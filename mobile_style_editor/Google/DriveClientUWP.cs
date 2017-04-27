@@ -130,7 +130,10 @@ namespace mobile_style_editor
             string url = "https://drive.google.com/uc?export=download&id=";
             url += id;
             // TODO Can currently only download file that have been made shareable via Drive's web client
-            //url += "&confirm=" + AccessToken;
+            
+            // &confirm is used to suppress the download size warning.
+            // Shouldn't be necessary since our styles aren't that large
+            // url += "&confirm=";
             
             using (var client = new HttpClient())
             {
@@ -143,6 +146,11 @@ namespace mobile_style_editor
                 var message = await response.Content.ReadAsStringAsync();
                 return await response.Content.ReadAsStreamAsync();
             }
+        }
+
+        public async void Upload(string name, Stream file)
+        {
+
         }
 
         void ParseKeysFromFile()
