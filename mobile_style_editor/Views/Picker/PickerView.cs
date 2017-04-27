@@ -23,8 +23,14 @@ namespace mobile_style_editor
 			titleLabel.HorizontalTextAlignment = TextAlignment.Center;
 			titleLabel.Text = "CHOOSE STYLE SOURCE";
 
-			Drive = new PickerViewItem("icon_drive.png", "FROM GOOGLE DRIVE");
-			Database = new PickerViewItem("icon_database.png", "FROM LOCAL DATABASE");
+            string folder = "";
+
+#if __UWP__
+            folder = "Assets/";
+#endif
+
+            Drive = new PickerViewItem(folder +"icon_drive.png", "FROM GOOGLE DRIVE");
+			Database = new PickerViewItem(folder + "icon_database.png", "FROM LOCAL DATABASE");
 
 			Popup = new FileListPopup();
 		}

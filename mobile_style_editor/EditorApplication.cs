@@ -24,16 +24,10 @@ namespace mobile_style_editor
 #elif __UWP__
             MapView.RegisterLicense(CartoLicense);
 #endif
-
-#if __UWP__
-            List<string> paths = CopyToAppData();
-            MainPage = new NavigationPage(new MainController(paths[1], paths[0]));
-#else
             MainPage = new NavigationPage(new PickerController()) { 
 				BarBackgroundColor = Colors.CartoNavyLight, 
 				BarTextColor = Color.White
 			};
-#endif
 		}
 
 		protected override void OnStart()

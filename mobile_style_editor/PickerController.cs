@@ -76,7 +76,7 @@ namespace mobile_style_editor
 			});
 		}
 
-		void OnDriveButtonClick(object sender, EventArgs e)
+		async void OnDriveButtonClick(object sender, EventArgs e)
 		{
 #if __ANDROID__
 			DriveClient.Instance.Register(Forms.Context);
@@ -84,8 +84,21 @@ namespace mobile_style_editor
 #elif __IOS__
 			ContentView.ShowLoading();
 			GoogleClient.Instance.DownloadStyleList();
+#elif __UWP__
+            ContentView.ShowLoading();
+            /*
+             * If you crash here, you're probably missing drive_client_ids.json that needs to be bundled as an asset,
+             * but because of security reasons, it's not on github.
+             * Keys for nutitab@gmail.com are available on Carto's Google Drive under Technology/Product Development/Mobile/keys
+             * Simply copy drive_client_ids.json into this project's Assets folder
+             * 
+             * If you wish to create your ids and refresh tokens,
+             * there's a guide under DriveClientiOS
+             */
+            List<DriveFile> files = await DriveClientUWP.Instance.DownloadFileList();
+            OnListDownloadComplete(null, new ListDownloadEventArgs { Items = files });
 #endif
-		}
+        }
 
 		void OnDatabaseButtonClick(object sender, EventArgs e)
 		{

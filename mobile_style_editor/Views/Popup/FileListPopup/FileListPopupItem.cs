@@ -46,7 +46,13 @@ namespace mobile_style_editor
 			container = new BaseView();
 
 			image = new Image();
-			image.Source = ImageSource.FromFile("icon_zip.png");
+
+            string folder = "";
+#if __UWP__
+            folder = "Assets/";
+#endif
+
+            image.Source = ImageSource.FromFile(folder + "icon_zip.png");
 
 			text = new Label();
 			text.FontSize = 12f;

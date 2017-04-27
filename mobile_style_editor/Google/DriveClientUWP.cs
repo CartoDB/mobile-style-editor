@@ -127,7 +127,7 @@ namespace mobile_style_editor
 
 		void ParseKeysFromFile()
 		{
-			using (var stream = new FileStream("drive_client_ids.json", FileMode.Open, FileAccess.Read))
+			using (var stream = new FileStream("Assets/drive_client_ids.json", FileMode.Open, FileAccess.Read))
 			{
 				using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
 				{
