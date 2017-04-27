@@ -149,7 +149,7 @@ namespace mobile_style_editor
             Resources["TextControlBackground"] = backgroundColor;
             Resources["TextControlBackground" + hover] = backgroundColor;
             Resources["TextControlBackground" + focused] = backgroundColor;
-
+            
             IsSpellCheckEnabled = false;
 #endif
         }
@@ -229,7 +229,7 @@ namespace mobile_style_editor
 
 			var builder = new iOS.AttributedTextBuilder();
 #elif __UWP__
-            var builder = new UWP.SimpleSpanBuilder();
+            var builder = new UWP.SimpleSpanBuilder(this);
 #endif
                 float size = 1f;
 
@@ -244,7 +244,14 @@ namespace mobile_style_editor
 
 				bool isInCommentBlock = false;
 
-				foreach (string line in lines)
+#if __UWP__
+                Device.BeginInvokeOnMainThread(delegate
+                {
+                    Text = text;
+                });
+#endif
+
+                foreach (string line in lines)
 				{
 					string trimmed = line.Trim();
 					string withNewLine = line + "\n";
@@ -312,10 +319,10 @@ namespace mobile_style_editor
 #if __ANDROID__
 					TextFormatted = builder.Build();
 #elif __IOS__
-			AttributedText = builder.Build();
-			this.SetNeedsDisplay();
+			        AttributedText = builder.Build();
+			        this.SetNeedsDisplay();
 #elif __UWP__
-            Text = builder.Build();
+                    Document.ApplyDisplayUpdates();
 #endif
 				});
 
