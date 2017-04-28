@@ -27,13 +27,11 @@ namespace mobile_style_editor
 			Field = new EditorField();
 
 			RefreshButton = new RefreshButton();
-			RefreshButton.BackgroundColor = Colors.CartoRed;
 
             string folder = "";
 #if __UWP__
             folder = "Assets/";
 #endif
-
 			RefreshButton.ImageSource = new FileImageSource { File = folder + "icon_refresh.png" };
 		}
 
@@ -55,8 +53,6 @@ namespace mobile_style_editor
 			x = Width - (w + padding);
 			y = Height - (h + padding);
 
-			//RefreshButton.BorderRadius = (int)(w / 2);
-
 #if __UWP__
             // Accommodate for wide scrollbar
             x -= 12;
@@ -76,22 +72,19 @@ namespace mobile_style_editor
 		}
 	}
     
-    public class RefreshButton : BaseView
+    public class RefreshButton : Frame
     {
+        public ContainerView container;
         public EventHandler<EventArgs> Clicked;
-
-        Image image;
 
         public ImageSource ImageSource
         {
-            get { return image.Source; }
-            set { image.Source = value; }
+            get { return container.image.Source; }
+            set { container.image.Source = value; }
         }
 
         public RefreshButton()
         {
-            image = new Image();
-
             TapGestureRecognizer recognizer = new TapGestureRecognizer();
             recognizer.Tapped += delegate
             {
@@ -101,7 +94,30 @@ namespace mobile_style_editor
                 }
             };
 
+            Padding = new Thickness(0, 0, 0, 0);
+            
             GestureRecognizers.Add(recognizer);
+
+            container = new ContainerView();
+            container.BackgroundColor = Colors.CartoRed;
+            Content = container;
+
+            SizeChanged += OnSizeChange;
+        }
+
+        private void OnSizeChange(object sender, EventArgs e)
+        {
+            CornerRadius = (float)Width / 2;
+        }
+    }
+
+    public class ContainerView : BaseView
+    {
+        public Image image;
+
+        public ContainerView()
+        {
+            image = new Image();
         }
 
         public override void LayoutSubviews()
