@@ -18,7 +18,7 @@ namespace mobile_style_editor
 
 		public EditorField Field { get; private set; }
 
-		public Button RefreshButton { get; private set; }
+		public RefreshButton RefreshButton { get; private set; }
 
 		public string Text { get { return Field.Text; } }
 
@@ -26,11 +26,15 @@ namespace mobile_style_editor
 		{
 			Field = new EditorField();
 
-			RefreshButton = new Button();
+			RefreshButton = new RefreshButton();
 			RefreshButton.BackgroundColor = Colors.CartoRed;
 
-			var source = new FileImageSource { File = "icon_refresh.png" };
-			RefreshButton.Image = source;
+            string folder = "";
+#if __UWP__
+            folder = "Assets/";
+#endif
+
+			RefreshButton.ImageSource = new FileImageSource { File = folder + "icon_refresh.png" };
 		}
 
 		public override void LayoutSubviews()
@@ -51,7 +55,7 @@ namespace mobile_style_editor
 			x = Width - (w + padding);
 			y = Height - (h + padding);
 
-			RefreshButton.BorderRadius = (int)(w / 2);
+			//RefreshButton.BorderRadius = (int)(w / 2);
 
 #if __UWP__
             // Accommodate for wide scrollbar
@@ -71,4 +75,47 @@ namespace mobile_style_editor
 			Field.Update(items.DecompressedFiles[index]);
 		}
 	}
+    
+    public class RefreshButton : BaseView
+    {
+        public EventHandler<EventArgs> Clicked;
+
+        Image image;
+
+        public ImageSource ImageSource
+        {
+            get { return image.Source; }
+            set { image.Source = value; }
+        }
+
+        public RefreshButton()
+        {
+            image = new Image();
+
+            TapGestureRecognizer recognizer = new TapGestureRecognizer();
+            recognizer.Tapped += delegate
+            {
+                if (Clicked != null)
+                {
+                    Clicked(this, EventArgs.Empty);
+                }
+            };
+
+            GestureRecognizers.Add(recognizer);
+        }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+
+            double padding = Width / 10;
+
+            double x = padding;
+            double y = padding;
+            double w = Width - 2 * padding;
+            double h = Height - 2 * padding;
+
+            AddSubview(image, x, y, w, h);
+        }
+    }
 }
