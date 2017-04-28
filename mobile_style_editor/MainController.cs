@@ -45,8 +45,10 @@ namespace mobile_style_editor
 
 				Device.BeginInvokeOnMainThread(delegate
 				{
-					ContentView.UpdateMap(zipBytes);
-					ContentView.HideLoading();
+					ContentView.UpdateMap(zipBytes, delegate
+					{
+						ContentView.HideLoading();
+					});
 				});
 			});
 
@@ -203,8 +205,10 @@ namespace mobile_style_editor
 					currentWorkingName = name;
 					currentWorkingStream = new MemoryStream(zipBytes);
 
-					ContentView.UpdateMap(zipBytes);
-					ContentView.HideLoading();
+					ContentView.UpdateMap(zipBytes, delegate
+					{
+						ContentView.HideLoading();
+					});
 				});
 			});
 		}

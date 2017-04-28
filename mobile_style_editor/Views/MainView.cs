@@ -39,7 +39,7 @@ namespace mobile_style_editor
 #elif __UWP__
             MapView = new MapView();
 #endif
-            Editor = new CSSEditorView();
+			Editor = new CSSEditorView();
 
 			Popup = new ConfirmationPopup();
 		}
@@ -50,7 +50,7 @@ namespace mobile_style_editor
 
 			// Platform padding isn't required when navigation bar is visible
 			int platformPadding = 0; //Device.OnPlatform(20, 0, 0);
-            
+
 			double x = 0;
 			double y = platformPadding;
 			double w = Width;
@@ -66,16 +66,16 @@ namespace mobile_style_editor
 			AddSubview(Toolbar, x, y, w, h);
 
 			y += h;
-            w = Width / 3 * 1.9;
+			w = Width / 3 * 1.9;
 			h = Height - (h + platformPadding);
 
-            AddSubview(MapView.ToView(), new Rectangle(x, y, w, h));
+			AddSubview(MapView.ToView(), new Rectangle(x, y, w, h));
 
-            x += w;
+			x += w;
 			w = Width - w;
-            AddSubview(Editor, new Rectangle(x, y, w, h));
+			AddSubview(Editor, new Rectangle(x, y, w, h));
 
-            if (Data != null)
+			if (Data != null)
 			{
 				Editor.Initialize(Data);
 				Toolbar.Initialize(Data);
@@ -102,17 +102,20 @@ namespace mobile_style_editor
 
 		const string OSM = "nutiteq.osm";
 
-		public void UpdateMap(byte[] data)
+		public void UpdateMap(byte[] data, Action completed)
 		{
-			MapView.Layers.Clear();
-
 			System.Threading.Tasks.Task.Run(delegate
 			{
 				BinaryData styleAsset = new BinaryData(data);
 
 				var package = new ZippedAssetPackage(styleAsset);
 				var styleSet = new CompiledStyleSet(package);
-
+			
+				// UWP doesn't have a version released where simply changing the style set is supported,
+				// need to clear layers and recreate the entire thing
+#if __UWP__
+				MapView.Layers.Clear();
+		
 				var source = new CartoOnlineTileDataSource(OSM);
 				var decoder = new MBVectorTileDecoder(styleSet);
                 
@@ -122,32 +125,31 @@ namespace mobile_style_editor
 					MapView.Layers.Add(layer);
 					Console.WriteLine("Update map: complete");
 				});
+#else
+				if (MapView.Layers.Count == 0)
+				{
+					var source = new CartoOnlineTileDataSource(OSM);
+					var decoder = new MBVectorTileDecoder(styleSet);
 
-				// TODO just set new compiled style set, not recreate the layer.
-				// But for some reason this does not change the style set
+					var layer = new VectorTileLayer(source, decoder);
+					Device.BeginInvokeOnMainThread(delegate
+					{
+						MapView.Layers.Add(layer);
+						completed();
+					});
+				}
+				else
+				{
+					var decoder = (MBVectorTileDecoder)(MapView.Layers[0] as VectorTileLayer).TileDecoder;
 
-				//if (MapView.Layers.Count == 0)
-				//{
-				//	var source = new CartoOnlineTileDataSource(OSM);
-				//	var decoder = new MBVectorTileDecoder(styleSet);
-
-				//	var layer = new VectorTileLayer(source, decoder);
-				//	Device.BeginInvokeOnMainThread(delegate
-				//	{
-				//		MapView.Layers.Add(layer);
-				//		Console.WriteLine("Update map: complete");
-				//	});
-				//}
-				//else
-				//{
-				//	var decoder = (MBVectorTileDecoder)(MapView.Layers[0] as VectorTileLayer).TileDecoder;
-
-				//	Device.BeginInvokeOnMainThread(delegate
-				//	{
-				//		decoder.CompiledStyle = styleSet;
-				//	});
-				//}
+					Device.BeginInvokeOnMainThread(delegate
+					{
+						decoder.CompiledStyle = styleSet;
+						completed();
+					});
+				}
 			});
+#endif
 		}
 	}
 }
