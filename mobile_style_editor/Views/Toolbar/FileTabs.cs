@@ -30,7 +30,6 @@ namespace mobile_style_editor
 		public FileTabs()
 		{
 			items = new List<FileTab>();
-			BackgroundColor = Colors.CartoNavy;
 		}
 
 		public void Update(ZipData data)

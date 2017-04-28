@@ -21,6 +21,8 @@ namespace mobile_style_editor
 
 		public Toolbar()
 		{
+			BackgroundColor = Colors.CartoNavy;
+
 			Tabs = new FileTabs();
 
 			UploadButton = new ToolbarButton("UPLOAD");
@@ -32,7 +34,7 @@ namespace mobile_style_editor
 		{
 			double x = 0;
 			double y = 0;
-			double w = Width;
+			double w = Width / 3 * 2;
 			double h = Height;
 
 			AddSubview(Tabs, x, y, w, h);
