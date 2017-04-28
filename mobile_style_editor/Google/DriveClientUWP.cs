@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+#if __UWP__
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -192,3 +194,4 @@ namespace mobile_style_editor
 		}
 	}
 }
+#endif

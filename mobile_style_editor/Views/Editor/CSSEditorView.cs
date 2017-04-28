@@ -28,7 +28,7 @@ namespace mobile_style_editor
 
 			RefreshButton = new RefreshButton();
 
-            string folder = "";
+			string folder = "";
 #if __UWP__
             folder = "Assets/";
 #endif
@@ -57,7 +57,7 @@ namespace mobile_style_editor
             // Accommodate for wide scrollbar
             x -= 12;
 #endif
-            AddSubview(RefreshButton, x, y, w, h);
+			AddSubview(RefreshButton, x, y, w, h);
 		}
 
 		public void Initialize(ZipData items)
@@ -71,44 +71,48 @@ namespace mobile_style_editor
 			Field.Update(items.DecompressedFiles[index]);
 		}
 	}
-    
-    public class RefreshButton : Frame
-    {
-        public ContainerView container;
-        public EventHandler<EventArgs> Clicked;
 
-        public ImageSource ImageSource
-        {
-            get { return container.image.Source; }
-            set { container.image.Source = value; }
-        }
+	public class RefreshButton : Frame
+	{
+		public ContainerView container;
+		public EventHandler<EventArgs> Clicked;
 
-        public RefreshButton()
-        {
-            TapGestureRecognizer recognizer = new TapGestureRecognizer();
-            recognizer.Tapped += delegate
-            {
-                if (Clicked != null)
-                {
-                    Clicked(this, EventArgs.Empty);
-                }
-            };
+		public ImageSource ImageSource
+		{
+			get { return container.image.Source; }
+			set { container.image.Source = value; }
+		}
 
-            Padding = new Thickness(0, 0, 0, 0);
-            
-            GestureRecognizers.Add(recognizer);
+		public RefreshButton()
+		{
+			TapGestureRecognizer recognizer = new TapGestureRecognizer();
+			recognizer.Tapped += delegate
+			{
+				if (Clicked != null)
+				{
+					Clicked(this, EventArgs.Empty);
+				}
+			};
 
-            container = new ContainerView();
-            container.BackgroundColor = Colors.CartoRed;
-            Content = container;
+			Padding = new Thickness(0, 0, 0, 0);
 
-            SizeChanged += OnSizeChange;
-        }
+			GestureRecognizers.Add(recognizer);
 
-        private void OnSizeChange(object sender, EventArgs e)
-        {
-            CornerRadius = (float)Width / 2;
-        }
+			container = new ContainerView();
+			container.BackgroundColor = Colors.CartoRed;
+			Content = container;
+
+			SizeChanged += OnSizeChange;
+		}
+
+		void OnSizeChange(object sender, EventArgs e)
+		{
+#if __ANDROID__
+			// TODO Why does CornerRadius not exist on Android?
+#else
+			CornerRadius = (float)Width / 2;
+#endif
+		}
     }
 
     public class ContainerView : BaseView
