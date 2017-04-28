@@ -5,6 +5,8 @@ namespace mobile_style_editor
 {
 	public class FileListPopupItem : BaseView
 	{
+        public new bool IsEnabled { get; private set; } = true;
+
 		public EventHandler<EventArgs> Click;
 
 		public DriveFile File { get; private set; }
@@ -29,9 +31,14 @@ namespace mobile_style_editor
             Initialize();
 		}
 
+        public void Disable()
+        {
+            IsEnabled = false;
+            this.FadeTo(0.5);
+        }
+
 		void Initialize()
 		{
-
 			TapGestureRecognizer recognizer = new TapGestureRecognizer();
 			recognizer.Tapped += delegate
 			{

@@ -123,13 +123,19 @@ namespace mobile_style_editor
 
 		async void OnItemClicked(object sender, EventArgs e)
 		{
-			Device.BeginInvokeOnMainThread(delegate
+            FileListPopupItem item = (FileListPopupItem)sender;
+
+            if (!item.IsEnabled)
+            {
+                Alert("This style is not publicly available and cannot be downloaded");
+                return;
+            }
+
+            Device.BeginInvokeOnMainThread(delegate
 			{
 				ContentView.Popup.Hide();
 				ContentView.ShowLoading();
 			});
-
-			FileListPopupItem item = (FileListPopupItem)sender;
 
 			if (item.File == null)
 			{
@@ -146,10 +152,32 @@ namespace mobile_style_editor
                 GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
 #elif __UWP__
                 Stream stream = await DriveClientUWP.Instance.DownloadStyle(item.File.Id, item.File.Name);
-                OnFileDownloadComplete(null, new DownloadEventArgs { Name = item.File.Name, Stream = stream });
+
+                if (stream == null)
+                {
+                    Device.BeginInvokeOnMainThread(delegate
+                    {
+                        ContentView.Popup.Show();
+                        ContentView.HideLoading();
+                        item.Disable();
+                        Alert("This style is not publicly available and cannot be downloaded");
+                    });
+
+                } else
+                {
+                    OnFileDownloadComplete(null, new DownloadEventArgs { Name = item.File.Name, Stream = stream });
+                }
 #endif
             }
 		}
 
-	}
+        public async void Alert(string message)
+        {
+#if __UWP__
+            var dialog = new Windows.UI.Popups.MessageDialog(message);
+            await dialog.ShowAsync();
+#endif
+        }
+
+    }
 }

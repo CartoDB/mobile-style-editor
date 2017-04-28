@@ -137,13 +137,23 @@ namespace mobile_style_editor
             
             using (var client = new HttpClient())
             {
-                var stream = await client.GetStreamAsync(url);
-                return stream;
+                //var stream = await client.GetStreamAsync(url);
+                //return stream;
 
                 var response = await client.GetAsync(url);
                 
                 var content = (StreamContent)response.Content;
                 var message = await response.Content.ReadAsStringAsync();
+
+                if (message.Length < 70000)
+                {
+                    // The approximate size of Google Drive login page
+                    // The login page is downloaded when the style isn't a publicly available (sharing turned on)
+
+                    // In this case, return null and handle it later
+                    return null;
+                }
+
                 return await response.Content.ReadAsStreamAsync();
             }
         }
