@@ -107,10 +107,10 @@ namespace mobile_style_editor
 
 		void OnSizeChange(object sender, EventArgs e)
 		{
-#if __ANDROID__
-			// TODO Why does CornerRadius not exist on Android?
-#else
+#if __UWP__
 			CornerRadius = (float)Width / 2;
+#else
+			// TODO Why does CornerRadius only exist on UWP (and doesn't even work there)?
 #endif
 		}
     }
