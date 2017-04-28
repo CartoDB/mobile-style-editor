@@ -18,24 +18,14 @@ namespace mobile_style_editor
 			LayoutSubviews();
 		}
 
-		public void AddSubview(View view, Rectangle bounds)
-		{
-			Children.Add(view,
-						 Constraint.Constant(bounds.X),
-						 Constraint.Constant(bounds.Y),
-						 Constraint.Constant(bounds.Width),
-						 Constraint.Constant(bounds.Height)
-						);
-		}
-
 		public void AddSubview(View view, double x, double y, double w, double h)
 		{
-			Children.Add(view,
-						 Constraint.Constant(x),
-						 Constraint.Constant(y),
-						 Constraint.Constant(w),
-						 Constraint.Constant(h)
-						);
+			Children.Add(view, GetConstraint(x), GetConstraint(y), GetConstraint(w), GetConstraint(h));
+		}
+
+		Constraint GetConstraint(double number)
+		{
+			return Constraint.Constant(number);
 		}
 
 		public virtual void LayoutSubviews() { Children.Clear(); }

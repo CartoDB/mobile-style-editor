@@ -51,6 +51,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\PickerView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\PickerViewItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClientUWP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileTabPopup\FileTabPopup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />
@@ -63,6 +64,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileTabPopup\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style-with-params.zip" />

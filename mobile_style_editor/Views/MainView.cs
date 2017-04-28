@@ -29,6 +29,8 @@ namespace mobile_style_editor
 
 		public ConfirmationPopup Popup { get; private set; }
 
+		public FileTabPopup FileTabs { get; private set; }
+		
 		public MainView()
 		{
 			Toolbar = new Toolbar();
@@ -42,6 +44,8 @@ namespace mobile_style_editor
 			Editor = new CSSEditorView();
 
 			Popup = new ConfirmationPopup();
+
+			FileTabs = new FileTabPopup();
 		}
 
 		public override void LayoutSubviews()
@@ -69,11 +73,11 @@ namespace mobile_style_editor
 			w = Width / 3 * 1.9;
 			h = Height - (h + platformPadding);
 
-			AddSubview(MapView.ToView(), new Rectangle(x, y, w, h));
+			AddSubview(MapView.ToView(), x, y, w, h);
 
 			x += w;
 			w = Width - w;
-			AddSubview(Editor, new Rectangle(x, y, w, h));
+			AddSubview(Editor, x, y, w, h);
 
 			if (Data != null)
 			{
