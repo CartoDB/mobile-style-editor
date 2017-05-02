@@ -52,11 +52,8 @@ namespace mobile_style_editor
 		{
 			base.LayoutSubviews();
 
-			// Platform padding isn't required when navigation bar is visible
-			int platformPadding = 0; //Device.OnPlatform(20, 0, 0);
-
 			double x = 0;
-			double y = platformPadding;
+			double y = 0;
 			double w = Width;
 			//double h = Height / 7;
 			double h = Height / 12;
@@ -71,7 +68,7 @@ namespace mobile_style_editor
 
 			y += h;
 			w = Width / 3 * 1.9;
-			h = Height - (h + platformPadding);
+			h = Height - h;
 
 			AddSubview(MapView.ToView(), x, y, w, h);
 
@@ -84,15 +81,6 @@ namespace mobile_style_editor
 				Editor.Initialize(Data);
 				Toolbar.Initialize(Data);
 			}
-
-			w = 50;
-			h = 50;
-			x = Width / 2 - w / 2;
-			y = Height / 2 - h / 2;
-
-			// Finally add popup view so it would cover other views
-			AddSubview(Popup, 0, platformPadding, Width, Height);
-			Popup.Hide();
 		}
 
 		ZipData Data;
@@ -103,6 +91,14 @@ namespace mobile_style_editor
 			Editor.Initialize(Data);
 			Toolbar.Initialize(Data);
 			FileTabs.Initialize(this, data);
+
+			// Set toolbar on top of file tab popup
+			Children.Remove(Toolbar);
+			AddSubview(Toolbar, 0, 0, Toolbar.Width, Toolbar.Height);
+
+			// Add popup view so it would cover other views
+			AddSubview(Popup, 0, 0, Width, Height);
+			Popup.Hide();
 		}
 
 		const string OSM = "nutiteq.osm";
