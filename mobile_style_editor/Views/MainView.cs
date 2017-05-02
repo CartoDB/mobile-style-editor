@@ -135,7 +135,7 @@ namespace mobile_style_editor
 				Device.BeginInvokeOnMainThread(delegate
 				{
 					MapView.Layers.Add(layer);
-					Console.WriteLine("Update map: complete");
+                    completed();
 				});
 #else
 				if (MapView.Layers.Count == 0)

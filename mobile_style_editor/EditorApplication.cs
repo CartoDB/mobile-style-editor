@@ -28,6 +28,7 @@ namespace mobile_style_editor
 				BarBackgroundColor = Colors.CartoNavyLight, 
 				BarTextColor = Color.White
 			};
+            
 		}
 
 		protected override void OnStart()
