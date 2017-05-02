@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Xamarin.Forms;
@@ -15,7 +15,7 @@ namespace mobile_style_editor
 			Content = ContentView;
 
 #if __IOS__
-			GoogleClient.Instance.Authenticate();
+			DriveClientiOS.Instance.Authenticate();
 #endif
 			Title = "CARTO STYLE EDITOR";
 		}
@@ -30,11 +30,11 @@ namespace mobile_style_editor
 			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 
 #if __ANDROID__
-			DriveClient.Instance.DownloadStarted += OnDownloadStarted;
-			DriveClient.Instance.DownloadComplete += OnFileDownloadComplete;
+			DriveClientDroid.Instance.DownloadStarted += OnDownloadStarted;
+			DriveClientDroid.Instance.DownloadComplete += OnFileDownloadComplete;
 #elif __IOS__
-			GoogleClient.Instance.DownloadComplete += OnFileDownloadComplete;
-			GoogleClient.Instance.ListDownloadComplete += OnListDownloadComplete;
+			DriveClientiOS.Instance.DownloadComplete += OnFileDownloadComplete;
+			DriveClientiOS.Instance.ListDownloadComplete += OnListDownloadComplete;
 #endif
 		}
 
@@ -48,11 +48,11 @@ namespace mobile_style_editor
 			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 
 #if __ANDROID__
-			DriveClient.Instance.DownloadStarted -= OnDownloadStarted;
-			DriveClient.Instance.DownloadComplete -= OnFileDownloadComplete;
+			DriveClientDroid.Instance.DownloadStarted -= OnDownloadStarted;
+			DriveClientDroid.Instance.DownloadComplete -= OnFileDownloadComplete;
 #elif __IOS__
-			GoogleClient.Instance.DownloadComplete -= OnFileDownloadComplete;
-			GoogleClient.Instance.ListDownloadComplete -= OnListDownloadComplete;
+			DriveClientiOS.Instance.DownloadComplete -= OnFileDownloadComplete;
+			DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
 #endif
 		}
 
@@ -81,11 +81,11 @@ namespace mobile_style_editor
 		void OnDriveButtonClick(object sender, EventArgs e)
 		{
 #if __ANDROID__
-			DriveClient.Instance.Register(Forms.Context);
-			DriveClient.Instance.Connect();
+			DriveClientDroid.Instance.Register(Forms.Context);
+			DriveClientDroid.Instance.Connect();
 #elif __IOS__
 			ContentView.ShowLoading();
-			GoogleClient.Instance.DownloadStyleList();
+			DriveClientiOS.Instance.DownloadStyleList();
 #elif __UWP__
             ContentView.ShowLoading();
             /*
@@ -159,7 +159,7 @@ namespace mobile_style_editor
 			{
 #if __ANDROID__
 #elif __IOS__
-                GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
+                DriveClientiOS.Instance.DownloadStyle(item.File.Id, item.File.Name);
 #elif __UWP__
                 Stream stream = await DriveClientUWP.Instance.DownloadStyle(item.File.Id, item.File.Name);
 

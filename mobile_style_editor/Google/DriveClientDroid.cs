@@ -18,14 +18,14 @@ using Android.Runtime;
 namespace mobile_style_editor
 {
 
-	public class DriveClient
+	public class DriveClientDroid
 #if __ANDROID__
 	 : Java.Lang.Object, GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener
 #elif __IOS__
 
 #endif
 	{
-		public static DriveClient Instance = new DriveClient();
+		public static DriveClientDroid Instance = new DriveClientDroid();
 
 		/*
 		 * Requires activity reference. Thankfully, Xamarin.Forms.Forms.Context is the default MainActivity,

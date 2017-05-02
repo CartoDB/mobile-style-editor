@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using Android.App;
 using Android.Content;
@@ -29,19 +29,19 @@ namespace mobile_style_editor.Droid
 
 		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
 		{
-			if (requestCode == DriveClient.RequestCode_RESOLUTION)
+			if (requestCode == DriveClientDroid.RequestCode_RESOLUTION)
 			{
 				if (resultCode == Result.Ok)
 				{
-					DriveClient.Instance.Connect();
+					DriveClientDroid.Instance.Connect();
 				}
 			}
-			else if (requestCode == DriveClient.RequestCode_OPENER)
+			else if (requestCode == DriveClientDroid.RequestCode_OPENER)
 			{
 				if (resultCode == Result.Ok)
 				{
-					var driveId = (Android.Gms.Drive.DriveId)data.GetParcelableExtra(DriveClient.Response_DRIVEID);
-					DriveClient.Instance.Download(driveId);
+					var driveId = (Android.Gms.Drive.DriveId)data.GetParcelableExtra(DriveClientDroid.Response_DRIVEID);
+					DriveClientDroid.Instance.Download(driveId);
 				}
 			}
 		}

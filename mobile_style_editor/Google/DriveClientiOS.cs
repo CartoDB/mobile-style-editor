@@ -16,9 +16,9 @@ using Google.Apis.Upload;
 
 namespace mobile_style_editor
 {
-	public class GoogleClient
+	public class DriveClientiOS
 	{
-		public static GoogleClient Instance { get; set; } = new GoogleClient();
+		public static DriveClientiOS Instance { get; set; } = new DriveClientiOS();
 
 		public EventHandler<DownloadEventArgs> DownloadComplete { get; set; }
 		public EventHandler<EventArgs> UploadComplete { get; set; }

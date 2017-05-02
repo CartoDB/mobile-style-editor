@@ -64,9 +64,9 @@ namespace mobile_style_editor
 
 			ContentView.Popup.Content.Confirm.Clicked += OnConfirmButtonClicked;
 #if __ANDROID__
-			DriveClient.Instance.UploadComplete += OnUploadComplete;
+			DriveClientDroid.Instance.UploadComplete += OnUploadComplete;
 #elif __IOS__
-			GoogleClient.Instance.UploadComplete += OnUploadComplete;
+			DriveClientiOS.Instance.UploadComplete += OnUploadComplete;
 #elif __UWP__
 #endif
 		}
@@ -87,9 +87,9 @@ namespace mobile_style_editor
 			ContentView.Popup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
 
 #if __ANDROID__
-			DriveClient.Instance.UploadComplete += OnUploadComplete;
+			DriveClientDroid.Instance.UploadComplete += OnUploadComplete;
 #elif __IOS__
-			GoogleClient.Instance.UploadComplete -= OnUploadComplete;
+			DriveClientiOS.Instance.UploadComplete -= OnUploadComplete;
 #elif __UWP__
 #endif
 		}
@@ -157,10 +157,10 @@ namespace mobile_style_editor
 					if (ContentView.Popup.Type == PopupType.Upload)
 					{
 #if __ANDROID__
-						DriveClient.Instance.Upload(name, currentWorkingStream);
+						DriveClientDroid.Instance.Upload(name, currentWorkingStream);
 #elif __IOS__
 
-						GoogleClient.Instance.Upload(name, currentWorkingStream);
+						DriveClientiOS.Instance.Upload(name, currentWorkingStream);
 #endif
 					}
 					else

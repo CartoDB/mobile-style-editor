@@ -43,9 +43,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\ConfirmationPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Toast.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DownloadEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClientDroid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveFile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Google\GoogleClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClientiOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\GoogleExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\ListDownloadEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\PickerView.cs" />
