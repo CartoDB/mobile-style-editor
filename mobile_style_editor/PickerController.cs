@@ -105,8 +105,16 @@ namespace mobile_style_editor
 		void OnDatabaseButtonClick(object sender, EventArgs e)
 		{
 			string path = Parser.LocalStyleLocation;
+            string[] files = { };
 
-			string[] files = Directory.GetFiles(path);
+            try
+            {
+                files = Directory.GetFiles(path);
+            } catch (DirectoryNotFoundException)
+            {
+                Alert("Local style directory doesn't seem to exist");
+                return;
+            }
 
 			Device.BeginInvokeOnMainThread(delegate
 			{

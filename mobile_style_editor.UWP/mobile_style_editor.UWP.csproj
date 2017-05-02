@@ -122,6 +122,7 @@
   <ItemGroup>
     <Content Include="Assets\icon_database.png" />
     <Content Include="Assets\icon_drive.png" />
+    <Content Include="Assets\icon_expand_more.png" />
     <Content Include="Assets\icon_refresh.png" />
     <Content Include="Assets\icon_zip.png" />
     <Content Include="Properties\Default.rd.xml" />

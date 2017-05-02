@@ -160,8 +160,8 @@ namespace mobile_style_editor
 						completed();
 					});
 				}
-			});
 #endif
+            });
 		}
 	}
 }
