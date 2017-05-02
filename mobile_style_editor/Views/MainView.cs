@@ -48,14 +48,18 @@ namespace mobile_style_editor
 			FileTabs = new FileTabPopup();
 		}
 
+		double toolbarHeight;
+
 		public override void LayoutSubviews()
 		{
 			base.LayoutSubviews();
 
+			toolbarHeight = Height / 12;
+
 			double x = 0;
 			double y = 0;
 			double w = Width;
-			double h = Height / 12;
+			double h = toolbarHeight;
 			double min = 50;
 
 			if (h < min)
@@ -162,6 +166,26 @@ namespace mobile_style_editor
 				}
 #endif
             });
+		}
+
+		double editorOriginalHeight;
+
+		public void Redraw()
+		{
+			Toolbar.UpdateLayout(Toolbar.X, Toolbar.Y, Toolbar.Width, toolbarHeight);
+			Editor.UpdateLayout(Editor.X, Editor.Y + toolbarHeight, Editor.Width, editorOriginalHeight);
+			
+			ForceLayout();
+		}
+		
+		public void RedrawForKeyboard(double keyboardHeight)
+		{
+			editorOriginalHeight = Editor.Height;
+
+			Toolbar.UpdateLayout(Toolbar.X, Toolbar.Y, Toolbar.Width, 0);
+			Editor.UpdateLayout(Editor.X, Editor.Y - toolbarHeight, Editor.Width, Editor.Height - keyboardHeight + toolbarHeight);
+			
+			ForceLayout();
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using UIKit;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -63,6 +64,7 @@ namespace mobile_style_editor
 			ContentView.Editor.Field.EditingEnded += OnRefresh;
 
 			ContentView.Popup.Content.Confirm.Clicked += OnConfirmButtonClicked;
+
 #if __ANDROID__
 			DriveClientDroid.Instance.UploadComplete += OnUploadComplete;
 #elif __IOS__
@@ -232,6 +234,21 @@ namespace mobile_style_editor
 			ContentView.FileTabs.Toggle();
 			ContentView.Toolbar.ExpandButton.Update(tab.Text);
 		}
+
+#if __IOS__
+		void OnKeyboardWillShow(object sender, UIKeyboardEventArgs e)
+		{
+			Console.WriteLine("OnKeyboardWillShow");
+			double height = (float)UIKeyboard.FrameBeginFromNotification(e.Notification).Height;
+			ContentView.RedrawForKeyboard(height);
+		}
+
+		void OnKeyboardWillHide(object sender, UIKeyboardEventArgs e)
+		{
+			Console.WriteLine("OnKeyboardWillHide");
+			ContentView.Redraw();
+		}
+#endif
 
 	}
 }
