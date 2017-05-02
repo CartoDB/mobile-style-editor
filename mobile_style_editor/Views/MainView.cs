@@ -102,6 +102,7 @@ namespace mobile_style_editor
 			Data = data;
 			Editor.Initialize(Data);
 			Toolbar.Initialize(Data);
+			FileTabs.Initialize(this, data);
 		}
 
 		const string OSM = "nutiteq.osm";
