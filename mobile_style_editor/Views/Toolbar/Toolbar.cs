@@ -68,7 +68,7 @@ namespace mobile_style_editor
 		Image image;
 		Label label;
 
-		string icon_more_path, icon_less_path;
+		string icon_path, icon_less_path;
 
 		public ExpandButton()
 		{
@@ -83,8 +83,7 @@ namespace mobile_style_editor
 #if __UWP__
 			folder = "Assets/";
 #endif
-			icon_more_path = folder + "icon_expand_more.png";
-			icon_less_path = folder + "icon_expand_less.png";
+			icon_path = folder + "icon_expand_more.png";
 		}
 
 		public override void LayoutSubviews()
@@ -108,7 +107,11 @@ namespace mobile_style_editor
 			AddSubview(label, x, y, w, h);
 		}
 
-		string current_image_path;
+		static readonly double initialRotation = -1;
+		static readonly double collapsedRotation = -90;
+		static readonly double expandedRotation = 0;
+
+		static double currentRotation = initialRotation;
 
 		public void Update(string filename)
 		{
@@ -123,24 +126,25 @@ namespace mobile_style_editor
 
 		public void UpdateImage()
 		{
-			if (current_image_path == null)
+			if ((int)currentRotation == (int)initialRotation)
 			{
-				image.Source = ImageSource.FromFile(icon_more_path);
-				current_image_path = icon_more_path;
+				image.Source = ImageSource.FromFile(icon_path);
+				currentRotation = collapsedRotation;
+				image.RotateTo(collapsedRotation);
+				return;
+			}
+
+			if ((int)currentRotation == (int)collapsedRotation)
+			{
+				currentRotation = expandedRotation;
+				image.RotateTo(expandedRotation);
 			}
 			else
 			{
-				if (current_image_path.Equals(icon_more_path))
-				{
-					image.Source = ImageSource.FromFile(icon_less_path);
-					current_image_path = icon_less_path;
-				}
-				else
-				{
-					image.Source = ImageSource.FromFile(icon_more_path);
-					current_image_path = icon_more_path;
-				}
+				currentRotation = collapsedRotation;
+				image.RotateTo(currentRotation);
 			}
+
 		}
 
 	}
