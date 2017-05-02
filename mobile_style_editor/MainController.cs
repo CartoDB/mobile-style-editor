@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using UIKit;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -236,14 +235,14 @@ namespace mobile_style_editor
 		}
 
 #if __IOS__
-		void OnKeyboardWillShow(object sender, UIKeyboardEventArgs e)
+		void OnKeyboardWillShow(object sender, UIKit.UIKeyboardEventArgs e)
 		{
 			Console.WriteLine("OnKeyboardWillShow");
-			double height = (float)UIKeyboard.FrameBeginFromNotification(e.Notification).Height;
+			double height = (float)UIKit.UIKeyboard.FrameBeginFromNotification(e.Notification).Height;
 			ContentView.RedrawForKeyboard(height);
 		}
 
-		void OnKeyboardWillHide(object sender, UIKeyboardEventArgs e)
+		void OnKeyboardWillHide(object sender, UIKit.UIKeyboardEventArgs e)
 		{
 			Console.WriteLine("OnKeyboardWillHide");
 			ContentView.Redraw();
