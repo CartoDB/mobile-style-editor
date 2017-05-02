@@ -15,6 +15,8 @@ namespace mobile_style_editor
 	{
 		public FileTabs Tabs { get; private set; }
 
+		public ExpandButton ExpandButton { get; set; }
+
 		public ToolbarButton UploadButton { get; private set; }
 
 		public ToolbarButton SaveButton { get; private set; }
@@ -23,7 +25,8 @@ namespace mobile_style_editor
 		{
 			BackgroundColor = Colors.CartoNavy;
 
-			Tabs = new FileTabs();
+			//Tabs = new FileTabs();
+			ExpandButton = new ExpandButton();
 
 			UploadButton = new ToolbarButton("UPLOAD");
 
@@ -34,10 +37,10 @@ namespace mobile_style_editor
 		{
 			double x = 0;
 			double y = 0;
-			double w = Width / 3 * 2;
+			double w = Width / 3;
 			double h = Height;
 
-			AddSubview(Tabs, x, y, w, h);
+			AddSubview(ExpandButton, x, y, w, h);
 
 			double padding = 10;
 
@@ -56,23 +59,89 @@ namespace mobile_style_editor
 
 		public void Initialize(ZipData data)
 		{
-			Tabs.Update(data);
-			Tabs.Highlight(0);
+			ExpandButton.Update(data.StyleFileNames[0]);
+		}
+	}
+
+	public class ExpandButton : ClickView
+	{
+		Image image;
+		Label label;
+
+		string icon_more_path, icon_less_path;
+
+		public ExpandButton()
+		{
+			image = new Image();
+			label = new Label();
+			label.FontSize = 12;
+			label.TextColor = Color.White;
+			label.VerticalTextAlignment = TextAlignment.Center;
+
+			string folder = "";
+
+#if __UWP__
+			folder = "Assets/";
+#endif
+			icon_more_path = folder + "icon_expand_more.png";
+			icon_less_path = folder + "icon_expand_less.png";
 		}
 
-		//public async void Expand()
-		//{
-		//	Rectangle rect = new Rectangle(X, Y, Width, 1000);
-		//	Console.WriteLine(Width + " - " + Height);
-		//	//await this.LayoutTo(rect, 300, Easing.CubicIn);
-		//	HeightRequest = 1000;
-		//	//LayoutTo(rect, 300, Easing.CubicIn);
-		//}
+		public override void LayoutSubviews()
+		{
+			base.LayoutSubviews();
 
-		//public void Collapse()
-		//{
-			
-		//}
+			double padding = Width / 20;
+
+			double x = padding;
+			double y = padding;
+			double w = Height - 2 * padding;
+			double h = w;
+
+			AddSubview(image, x, y, w, h);
+
+			x += w;
+			y = 0;
+			w = Width - (w + padding);
+			h = Height;
+
+			AddSubview(label, x, y, w, h);
+		}
+
+		string current_image_path;
+
+		public void Update(string filename)
+		{
+			UpdateText(filename);
+			UpdateImage();
+		}
+
+		public void UpdateText(string filename)
+		{
+			label.Text = "CURRENT STYLE: " + filename.ToUpper();
+		}
+
+		public void UpdateImage()
+		{
+			if (current_image_path == null)
+			{
+				image.Source = ImageSource.FromFile(icon_more_path);
+				current_image_path = icon_more_path;
+			}
+			else
+			{
+				if (current_image_path.Equals(icon_more_path))
+				{
+					image.Source = ImageSource.FromFile(icon_less_path);
+					current_image_path = icon_less_path;
+				}
+				else
+				{
+					image.Source = ImageSource.FromFile(icon_more_path);
+					current_image_path = icon_more_path;
+				}
+			}
+		}
 
 	}
 }

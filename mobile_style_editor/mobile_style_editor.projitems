@@ -52,6 +52,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\PickerViewItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClientUWP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileTabPopup\FileTabPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\ClickView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />

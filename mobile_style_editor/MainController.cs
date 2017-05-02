@@ -52,7 +52,9 @@ namespace mobile_style_editor
 				});
 			});
 
-			ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
+			ContentView.FileTabs.OnTabTap += OnTabTapped;
+
+			ContentView.Toolbar.ExpandButton.Click += OnFileTabExpand;
 			ContentView.Toolbar.UploadButton.Click += OnUploadButtonClicked;
 			ContentView.Toolbar.SaveButton.Click += OnSaveButtonClicked;
 
@@ -72,7 +74,9 @@ namespace mobile_style_editor
 		{
 			base.OnDisappearing();
 
-			ContentView.Toolbar.Tabs.OnTabTap -= OnTabTapped;
+			ContentView.FileTabs.OnTabTap -= OnTabTapped;
+
+			ContentView.Toolbar.ExpandButton.Click -= OnFileTabExpand;
 			ContentView.Toolbar.UploadButton.Click -= OnUploadButtonClicked;
 			ContentView.Toolbar.SaveButton.Click -= OnSaveButtonClicked;
 
@@ -97,6 +101,12 @@ namespace mobile_style_editor
 				ContentView.Popup.Hide();
 				Toast.Show(text);
 			});
+		}
+
+
+		void OnFileTabExpand(object sender, EventArgs e)
+		{
+			ContentView.ToggleTabs();
 		}
 
 		void OnUploadComplete(object sender, EventArgs e)
@@ -218,6 +228,8 @@ namespace mobile_style_editor
 			FileTab tab = (FileTab)sender;
 
 			ContentView.Editor.Update(tab.Index);
+			ContentView.FileTabs.Toggle();
+			ContentView.Toolbar.ExpandButton.Update(tab.Text);
 		}
 
 	}

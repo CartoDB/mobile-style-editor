@@ -55,7 +55,6 @@ namespace mobile_style_editor
 			double x = 0;
 			double y = 0;
 			double w = Width;
-			//double h = Height / 7;
 			double h = Height / 12;
 			double min = 50;
 
@@ -99,6 +98,18 @@ namespace mobile_style_editor
 			// Add popup view so it would cover other views
 			AddSubview(Popup, 0, 0, Width, Height);
 			Popup.Hide();
+		}
+
+		public void ToggleTabs()
+		{
+			bool willExpand = FileTabs.Toggle();
+
+			if (willExpand)
+			{
+				Toolbar.ExpandButton.UpdateText(FileTabs.CurrentHighlight);
+			}
+
+			Toolbar.ExpandButton.UpdateImage();
 		}
 
 		const string OSM = "nutiteq.osm";
