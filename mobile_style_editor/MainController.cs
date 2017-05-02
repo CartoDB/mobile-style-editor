@@ -186,7 +186,7 @@ namespace mobile_style_editor
 
 		void OnRefresh(object sender, EventArgs e)
 		{
-			int index = ContentView.Toolbar.Tabs.ActiveIndex;
+			int index = ContentView.FileTabs.ActiveIndex;
 			string text = ContentView.Editor.Text;
 
 			if (index == -1)

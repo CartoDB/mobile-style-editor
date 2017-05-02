@@ -13,8 +13,6 @@ namespace mobile_style_editor
 {
 	public class Toolbar : BaseView
 	{
-		public FileTabs Tabs { get; private set; }
-
 		public ExpandButton ExpandButton { get; set; }
 
 		public ToolbarButton UploadButton { get; private set; }
