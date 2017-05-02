@@ -68,7 +68,7 @@ namespace mobile_style_editor
 		Image image;
 		Label label;
 
-		string icon_path, icon_less_path;
+		string icon_path;
 
 		public ExpandButton()
 		{

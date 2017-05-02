@@ -157,7 +157,6 @@
     <AndroidResource Include="Resources\drawable-nodpi\icon_refresh.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_database.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_zip.png" />
-    <AndroidResource Include="Resources\drawable-nodpi\icon_expand_less.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_expand_more.png" />
   </ItemGroup>
   <ItemGroup>

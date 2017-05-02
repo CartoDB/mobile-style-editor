@@ -75,8 +75,10 @@ namespace mobile_style_editor
 				await Navigation.PushAsync(new MainController(result[1], result[0]));
 			});
 		}
-
-		async void OnDriveButtonClick(object sender, EventArgs e)
+#if __UWP__
+		async 
+#endif
+		void OnDriveButtonClick(object sender, EventArgs e)
 		{
 #if __ANDROID__
 			DriveClient.Instance.Register(Forms.Context);
@@ -98,7 +100,7 @@ namespace mobile_style_editor
             List<DriveFile> files = await DriveClientUWP.Instance.DownloadFileList();
             OnListDownloadComplete(null, new ListDownloadEventArgs { Items = files });
 #endif
-        }
+		}
 
 		void OnDatabaseButtonClick(object sender, EventArgs e)
 		{
@@ -123,15 +125,15 @@ namespace mobile_style_editor
 
 		async void OnItemClicked(object sender, EventArgs e)
 		{
-            FileListPopupItem item = (FileListPopupItem)sender;
+			FileListPopupItem item = (FileListPopupItem)sender;
 
-            if (!item.IsEnabled)
-            {
-                Alert("This style is not publicly available and cannot be downloaded");
-                return;
-            }
+			if (!item.IsEnabled)
+			{
+				Alert("This style is not publicly available and cannot be downloaded");
+				return;
+			}
 
-            Device.BeginInvokeOnMainThread(delegate
+			Device.BeginInvokeOnMainThread(delegate
 			{
 				ContentView.Popup.Hide();
 				ContentView.ShowLoading();
@@ -146,7 +148,7 @@ namespace mobile_style_editor
 				});
 			}
 			else
-            {
+			{
 #if __ANDROID__
 #elif __IOS__
                 GoogleClient.Instance.DownloadStyle(item.File.Id, item.File.Name);
@@ -168,16 +170,20 @@ namespace mobile_style_editor
                     OnFileDownloadComplete(null, new DownloadEventArgs { Name = item.File.Name, Stream = stream });
                 }
 #endif
-            }
+			}
 		}
 
-        public async void Alert(string message)
-        {
+		public
+#if __UWP__
+		async 
+#endif
+		void Alert(string message)
+		{
 #if __UWP__
             var dialog = new Windows.UI.Popups.MessageDialog(message);
             await dialog.ShowAsync();
 #endif
-        }
+		}
 
-    }
+	}
 }
