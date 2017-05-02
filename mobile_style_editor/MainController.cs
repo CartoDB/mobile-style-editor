@@ -33,6 +33,7 @@ namespace mobile_style_editor
 			(Forms.Context as Droid.MainActivity).SetIsLandscape(true);
 #endif
 			ContentView.ShowLoading();
+
 			Task.Run(delegate
 			{
 				data = Parser.GetZipData(folder, filename);

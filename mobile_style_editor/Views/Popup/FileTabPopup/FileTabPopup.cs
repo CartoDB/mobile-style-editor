@@ -6,7 +6,17 @@ namespace mobile_style_editor
 {
 	public class FileTabPopup : BaseView
 	{
-		public new bool IsVisible { get { return TranslationY > (visibleY - 0.1); } }
+		public new bool IsVisible {
+            get
+            {
+#if __UWP__
+                return Opacity == 1;
+#else
+                return TranslationY > (visibleY - 0.1);
+#endif
+            }
+        }
+
 		public int ActiveIndex
 		{
 			get
@@ -49,9 +59,14 @@ namespace mobile_style_editor
 
 			parent.AddSubview(this, x, y, w, h);
 
-			this.TranslateTo(0, -Height, 0);
-
-			AddTabs(data);
+            /* Initially hide the popup without animation */
+#if __UWP__
+            this.FadeTo(0.0, 0);
+            this.TranslateTo(0, visibleY, 0);
+#else
+            this.TranslateTo(0, -Height, 0);
+#endif
+            AddTabs(data);
 
 			Highlight(0);
 		}
@@ -109,15 +124,24 @@ namespace mobile_style_editor
 
 		public void Show()
 		{
-			this.TranslateTo(0, visibleY);
-		}
+#if __UWP__
+            this.FadeTo(1.0);
+#else
+            this.TranslateTo(0, visibleY);
+#endif
 
-		public void Hide()
+        }
+
+        public void Hide()
 		{
-			this.TranslateTo(0, -Height);
-		}
+#if __UWP__
+            this.FadeTo(0.0);
+#else
+            this.TranslateTo(0, -Height);
+#endif
+        }
 
-		void OnTap(object sender, EventArgs e)
+        void OnTap(object sender, EventArgs e)
 		{
 			FileTab tab = (FileTab)sender;
 			Highlight(tab);
