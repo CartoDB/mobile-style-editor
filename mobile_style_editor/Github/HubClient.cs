@@ -146,15 +146,15 @@ namespace mobile_style_editor
 
 		public async Task<bool> Test()
 		{
-			var user = await HubClient.Instance.GetUser("Nikituh");
-			var repositories = await HubClient.Instance.GetRepositories("Nikituh");
+			var user = await GetUser("Nikituh");
+			var repositories = await GetRepositories("Nikituh");
 
 			Console.WriteLine("User: " + user.Name + " (" + user.Id + ")");
 
 			foreach (var repository in repositories)
 			{
 				Console.WriteLine("Repository: " + repository.Name);
-				var content = await HubClient.Instance.GetRepositoryContent(repository.Owner.Login, repository.Name);
+				var content = await GetRepositoryContent(repository.Owner.Login, repository.Name);
 
 				foreach (var item in content)
 				{
@@ -167,8 +167,8 @@ namespace mobile_style_editor
 
 						if (item.DownloadUrl.OriginalString.Equals(testFile))
 						{
-							string result = await HubClient.Instance.DownloadFile(item);
-							await HubClient.Instance.UpdateFile(repository, item, result);
+							string result = await DownloadFile(item);
+							await UpdateFile(repository, item, result);
 						}
 					}
 					else if (item.Type == Octokit.ContentType.Dir)
