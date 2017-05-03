@@ -58,7 +58,20 @@ namespace mobile_style_editor
 				
 				foreach (var item in content)
 				{
-					Console.WriteLine(" - File: " + item.Name);
+					if (item.Type == Octokit.ContentType.File)
+					{
+						Console.WriteLine(" - File: " + item.Name + " (" + item.DownloadUrl.OriginalString + ")");
+
+						if (item.DownloadUrl.OriginalString.Equals("https://raw.githubusercontent.com/Nikituh/livehiv_web/master/.gitignore"))
+						{
+							string result = await HubClient.Instance.DownloadFile(item);
+							HubClient.Instance.UploadFile(repository, item, result);
+						}
+					}
+					else if (item.Type == Octokit.ContentType.Dir)
+					{
+						Console.WriteLine(" - File: " + item.Name + " is a folder");
+					}
 				}
 			}
 		}
