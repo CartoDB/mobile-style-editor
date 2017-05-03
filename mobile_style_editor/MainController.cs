@@ -88,7 +88,7 @@ namespace mobile_style_editor
 			ContentView.Popup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
 
 #if __ANDROID__
-			DriveClientDroid.Instance.UploadComplete += OnUploadComplete;
+			DriveClientDroid.Instance.UploadComplete -= OnUploadComplete;
 #elif __IOS__
 			DriveClientiOS.Instance.UploadComplete -= OnUploadComplete;
 #elif __UWP__
@@ -233,21 +233,6 @@ namespace mobile_style_editor
 			ContentView.FileTabs.Toggle();
 			ContentView.Toolbar.ExpandButton.Update(tab.Text);
 		}
-
-#if __IOS__
-		void OnKeyboardWillShow(object sender, UIKit.UIKeyboardEventArgs e)
-		{
-			Console.WriteLine("OnKeyboardWillShow");
-			double height = (float)UIKit.UIKeyboard.FrameBeginFromNotification(e.Notification).Height;
-			ContentView.RedrawForKeyboard(height);
-		}
-
-		void OnKeyboardWillHide(object sender, UIKit.UIKeyboardEventArgs e)
-		{
-			Console.WriteLine("OnKeyboardWillHide");
-			ContentView.Redraw();
-		}
-#endif
 
 	}
 }
