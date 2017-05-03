@@ -269,4 +269,5 @@ app/libs/
 
 # Project-specific
 **/drive_client_ids.json
+**github_info.json
 

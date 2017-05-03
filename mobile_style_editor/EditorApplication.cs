@@ -45,37 +45,6 @@ namespace mobile_style_editor
 			// Handle when your app resumes
 		}
 
-		public async void Test()
-		{
-			var user = await HubClient.Instance.GetUser("Nikituh");
-			var repositories = await HubClient.Instance.GetRepositories("Nikituh");
-
-			Console.WriteLine("User: " + user.Name + " (" + user.Id + ")");
-			foreach (var repository in repositories)
-			{
-				Console.WriteLine("Repository: " + repository.Name);
-				var content = await HubClient.Instance.GetRepositoryContent(repository.Owner.Login, repository.Name);
-				
-				foreach (var item in content)
-				{
-					if (item.Type == Octokit.ContentType.File)
-					{
-						Console.WriteLine(" - File: " + item.Name + " (" + item.DownloadUrl.OriginalString + ")");
-
-						if (item.DownloadUrl.OriginalString.Equals("https://raw.githubusercontent.com/Nikituh/livehiv_web/master/.gitignore"))
-						{
-							string result = await HubClient.Instance.DownloadFile(item);
-							HubClient.Instance.UploadFile(repository, item, result);
-						}
-					}
-					else if (item.Type == Octokit.ContentType.Dir)
-					{
-						Console.WriteLine(" - File: " + item.Name + " is a folder");
-					}
-				}
-			}
-		}
-
 		// TODO Remove when iOS/UWP have Drive integration
 		public List<string> CopyToAppData()
 		{
