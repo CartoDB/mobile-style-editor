@@ -28,7 +28,6 @@ namespace mobile_style_editor
 				BarBackgroundColor = Colors.CartoNavyLight, 
 				BarTextColor = Color.White
 			};
-            
 		}
 
 		protected override void OnStart()
@@ -46,8 +45,20 @@ namespace mobile_style_editor
 			// Handle when your app resumes
 		}
 
-		// TODO Remove when iOS has Drive integration
 
+		public async void Test()
+		{
+			var user = await HubClient.Instance.GetUser("Nikituh");
+			var repositories = await HubClient.Instance.GetRepositories("Nikituh");
+
+			Console.WriteLine("User: " + user.Name + " (" + user.Id + ")");
+			foreach (var repository in repositories)
+			{
+				Console.WriteLine("Repository: " + repository.Name);
+			}
+		}
+
+		// TODO Remove when iOS/UWP have Drive integration
 		public List<string> CopyToAppData()
 		{
             string styleName = "bright-cartocss-style";

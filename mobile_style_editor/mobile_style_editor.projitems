@@ -53,6 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClientUWP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileTabPopup\FileTabPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\ClickView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Github\HubClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />
@@ -66,6 +67,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileTabPopup\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Github\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style-with-params.zip" />

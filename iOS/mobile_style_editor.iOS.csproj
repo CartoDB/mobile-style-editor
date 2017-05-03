@@ -136,6 +136,9 @@
     <Reference Include="CartoMobileSDK.iOS">
       <HintPath>..\packages\CartoMobileSDK.iOS.4.0.2-pre-332\lib\Xamarin.iOS10\CartoMobileSDK.iOS.dll</HintPath>
     </Reference>
+    <Reference Include="Octokit">
+      <HintPath>..\packages\Octokit.0.24.1-alpha0001\lib\netstandard1.1\Octokit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

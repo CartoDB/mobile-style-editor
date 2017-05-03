@@ -28,6 +28,5 @@ namespace mobile_style_editor.iOS
 
 			return base.FinishedLaunching(app, options);
 		}
-
 	}
 }
