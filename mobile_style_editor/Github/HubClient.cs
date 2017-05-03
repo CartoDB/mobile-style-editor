@@ -12,9 +12,25 @@ namespace mobile_style_editor
 
 		readonly GitHubClient client;
 
+		/*
+		 * Create your own personal access token at: 
+		 * https://github.com/settings/tokens/new
+		 * 
+		 * and use it instead of your password to authenticate your account
+		 * 
+		 * TODO Improve authentication logic
+		 * 
+		 */
+
+		string Username = "<your-user-name>";
+		string PAToken = "<your-personal-access-token>";
+
 		HubClient()
 		{
+			var credentials = new Credentials(Username, PAToken);
+
 			client = new GitHubClient(new ProductHeaderValue("com.carto.style.editor"));
+			client.Credentials = credentials;
 		}
 
 		public async Task<User> GetUser(string name)
@@ -61,7 +77,10 @@ namespace mobile_style_editor
 			string branch = split[3];
 			path = split[4];
 
+			// Both seem to work now, since the branch has been specified
+
 			request = new UpdateFileRequest("test upload from octokit api", content, file.Sha, branch);
+
 			try
 			{
 				await client.Repository.Content.UpdateFile(owner, name, path, request);
