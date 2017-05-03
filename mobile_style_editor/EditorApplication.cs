@@ -45,7 +45,6 @@ namespace mobile_style_editor
 			// Handle when your app resumes
 		}
 
-
 		public async void Test()
 		{
 			var user = await HubClient.Instance.GetUser("Nikituh");
@@ -55,6 +54,12 @@ namespace mobile_style_editor
 			foreach (var repository in repositories)
 			{
 				Console.WriteLine("Repository: " + repository.Name);
+				var content = await HubClient.Instance.GetRepositoryContent(repository.Owner.Login, repository.Name);
+				
+				foreach (var item in content)
+				{
+					Console.WriteLine(" - File: " + item.Name);
+				}
 			}
 		}
 
