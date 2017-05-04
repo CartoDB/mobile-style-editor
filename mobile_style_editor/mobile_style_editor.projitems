@@ -54,9 +54,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileTabPopup\FileTabPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\ClickView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\HubClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Utilities\ZoomControl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Views\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Toolbar\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />

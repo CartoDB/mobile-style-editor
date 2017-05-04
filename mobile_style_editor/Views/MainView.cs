@@ -31,6 +31,8 @@ namespace mobile_style_editor
 
 		public FileTabPopup FileTabs { get; private set; }
 		
+        public ZoomControl Zoom { get; private set; }
+
 		public MainView()
 		{
 			Toolbar = new Toolbar();
@@ -46,7 +48,10 @@ namespace mobile_style_editor
 			Popup = new ConfirmationPopup();
 
 			FileTabs = new FileTabPopup();
-		}
+#if __UWP__
+            Zoom = new ZoomControl();
+#endif
+        }
 
 		double toolbarHeight;
 
@@ -69,9 +74,11 @@ namespace mobile_style_editor
 
 			AddSubview(Toolbar, x, y, w, h);
 
-			y += h;
-			w = Width / 3 * 1.9;
-			h = Height - h;
+            double mapWidth = Width / 3 * 1.9;
+            double mapHeight = Height - h;
+            y += h;
+			w = mapWidth;
+			h = mapHeight;
 
 			AddSubview(MapView.ToView(), x, y, w, h);
 
@@ -84,7 +91,17 @@ namespace mobile_style_editor
 				Editor.Initialize(Data);
 				Toolbar.Initialize(Data);
 			}
-		}
+
+#if __UWP__
+            double zoomPadding = 15;
+            w = mapWidth / 5;
+            h = w / 3;
+            x = mapWidth - (w + zoomPadding);
+            y = Height - (h + zoomPadding);
+
+            AddSubview(Zoom, x, y, w, h);
+#endif
+        }
 
 		ZipData Data;
 

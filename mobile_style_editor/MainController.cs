@@ -69,8 +69,10 @@ namespace mobile_style_editor
 #elif __IOS__
 			DriveClientiOS.Instance.UploadComplete += OnUploadComplete;
 #elif __UWP__
+            ContentView.Zoom.In.Click += ZoomIn;
+            ContentView.Zoom.Out.Click += ZoomOut;
 #endif
-		}
+        }
 
 		protected override void OnDisappearing()
 		{
@@ -92,10 +94,22 @@ namespace mobile_style_editor
 #elif __IOS__
 			DriveClientiOS.Instance.UploadComplete -= OnUploadComplete;
 #elif __UWP__
+            ContentView.Zoom.In.Click -= ZoomIn;
+            ContentView.Zoom.Out.Click -= ZoomOut;
 #endif
-		}
+        }
 
-		void NormalizeView(string text)
+        void ZoomIn(object sender, EventArgs e)
+        {
+            ContentView.MapView.SetZoom(ContentView.MapView.Zoom + 1, 0f);
+        }
+
+        void ZoomOut(object sender, EventArgs e)
+        {
+            ContentView.MapView.SetZoom(ContentView.MapView.Zoom - 1, 0f);
+        }
+
+        void NormalizeView(string text)
 		{
 			Device.BeginInvokeOnMainThread(delegate
 			{

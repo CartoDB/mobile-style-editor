@@ -125,6 +125,8 @@
     <Content Include="Assets\icon_expand_more.png" />
     <Content Include="Assets\icon_refresh.png" />
     <Content Include="Assets\icon_zip.png" />
+    <Content Include="Assets\icon_zoom_in.png" />
+    <Content Include="Assets\icon_zoom_out.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
