@@ -103,6 +103,8 @@
     <Content Include="Assets\drive_client_ids.json" />
     <None Include="project.json" />
     <None Include="Assets\icon_github.png" />
+    <None Include="Assets\icon_text.png" />
+    <None Include="Assets\icon_folder.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

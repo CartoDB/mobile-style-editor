@@ -15,6 +15,8 @@ namespace mobile_style_editor
 
 		public string Extension { get; set; }
 
+		public bool IsZip { get { return Extension.Equals("zip"); } }
+
 		internal static GithubFile FromRepositoryContent(RepositoryContent file)
 		{
 			GithubFile item = new GithubFile();

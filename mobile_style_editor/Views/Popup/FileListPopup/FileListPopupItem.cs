@@ -74,8 +74,20 @@ namespace mobile_style_editor
 				if (!GithubFile.IsDirectory)
 				{
 					Disable();
+					if (GithubFile.IsZip)
+					{
+						image.Source = ImageSource.FromFile(folder + "icon_zip.png");
+					}
+					else
+					{
+						image.Source = ImageSource.FromFile(folder + "icon_text.png");
+					}
 				}
-				image.Source = ImageSource.FromFile(folder + "icon_zip.png");
+				else
+				{
+					image.Source = ImageSource.FromFile(folder + "icon_folder.png");
+				}
+
 			}
 			else
 			{

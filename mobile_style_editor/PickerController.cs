@@ -78,10 +78,13 @@ namespace mobile_style_editor
 			});
 		}
 
+		const string GithubOwner = "CartoDB";
+		const string GithubRepo = "mobile-styles";
+
 		async void OnGithubButtonClick(object sender, EventArgs e)
 		{
 			ContentView.ShowLoading();
-			var contents = await HubClient.Instance.GetRepositoryContent("CartoDB", "mobile-styles");
+			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo);
 
 			OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
 
@@ -176,7 +179,13 @@ namespace mobile_style_editor
 
 			Device.BeginInvokeOnMainThread(delegate
 			{
-				ContentView.Popup.Hide();
+				if (item.GithubFile == null)
+				{
+					// Do not Hide the popup when dealing with github,
+					// as a new page should load almost immediately
+					// and we need to show content there as well
+					ContentView.Popup.Hide();
+				}
 				ContentView.ShowLoading();
 			});
 
@@ -221,6 +230,10 @@ namespace mobile_style_editor
 				}
 				else
 				{
+					string path = item.GithubFile.Path;
+					var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, path);
+					ContentView.Popup.Show(contents.ToGithubFiles());
+					ContentView.HideLoading();
 					// TODO save previous folder and download new files from path
 				}
 			}
