@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using Octokit;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -62,9 +64,23 @@ namespace mobile_style_editor
 #endif
 		}
 
+		List<List<GithubFile>> storedContents = new List<List<GithubFile>>();
+
 		void OnPopupBackButtonClick(object sender, EventArgs e)
 		{
-			
+			if (ContentView.Loader.IsRunning)
+			{
+				return;
+			}
+
+			if (storedContents.Count == 0)
+			{
+				return;
+			}
+
+			List<GithubFile> files = storedContents[storedContents.Count - 1];
+			ContentView.Popup.Show(files);
+			storedContents.Remove(files);
 		}
 
 		void OnDownloadStarted(object sender, EventArgs e)
@@ -228,6 +244,7 @@ namespace mobile_style_editor
 				}
 				else
 				{
+					storedContents.Add(ContentView.Popup.GithubFiles);
 					string path = item.GithubFile.Path;
 					var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, path);
 					ContentView.Popup.Show(contents.ToGithubFiles());

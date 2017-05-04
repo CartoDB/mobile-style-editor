@@ -52,9 +52,12 @@ namespace mobile_style_editor
 			FileContent.Populate(styles.ToObjects());
 		}
 
+		public List<GithubFile> GithubFiles { get; private set; }
+
 		public void Show(List<GithubFile> files)
 		{
             Show();
+			GithubFiles = files;
 			FileContent.Populate(files.ToObjects());
 
 			AddSubview(BackButton, 50, 50, 50, 50);
