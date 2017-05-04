@@ -8,9 +8,13 @@ namespace mobile_style_editor
 	{
 		public FileListPopupContent FileContent { get { return Content as FileListPopupContent; } }
 
+		public BackButton BackButton { get; private set; }
+
 		public FileListPopup()
 		{
 			Content = new FileListPopupContent();
+
+			BackButton = new BackButton();
 		}
 
 		public override void LayoutSubviews()
@@ -52,6 +56,21 @@ namespace mobile_style_editor
 		{
             Show();
 			FileContent.Populate(files.ToObjects());
+
+			AddSubview(BackButton, 50, 50, 50, 50);
+		}
+	}
+
+	public class BackButton : ClickView
+	{
+		public BackButton()
+		{
+			BackgroundColor = Colors.CartoNavy;
+		}
+
+		public override void LayoutSubviews()
+		{
+			base.LayoutSubviews();
 		}
 	}
 }

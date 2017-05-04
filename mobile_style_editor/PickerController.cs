@@ -28,6 +28,8 @@ namespace mobile_style_editor
 			ContentView.Drive.Click += OnDriveButtonClick;
 			ContentView.Database.Click += OnDatabaseButtonClick;
 
+			ContentView.Popup.BackButton.Click += OnPopupBackButtonClick;
+
 			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 
 #if __ANDROID__
@@ -47,6 +49,8 @@ namespace mobile_style_editor
 			ContentView.Drive.Click -= OnDriveButtonClick;
 			ContentView.Database.Click -= OnDatabaseButtonClick;
 
+			ContentView.Popup.BackButton.Click -= OnPopupBackButtonClick;
+
 			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 
 #if __ANDROID__
@@ -56,6 +60,11 @@ namespace mobile_style_editor
 			DriveClientiOS.Instance.DownloadComplete -= OnFileDownloadComplete;
 			DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
 #endif
+		}
+
+		void OnPopupBackButtonClick(object sender, EventArgs e)
+		{
+			
 		}
 
 		void OnDownloadStarted(object sender, EventArgs e)
@@ -85,22 +94,7 @@ namespace mobile_style_editor
 		{
 			ContentView.ShowLoading();
 			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo);
-
 			OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
-
-			//foreach (var content in contents)
-			//{
-			//	if (content.Type == Octokit.ContentType.Dir)
-			//	{
-			//		Console.WriteLine("Folder: " + content.Name + " (" + content.Sha + ")");
-			//		var folderContents = await HubClient.Instance.GetRepositoryContent("CartoDB", "mobile-styles", content.Path);
-			//		Console.WriteLine(folderContents);
-			//	}
-			//	else if (content.Type == Octokit.ContentType.File)
-			//	{
-			//		Console.WriteLine("File: " + content.Name);
-			//	}
-			//}
 		}
 
 #if __UWP__
@@ -200,6 +194,10 @@ namespace mobile_style_editor
 			else if (item.DriveFile != null)
 			{
 #if __ANDROID__
+				/*
+				 * Android uses a full-fledged Google Drive component.
+				 * No need to manually handle clicks -> Goes straight to FileDownloadComplete()
+				 */
 #elif __IOS__
 				DriveClientiOS.Instance.DownloadStyle(item.DriveFile.Id, item.DriveFile.Name);
 #elif __UWP__
