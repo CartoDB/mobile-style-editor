@@ -24,6 +24,7 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
+			ContentView.Github.Click += OnGithubButtonClick;
 			ContentView.Drive.Click += OnDriveButtonClick;
 			ContentView.Database.Click += OnDatabaseButtonClick;
 
@@ -42,6 +43,7 @@ namespace mobile_style_editor
 		{
 			base.OnDisappearing();
 
+			ContentView.Github.Click -= OnGithubButtonClick;
 			ContentView.Drive.Click -= OnDriveButtonClick;
 			ContentView.Database.Click -= OnDatabaseButtonClick;
 
@@ -75,6 +77,27 @@ namespace mobile_style_editor
 				await Navigation.PushAsync(new MainController(result[1], result[0]));
 			});
 		}
+
+		async void OnGithubButtonClick(object sender, EventArgs e)
+		{
+
+			var contents = await HubClient.Instance.GetRepositoryContent("CartoDB", "mobile-styles");
+
+			foreach (var content in contents)
+			{
+				if (content.Type == Octokit.ContentType.Dir)
+				{
+					Console.WriteLine("Folder: " + content.Name + " (" + content.Sha + ")");
+					var folderContents = await HubClient.Instance.GetRepositoryContent("CartoDB", "mobile-styles", content.Path);
+					Console.WriteLine(folderContents);
+				}
+				else if (content.Type == Octokit.ContentType.File)
+				{
+					Console.WriteLine("File: " + content.Name);
+				}
+			}
+		}
+
 #if __UWP__
 		async 
 #endif

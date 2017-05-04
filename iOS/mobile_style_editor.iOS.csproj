@@ -173,6 +173,7 @@
     <BundleResource Include="Resources\icon_refresh.png" />
     <BundleResource Include="Resources\icon_database.png" />
     <BundleResource Include="Resources\icon_expand_more.png" />
+    <BundleResource Include="Resources\icon_github.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="sqlite-net">

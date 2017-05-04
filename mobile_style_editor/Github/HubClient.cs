@@ -59,8 +59,13 @@ namespace mobile_style_editor
 			return await client.Repository.GetAllForUser(username);
 		}
 
-		public Task<IReadOnlyList<RepositoryContent>> GetRepositoryContent(string owner, string name)
+		public Task<IReadOnlyList<RepositoryContent>> GetRepositoryContent(string owner, string name, string path = null)
 		{
+			if (path != null)
+			{
+				return client.Repository.Content.GetAllContents(owner, name, path);
+			}
+				
 			return client.Repository.Content.GetAllContents(owner, name);
 		}
 

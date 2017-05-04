@@ -102,6 +102,7 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\drive_client_ids.json" />
     <None Include="project.json" />
+    <None Include="Assets\icon_github.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

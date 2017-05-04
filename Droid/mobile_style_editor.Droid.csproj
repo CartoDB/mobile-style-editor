@@ -163,6 +163,7 @@
     <AndroidResource Include="Resources\drawable-nodpi\icon_database.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_zip.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_expand_more.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\icon_github.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SpanBuilder\" />

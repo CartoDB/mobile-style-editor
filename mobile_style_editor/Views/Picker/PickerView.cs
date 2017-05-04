@@ -8,6 +8,7 @@ namespace mobile_style_editor
 	{
 		Label titleLabel;
 
+		public PickerViewItem Github { get; private set; }
 		public PickerViewItem Drive { get; private set; }
 		public PickerViewItem Database { get; private set; }
 
@@ -28,8 +29,8 @@ namespace mobile_style_editor
 #if __UWP__
             folder = "Assets/";
 #endif
-
-            Drive = new PickerViewItem(folder +"icon_drive.png", "FROM GOOGLE DRIVE");
+			Github = new PickerViewItem(folder + "icon_github.png", "FROM GITHUB");
+			Drive = new PickerViewItem(folder + "icon_drive.png", "FROM GOOGLE DRIVE");
 			Database = new PickerViewItem(folder + "icon_database.png", "FROM LOCAL DATABASE");
 
 			Popup = new FileListPopup();
@@ -55,9 +56,13 @@ namespace mobile_style_editor
 			x = Width / 2 - w / 2;
 
 			// PickerViewItem count
-			int count = 2;
+			int count = 3;
 
 			x = Width / 2 - (count * itemSize + (count + 1) * itemPadding) / 2;
+
+			AddSubview(Github, x, y, w, h);
+
+			x += itemSize + itemPadding;
 
 			AddSubview(Drive, x, y, w, h);
 
@@ -65,6 +70,7 @@ namespace mobile_style_editor
 
 			AddSubview(Database, x, y, w, h);
 
+			// Finally add popup so it'd be on top of other things
 			AddSubview(Popup, 0, 0, Width, Height);
 		}
 
