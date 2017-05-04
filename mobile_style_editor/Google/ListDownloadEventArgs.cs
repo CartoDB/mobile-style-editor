@@ -6,6 +6,8 @@ namespace mobile_style_editor
 {
 	public class ListDownloadEventArgs : EventArgs
 	{
-		public List<DriveFile> Items { get; set; }
+		public List<DriveFile> DriveFiles { get; set; }
+
+		public List<GithubFile> GithubFiles { get; set; }
 	}
 }

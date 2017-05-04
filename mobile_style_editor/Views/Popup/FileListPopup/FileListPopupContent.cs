@@ -29,9 +29,13 @@ namespace mobile_style_editor
 				{
 					view = new FileListPopupItem((DriveFile)item);
 				}
-				else
+				else if (item is StoredStyle)
 				{
 					view = new FileListPopupItem((StoredStyle)item);
+				}
+				else
+				{
+					view = new FileListPopupItem((GithubFile)item);
 				}
 
 				view.Click += OnItemClick;

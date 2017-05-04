@@ -1,4 +1,4 @@
-﻿#if __ANDROID__
+#if __ANDROID__
 #elif __IOS__
 using System;
 using System.Collections.Generic;
@@ -123,7 +123,7 @@ namespace mobile_style_editor
 
 				if (ListDownloadComplete != null)
 				{
-					ListDownloadComplete(null, new ListDownloadEventArgs { Items = items });
+					ListDownloadComplete(null, new ListDownloadEventArgs { DriveFiles = items });
 				}
 			});
 		}

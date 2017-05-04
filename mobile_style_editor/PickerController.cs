@@ -80,22 +80,24 @@ namespace mobile_style_editor
 
 		async void OnGithubButtonClick(object sender, EventArgs e)
 		{
-
+			ContentView.ShowLoading();
 			var contents = await HubClient.Instance.GetRepositoryContent("CartoDB", "mobile-styles");
 
-			foreach (var content in contents)
-			{
-				if (content.Type == Octokit.ContentType.Dir)
-				{
-					Console.WriteLine("Folder: " + content.Name + " (" + content.Sha + ")");
-					var folderContents = await HubClient.Instance.GetRepositoryContent("CartoDB", "mobile-styles", content.Path);
-					Console.WriteLine(folderContents);
-				}
-				else if (content.Type == Octokit.ContentType.File)
-				{
-					Console.WriteLine("File: " + content.Name);
-				}
-			}
+			OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
+
+			//foreach (var content in contents)
+			//{
+			//	if (content.Type == Octokit.ContentType.Dir)
+			//	{
+			//		Console.WriteLine("Folder: " + content.Name + " (" + content.Sha + ")");
+			//		var folderContents = await HubClient.Instance.GetRepositoryContent("CartoDB", "mobile-styles", content.Path);
+			//		Console.WriteLine(folderContents);
+			//	}
+			//	else if (content.Type == Octokit.ContentType.File)
+			//	{
+			//		Console.WriteLine("File: " + content.Name);
+			//	}
+			//}
 		}
 
 #if __UWP__
@@ -149,7 +151,15 @@ namespace mobile_style_editor
 		{
 			Device.BeginInvokeOnMainThread(delegate
 			{
-				ContentView.Popup.Show(e.Items);
+				if (e.DriveFiles != null)
+				{
+					ContentView.Popup.Show(e.DriveFiles);
+				}
+				else if (e.GithubFiles != null)
+				{
+					ContentView.Popup.Show(e.GithubFiles);
+				}
+
 				ContentView.HideLoading();
 			});
 		}
@@ -170,7 +180,7 @@ namespace mobile_style_editor
 				ContentView.ShowLoading();
 			});
 
-			if (item.File == null)
+			if (item.Style != null)
 			{
 				await Navigation.PushAsync(new MainController(item.Style.Path, item.Style.Name));
 				Device.BeginInvokeOnMainThread(delegate
@@ -178,13 +188,13 @@ namespace mobile_style_editor
 					ContentView.HideLoading();
 				});
 			}
-			else
+			else if (item.DriveFile != null)
 			{
 #if __ANDROID__
 #elif __IOS__
-                DriveClientiOS.Instance.DownloadStyle(item.File.Id, item.File.Name);
+				DriveClientiOS.Instance.DownloadStyle(item.DriveFile.Id, item.DriveFile.Name);
 #elif __UWP__
-                Stream stream = await DriveClientUWP.Instance.DownloadStyle(item.File.Id, item.File.Name);
+                Stream stream = await DriveClientUWP.Instance.DownloadStyle(item.DriveFile.Id, item.DriveFile.Name);
 
                 if (stream == null)
                 {
@@ -201,6 +211,18 @@ namespace mobile_style_editor
                     OnFileDownloadComplete(null, new DownloadEventArgs { Name = item.File.Name, Stream = stream });
                 }
 #endif
+			}
+			else if (item.GithubFile != null)
+			{
+				if (!item.GithubFile.IsDirectory)
+				{
+					// Do nothing if it's a file click
+					return;
+				}
+				else
+				{
+					// TODO save previous folder and download new files from path
+				}
 			}
 		}
 

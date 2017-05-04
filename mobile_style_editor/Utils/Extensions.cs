@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Octokit;
 
 namespace mobile_style_editor
 {
@@ -16,9 +17,14 @@ namespace mobile_style_editor
 			return styles.Cast<object>().ToList();
 		}
 
+		public static List<object> ToObjects(this List<GithubFile> styles)
+		{
+			return styles.Cast<object>().ToList();
+		}
+
 		public static List<StoredStyle> ToStoredStyles(this string[] files)
 		{
-		List<StoredStyle> list = new List<StoredStyle>();
+			List<StoredStyle> list = new List<StoredStyle>();
 
 			foreach (string file in files)
 			{
@@ -29,6 +35,19 @@ namespace mobile_style_editor
 
 				list.Add(new StoredStyle { Name = name, Path = path });
 			}
+
+			return list;
+		}
+
+		public static List<GithubFile> ToGithubFiles(this IReadOnlyList<RepositoryContent> files)
+		{
+			List<GithubFile> list = new List<GithubFile>();
+
+			foreach (RepositoryContent file in files)
+			{
+				list.Add(GithubFile.FromRepositoryContent(file));	
+			}
+
 			return list;
 		}
 	}

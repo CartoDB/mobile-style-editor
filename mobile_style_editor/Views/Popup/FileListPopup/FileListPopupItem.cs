@@ -9,7 +9,8 @@ namespace mobile_style_editor
 
 		public EventHandler<EventArgs> Click;
 
-		public DriveFile File { get; private set; }
+		public DriveFile DriveFile { get; private set; }
+		public GithubFile GithubFile { get; private set; }
 		public new StoredStyle Style { get; private set; }
 
 		BaseView container;
@@ -17,9 +18,16 @@ namespace mobile_style_editor
 		Image image;
 		Label text;
 
+		public FileListPopupItem(GithubFile file)
+		{
+			GithubFile = file;
+
+			Initialize();
+		}
+
 		public FileListPopupItem(DriveFile file)
 		{
-			File = file;
+			DriveFile = file;
 
 			Initialize();
 		}
@@ -58,20 +66,37 @@ namespace mobile_style_editor
 #if __UWP__
             folder = "Assets/";
 #endif
+			if (GithubFile != null)
+			{
+				/* If we're dealing with a Github file, it can be any type, else it'll be a .zip
+				 */
 
-            image.Source = ImageSource.FromFile(folder + "icon_zip.png");
+				if (!GithubFile.IsDirectory)
+				{
+					Disable();
+				}
+				image.Source = ImageSource.FromFile(folder + "icon_zip.png");
+			}
+			else
+			{
+				image.Source = ImageSource.FromFile(folder + "icon_zip.png");
+			}
 
 			text = new Label();
 			text.FontSize = 12f;
 			text.HorizontalTextAlignment = TextAlignment.Center;
 
-			if (File == null)
+			if (DriveFile != null)
+			{
+				text.Text = DriveFile.Name;
+			}
+			else if (Style != null)
 			{
 				text.Text = Style.Name;
 			}
 			else
 			{
-				text.Text = File.Name;
+				text.Text = GithubFile.Name;
 			}
 		}
 

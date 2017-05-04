@@ -48,5 +48,10 @@ namespace mobile_style_editor
 			(Content as FileListPopupContent).Populate(styles.ToObjects());
 		}
 
+		public void Show(List<GithubFile> files)
+		{
+			Show();
+			FileContent.Populate(files.ToObjects());
+		}
 	}
 }
