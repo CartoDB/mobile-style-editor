@@ -32,6 +32,7 @@ namespace mobile_style_editor
 
 		protected override void OnStart()
 		{
+            HubClient.Instance.Test();
 			// Handle when your app starts
 		}
 
