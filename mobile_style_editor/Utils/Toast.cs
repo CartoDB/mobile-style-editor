@@ -6,10 +6,7 @@ namespace mobile_style_editor
 #if __ANDROID__
 		static Android.Widget.Toast toast;
 #endif
-		public static void Show(string text
-#if __UWP__
-            , BaseView view = null
-#endif
+		public static void Show(string text, BaseView view = null
             )
 		{
 #if __ANDROID__

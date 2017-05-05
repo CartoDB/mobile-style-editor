@@ -149,6 +149,7 @@ namespace mobile_style_editor
 				ContentView.HideLoading();
 				await Navigation.PushAsync(new MainController(destination, zipname));
 			});
+
 		}
 
 		public void OnGithubFileDownloadComplete(object sender, EventArgs e)
