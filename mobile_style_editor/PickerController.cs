@@ -89,27 +89,31 @@ namespace mobile_style_editor
 
 		async void OnSelectClick(object sender, EventArgs e)
 		{
+
+			if (ContentView.Popup.GithubFiles == null)
+			{
+				return;
+			}
+
 			Device.BeginInvokeOnMainThread(delegate
 			{
 				ContentView.Popup.Hide();
 				ContentView.ShowLoading();
 			});
-			                               
-			if (ContentView.Popup.GithubFiles != null)
-			{
-				List<GithubFile> folder = ContentView.Popup.GithubFiles;
-				List<DownloadedGithubFile> files = await HubClient.Instance.DownloadFolder(GithubOwner, GithubRepo, folder);
 
-				var watch = new System.Diagnostics.Stopwatch();
-				watch.Start();
-				foreach (DownloadedGithubFile file in files)
-				{
-					FileUtils.SaveToAppFolder(file.Stream, file.Path);
-					Console.WriteLine(watch.ElapsedMilliseconds);
-				}
-				Console.WriteLine("total: " + watch.ElapsedMilliseconds);
-				watch.Stop();
+			List<GithubFile> folder = ContentView.Popup.GithubFiles;
+			List<DownloadedGithubFile> files = await HubClient.Instance.DownloadFolder(GithubOwner, GithubRepo, folder);
+
+			foreach (DownloadedGithubFile file in files)
+			{
+				FileUtils.SaveToAppFolder(file.Stream, file.Path, file.Name);
 			}
+
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.Popup.Hide();
+				ContentView.ShowLoading();
+			});
 		}
 
 		public void OnGithubFileDownloadComplete(object sender, EventArgs e)
