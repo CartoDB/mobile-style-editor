@@ -210,7 +210,7 @@ namespace mobile_style_editor
              * there's a guide under DriveClientiOS
              */
             List<DriveFile> files = await DriveClientUWP.Instance.DownloadFileList();
-            OnListDownloadComplete(null, new ListDownloadEventArgs { Items = files });
+            OnListDownloadComplete(null, new ListDownloadEventArgs { DriveFiles = files });
 #endif
 		}
 
@@ -305,7 +305,7 @@ namespace mobile_style_editor
 
                 } else
                 {
-                    OnFileDownloadComplete(null, new DownloadEventArgs { Name = item.File.Name, Stream = stream });
+                    OnFileDownloadComplete(null, new DownloadEventArgs { Name = item.DriveFile.Name, Stream = stream });
                 }
 #endif
 			}
