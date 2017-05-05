@@ -20,7 +20,7 @@ namespace mobile_style_editor
 #elif __IOS__
 			ToastIOS.Toast.MakeText(text).SetFontSize(12f).Show();
 #elif __UWP__
-            new Windows.UI.Popups.MessageDialog(text);
+             
 #endif
         }
 	}

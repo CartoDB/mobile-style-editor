@@ -35,12 +35,12 @@ namespace mobile_style_editor
 
 			Popup = new FileListPopup();
 		}
-
-		public override void LayoutSubviews()
+        
+        public override void LayoutSubviews()
 		{
 			Popup.Hide();
 
-			double x = 0;
+            double x = 0;
 			double y = 0;
 			double h = Height / 8;
 			double w = Width;

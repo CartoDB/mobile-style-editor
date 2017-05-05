@@ -72,5 +72,38 @@ namespace mobile_style_editor
 			Loader.IsRunning = false;
 		}
 
-	}
+        Label toast;
+        public void Toast(string text)
+        {
+            if (toast == null)
+            {
+                toast = new Label();
+                toast.Text = text;
+                toast.VerticalTextAlignment = TextAlignment.Center;
+                toast.HorizontalTextAlignment = TextAlignment.Center;
+                toast.BackgroundColor = Color.FromRgba(0, 0, 0, 190);
+                toast.TextColor = Color.White;
+
+                double padding = 30;
+                double w = 300;
+                double h = 35;
+                double x = Width / 2 - w / 2;
+                double y = Height - (h + padding);
+
+                AddSubview(toast, x, y, w, h);
+            }
+
+            toast.FadeTo(1.0);
+            var milliseconds = 200;
+
+            var timer = new System.Threading.Timer((object state) =>
+            {
+                Device.BeginInvokeOnMainThread(delegate
+                {
+                    toast.FadeTo(0.0);
+                });
+            }, null, milliseconds, System.Threading.Timeout.Infinite);
+        }
+
+    }
 }
