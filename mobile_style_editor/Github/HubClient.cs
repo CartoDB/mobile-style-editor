@@ -201,43 +201,5 @@ namespace mobile_style_editor
 			return dictionary;
 		}
 
-		public async Task<bool> Test()
-		{
-			var user = await GetUser("Nikituh");
-			var repositories = await GetRepositories("Nikituh");
-
-			Console.WriteLine("User: " + user.Name + " (" + user.Id + ")");
-
-			foreach (var repository in repositories)
-			{
-				Console.WriteLine("Repository: " + repository.Name);
-				var content = await GetRepositoryContent(repository.Owner.Login, repository.Name);
-
-				foreach (var item in content)
-				{
-					if (item.Type == Octokit.ContentType.File)
-					{
-						Console.WriteLine(" - File: " + item.Name + " (" + item.DownloadUrl.OriginalString + ")");
-
-						// Some random file from a public repo that i'll download and upload
-						string testFile = "https://raw.githubusercontent.com/Nikituh/livehiv_web/master/.gitignore";
-
-						if (item.DownloadUrl.OriginalString.Equals(testFile))
-						{
-							//DownloadedGithubFile result = await DownloadFile(item);
-							//string fileContent = await result.Content.ReadAsStringAsync();
-							//await UpdateFile(repository, item, fileContent);
-						}
-					}
-					else if (item.Type == Octokit.ContentType.Dir)
-					{
-						Console.WriteLine(" - File: " + item.Name + " is a folder");
-					}
-				}
-			}
-
-			return true;
-		}
-
 	}
 }
