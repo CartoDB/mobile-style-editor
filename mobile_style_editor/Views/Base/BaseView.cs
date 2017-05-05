@@ -73,12 +73,12 @@ namespace mobile_style_editor
 		}
 
         Label toast;
+        System.Threading.Timer timer;
         public void Toast(string text)
         {
             if (toast == null)
             {
                 toast = new Label();
-                toast.Text = text;
                 toast.VerticalTextAlignment = TextAlignment.Center;
                 toast.HorizontalTextAlignment = TextAlignment.Center;
                 toast.BackgroundColor = Color.FromRgba(0, 0, 0, 190);
@@ -92,17 +92,23 @@ namespace mobile_style_editor
 
                 AddSubview(toast, x, y, w, h);
             }
-
+            toast.Text = text;
             toast.FadeTo(1.0);
-            var milliseconds = 200;
+            
+            if (timer != null)
+            {
+                timer.Dispose();
+                timer = null;
+            }
 
-            var timer = new System.Threading.Timer((object state) =>
+            timer = new System.Threading.Timer((object state) =>
             {
                 Device.BeginInvokeOnMainThread(delegate
                 {
                     toast.FadeTo(0.0);
+                    timer = null;
                 });
-            }, null, milliseconds, System.Threading.Timeout.Infinite);
+            }, null, 500, System.Threading.Timeout.Infinite);
         }
 
     }

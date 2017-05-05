@@ -6,7 +6,11 @@ namespace mobile_style_editor
 #if __ANDROID__
 		static Android.Widget.Toast toast;
 #endif
-		public static void Show(string text)
+		public static void Show(string text
+#if __UWP__
+            , BaseView view = null
+#endif
+            )
 		{
 #if __ANDROID__
 
@@ -20,7 +24,13 @@ namespace mobile_style_editor
 #elif __IOS__
 			ToastIOS.Toast.MakeText(text).SetFontSize(12f).Show();
 #elif __UWP__
-             
+             if (view != null)
+            {
+                view.Toast(text);
+            } else
+            {
+                new Windows.UI.Popups.MessageDialog(text);
+            }
 #endif
         }
 	}

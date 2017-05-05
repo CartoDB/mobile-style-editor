@@ -104,7 +104,7 @@ namespace mobile_style_editor
 			List<GithubFile> folder = ContentView.Popup.GithubFiles;
 			List<DownloadedGithubFile> files = await HubClient.Instance.DownloadFolder(GithubOwner, GithubRepo, folder);
 
-			Toast.Show("Saving...");
+			Toast.Show("Saving...", ContentView);
 
 			/*
 			 * This is where we update pathing -> Shouldn't use repository folder hierarcy
@@ -136,13 +136,13 @@ namespace mobile_style_editor
 			string zipname = rootFolder + Parser.ZipExtension;
 			string source = Path.Combine(Parser.ApplicationFolder, rootFolder);
 
-			Toast.Show("Comperssing...");
+			Toast.Show("Comperssing...", ContentView);
 
 			string destination = Parser.Compress(source, zipname);
 			// Destination contains filename, just remove it
 			destination = destination.Replace(zipname, "");
 
-			Toast.Show("Done!");
+			Toast.Show("Done!", ContentView);
 
 			Device.BeginInvokeOnMainThread(async delegate
 			{
@@ -154,7 +154,7 @@ namespace mobile_style_editor
 		public void OnGithubFileDownloadComplete(object sender, EventArgs e)
 		{
 			string name = (string)sender;
-			Toast.Show("Downloading: " + name);
+			Toast.Show("Downloading: " + name, ContentView);
 		}
 
 		void OnDownloadStarted(object sender, EventArgs e)
