@@ -104,15 +104,24 @@ namespace mobile_style_editor
 			List<GithubFile> folder = ContentView.Popup.GithubFiles;
 			List<DownloadedGithubFile> files = await HubClient.Instance.DownloadFolder(GithubOwner, GithubRepo, folder);
 
+			/*
+			 * We can safely assume the root folder of the style, not the repository,
+			 * contains a config file (currently only supports project.json)
+             * and therefore can remove any other folder hierarchy
+             * 
+             * TODO What if it always isn't like that? && support other types of config files
+             * 
+			 */
+
 			foreach (DownloadedGithubFile file in files)
 			{
 				FileUtils.SaveToAppFolder(file.Stream, file.Path, file.Name);
 			}
 
+
 			Device.BeginInvokeOnMainThread(delegate
 			{
-				ContentView.Popup.Hide();
-				ContentView.ShowLoading();
+				ContentView.HideLoading();
 			});
 		}
 
