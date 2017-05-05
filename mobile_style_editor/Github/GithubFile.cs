@@ -5,6 +5,8 @@ namespace mobile_style_editor
 {
 	public class GithubFile
 	{
+		public const string PROJECTFILE = "project.json";
+
 		public string Name { get; set; }
 
 		public string Path { get; set; }
@@ -35,8 +37,6 @@ namespace mobile_style_editor
 
 			return item;
 		}
-
-		const string PROJECTFILE = "project.json";
 
 		public bool IsProjectFile
 		{

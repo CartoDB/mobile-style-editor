@@ -105,6 +105,9 @@ namespace mobile_style_editor
 			List<DownloadedGithubFile> files = await HubClient.Instance.DownloadFolder(GithubOwner, GithubRepo, folder);
 
 			/*
+			 * This is where we update pathing -> Shouldn't use repository folder hierarcy
+			 * We get the root of the style folder, and use that as the root folder for our folder hierarcy
+			 * 
 			 * We can safely assume the root folder of the style, not the repository,
 			 * contains a config file (currently only supports project.json)
              * and therefore can remove any other folder hierarchy
@@ -113,15 +116,32 @@ namespace mobile_style_editor
              * 
 			 */
 
+			DownloadedGithubFile projectFile = files.Find(file => file.IsProjectFile);
+
+			string folderPath = projectFile.FolderPath;
+			string[] split = folderPath.Split('/');
+
+			string rootFolder = split[split.Length - 1];
+			int length = folderPath.IndexOf(rootFolder, StringComparison.Ordinal);
+			string repoRootFolder = folderPath.Substring(0, length);
+
 			foreach (DownloadedGithubFile file in files)
 			{
+				file.Path = file.Path.Replace(repoRootFolder, "");
 				FileUtils.SaveToAppFolder(file.Stream, file.Path, file.Name);
 			}
 
+			string zipname = rootFolder + Parser.ZipExtension;
+			string source = Path.Combine(Parser.ApplicationFolder, rootFolder);
 
-			Device.BeginInvokeOnMainThread(delegate
+			string destination = Parser.Compress(source, zipname);
+			// Destination contains filename, just remove it
+			destination = destination.Replace(zipname, "");
+
+			Device.BeginInvokeOnMainThread(async delegate
 			{
 				ContentView.HideLoading();
+				await Navigation.PushAsync(new MainController(destination, zipname));
 			});
 		}
 
