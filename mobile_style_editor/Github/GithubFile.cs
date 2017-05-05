@@ -30,5 +30,12 @@ namespace mobile_style_editor
 
 			return item;
 		}
+
+		const string PROJECTFILE = "project.json";
+
+		public bool IsProjectFile
+		{
+			get { return Name.Equals(PROJECTFILE); }
+		}
 	}
 }

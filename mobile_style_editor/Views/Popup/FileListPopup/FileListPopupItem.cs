@@ -3,12 +3,8 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class FileListPopupItem : BaseView
+	public class FileListPopupItem : ClickView
 	{
-        public new bool IsEnabled { get; private set; } = true;
-
-		public EventHandler<EventArgs> Click;
-
 		public DriveFile DriveFile { get; private set; }
 		public GithubFile GithubFile { get; private set; }
 		public new StoredStyle Style { get; private set; }
@@ -39,25 +35,8 @@ namespace mobile_style_editor
             Initialize();
 		}
 
-        public void Disable()
-        {
-            IsEnabled = false;
-            this.FadeTo(0.5);
-        }
-
 		void Initialize()
 		{
-			TapGestureRecognizer recognizer = new TapGestureRecognizer();
-			recognizer.Tapped += delegate
-			{
-				if (Click != null)
-				{
-					Click(this, EventArgs.Empty);
-				}
-			};
-
-			GestureRecognizers.Add(recognizer);
-
 			container = new BaseView();
 
 			image = new Image();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -9,12 +10,14 @@ namespace mobile_style_editor
 		public FileListPopupContent FileContent { get { return Content as FileListPopupContent; } }
 
 		public BackButton BackButton { get; private set; }
+		public SelectButton Select { get; private set; }
 
 		public FileListPopup()
 		{
 			Content = new FileListPopupContent();
 
 			BackButton = new BackButton();
+			Select = new SelectButton();
 		}
 
 		public override void LayoutSubviews()
@@ -60,7 +63,36 @@ namespace mobile_style_editor
 			GithubFiles = files;
 			FileContent.Populate(files.ToObjects());
 
-			AddSubview(BackButton, 50, 50, 50, 50);
+			double padding = 10;
+
+			double x = 50;
+			double y = 50;
+			double w = 50;
+			double h = 50;
+
+			if (BackButton.Parent == null)
+			{
+				AddSubview(BackButton, x, y, w, h);
+			}
+
+			w = 120;
+			h = w / 3;
+			x = Content.X + Content.Width - w;
+			y = Content.Y + Content.Height + padding;
+
+			if (Select.Parent == null)
+			{
+				AddSubview(Select, x, y, w, h);
+			}
+
+			if (files.Any(file => file.IsProjectFile))
+			{
+				Select.Enable();
+			}
+			else
+			{
+				Select.Disable();
+			}
 		}
 	}
 
@@ -75,5 +107,31 @@ namespace mobile_style_editor
 		{
 			base.LayoutSubviews();
 		}
+	}
+
+	public class SelectButton : ClickView
+	{
+		Label label;
+
+		public SelectButton()
+		{
+			BackgroundColor = Colors.CartoNavy;
+
+			label = new Label();
+			label.FontSize = 13;
+			label.VerticalTextAlignment = TextAlignment.Center;
+			label.HorizontalTextAlignment = TextAlignment.Center;
+			label.TextColor = Color.White;
+			label.FontAttributes = FontAttributes.Bold;
+			label.Text = "SELECT";
+		}
+
+		public override void LayoutSubviews()
+		{
+			base.LayoutSubviews();
+
+			AddSubview(label, 0, 0, Width, Height);
+		}
+			
 	}
 }
