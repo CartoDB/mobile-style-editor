@@ -14,6 +14,8 @@ namespace mobile_style_editor
 	{
 		public static readonly HubClient Instance = new HubClient();
 
+		public EventHandler<EventArgs> FileDownloadStarted;
+
 		readonly GitHubClient client;
 
 		/*
@@ -65,22 +67,72 @@ namespace mobile_style_editor
 			{
 				return client.Repository.Content.GetAllContents(owner, name, path);
 			}
-				
+
 			return client.Repository.Content.GetAllContents(owner, name);
 		}
 
-		public async Task<string> DownloadFile(RepositoryContent content)
+		public async Task<DownloadedGithubFile> DownloadFile(RepositoryContent content)
 		{
+			string name = content.Name;
 			string url = content.DownloadUrl.OriginalString;
-			string result;
+			string path = content.Path;
+			return await DownloadFile(name, url, path);
+		}
+
+		public async Task<DownloadedGithubFile> DownloadFile(GithubFile content)
+		{
+			string name = content.Name;
+			string url = content.DownloadUrl;
+			string path = content.Path;
+			return await DownloadFile(name, url, path);
+		}
+
+		public async Task<DownloadedGithubFile> DownloadFile(string name, string url, string path)
+		{
+			DownloadedGithubFile result = new DownloadedGithubFile();;
 
 			using (var client = new HttpClient())
 			{
 				HttpResponseMessage response = await client.GetAsync(url);
-				result = await response.Content.ReadAsStringAsync();
+
+				result.Name = name;
+				result.Path = path;
+				result.Stream = await response.Content.ReadAsStreamAsync();
 			}
 
 			return result;
+		}
+
+		public async Task<List<DownloadedGithubFile>> DownloadFolder(string owner, string repoName, List<GithubFile> folder)
+		{
+			List<DownloadedGithubFile> files = new List<DownloadedGithubFile>();
+
+			foreach (GithubFile file in folder)
+			{
+				if (file.IsDirectory)
+				{
+					string path = file.Path;
+					var items = await GetRepositoryContent(owner, repoName, path);
+					List<GithubFile> innerFolder = items.ToGithubFiles();
+					List<DownloadedGithubFile> inner = await DownloadFolder(owner, repoName, innerFolder);
+					files.AddRange(inner);
+				}
+				else
+				{
+					if (FileDownloadStarted != null)
+					{
+						FileDownloadStarted(file.Name, EventArgs.Empty);
+					}
+
+					Console.WriteLine("Downloading: " + file.Name + " (" + file.DownloadUrl + ")");
+					DownloadedGithubFile downloaded = await DownloadFile(file.Name, file.DownloadUrl, file.Path);
+
+					files.Add(downloaded);
+
+				}
+			}
+
+			return files;
 		}
 
 		public async Task<bool> UpdateFile(Repository repository, RepositoryContent file, string content)
@@ -172,8 +224,9 @@ namespace mobile_style_editor
 
 						if (item.DownloadUrl.OriginalString.Equals(testFile))
 						{
-							string result = await DownloadFile(item);
-							await UpdateFile(repository, item, result);
+							//DownloadedGithubFile result = await DownloadFile(item);
+							//string fileContent = await result.Content.ReadAsStringAsync();
+							//await UpdateFile(repository, item, fileContent);
 						}
 					}
 					else if (item.Type == Octokit.ContentType.Dir)

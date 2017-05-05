@@ -47,12 +47,16 @@ namespace mobile_style_editor
 		{
             Show();
 			FileContent.Populate(files.ToObjects());
+
+			RemoveNavigationAndSelection();
 		}
 
 		public void Show(List<StoredStyle> styles)
 		{
             Show();
 			FileContent.Populate(styles.ToObjects());
+
+			RemoveNavigationAndSelection();
 		}
 
 		public List<GithubFile> GithubFiles { get; private set; }
@@ -92,6 +96,19 @@ namespace mobile_style_editor
 			else
 			{
 				Select.Disable();
+			}
+		}
+
+		void RemoveNavigationAndSelection()
+		{
+			if (Select.Parent != null)
+			{
+				RemoveChild(Select);
+			}
+
+			if (BackButton.Parent != null)
+			{
+                RemoveChild(BackButton);
 			}
 		}
 	}

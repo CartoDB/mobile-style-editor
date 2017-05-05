@@ -31,9 +31,11 @@ namespace mobile_style_editor
 			ContentView.Database.Click += OnDatabaseButtonClick;
 
 			ContentView.Popup.BackButton.Click += OnPopupBackButtonClick;
+			ContentView.Popup.Select.Click += OnSelectClick;
 
 			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 
+			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadComplete;
 #if __ANDROID__
 			DriveClientDroid.Instance.DownloadStarted += OnDownloadStarted;
 			DriveClientDroid.Instance.DownloadComplete += OnFileDownloadComplete;
@@ -52,9 +54,11 @@ namespace mobile_style_editor
 			ContentView.Database.Click -= OnDatabaseButtonClick;
 
 			ContentView.Popup.BackButton.Click -= OnPopupBackButtonClick;
+			ContentView.Popup.Select.Click -= OnSelectClick;
 
 			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 
+			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadComplete;
 #if __ANDROID__
 			DriveClientDroid.Instance.DownloadStarted -= OnDownloadStarted;
 			DriveClientDroid.Instance.DownloadComplete -= OnFileDownloadComplete;
@@ -81,6 +85,37 @@ namespace mobile_style_editor
 			List<GithubFile> files = storedContents[storedContents.Count - 1];
 			ContentView.Popup.Show(files);
 			storedContents.Remove(files);
+		}
+
+		async void OnSelectClick(object sender, EventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.Popup.Hide();
+				ContentView.ShowLoading();
+			});
+			                               
+			if (ContentView.Popup.GithubFiles != null)
+			{
+				List<GithubFile> folder = ContentView.Popup.GithubFiles;
+				List<DownloadedGithubFile> files = await HubClient.Instance.DownloadFolder(GithubOwner, GithubRepo, folder);
+
+				var watch = new System.Diagnostics.Stopwatch();
+				watch.Start();
+				foreach (DownloadedGithubFile file in files)
+				{
+					FileUtils.SaveToAppFolder(file.Stream, file.Path);
+					Console.WriteLine(watch.ElapsedMilliseconds);
+				}
+				Console.WriteLine("total: " + watch.ElapsedMilliseconds);
+				watch.Stop();
+			}
+		}
+
+		public void OnGithubFileDownloadComplete(object sender, EventArgs e)
+		{
+			string name = (string)sender;
+			Toast.Show("Downloading: " + name);
 		}
 
 		void OnDownloadStarted(object sender, EventArgs e)

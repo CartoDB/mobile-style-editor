@@ -28,6 +28,11 @@ namespace mobile_style_editor
 			Children.Add(view, GetConstraint(x), GetConstraint(y), GetConstraint(w), GetConstraint(h));
 		}
 
+		public void RemoveChild(View view)
+		{
+			Children.Remove(view);
+		}
+
 		/*
 		 * Hack for rezising and changing position of elements, 
 		 * as it's not an operation supported by default

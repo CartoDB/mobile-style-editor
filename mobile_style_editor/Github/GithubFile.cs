@@ -15,6 +15,8 @@ namespace mobile_style_editor
 
 		public string Extension { get; set; }
 
+		public string DownloadUrl { get; set; }
+
 		public bool IsZip { get { return Extension.Equals("zip"); } }
 
 		internal static GithubFile FromRepositoryContent(RepositoryContent file)
@@ -24,7 +26,10 @@ namespace mobile_style_editor
 			item.Path = file.Path;
 			item.Sha = file.Sha;
 			item.IsDirectory = (file.Type == ContentType.Dir);
-
+			if (!item.IsDirectory)
+			{
+				item.DownloadUrl = file.DownloadUrl.OriginalString;
+			}
 			string[] split = file.Name.Split('.');
 			item.Extension = split[split.Length - 1];
 

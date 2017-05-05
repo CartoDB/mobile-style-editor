@@ -56,6 +56,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Github\HubClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Utilities\ZoomControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\GithubFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Github\DownloadedGithubFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />
