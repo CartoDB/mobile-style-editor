@@ -57,6 +57,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Utilities\ZoomControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\GithubFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\DownloadedGithubFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StyleListController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />
