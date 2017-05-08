@@ -32,45 +32,17 @@ namespace mobile_style_editor
 
 		protected override void OnStart()
 		{
-			// Handle when your app starts
+			
 		}
 
 		protected override void OnSleep()
 		{
-			// Handle when your app sleeps
+			
 		}
 
 		protected override void OnResume()
 		{
-			// Handle when your app resumes
-		}
-
-		// TODO Remove when iOS/UWP have Drive integration
-		public List<string> CopyToAppData()
-		{
-            string styleName = "bright-cartocss-style";
-			string stylePath = "";
-
-#if __UWP__
-            Assembly assembly = typeof(Parser).GetTypeInfo().Assembly;
-#else
-            Assembly assembly = Assembly.GetAssembly(typeof(Parser));
-#endif
-			string[] resources = assembly.GetManifestResourceNames();
-
-			foreach (var resource in resources)
-			{
-				if (resource.Contains(styleName) && !resource.Contains("with-params"))
-				{
-					stylePath = resource;
-				}
-			}
-
-			using (var stream = assembly.GetManifestResourceStream(stylePath))
-			{
-				string filename = styleName + Parser.ZipExtension;
-				return FileUtils.SaveToAppFolder(stream, filename);
-			}
+			
 		}
 
 	}

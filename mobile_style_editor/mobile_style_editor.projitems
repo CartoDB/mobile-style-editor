@@ -72,8 +72,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Github\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style-with-params.zip" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Parser\bright-cartocss-style.zip" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />
   </ItemGroup>
 </Project>
