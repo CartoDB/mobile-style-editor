@@ -28,35 +28,35 @@ namespace mobile_style_editor
 
 		public async void GetContents()
 		{
-			var contents = await HubClient.Instance.GetRepositoryContent("CartoDB", "mobile-sample-styles");
+			List<Octokit.RepositoryContent> zipfiles = await HubClient.Instance.GetZipFiles("CartoDB", "mobile-sample-styles");
 
-			foreach (var content in contents)
+			foreach (var content in zipfiles)
 			{
-				if (content.Name.Contains(".zip"))
+				// TODO Check if file exists locally
+				bool existsLocally = false;
+				if (!existsLocally)
 				{
 					Console.WriteLine("Downloading: " + content.Name);
-					// TODO Check if file exists locally
-					bool existsLocally = false;
-					if (!existsLocally)
+					var file = await HubClient.Instance.DownloadFile(content);
+					List<string> paths = FileUtils.SaveToAppFolder(file.Stream, file.Name);
+					// TODO save local register that file exists
+
+					string path = paths[1];
+					string filename = paths[0];
+
+					Device.BeginInvokeOnMainThread(async delegate
 					{
-
-						var file = await HubClient.Instance.DownloadFile(content);
-						List<string> paths = FileUtils.SaveToAppFolder(file.Stream, file.Name);
-						// TODO save local register that file exists
-
-						string path = paths[1];
-						string filename = paths[0];
-
-						Device.BeginInvokeOnMainThread(async delegate
+						if (content.Name.Equals("nutiteq-bright-blue.zip"))
 						{
-							if (content.Name.Equals("nutiteq-bright-blue.zip"))
-							{
-								Console.WriteLine("Opening MainController: " + path + " & " + filename);
-								await Navigation.PushAsync(new MainController(path, filename));
-							}
-							Console.WriteLine("Name: " + content.Name);
-						});
-					}
+							Console.WriteLine("Opening MainController: " + path + " & " + filename);
+							await Navigation.PushAsync(new MainController(path, filename));
+						}
+						Console.WriteLine("Name: " + content.Name);
+					});
+				}
+				else
+				{
+					Console.WriteLine("Using local copy of: " + content.Name);
 				}
 			}
 		}

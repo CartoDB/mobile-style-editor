@@ -71,6 +71,32 @@ namespace mobile_style_editor
 			return client.Repository.Content.GetAllContents(owner, name);
 		}
 
+		public async Task<List<RepositoryContent>> GetZipFiles(string owner, string name, string path = null)
+		{
+			IReadOnlyList<RepositoryContent> contents;
+
+			if (path != null)
+			{
+				contents = await client.Repository.Content.GetAllContents(owner, name, path);
+			}
+			else
+			{
+				contents = await client.Repository.Content.GetAllContents(owner, name);
+			}
+
+			List<RepositoryContent> zipfiles = new List<RepositoryContent>();
+
+			foreach (var content in contents)
+			{
+				if (content.Name.Contains(Parser.ZipExtension))
+				{
+					zipfiles.Add(content);
+				}
+			}
+
+			return zipfiles;
+		}
+
 		public async Task<DownloadedGithubFile> DownloadFile(RepositoryContent content)
 		{
 			string name = content.Name;
