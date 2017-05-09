@@ -6,6 +6,8 @@ namespace mobile_style_editor
 {
 	public class StyleContainer : BaseView
 	{
+		public EventHandler<EventArgs> ItemClick;
+
 		public BaseView Header { get; set; }
 
 		BaseScrollView styleList;
@@ -23,7 +25,7 @@ namespace mobile_style_editor
 		{
 			base.LayoutSubviews();
 
-			double headerHeight = Height / 17;
+			double headerHeight = Height > Width ? Height / 17 : Width / 17;
 			double footerHeight = 0;
 			double headerPadding = headerHeight / 4;
 
@@ -59,6 +61,8 @@ namespace mobile_style_editor
 
 		public void ShowSampleStyles(List<DownloadResult> results)
 		{
+			styleList.Children.Clear();	
+			
 			double x = 0;
 			double y = 0;
 			double w = styleList.Width;
@@ -67,10 +71,18 @@ namespace mobile_style_editor
 			foreach (DownloadResult result in results)
 			{
 				var item = new StyleListItem();
+				item.Click += (object sender, EventArgs e) =>
+				{
+					if (ItemClick != null)
+					{
+						ItemClick(sender, e);
+					}
+				};
+
 				styleList.AddSubview(item, x, y, w, h);
 				y += h + padding;
 
-				item.Update(result.CleanName, result.Data);
+				item.Update(result);
 			}
 		}
 

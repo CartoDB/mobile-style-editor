@@ -13,8 +13,10 @@ using Xamarin.Forms.Platform.UWP;
 
 namespace mobile_style_editor
 {
-	public class StyleListItem : BaseView
+	public class StyleListItem : ClickView
 	{
+		public DownloadResult Data { get; private set; }
+
 		MapView mapView;
 		Label label;
 
@@ -26,8 +28,17 @@ namespace mobile_style_editor
 			label.VerticalTextAlignment = TextAlignment.Center;
 			label.TextColor = Color.White;
 			label.FontSize = 11;
-			
-			mapView = new MapView();
+
+			mapView = new MapView(
+#if __ANDROID__
+				Forms.Context
+#endif
+			);
+
+#if __ANDROID__
+#elif __IOS__
+			mapView.UserInteractionEnabled = false;
+#endif
 		}
 
 		public override void LayoutSubviews()
@@ -52,10 +63,12 @@ namespace mobile_style_editor
 			AddSubview(label, x, y, w, h);
 		}
 
-		public void Update(string title, byte[] data)
+		public void Update(DownloadResult result)
 		{
-			mapView.Update(data, null);
-			label.Text = title.ToUpper();
+			Data = result;
+
+			mapView.Update(result.Data, null);
+			label.Text = result.CleanName.ToUpper();
 		}
 	}
 }

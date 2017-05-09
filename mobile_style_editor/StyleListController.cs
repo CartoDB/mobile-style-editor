@@ -26,13 +26,36 @@ namespace mobile_style_editor
 			ContentView = new StyleView();
 			Content = ContentView;
 		}
-
+		
 		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
 
 			List<DownloadResult> results = await GetContents();
 			ContentView.Templates.ShowSampleStyles(results);
+
+			ContentView.MyStyles.ItemClick += OnStyleClick;
+
+			ContentView.Templates.ItemClick += OnStyleClick;
+		}
+
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
+
+			ContentView.MyStyles.ItemClick -= OnStyleClick;
+
+			ContentView.Templates.ItemClick -= OnStyleClick;
+		}
+
+		void OnStyleClick(object sender, EventArgs e)
+		{
+			StyleListItem item = (StyleListItem)sender;
+
+			Device.BeginInvokeOnMainThread(async delegate
+			{
+				await Navigation.PushAsync(new MainController(item.Data.Path, item.Data.Filename));
+			});
 		}
 
 		public async System.Threading.Tasks.Task<List<DownloadResult>> GetContents()
