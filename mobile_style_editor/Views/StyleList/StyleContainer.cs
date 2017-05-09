@@ -55,12 +55,7 @@ namespace mobile_style_editor
 
 		public void ShowSampleStyles(List<DownloadResult> results)
 		{
-			styleList.Children.Clear();	
-			
-			double x = 0;
-			double y = 0;
-			double w = styleList.Width;
-			double h = 150;
+			//styleList.Children.Clear();	
 
 			foreach (DownloadResult result in results)
 			{
@@ -73,11 +68,12 @@ namespace mobile_style_editor
 					}
 				};
 
-				styleList.AddSubview(item, x, y, w, h);
-				y += h + padding;
+				styleList.AddSubview(item);
 
 				item.Update(result);
 			}
+
+			UpdateListLayout();
 		}
 
 		void UpdateListLayout()

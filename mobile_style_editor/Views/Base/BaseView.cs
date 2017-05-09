@@ -27,6 +27,11 @@ namespace mobile_style_editor
 			LayoutSubviews();
 		}
 
+		public void AddSubview(View view)
+		{
+			Children.Add(view, ZeroConstraint, ZeroConstraint, ZeroConstraint, ZeroConstraint);
+		}
+
 		public void AddSubview(View view, double x, double y, double w, double h)
 		{
 			if (view.Parent == null)

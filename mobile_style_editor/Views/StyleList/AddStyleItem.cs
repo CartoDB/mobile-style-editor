@@ -61,16 +61,13 @@ namespace mobile_style_editor
 			double itemSize = container.Height - (titleHeight + 2 * padding);
 			double itemPadding = 10;
 
+			// PickerViewItem count
+			int count =  2;
+
 			h = itemSize;
 			w = itemSize;
+			x = container.Width - (count* itemSize + count* itemPadding);
 			y = container.Height / 2 - h / 2;
-			x = container.Width / 2 - w / 2;
-
-			// PickerViewItem count
-			int count = 3;
-
-			x = container.Width / 2 - (count * itemSize + (count + 1) * itemPadding) / 2;
-			x = container.Width - (2 * itemSize + 2 * itemPadding);
 
 			container.AddSubview(Github, x, y, w, h);
 

@@ -6,13 +6,19 @@ namespace mobile_style_editor
 {
 	public class BaseScrollView : ScrollView
 	{
-		RelativeLayout content;
+		BaseView content;
 
 		public IList<View> Children { get { return content.Children; } }
 
+		Constraint ZeroConstraint
+		{
+			get { return GetConstraint(0); }
+		}
+
 		public BaseScrollView()
 		{
-			content = new RelativeLayout();
+			content = new BaseView();
+			content.ClearChildrenOnLayout = false;
 			Content = content;
 
 			SizeChanged += OnSizeChanged;
@@ -23,10 +29,18 @@ namespace mobile_style_editor
 			LayoutSubviews();
 		}
 
+		public void AddSubview(View view)
+		{
+			content.AddSubview(view);
+			//content.Children.Add(view, ZeroConstraint, ZeroConstraint, ZeroConstraint, ZeroConstraint);
+		}
+
 		public void AddSubview(View view, double x, double y, double w, double h)
 		{
-			content.Children.Add(view, GetConstraint(x), GetConstraint(y), GetConstraint(w), GetConstraint(h));
+			content.AddSubview(view, x, y, w, h);
+			//content.Children.Add(view, GetConstraint(x), GetConstraint(y), GetConstraint(w), GetConstraint(h));
 		}
+
 		Constraint GetConstraint(double number)
 		{
 			return Constraint.Constant(number);
