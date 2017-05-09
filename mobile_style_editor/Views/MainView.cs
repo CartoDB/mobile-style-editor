@@ -154,8 +154,6 @@ namespace mobile_style_editor
 
 			Toolbar.UpdateLayout(Toolbar.X, Toolbar.Y, Toolbar.Width, 0);
 			Editor.UpdateLayout(Editor.X, Editor.Y - toolbarHeight, Editor.Width, Editor.Height - keyboardHeight + toolbarHeight);
-			
-			ForceLayout();
 		}
 	}
 }

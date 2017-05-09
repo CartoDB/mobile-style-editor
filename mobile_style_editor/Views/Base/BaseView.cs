@@ -14,8 +14,8 @@ namespace mobile_style_editor
 		public bool ClearChildrenOnLayout { get; set; } = true;
 
 		Constraint ZeroConstraint
-		{ 
-			get { return GetConstraint(0); } 
+		{
+			get { return GetConstraint(0); }
 		}
 		public BaseView()
 		{
@@ -37,6 +37,11 @@ namespace mobile_style_editor
 			{
 				var constraint = BoundsConstraint.FromExpression(() => new Rectangle(x, y, w, h), new View[0]);
 				SetBoundsConstraint(view, constraint);
+
+				if (view.Parent is RelativeLayout)
+				{
+					(view.Parent as RelativeLayout).ForceLayout();
+				}
 			}
 		}
 
