@@ -26,13 +26,7 @@ namespace mobile_style_editor
 			base.LayoutSubviews();
 
 			double headerHeight = Height > Width ? Height / 17 : Width / 17;
-			double footerHeight = 0;
 			double headerPadding = headerHeight / 4;
-
-			if (Footer != null)
-			{
-				footerHeight = Height / 10;
-			}
 
 			double x = padding;
 			double y = 0;
@@ -52,7 +46,7 @@ namespace mobile_style_editor
 			}
 
 			y += h + headerPadding;
-			h = Height - (headerHeight + headerPadding + footerHeight);
+			h = Height - (headerHeight + headerPadding);
 
 			AddSubview(styleList, x, y, w, h);
 
@@ -101,6 +95,13 @@ namespace mobile_style_editor
 					y += h + padding;
 				}
 			}
+
+
+			if (Footer != null)
+			{
+				styleList.AddSubview(Footer, x, y, w, h);
+			}
+
 		}
 
 		public static BaseView GetHeaderLabel(string text)

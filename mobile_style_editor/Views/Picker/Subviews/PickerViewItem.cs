@@ -10,6 +10,12 @@ namespace mobile_style_editor
 		public Image Image { get; private set; }
 		Label label;
 
+		public double TextSize
+		{ 
+			get { return label.FontSize; }
+			set { label.FontSize = value; }
+		}
+
 		public PickerViewItem(string resource, string text)
 		{
 			BackgroundColor = Color.FromRgb(240, 240, 240);

@@ -10,6 +10,8 @@ namespace mobile_style_editor
 
 		public StyleContainer Templates { get; private set; }
 
+		public AddStyleItem AddStyle { get; private set; }
+
 		public StyleView()
 		{
 			BackgroundColor = Colors.CartoRed;
@@ -19,6 +21,9 @@ namespace mobile_style_editor
 
 			Templates = new StyleContainer();
 			Templates.Header = StyleContainer.GetHeaderLabel("TEMPLATE STYLES");
+
+			AddStyle = new AddStyleItem();
+			MyStyles.Footer = AddStyle;
 		}
 
 		public override void LayoutSubviews()
@@ -35,6 +40,18 @@ namespace mobile_style_editor
 			x += w;
 
 			AddSubview(Templates, x, y, w, h);
+
+			//AddAddBlock();
+		}
+
+		void AddAddBlock()
+		{
+			//double x = 0;
+			//double y = MyStyles.FooterY;
+			//double w = MyStyles.Width;
+			//double h = 120;
+
+			//MyStyles.AddSubview(AddStyle, x, y, w, h);
 		}
 	}
 }
