@@ -25,5 +25,9 @@ namespace mobile_style_editor
 		public static Color NearWhite = Color.FromRgb(240, 240, 240);
 
 		public static Color PaleSky = Color.FromRgb(99, 109, 114);
+
+		public static Color Heather = Color.FromRgb(117, 184, 193);
+
+		public static Color SoftGray = Color.FromRgb(249, 249, 249);
 	}
 }

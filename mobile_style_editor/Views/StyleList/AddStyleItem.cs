@@ -14,13 +14,10 @@ namespace mobile_style_editor
 
 		public AddStyleItem()
 		{
-			//BackgroundColor = Colors.NearWhite;
 			BackgroundColor = Color.White;
 
 			container = new BaseView();
-			//container.BackgroundColor = Color.White;
 			container.BackgroundColor = Colors.NearWhite;
-			//container.BackgroundColor = Colors.PaleSky;
 
 			titleLabel = new Label();
 			titleLabel.TextColor = Colors.CartoNavy;
@@ -37,9 +34,11 @@ namespace mobile_style_editor
 #endif
 			Github = new PickerViewItem(folder + "icon_github.png", "GITHUB");
 			Github.TextSize = 10;
+			Github.BackgroundColor = container.BackgroundColor;
 
 			Drive = new PickerViewItem(folder + "icon_drive.png", "GOOGLE DRIVE");
 			Drive.TextSize = 10;
+			Drive.BackgroundColor = container.BackgroundColor;
 		}
 
 		public override void LayoutSubviews()

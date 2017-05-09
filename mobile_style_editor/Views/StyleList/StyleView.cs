@@ -40,18 +40,7 @@ namespace mobile_style_editor
 			x += w;
 
 			AddSubview(Templates, x, y, w, h);
-
-			//AddAddBlock();
 		}
 
-		void AddAddBlock()
-		{
-			//double x = 0;
-			//double y = MyStyles.FooterY;
-			//double w = MyStyles.Width;
-			//double h = 120;
-
-			//MyStyles.AddSubview(AddStyle, x, y, w, h);
-		}
 	}
 }
