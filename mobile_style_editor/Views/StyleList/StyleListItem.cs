@@ -20,12 +20,13 @@ namespace mobile_style_editor
 
 		public StyleListItem()
 		{
-			BackgroundColor = Color.White;
+			BackgroundColor = Colors.CartoRedDark;
 
 			label = new Label();
 			label.VerticalTextAlignment = TextAlignment.Center;
-			label.TextColor = Colors.CartoNavy;
-
+			label.TextColor = Color.White;
+			label.FontSize = 11;
+			
 			mapView = new MapView();
 		}
 
@@ -34,17 +35,19 @@ namespace mobile_style_editor
 			base.LayoutSubviews();
 
 			double padding = 5;
-			double quarterHeight = (Height - 3 * padding) / 4;
+
+			double divider = 5;
+			double unitHeight = (Height - 3 * padding) / divider;
 
 			double x = padding;
 			double y = padding;
 			double w = Width - 2 * padding;
-			double h = quarterHeight * 3;
+			double h = unitHeight * (divider - 1);
 
 			AddSubview(mapView.ToView(), x, y, w, h);
 
 			y += h + padding;
-			h = quarterHeight;
+			h = unitHeight;
 
 			AddSubview(label, x, y, w, h);
 		}
@@ -52,7 +55,7 @@ namespace mobile_style_editor
 		public void Update(string title, byte[] data)
 		{
 			mapView.Update(data, null);
-			label.Text = title;
+			label.Text = title.ToUpper();
 		}
 	}
 }

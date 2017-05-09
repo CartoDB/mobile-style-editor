@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Linq.Expressions;
 using Xamarin.Forms;
@@ -7,6 +7,12 @@ namespace mobile_style_editor
 {
 	public class BaseView : RelativeLayout
 	{
+		const string ConstraintProperty_Height = "height";
+
+		public static readonly double MatchParent = -1;
+
+		public bool ClearChildrenOnLayout { get; set; } = true;
+
 		Constraint ZeroConstraint
 		{ 
 			get { return GetConstraint(0); } 
@@ -18,14 +24,20 @@ namespace mobile_style_editor
 
 		void OnSizeChanged(object sender, EventArgs e)
 		{
-			Children.Clear();
-
 			LayoutSubviews();
 		}
 
 		public void AddSubview(View view, double x, double y, double w, double h)
 		{
-			Children.Add(view, GetConstraint(x), GetConstraint(y), GetConstraint(w), GetConstraint(h));
+			if (view.Parent == null)
+			{
+				Children.Add(view, GetConstraint(x), GetConstraint(y), GetConstraint(w), GetConstraint(h, ConstraintProperty_Height));
+			}
+			else
+			{
+				var constraint = BoundsConstraint.FromExpression(() => new Rectangle(x, y, w, h), new View[0]);
+				SetBoundsConstraint(view, constraint);
+			}
 		}
 
 		public void RemoveChild(View view)
@@ -45,12 +57,30 @@ namespace mobile_style_editor
 			SetBoundsConstraint(this, constraint);
 		}
 
-		Constraint GetConstraint(double number)
+		Constraint GetConstraint(double number, string property = "")
 		{
+			if (number < 0 && number > -2)
+			{
+				if (property.Equals(ConstraintProperty_Height))
+				{
+					return Constraint.RelativeToParent((parent) => { return parent.Height; });
+				}
+				else
+				{
+					return Constraint.RelativeToParent((parent) => { return parent.Width; });
+				}
+			}
+
 			return Constraint.Constant(number);
 		}
 
-		public virtual void LayoutSubviews() { Children.Clear(); }
+		public virtual void LayoutSubviews()
+		{
+			if (ClearChildrenOnLayout)
+			{
+				Children.Clear();
+			}
+		}
 
 
 		public ActivityIndicator Loader { get; private set; }

@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,11 +17,13 @@ namespace mobile_style_editor
 {
 	public class StyleListController : ContentPage
 	{
-		public StyleListView ContentView { get; private set; }
+		public StyleView ContentView { get; private set; }
 
 		public StyleListController()
 		{
-			ContentView = new StyleListView();
+			Title = "CARTO STYLE VIEWER";
+
+			ContentView = new StyleView();
 			Content = ContentView;
 		}
 
@@ -30,7 +32,7 @@ namespace mobile_style_editor
 			base.OnAppearing();
 
 			List<DownloadResult> results = await GetContents();
-			ContentView.ShowSampleStyles(results);
+			ContentView.Templates.ShowSampleStyles(results);
 		}
 
 		public async System.Threading.Tasks.Task<List<DownloadResult>> GetContents()

@@ -58,10 +58,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Github\GithubFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\DownloadedGithubFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StyleListController.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleListView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseScrollView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleListItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\MapExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />

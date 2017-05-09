@@ -8,6 +8,8 @@ namespace mobile_style_editor
 	{
 		public static Color CartoRed = Color.FromRgb(215, 82, 75);
 
+		public static Color CartoRedTransparent = Color.FromRgba(215, 82, 75, 200);
+
 		public static Color CartoRedDark = Color.FromRgb(180, 65, 60);
 
 		public static Color CartoNavyLight = Color.FromRgb(22, 50, 80);
