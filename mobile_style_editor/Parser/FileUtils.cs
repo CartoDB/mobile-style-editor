@@ -6,6 +6,16 @@ namespace mobile_style_editor
 {
 	public class FileUtils
 	{
+		public static bool HasLocalCopy(string name)
+		{
+			return File.Exists( Path.Combine(Parser.ApplicationFolder, name));
+		}
+
+		public static string GetLocalPath()
+		{
+			return Parser.ApplicationFolder;
+		}
+
 		public static void OverwriteFileAtPath(string path, string text)
 		{
 #if __UWP__

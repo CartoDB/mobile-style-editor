@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Carto.Ui;
 using Xamarin.Forms;
 
@@ -23,56 +24,61 @@ namespace mobile_style_editor
 			ContentView = new StyleListView();
 			Content = ContentView;
 
-			GetContents();			
+			GetContents();
 		}
 
 		public async void GetContents()
 		{
 			List<Octokit.RepositoryContent> zipfiles = await HubClient.Instance.GetZipFiles("CartoDB", "mobile-sample-styles");
 
+			List<string> paths = new List<string>();
+			List<string> filenames = new List<string>();
+
 			foreach (var content in zipfiles)
 			{
-				// TODO Check if file exists locally
-				bool existsLocally = false;
-				if (!existsLocally)
+				bool existsLocally = FileUtils.HasLocalCopy(content.Name);
+
+				string path = "";
+				string filename = "";
+
+				if (existsLocally)
 				{
-					Console.WriteLine("Downloading: " + content.Name);
-					var file = await HubClient.Instance.DownloadFile(content);
-					List<string> paths = FileUtils.SaveToAppFolder(file.Stream, file.Name);
-					// TODO save local register that file exists
+					Console.WriteLine("Using local file: " + content.Name);
 
-					string path = paths[1];
-					string filename = paths[0];
-
-					Device.BeginInvokeOnMainThread(async delegate
-					{
-						if (content.Name.Equals("nutiteq-bright-blue.zip"))
-						{
-							Console.WriteLine("Opening MainController: " + path + " & " + filename);
-							await Navigation.PushAsync(new MainController(path, filename));
-						}
-						Console.WriteLine("Name: " + content.Name);
-					});
+					path = FileUtils.GetLocalPath();
+					filename = content.Name;
 				}
 				else
 				{
-					Console.WriteLine("Using local copy of: " + content.Name);
+					Console.WriteLine("Downloading: " + content.Name);
+
+					var file = await HubClient.Instance.DownloadFile(content);
+					List<string> data = FileUtils.SaveToAppFolder(file.Stream, file.Name);
+
+					path = data[1];
+					filename = data[0];
 				}
+
+				paths.Add(path);
+				filenames.Add(filename);
 			}
+
+
+			ContentView.ShowSampleStyles(paths, filenames);
 		}
 
 	}
 
-	public class StyleListView : Frame
+	public class StyleListView : BaseView
 	{
-		public MapView MapView { get; private set; }
-
 		public StyleListView()
 		{
-			Padding = new Thickness(0, 0, 0, 0);
+			BackgroundColor = Color.Yellow;
+		}
 
-			MapView = new MapView();
-			Content = MapView.ToView();			
+		public void ShowSampleStyles(List<string> paths, List<string> filenames)
+		{
+			
 		}
 	}
 }
