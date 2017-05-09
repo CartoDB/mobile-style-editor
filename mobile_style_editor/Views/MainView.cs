@@ -133,56 +133,9 @@ namespace mobile_style_editor
 			Toolbar.ExpandButton.UpdateImage();
 		}
 
-		const string OSM = "nutiteq.osm";
-
 		public void UpdateMap(byte[] data, Action completed)
 		{
-			System.Threading.Tasks.Task.Run(delegate
-			{
-				BinaryData styleAsset = new BinaryData(data);
-
-				var package = new ZippedAssetPackage(styleAsset);
-				var styleSet = new CompiledStyleSet(package);
-			
-				// UWP doesn't have a version released where simply changing the style set is supported,
-				// need to clear layers and recreate the entire thing
-#if __UWP__
-				MapView.Layers.Clear();
-		
-				var source = new CartoOnlineTileDataSource(OSM);
-				var decoder = new MBVectorTileDecoder(styleSet);
-                
-				var layer = new VectorTileLayer(source, decoder);
-				Device.BeginInvokeOnMainThread(delegate
-				{
-					MapView.Layers.Add(layer);
-                    completed();
-				});
-#else
-				if (MapView.Layers.Count == 0)
-				{
-					var source = new CartoOnlineTileDataSource(OSM);
-					var decoder = new MBVectorTileDecoder(styleSet);
-
-					var layer = new VectorTileLayer(source, decoder);
-					Device.BeginInvokeOnMainThread(delegate
-					{
-						MapView.Layers.Add(layer);
-						completed();
-					});
-				}
-				else
-				{
-					var decoder = (MBVectorTileDecoder)(MapView.Layers[0] as VectorTileLayer).TileDecoder;
-
-					Device.BeginInvokeOnMainThread(delegate
-					{
-						decoder.CompiledStyle = styleSet;
-						completed();
-					});
-				}
-#endif
-            });
+			MapView.Update(data, completed);
 		}
 
 		double editorOriginalHeight;

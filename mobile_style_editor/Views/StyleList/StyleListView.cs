@@ -24,10 +24,20 @@ namespace mobile_style_editor
 
 		public void ShowSampleStyles(List<DownloadResult> results)
 		{
-			double h = 70;
+			double padding = 5;
+
+			double x = 0;
+			double y = 0;
+			double w = styleList.Width;
+			double h = 150;
+
 			foreach (DownloadResult result in results)
 			{
-				styleList.AddSubview(new StyleListItem(result.CleanName), h);
+				var item = new StyleListItem();
+				styleList.AddSubview(item, x, y, w, h);
+				y += h + padding;
+
+				item.Update(result.CleanName, result.Data);
 			}
 		}
 	}

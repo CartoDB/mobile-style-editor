@@ -79,5 +79,13 @@ namespace mobile_style_editor
 		public string Filename { get; set; }
 
 		public string CleanName { get { return Filename.Replace(Parser.ZipExtension, ""); } }
+
+		public byte[] Data
+		{
+			get
+			{
+				return FileUtils.PathToByteData(System.IO.Path.Combine(Path, Filename));
+			}
+		}
 	}
 }

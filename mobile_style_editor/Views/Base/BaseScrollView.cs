@@ -6,13 +6,13 @@ namespace mobile_style_editor
 {
 	public class BaseScrollView : ScrollView
 	{
-		StackLayout content;
+		RelativeLayout content;
 
 		public IList<View> Children { get { return content.Children; } }
 
 		public BaseScrollView()
 		{
-			content = new StackLayout();
+			content = new RelativeLayout();
 			Content = content;
 
 			SizeChanged += OnSizeChanged;
@@ -23,10 +23,13 @@ namespace mobile_style_editor
 			LayoutSubviews();
 		}
 
-		public void AddSubview(View view, double h)
+		public void AddSubview(View view, double x, double y, double w, double h)
 		{
-			view.HeightRequest = h;
-			content.Children.Add(view);
+			content.Children.Add(view, GetConstraint(x), GetConstraint(y), GetConstraint(w), GetConstraint(h));
+		}
+		Constraint GetConstraint(double number)
+		{
+			return Constraint.Constant(number);
 		}
 
 		public void RemoveChild(View view)
