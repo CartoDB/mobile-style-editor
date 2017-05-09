@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -18,15 +19,15 @@ namespace mobile_style_editor
 		{
 			base.LayoutSubviews();
 
-			AddSubview(styleList, 0, 0, Width / 2, Height / 1.2);
+			AddSubview(styleList, 0, 0, Width / 2, Height / 1.5);
 		}
 
-		public void ShowSampleStyles(DownloadResult result)
+		public void ShowSampleStyles(List<DownloadResult> results)
 		{
-			double h = 100;
-			for (int i = 0; i < 50; i++)
+			double h = 70;
+			foreach (DownloadResult result in results)
 			{
-				styleList.AddSubview(new Label { Text = i.ToString(), BackgroundColor = Color.Red }, h);
+				styleList.AddSubview(new StyleListItem(result.CleanName), h);
 			}
 		}
 	}

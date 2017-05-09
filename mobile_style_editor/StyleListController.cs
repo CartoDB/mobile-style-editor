@@ -29,16 +29,15 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
-			DownloadResult result = await GetContents();
-			ContentView.ShowSampleStyles(result);
+			List<DownloadResult> results = await GetContents();
+			ContentView.ShowSampleStyles(results);
 		}
 
-		public async System.Threading.Tasks.Task<DownloadResult> GetContents()
+		public async System.Threading.Tasks.Task<List<DownloadResult>> GetContents()
 		{
 			List<Octokit.RepositoryContent> zipfiles = await HubClient.Instance.GetZipFiles("CartoDB", "mobile-sample-styles");
 
-			List<string> paths = new List<string>();
-			List<string> filenames = new List<string>();
+			List<DownloadResult> results = new List<DownloadResult>();
 
 			foreach (var content in zipfiles)
 			{
@@ -65,19 +64,20 @@ namespace mobile_style_editor
 					filename = data[0];
 				}
 
-				paths.Add(path);
-				filenames.Add(filename);
+				results.Add(new DownloadResult { Path = path, Filename = filename });
 			}
 
-			return new DownloadResult { Paths = paths, Filenames = filenames };
+			return results;
 		}
 
 	}
 
 	public class DownloadResult
 	{
-		public List<string> Paths { get; set; }
+		public string Path { get; set; }
 
-		public List<string> Filenames { get; set; }
+		public string Filename { get; set; }
+
+		public string CleanName { get { return Filename.Replace(Parser.ZipExtension, ""); } }
 	}
 }

@@ -60,6 +60,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)StyleListController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleListView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseScrollView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />

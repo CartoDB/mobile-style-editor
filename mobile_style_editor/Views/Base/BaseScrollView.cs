@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using System.Collections.Generic;
 
 namespace mobile_style_editor
 {
@@ -7,21 +8,18 @@ namespace mobile_style_editor
 	{
 		StackLayout content;
 
+		public IList<View> Children { get { return content.Children; } }
+
 		public BaseScrollView()
 		{
 			content = new StackLayout();
 			Content = content;
-			SizeChanged += OnSizeChanged;
 
-			Padding = new Thickness(0, 0, 0, 0);
-			content.Padding = new Thickness(0, 0, 0, 0);
-			content.Margin = new Thickness(0, 0, 0, 0);
+			SizeChanged += OnSizeChanged;
 		}
 
 		void OnSizeChanged(object sender, EventArgs e)
 		{
-			content.Children.Clear();
-
 			LayoutSubviews();
 		}
 
@@ -36,6 +34,6 @@ namespace mobile_style_editor
 			content.Children.Remove(view);
 		}
 
-		public virtual void LayoutSubviews() { content.Children.Clear(); }
+		public virtual void LayoutSubviews() { /*content.Children.Clear();*/ }
 	}
 }
