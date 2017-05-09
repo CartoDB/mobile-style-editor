@@ -23,11 +23,17 @@ namespace mobile_style_editor
 		{
 			ContentView = new StyleListView();
 			Content = ContentView;
-
-			GetContents();
 		}
 
-		public async void GetContents()
+		protected override async void OnAppearing()
+		{
+			base.OnAppearing();
+
+			DownloadResult result = await GetContents();
+			ContentView.ShowSampleStyles(result);
+		}
+
+		public async System.Threading.Tasks.Task<DownloadResult> GetContents()
 		{
 			List<Octokit.RepositoryContent> zipfiles = await HubClient.Instance.GetZipFiles("CartoDB", "mobile-sample-styles");
 
@@ -63,8 +69,7 @@ namespace mobile_style_editor
 				filenames.Add(filename);
 			}
 
-
-			ContentView.ShowSampleStyles(paths, filenames);
+			return new DownloadResult { Paths = paths, Filenames = filenames };
 		}
 
 	}
@@ -80,5 +85,12 @@ namespace mobile_style_editor
 		{
 			
 		}
+	}
+
+	public class DownloadResult
+	{
+		public List<string> Paths { get; set; }
+
+		public List<string> Filenames { get; set; }
 	}
 }
