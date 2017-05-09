@@ -74,19 +74,6 @@ namespace mobile_style_editor
 
 	}
 
-	public class StyleListView : BaseView
-	{
-		public StyleListView()
-		{
-			BackgroundColor = Color.Yellow;
-		}
-
-		public void ShowSampleStyles(List<string> paths, List<string> filenames)
-		{
-			
-		}
-	}
-
 	public class DownloadResult
 	{
 		public List<string> Paths { get; set; }

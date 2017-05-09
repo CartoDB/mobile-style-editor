@@ -58,6 +58,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Github\GithubFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\DownloadedGithubFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StyleListController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleListView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseScrollView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />
@@ -71,6 +73,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileTabPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Github\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />
