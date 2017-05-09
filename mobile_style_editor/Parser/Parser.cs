@@ -26,77 +26,99 @@ namespace mobile_style_editor
 
 		public static string LocalStyleLocation { get { return Path.Combine(ApplicationFolder, "local-styles"); } }
 
-        public static ZipData GetZipData(string folder, string filename)
-        {
-            ZipData data = new ZipData();
+		public static ZipData GetZipData(string folder, string filename)
+		{
+			ZipData data = new ZipData();
 
-            string fullPath = Path.Combine(folder, filename);
-            string newFolder = filename.Replace(ZipExtension, "");
-            string decompressedPath = Path.Combine(folder, newFolder);
+			string fullPath = Path.Combine(folder, filename);
+			string newFolder = filename.Replace(ZipExtension, "");
+			string decompressedPath = Path.Combine(folder, newFolder);
 
-            List<string> paths = Decompress(fullPath, decompressedPath);
+			List<string> paths = Decompress(fullPath, decompressedPath);
 
-            data.Filename = filename;
-            data.DecompressedPath = decompressedPath;
-            data.AllFilePaths = paths;
+			data.Filename = filename;
+			data.DecompressedPath = decompressedPath;
+			data.AllFilePaths = paths;
 
-            /*
+			/*
 			 * The Zip itself can contain extra .mss files and presents them in the wrong order.
 			 * Read the necessary .mss files and their order from project.json
 			 */
-            foreach (string path in paths)
-            {
-                if (path.Contains(ProjectFile))
-                {
+			foreach (string path in paths)
+			{
+				if (path.Contains(ProjectFile))
+				{
 #if __UWP__
                     using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
                     {
                         using (var streamReader = new StreamReader(stream))
 #else
-                        using (var streamReader = new StreamReader(path))
+					using (var streamReader = new StreamReader(path))
 #endif
-                        {
-                            string content = streamReader.ReadToEnd();
-                            Variant json = Variant.FromString(content);
-                            Variant styles = json.GetObjectElement("styles");
+					{
+						if (path.Contains("__MACOSX"))
+						{
+							/* 
+							 * OSX Creates a __MAXOSX folder every time you zip an archive:
+							 * 
+                             * The Mac OS X has a "forked" filesystem called HFS+ - in particular, 
+                             * many files have a "resource fork" in addition to the "data fork" 
+                             * (the more common place where data is stored).  
+                             * The __MACOSX folders in a zip file allow the zipped file to 
+                             * retain the additional forks like the resource fork.
+							 * 
+							 * However, in our case, we must ignore that folder since it contains metadata
+							 * that cannot be parsed into json and causes the application to crash
+							 * 
+							 * Ideally, if zipping on osx, you should do it without the rather pointless metadata,
+							 * as it just increases the size of the file anyway.
+							 * You should use a third-party service like Keka (http://www.kekaosx.com/en/) tha
+							 * 
+							 */
+							continue;
+						}
 
-                            for (int i = 0; i < styles.ArraySize; i++)
-                            {
-                                string styleFileName = styles.GetArrayElement(i).String;
+						string content = streamReader.ReadToEnd();
+						Variant json = Variant.FromString(content);
+						Variant styles = json.GetObjectElement("styles");
 
-                                foreach (string mssPath in paths)
-                                {
-                                    if (mssPath.Contains(styleFileName))
-                                    {
+						for (int i = 0; i < styles.ArraySize; i++)
+						{
+							string styleFileName = styles.GetArrayElement(i).String;
+
+							foreach (string mssPath in paths)
+							{
+								if (mssPath.Contains(styleFileName))
+								{
 #if __UWP__
                                         using (var stream2 = new FileStream(mssPath, FileMode.Open, FileAccess.Read))
                                         {
                                             using (var mssReader = new StreamReader(stream2))
 #else
-											using (var mssReader = new StreamReader(mssPath))
+									using (var mssReader = new StreamReader(mssPath))
 #endif
-                                            {
-                                                string styleContent = mssReader.ReadToEnd();
-                                                data.DecompressedFiles.Add(styleContent);
-                                            }
+									{
+										string styleContent = mssReader.ReadToEnd();
+										data.DecompressedFiles.Add(styleContent);
+									}
 
-                                            data.StyleFileNames.Add(styleFileName);
-                                            data.StyleFilePaths.Add(mssPath);
+									data.StyleFileNames.Add(styleFileName);
+									data.StyleFilePaths.Add(mssPath);
 #if __UWP__
                                         }
 #endif
-                                    }
-                                }
-                            }
-                        }
+								}
+							}
+						}
+					}
 #if __UWP__
                     }
 #endif
-                }
-            }
+				}
+			}
 
-            return data;
-        }
+			return data;
+		}
 
 		public static string Compress(string source, string newFilename)
 		{

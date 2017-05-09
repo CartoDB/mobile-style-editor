@@ -49,7 +49,12 @@ namespace mobile_style_editor
 
 						Device.BeginInvokeOnMainThread(async delegate
 						{
-							await Navigation.PushAsync(new MainController(path, filename));
+							if (content.Name.Equals("nutiteq-bright-blue.zip"))
+							{
+								Console.WriteLine("Opening MainController: " + path + " & " + filename);
+								await Navigation.PushAsync(new MainController(path, filename));
+							}
+							Console.WriteLine("Name: " + content.Name);
 						});
 					}
 				}
