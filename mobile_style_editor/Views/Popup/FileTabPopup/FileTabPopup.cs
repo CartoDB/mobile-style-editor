@@ -117,12 +117,14 @@ namespace mobile_style_editor
 
 		public void Show()
 		{
+			//base.IsVisible = true;
             this.FadeTo(1.0);
         }
 
-        public void Hide()
+        public async void Hide()
 		{
-            this.FadeTo(0.0);
+            await this.FadeTo(0.0);
+			//base.IsVisible = false;
         }
 
         void OnTap(object sender, EventArgs e)

@@ -59,7 +59,7 @@ namespace mobile_style_editor
 		{
 			base.LayoutSubviews();
 
-			toolbarHeight = Height / 12;
+			toolbarHeight = 60;
 
 			double x = 0;
 			double y = 0;
