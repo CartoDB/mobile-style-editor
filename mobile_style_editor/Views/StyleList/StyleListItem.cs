@@ -36,6 +36,7 @@ namespace mobile_style_editor
 			);
 
 #if __ANDROID__
+			mapView.Enabled = false;
 #elif __IOS__
 			mapView.UserInteractionEnabled = false;
 #endif
@@ -55,6 +56,15 @@ namespace mobile_style_editor
 			double w = Width - 2 * padding;
 			double h = unitHeight * (divider - 1);
 
+#if __IOS__
+#elif __ANDROID__
+			if (mapView.Parent != null)
+			{
+				mapView.RemoveFromParent();
+			}
+#elif __UWP__
+
+#endif
 			AddSubview(mapView.ToView(), x, y, w, h);
 
 			y += h + padding;
