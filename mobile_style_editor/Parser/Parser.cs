@@ -88,6 +88,12 @@ namespace mobile_style_editor
 
 							foreach (string mssPath in paths)
 							{
+								if (mssPath.Contains("__MACOSX"))
+								{
+									/* cf. explanation above */
+									continue;
+								}
+
 								if (mssPath.Contains(styleFileName))
 								{
 #if __UWP__
