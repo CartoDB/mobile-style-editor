@@ -43,53 +43,48 @@ namespace mobile_style_editor
 			double w = Width - 2 * horizontalPadding;
 
 			AddSubview(Content, x, y, w, h);
+
+			double padding = 10;
+
+			x = 50;
+			y = 50;
+			w = 50;
+			h = 50;
+
+			AddSubview(BackButton, x, y, w, h);
+		
+			w = 120;
+			h = w / 3;
+			x = Content.X + Content.Width - w;
+			y = Content.Y + Content.Height + padding;
+
+			AddSubview(Select, x, y, w, h);
 		}
 
 		public void Show(List<DriveFile> files)
 		{
             Show();
 			FileContent.Populate(files.ToObjects());
-
-			RemoveNavigationAndSelection();
+			Select.IsVisible = false;
+			BackButton.IsVisible = false;
 		}
 
 		public void Show(List<StoredStyle> styles)
 		{
             Show();
 			FileContent.Populate(styles.ToObjects());
-
-			RemoveNavigationAndSelection();
 		}
 
 		public List<GithubFile> GithubFiles { get; private set; }
 
 		public void Show(List<GithubFile> files)
 		{
-            Show();
+			Select.IsVisible = true;
+			BackButton.IsVisible = true;
+            
+			Show();
 			GithubFiles = files;
 			FileContent.Populate(files.ToObjects());
-
-			double padding = 10;
-
-			double x = 50;
-			double y = 50;
-			double w = 50;
-			double h = 50;
-
-			if (BackButton.Parent == null)
-			{
-				AddSubview(BackButton, x, y, w, h);
-			}
-
-			w = 120;
-			h = w / 3;
-			x = Content.X + Content.Width - w;
-			y = Content.Y + Content.Height + padding;
-
-			if (Select.Parent == null)
-			{
-				AddSubview(Select, x, y, w, h);
-			}
 
 			if (files.Any(file => file.IsProjectFile))
 			{
@@ -101,18 +96,6 @@ namespace mobile_style_editor
 			}
 		}
 
-		void RemoveNavigationAndSelection()
-		{
-			if (Select.Parent != null)
-			{
-				RemoveChild(Select);
-			}
-
-			if (BackButton.Parent != null)
-			{
-                RemoveChild(BackButton);
-			}
-		}
 	}
 
 	public class BackButton : ClickView

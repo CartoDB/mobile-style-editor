@@ -8,10 +8,8 @@ namespace mobile_style_editor
 	{
 		public EventHandler<EventArgs> ItemClick;
 
-		public void Populate(List<object> items)
+		public override void LayoutSubviews()
 		{
-			Children.Clear();
-
 			double padding = 0;
 
 			int itemsPerRow = 6;
@@ -20,6 +18,34 @@ namespace mobile_style_editor
 			double y = padding;
 			double w = Width / itemsPerRow;
 			double h = w * 1.2;
+
+			foreach (var view in Children)
+			{
+				if (!(view is FileListPopupItem))
+				{
+					continue;
+				}
+
+				var item = (FileListPopupItem)view;
+
+				item.UpdateLayout(x, y, w, h);
+
+				if (Width - (x + w) < 1)
+				{
+					x = padding;
+					y += h + padding;
+				}
+				else
+				{
+					x += w + padding;
+				}
+			}
+
+		}
+
+		public void Populate(List<object> items)
+		{
+			Children.Clear();
 
 			foreach (object item in items)
 			{
@@ -40,18 +66,10 @@ namespace mobile_style_editor
 
 				view.Click += OnItemClick;
 
-				AddSubview(view, x, y, w, h);
-
-				if (Width - (x + w)  < 1)
-				{
-					x = padding;
-					y += h + padding;
-				}
-				else
-				{
-					x += w + padding;
-				}
+				AddSubview(view);
 			}
+
+			LayoutSubviews();
 		}
 
 		void OnItemClick(object sender, EventArgs e)

@@ -65,6 +65,11 @@ namespace mobile_style_editor
 		{
 			var constraint = BoundsConstraint.FromExpression(() => new Rectangle(x, y, w, h), new View[0]);
 			SetBoundsConstraint(this, constraint);
+
+			if (Parent != null && Parent is RelativeLayout)
+			{
+				(Parent as RelativeLayout).ForceLayout();
+			}
 		}
 
 		Constraint GetConstraint(double number, string property = "")
@@ -88,7 +93,7 @@ namespace mobile_style_editor
 		{
 			if (ClearChildrenOnLayout)
 			{
-				Children.Clear();
+				//Children.Clear();
 			}
 		}
 
