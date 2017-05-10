@@ -18,6 +18,8 @@ namespace mobile_style_editor
 
 			BackButton = new BackButton();
 			Select = new SelectButton();
+
+			Hide(false);
 		}
 
 		public override void LayoutSubviews()

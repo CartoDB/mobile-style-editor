@@ -32,14 +32,28 @@ namespace mobile_style_editor
 			Hide();
 		}
 
-		public void Show()
+		public void Show(bool animated = true)
 		{
-			IsVisible = true;
+			if (!animated)
+			{
+				this.FadeTo(1, 0);
+			}
+			else
+			{
+				this.FadeTo(1);
+			}
 		}
 
-		public void Hide()
+		public void Hide(bool animated = true)
 		{
-			IsVisible = false;
+			if (!animated)
+			{
+				this.FadeTo(0, 0);
+			}
+			else
+			{
+				this.FadeTo(0);
+			}
 		}
 	}
 }

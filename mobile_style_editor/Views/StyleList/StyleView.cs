@@ -12,6 +12,8 @@ namespace mobile_style_editor
 
 		public AddStyleItem AddStyle { get; private set; }
 
+		public FileListPopup Popup { get; private set; }
+
 		public StyleView()
 		{
 			BackgroundColor = Colors.CartoRed;
@@ -24,6 +26,8 @@ namespace mobile_style_editor
 
 			AddStyle = new AddStyleItem();
 			MyStyles.Footer = AddStyle;
+
+			Popup = new FileListPopup();
 		}
 
 		public override void LayoutSubviews()
@@ -40,6 +44,8 @@ namespace mobile_style_editor
 			x += w;
 
 			AddSubview(Templates, x, y, w, h);
+
+			AddSubview(Popup, 0, 0, Width, Height);
 		}
 
 	}
