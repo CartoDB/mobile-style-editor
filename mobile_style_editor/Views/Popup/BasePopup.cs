@@ -36,6 +36,8 @@ namespace mobile_style_editor
 
 		public void Show(bool animated = true)
 		{
+			IsVisible = true;
+
 			if (!animated)
 			{
 				Opacity = 1;
@@ -46,7 +48,7 @@ namespace mobile_style_editor
 			}
 		}
 
-		public void Hide(bool animated = true)
+		public async void Hide(bool animated = true)
 		{
 			if (!animated)
 			{
@@ -54,8 +56,10 @@ namespace mobile_style_editor
 			}
 			else
 			{
-				this.FadeTo(0);
+				await this.FadeTo(0);
 			}
+
+			IsVisible = false;
 		}
 	}
 }
