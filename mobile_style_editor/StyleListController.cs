@@ -26,13 +26,18 @@ namespace mobile_style_editor
 			ContentView = new StyleView();
 			Content = ContentView;
 		}
-		
+
+		bool filesDownloaded;
 		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
 
-			List<DownloadResult> results = await GetContents();
-			ContentView.Templates.ShowSampleStyles(results);
+			if (!filesDownloaded)
+			{
+				List<DownloadResult> results = await GetContents();
+				ContentView.Templates.ShowSampleStyles(results);
+				filesDownloaded = true;
+			}
 
 			ContentView.AddStyle.Drive.Click += OnDriveButtonClick;
 			ContentView.AddStyle.Github.Click += OnGithubButtonClick;

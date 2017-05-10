@@ -24,8 +24,8 @@ namespace mobile_style_editor
 #elif __UWP__
             MapView.RegisterLicense(CartoLicense);
 #endif
-			//MainPage = new NavigationPage(new StyleListController()) {
-            MainPage = new NavigationPage(new PickerController()) {
+			MainPage = new NavigationPage(new StyleListController()) {
+            //MainPage = new NavigationPage(new PickerController()) {
 				BarBackgroundColor = Colors.CartoNavyLight, 
 				BarTextColor = Color.White
 			};
