@@ -29,6 +29,10 @@ namespace mobile_style_editor
 				BarBackgroundColor = Colors.CartoNavyLight, 
 				BarTextColor = Color.White
 			};
+
+			MainPage = new NavigationPage(new MainController(
+				"/data/user/0/com.carto.style.editor/files/.config", 
+				"nutiteq-bright-blue.zip"));
 		}
 
 		protected override void OnStart()

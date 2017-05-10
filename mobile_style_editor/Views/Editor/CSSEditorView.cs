@@ -44,6 +44,9 @@ namespace mobile_style_editor
 			double w = Width;
 			double h = Height;
 
+#if __ANDROID__
+			Field.RemoveFromParent();
+#endif
 			AddSubview(Field.ToView(), x, y, w, h);
 
 			double padding = 10;

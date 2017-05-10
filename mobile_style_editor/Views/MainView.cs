@@ -169,19 +169,22 @@ namespace mobile_style_editor
 		MapView mapView;
 
 		public float Zoom { get { return mapView.Zoom; } set { mapView.Zoom = value; } }
-		
+
 		public MapContainer()
 		{
 
 			mapView = new MapView(
 #if __ANDROID__
-			Forms.Context		
+			Forms.Context
 #endif
-			);			
+			);
 		}
 
 		public override void LayoutSubviews()
 		{
+#if __ANDROID__
+			mapView.RemoveFromParent();
+#endif
 			AddSubview(mapView.ToView(), 0, 0, Width, Height);
 		}
 
