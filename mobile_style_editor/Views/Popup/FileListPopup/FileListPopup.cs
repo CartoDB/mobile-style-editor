@@ -29,41 +29,44 @@ namespace mobile_style_editor
 			if (Width > Height)
 			{
 				horizontalPadding = Width / 6;
-				verticalPadding = Height / 15;
 			}
 			else
 			{
 				horizontalPadding = Width / 15;
-				verticalPadding = Height / 6;
 			}
+
+			verticalPadding = 70;
 
 			double x = horizontalPadding;
 			double y = verticalPadding;
-			double h = Height - 2 * verticalPadding;
-			double w = Width - 2 * horizontalPadding;
+
+			double contentHeight = Height - 2 * verticalPadding;
+			double contentWidth = Width - 2 * horizontalPadding; ;
+
+			double w = contentWidth;
+			double h = contentHeight;
 
 			AddSubview(Content, x, y, w, h);
 
 			double padding = 10;
 
-			x = 50;
-			y = 50;
-			w = 50;
-			h = 50;
+			w = verticalPadding;
+			h = verticalPadding - 3 * padding;
+			x = horizontalPadding;
+			y = verticalPadding - h;
 
 			AddSubview(BackButton, x, y, w, h);
-		
-			w = 120;
-			h = w / 3;
-			x = Content.X + Content.Width - w;
-			y = Content.Y + Content.Height + padding;
+
+			w = 3 * h;
+			x = horizontalPadding + contentWidth - w;
+			y = verticalPadding - h;
 
 			AddSubview(Select, x, y, w, h);
 		}
 
 		public void Show(List<DriveFile> files)
 		{
-            Show();
+			Show();
 			FileContent.Populate(files.ToObjects());
 			Select.IsVisible = false;
 			BackButton.IsVisible = false;
@@ -71,7 +74,7 @@ namespace mobile_style_editor
 
 		public void Show(List<StoredStyle> styles)
 		{
-            Show();
+			Show();
 			FileContent.Populate(styles.ToObjects());
 		}
 
@@ -81,7 +84,7 @@ namespace mobile_style_editor
 		{
 			Select.IsVisible = true;
 			BackButton.IsVisible = true;
-            
+
 			Show();
 			GithubFiles = files;
 			FileContent.Populate(files.ToObjects());
@@ -100,14 +103,31 @@ namespace mobile_style_editor
 
 	public class BackButton : ClickView
 	{
+		Image image;
+
 		public BackButton()
 		{
 			BackgroundColor = Colors.CartoNavy;
+
+			image = new Image();
+
+			string folder = "";
+#if __UWP__
+			folder = "Assets/";
+#endif
+			image.Source = ImageSource.FromFile(folder + "icon_arrow_back.png");
 		}
 
 		public override void LayoutSubviews()
 		{
-			base.LayoutSubviews();
+			double padding = Height / 5;
+
+			double w = Height - 2 * padding;
+			double h = w;
+			double x = Width / 2 - w / 2;
+			double y = padding;
+
+			AddSubview(image, x, y, w, h);
 		}
 	}
 
