@@ -8,7 +8,7 @@ namespace mobile_style_editor
 	{
 		public ZipData Data { get; private set; }
 
-		public new bool IsVisible { get { return Opacity == 1 && base.IsVisible; } }
+		public new bool IsVisible { get { return Opacity == 1; } }
 
 		public int ActiveIndex
 		{
