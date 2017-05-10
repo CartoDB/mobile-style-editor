@@ -31,7 +31,8 @@ namespace mobile_style_editor
 			HorizontalTextAlignment = TextAlignment.Center;
 
 			TapGestureRecognizer recognizer = new TapGestureRecognizer();
-			recognizer.Tapped += delegate {
+			recognizer.Tapped += delegate
+			{
 				if (Tapped != null)
 				{
 					Tapped(this, EventArgs.Empty);
@@ -50,5 +51,17 @@ namespace mobile_style_editor
 		{
 			TextColor = normalizedColor;
 		}
+
+		public void UpdateLayout(double x, double y, double w, double h)
+		{
+			var constraint = BoundsConstraint.FromExpression(() => new Rectangle(x, y, w, h), new View[0]);
+			RelativeLayout.SetBoundsConstraint(this, constraint);
+
+			if (Parent != null && Parent is RelativeLayout)
+			{
+				(Parent as RelativeLayout).ForceLayout();
+			}
+		}
+
 	}
 }

@@ -85,12 +85,29 @@ namespace mobile_style_editor
 			x += w;
 			w = Width - w;
 			AddSubview(Editor, x, y, w, h);
-
+			
 			if (Data != null)
 			{
+				double rowCount = Math.Ceiling((double)Data.DecompressedFiles.Count / 3);
+				double rowHeight = Toolbar.Height;
+
+				h = rowCount * rowHeight;
+				w = Width / 3;
+				x = 0;
+				y = rowHeight;
+		
+				FileTabs.RowCount = rowCount;
+				
+				RemoveChild(FileTabs);
+				AddSubview(FileTabs, x, y, w, h);
+				
 				Editor.Initialize(Data);
 				Toolbar.Initialize(Data);
+				FileTabs.Initialize(Data);
 			}
+
+			RemoveChild(Popup);
+			AddSubview(Popup, 0, 0, Width, Height);
 
 #if __UWP__
             double zoomPadding = 15;
@@ -108,17 +125,7 @@ namespace mobile_style_editor
 		public void Initialize(ZipData data)
 		{
 			Data = data;
-			Editor.Initialize(Data);
-			Toolbar.Initialize(Data);
-			FileTabs.Initialize(this, data);
-
-			// Set toolbar on top of file tab popup
-			Children.Remove(Toolbar);
-			AddSubview(Toolbar, 0, 0, Toolbar.Width, Toolbar.Height);
-
-			// Add popup view so it would cover other views
-			AddSubview(Popup, 0, 0, Width, Height);
-			Popup.Hide();
+			LayoutSubviews();
 		}
 
 		public void ToggleTabs()

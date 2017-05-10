@@ -6,16 +6,9 @@ namespace mobile_style_editor
 {
 	public class FileTabPopup : BaseView
 	{
-		public new bool IsVisible {
-            get
-            {
-#if __UWP__
-                return Opacity == 1;
-#else
-                return TranslationY > (visibleY - 0.1);
-#endif
-            }
-        }
+		public ZipData Data { get; private set; }
+
+		public new bool IsVisible { get { return Opacity == 1 && base.IsVisible; } }
 
 		public int ActiveIndex
 		{
@@ -42,30 +35,44 @@ namespace mobile_style_editor
 			BackgroundColor = Colors.CartoNavy;
 		}
 
-		double visibleY;
+		public double RowCount { get; set; }
 
-		public void Initialize(MainView parent, ZipData data)
+		public override void LayoutSubviews()
 		{
-			double rowCount = Math.Ceiling((double)data.DecompressedFiles.Count / 3);
-			double rowHeight = parent.Toolbar.Height;
+			if (items == null || items.Count == 0)
+			{
+				return;
+			}
 
-			double h = rowCount * rowHeight;
-
-			double w = parent.Width / 3;
 			double x = 0;
 			double y = 0;
+			double w = Width / 3;
+			double h = Height / RowCount;
 
-			visibleY = rowHeight;
+			foreach (var item in items)
+			{
+				item.UpdateLayout(x, y, w, h);
 
-			parent.AddSubview(this, x, y, w, h);
+				int nextX = (int)Math.Ceiling(x + w);
 
-            /* Initially hide the popup without animation */
-#if __UWP__
-            this.FadeTo(0.0, 0);
-            this.TranslateTo(0, visibleY, 0);
-#else
-            this.TranslateTo(0, -Height, 0);
-#endif
+				if (nextX <= (int)Width + 2 && nextX >= (int)Width - 2)
+				{
+					x = 0;
+					y += h;
+				}
+				else
+				{
+					x += w;
+				}
+			}
+		}
+
+		public void Initialize(ZipData data)
+		{
+			Data = data;
+
+			Opacity = 0;
+
             AddTabs(data);
 
 			Highlight(0);
@@ -78,34 +85,20 @@ namespace mobile_style_editor
 			Children.Clear();
 			items.Clear();
 
-			double x = 0;
-			double y = 0;
-			double w = Width / 3;
-			double h = Height;
-
 			List<string> names = data.StyleFileNames;
 			int index = 0;
-
 			foreach (string name in names)
 			{
 				FileTab tab = new FileTab(name, index);
-				AddSubview(tab, x, y, w, h);
+				AddSubview(tab);
 				items.Add(tab);
 
 				tab.Tapped += OnTap;
 
-				if ((int)Math.Ceiling(x + w) == (int)Width)
-				{
-					x = 0;
-					y += h;
-				}
-				else
-				{
-					x += w;
-				}
-
 				index++;
 			}
+
+			LayoutSubviews();
 		}
 
 		public bool Toggle()
@@ -124,21 +117,12 @@ namespace mobile_style_editor
 
 		public void Show()
 		{
-#if __UWP__
             this.FadeTo(1.0);
-#else
-            this.TranslateTo(0, visibleY);
-#endif
-
         }
 
         public void Hide()
 		{
-#if __UWP__
             this.FadeTo(0.0);
-#else
-            this.TranslateTo(0, -Height);
-#endif
         }
 
         void OnTap(object sender, EventArgs e)
