@@ -48,6 +48,7 @@ namespace mobile_style_editor
 		public static List<string> SaveToAppFolder(Stream input, string filename)
 		{
 			string folder = Parser.ApplicationFolder;
+
 			string path = Path.Combine(folder, filename);
 
 			using (Stream output = File.Create(path))

@@ -189,9 +189,11 @@ namespace mobile_style_editor
 			});
 		}
 
+		const string MyStyleFolder = "my-styles";
+
 		void OnFileDownloadComplete(object sender, DownloadEventArgs e)
 		{
-			List<string> result = FileUtils.SaveToAppFolder(e.Stream, e.Name);
+			List<string> result = FileUtils.SaveToAppFolder(e.Stream, MyStyleFolder, e.Name);
 
 			Device.BeginInvokeOnMainThread(async delegate
 			{
@@ -267,11 +269,12 @@ namespace mobile_style_editor
 			{
 				if (item.GithubFile == null)
 				{
-			// Do not Hide the popup when dealing with github,
-			// as a new page should load almost immediately
-			// and we need to show content there as well
-			ContentView.Popup.Hide();
+					// Do not Hide the popup when dealing with github,
+					// as a new page should load almost immediately
+					// and we need to show content there as well
+					ContentView.Popup.Hide();
 				}
+
 				ContentView.ShowLoading();
 			});
 

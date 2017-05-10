@@ -26,7 +26,7 @@ namespace mobile_style_editor
 #endif
 			MainPage = new NavigationPage(new StyleListController()) {
             //MainPage = new NavigationPage(new PickerController()) {
-				BarBackgroundColor = Colors.CartoNavyLight, 
+				BarBackgroundColor = Colors.CartoNavy, 
 				BarTextColor = Color.White
 			};
 

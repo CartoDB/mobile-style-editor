@@ -23,7 +23,7 @@ namespace mobile_style_editor.Droid
 
 			if (((int)Build.VERSION.SdkInt) > 21)
 			{
-				Window.SetStatusBarColor(Colors.CartoRedDark.ToNativeColor());
+				Window.SetStatusBarColor(Colors.CartoNavyLight.ToNativeColor());
 			}
 		}
 

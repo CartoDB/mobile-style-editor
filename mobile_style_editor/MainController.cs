@@ -29,9 +29,6 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
-#if __ANDROID__
-			(Forms.Context as Droid.MainActivity).SetIsLandscape(true);
-#endif
 			ContentView.ShowLoading();
 
 			Task.Run(delegate

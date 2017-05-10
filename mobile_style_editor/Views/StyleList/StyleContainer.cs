@@ -10,6 +10,8 @@ namespace mobile_style_editor
 
 		public BaseView Header { get; set; }
 
+		BaseView separator;
+
 		BaseScrollView styleList;
 
 		public BaseView Footer { get; set; }
@@ -17,6 +19,8 @@ namespace mobile_style_editor
 		public StyleContainer()
 		{
 			styleList = new BaseScrollView();
+
+			separator = new BaseView { BackgroundColor = Color.FromRgb(220, 220, 220) };
 		}
 
 		double padding = 5;
@@ -40,7 +44,7 @@ namespace mobile_style_editor
 				// Separator
 				y += h + 3;
 				h = 1;
-				AddSubview(new BaseView { BackgroundColor = Color.FromRgb(220, 220, 220) }, 2 * padding, y + h, w - 2 * padding, h);
+                AddSubview(separator, 2 * padding, y + h, w - 2 * padding, h);
 				y += headerPadding;
 
 			}

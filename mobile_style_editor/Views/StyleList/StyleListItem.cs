@@ -20,6 +20,8 @@ namespace mobile_style_editor
 		MapView mapView;
 		Label label;
 
+		public MapView MapView { get { return mapView; } }
+
 		public StyleListItem()
 		{
 			BackgroundColor = Colors.CartoRedDark;
@@ -37,6 +39,7 @@ namespace mobile_style_editor
 
 #if __ANDROID__
 			mapView.Enabled = false;
+			mapView.FocusableInTouchMode = false;
 #elif __IOS__
 			mapView.UserInteractionEnabled = false;
 #endif
