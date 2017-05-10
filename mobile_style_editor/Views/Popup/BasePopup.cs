@@ -25,6 +25,8 @@ namespace mobile_style_editor
 			GestureRecognizers.Add(recognizer);
 
 			Click += OnBackgroundClick;
+
+			Hide(false);
 		}
 
 		void OnBackgroundClick(object sender, EventArgs e)
@@ -36,7 +38,7 @@ namespace mobile_style_editor
 		{
 			if (!animated)
 			{
-				this.FadeTo(1, 0);
+				Opacity = 1;
 			}
 			else
 			{
@@ -48,7 +50,7 @@ namespace mobile_style_editor
 		{
 			if (!animated)
 			{
-				this.FadeTo(0, 0);
+				Opacity = 0;
 			}
 			else
 			{

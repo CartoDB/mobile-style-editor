@@ -26,9 +26,9 @@ namespace mobile_style_editor
 			ContentView = new StyleView();
 			Content = ContentView;
 
-			#if __IOS__
-						DriveClientiOS.Instance.Authenticate();
-			#endif
+#if __IOS__
+			DriveClientiOS.Instance.Authenticate();
+#endif
 		}
 
 		bool filesDownloaded;
@@ -389,22 +389,5 @@ namespace mobile_style_editor
 			return results;
 		}
 
-	}
-
-	public class DownloadResult
-	{
-		public string Path { get; set; }
-
-		public string Filename { get; set; }
-
-		public string CleanName { get { return Filename.Replace(Parser.ZipExtension, ""); } }
-
-		public byte[] Data
-		{
-			get
-			{
-				return FileUtils.PathToByteData(System.IO.Path.Combine(Path, Filename));
-			}
-		}
 	}
 }

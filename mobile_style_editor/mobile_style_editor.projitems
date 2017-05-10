@@ -64,6 +64,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\MapExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\AddStyleItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\DownloadResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />
