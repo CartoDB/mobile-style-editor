@@ -34,8 +34,10 @@ namespace mobile_style_editor
 			List<DownloadResult> results = await GetContents();
 			ContentView.Templates.ShowSampleStyles(results);
 
-			ContentView.MyStyles.ItemClick += OnStyleClick;
+			ContentView.AddStyle.Drive.Click += OnDriveButtonClick;
+			ContentView.AddStyle.Github.Click += OnGithubButtonClick;
 
+			ContentView.MyStyles.ItemClick += OnStyleClick;
 			ContentView.Templates.ItemClick += OnStyleClick;
 		}
 
@@ -43,9 +45,21 @@ namespace mobile_style_editor
 		{
 			base.OnDisappearing();
 
-			ContentView.MyStyles.ItemClick -= OnStyleClick;
+			ContentView.AddStyle.Drive.Click -= OnDriveButtonClick;
+			ContentView.AddStyle.Github.Click -= OnGithubButtonClick;
 
+			ContentView.MyStyles.ItemClick -= OnStyleClick;
 			ContentView.Templates.ItemClick -= OnStyleClick;
+		}
+
+		void OnDriveButtonClick(object sender, EventArgs e)
+		{
+			Console.WriteLine("drive");
+		}
+
+		void OnGithubButtonClick(object sender, EventArgs e)
+		{
+			Console.WriteLine("github");
 		}
 
 		void OnStyleClick(object sender, EventArgs e)
