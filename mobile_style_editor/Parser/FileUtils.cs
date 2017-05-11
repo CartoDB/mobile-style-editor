@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace mobile_style_editor
 {
@@ -8,7 +9,7 @@ namespace mobile_style_editor
 	{
 		public static bool HasLocalCopy(string name)
 		{
-			return File.Exists( Path.Combine(Parser.ApplicationFolder, name));
+			return File.Exists(Path.Combine(Parser.ApplicationFolder, name));
 		}
 
 		public static string GetLocalPath()
@@ -81,6 +82,15 @@ namespace mobile_style_editor
 				Directory.CreateDirectory(folderWithoutFile);
 			}
 
+			if (!path.Contains(filename))
+			{
+				/*
+				 * Different use-cases. Sometimes folderPath will be full path,
+				 * in another method, just the folder name is given as parameters
+				 */
+				path = Path.Combine(path, filename);
+			}
+
 			using (Stream output = File.Create(path))
 			{
 				input.Seek(0, SeekOrigin.Begin);
@@ -90,5 +100,26 @@ namespace mobile_style_editor
 			return new List<string> { filename, folderWithoutFile, path };
 		}
 
+		public static List<string> GetStylesFromFolder(string folder)
+		{
+			string[] files = Directory.GetFiles(Path.Combine(GetLocalPath(), folder));
+
+			return files.Where(file => file.Contains(Parser.ZipExtension)).ToList();
+		}
+
+		public static List<DownloadResult> GetDataFromPaths(List<string> paths)
+		{
+			List<DownloadResult> results = new List<DownloadResult>();
+
+			foreach (string path in paths)
+			{
+				string[] split = path.Split('/');
+				string filename = split[split.Length - 1];
+				string filepath = path.Replace("/" + filename, "");
+
+				results.Add(new DownloadResult { Filename = filename, Path = filepath });
+			}
+			return results;
+		}
 	}
 }

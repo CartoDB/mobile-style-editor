@@ -126,12 +126,23 @@ namespace mobile_style_editor
 			return data;
 		}
 
-		public static string Compress(string source, string newFilename)
+		public static string Compress(string source, string newFilename, string destinationFolder = null)
 		{
 			FastZip instance = new FastZip();
 			instance.CreateEmptyDirectories = true;
 
-			string destination = Path.Combine(ApplicationFolder, newFilename);
+			string folder = ApplicationFolder;
+
+			if (destinationFolder != null)
+			{
+				folder = Path.Combine(folder, destinationFolder);
+				if (!Directory.Exists(folder))
+				{
+					Directory.CreateDirectory(folder);
+				}
+			}
+
+			string destination = Path.Combine(folder, newFilename);
 
 #if __UWP__
             // Need to Set Virtual File System on UWP

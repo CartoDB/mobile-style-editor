@@ -59,7 +59,7 @@ namespace mobile_style_editor
 
 		public void ShowSampleStyles(List<DownloadResult> results)
 		{
-			//styleList.Children.Clear();	
+			styleList.Children.Clear();	
 
 			foreach (DownloadResult result in results)
 			{

@@ -44,6 +44,8 @@ namespace mobile_style_editor
 				filesDownloaded = true;
 			}
 
+			ShowMyStyles();
+
 			ContentView.AddStyle.Drive.Click += OnDriveButtonClick;
 			ContentView.AddStyle.Github.Click += OnGithubButtonClick;
 
@@ -167,18 +169,21 @@ namespace mobile_style_editor
 
 			Toast.Show("Comperssing...", ContentView);
 
-			string destination = Parser.Compress(source, zipname);
+			string destination = Parser.Compress(source, zipname, MyStyleFolder);
 			// Destination contains filename, just remove it
 			destination = destination.Replace(zipname, "");
 
 			Toast.Show("Done!", ContentView);
 
-			Device.BeginInvokeOnMainThread(async delegate
-			{
-				ContentView.HideLoading();
-				await Navigation.PushAsync(new MainController(destination, zipname));
-			});
+			ShowMyStyles();
+		}
 
+		void ShowMyStyles()
+		{
+			List<string> paths = FileUtils.GetStylesFromFolder(MyStyleFolder);
+
+			List<DownloadResult> data = FileUtils.GetDataFromPaths(paths);
+			ContentView.MyStyles.ShowSampleStyles(data);
 		}
 
 		public void OnGithubFileDownloadComplete(object sender, EventArgs e)
@@ -200,13 +205,11 @@ namespace mobile_style_editor
 
 		void OnFileDownloadComplete(object sender, DownloadEventArgs e)
 		{
-			List<string> result = FileUtils.SaveToAppFolder(e.Stream, MyStyleFolder, e.Name);
-
-			Device.BeginInvokeOnMainThread(async delegate
+			Device.BeginInvokeOnMainThread(delegate
 			{
 				ContentView.HideLoading();
-				await Navigation.PushAsync(new MainController(result[1], result[0]));
 			});
+            ShowMyStyles();
 		}
 
 		const string GithubOwner = "CartoDB";
@@ -266,6 +269,7 @@ namespace mobile_style_editor
 				ContentView.HideLoading();
 			});
 		}
+
 		async void OnItemClicked(object sender, EventArgs e)
 		{
 			FileListPopupItem item = (FileListPopupItem)sender;
