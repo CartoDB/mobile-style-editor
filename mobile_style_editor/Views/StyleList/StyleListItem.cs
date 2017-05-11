@@ -17,10 +17,11 @@ namespace mobile_style_editor
 	{
 		public DownloadResult Data { get; private set; }
 
-		MapView mapView;
-		Label label;
+		ClickView overlay;
 
-		public MapView MapView { get { return mapView; } }
+		public MapView MapView { get; private set; }
+
+		Label label;
 
 		public StyleListItem()
 		{
@@ -31,17 +32,19 @@ namespace mobile_style_editor
 			label.TextColor = Color.White;
 			label.FontSize = 11;
 
-			mapView = new MapView(
+			MapView = new MapView(
 #if __ANDROID__
 				Forms.Context
 #endif
 			);
 
 #if __ANDROID__
-			mapView.Enabled = false;
-			mapView.FocusableInTouchMode = false;
+			overlay = new ClickView();
+			overlay.Click += delegate {
+				Click(this, EventArgs.Empty);
+			};
 #elif __IOS__
-			mapView.UserInteractionEnabled = false;
+			MapView.UserInteractionEnabled = false;
 #endif
 		}
 
@@ -60,13 +63,16 @@ namespace mobile_style_editor
 			double h = unitHeight * (divider - 1);
 
 #if __IOS__
-            AddSubview(mapView.ToView(), x, y, w, h);
+            AddSubview(MapView.ToView(), x, y, w, h);
 #elif __ANDROID__
-			if (mapView.Parent != null)
+			if (MapView.Parent != null)
 			{
-				mapView.RemoveFromParent();
+				MapView.RemoveFromParent();
 			}
-            AddSubview(mapView.ToView(), x, y, w, h);
+            AddSubview(MapView.ToView(), x, y, w, h);
+
+			RemoveChild(overlay);
+            AddSubview(overlay, x, y, w, h);
 #elif __UWP__
 
             // TODO Crashes application
@@ -77,8 +83,8 @@ namespace mobile_style_editor
             {
                 //mapView.ToView().UpdateLayout(x, y, w, h);
             }
+            AddSubview(overlay, x, y, w, h);
 #endif
-			
 
 			y += h + padding;
 			h = unitHeight;
@@ -90,7 +96,7 @@ namespace mobile_style_editor
 		{
 			Data = result;
 
-			mapView.Update(result.Data, null);
+			MapView.Update(result.Data, null);
 			label.Text = result.CleanName.ToUpper();
 		}
 	}

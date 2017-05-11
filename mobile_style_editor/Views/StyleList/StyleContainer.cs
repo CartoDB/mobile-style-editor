@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -15,6 +16,13 @@ namespace mobile_style_editor
 		BaseScrollView styleList;
 
 		public BaseView Footer { get; set; }
+
+		public List<StyleListItem> Items
+		{
+			get {
+				return styleList.Children.Where(child => child is StyleListItem).Cast<StyleListItem>().ToList();
+			}
+		}
 
 		public StyleContainer()
 		{

@@ -48,5 +48,34 @@ namespace mobile_style_editor
 			AddSubview(Popup, 0, 0, Width, Height);
 		}
 
+		public void HideMapViews()
+		{
+#if __ANDROID__
+			foreach (StyleListItem view in MyStyles.Items)
+			{
+				view.MapView.Visibility = Android.Views.ViewStates.Gone;
+			}
+
+			foreach (StyleListItem view in Templates.Items)
+			{
+				view.MapView.Visibility = Android.Views.ViewStates.Gone;
+			}
+#endif
+		}
+
+		public void ShowMapViews()
+		{
+#if __ANDROID__
+			foreach (StyleListItem view in MyStyles.Items)
+			{
+				view.MapView.Visibility = Android.Views.ViewStates.Visible;
+			}
+
+			foreach (StyleListItem view in Templates.Items)
+			{
+				view.MapView.Visibility = Android.Views.ViewStates.Visible;
+			}
+#endif
+		}
 	}
 }

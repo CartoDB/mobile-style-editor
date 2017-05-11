@@ -65,6 +65,10 @@ namespace mobile_style_editor
 			DriveClientiOS.Instance.DownloadComplete += OnFileDownloadComplete;
 			DriveClientiOS.Instance.ListDownloadComplete += OnListDownloadComplete;
 #endif
+
+#if __ANDROID__
+			ContentView.ShowMapViews();
+#endif
 		}
 
 		protected override void OnDisappearing()
@@ -214,8 +218,8 @@ namespace mobile_style_editor
 			{
 				ContentView.HideLoading();
 			});
-            ShowMyStyles();
-            
+			ShowMyStyles();
+
 		}
 
 		const string GithubOwner = "CartoDB";
@@ -375,6 +379,9 @@ namespace mobile_style_editor
 			Device.BeginInvokeOnMainThread(async delegate
 			{
 				await Navigation.PushAsync(new MainController(item.Data.Path, item.Data.Filename));
+#if __ANDROID__
+				ContentView.HideMapViews();
+#endif
 			});
 		}
 
