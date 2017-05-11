@@ -46,8 +46,13 @@ namespace mobile_style_editor
 
 #if __ANDROID__
 			Field.RemoveFromParent();
+#elif __UWP__
+            if (Field.Parent != null)
+            {
+                (Field.Parent as NativeViewWrapperRenderer).Children.Remove(Field);
+            }
 #endif
-			AddSubview(Field.ToView(), x, y, w, h);
+            AddSubview(Field.ToView(), x, y, w, h);
 
 			double padding = 10;
 

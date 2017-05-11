@@ -60,15 +60,25 @@ namespace mobile_style_editor
 			double h = unitHeight * (divider - 1);
 
 #if __IOS__
+            AddSubview(mapView.ToView(), x, y, w, h);
 #elif __ANDROID__
 			if (mapView.Parent != null)
 			{
 				mapView.RemoveFromParent();
 			}
+            AddSubview(mapView.ToView(), x, y, w, h);
 #elif __UWP__
 
+            // TODO Crashes application
+            if (mapView.Parent == null)
+            {
+                //AddSubview(mapView.ToView(), x, y, w, h);
+            } else
+            {
+                //mapView.ToView().UpdateLayout(x, y, w, h);
+            }
 #endif
-			AddSubview(mapView.ToView(), x, y, w, h);
+			
 
 			y += h + padding;
 			h = unitHeight;

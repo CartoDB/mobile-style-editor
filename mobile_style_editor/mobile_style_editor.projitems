@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\ZipData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\UWPHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ViewExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Editor\CSSEditorView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Editor\EditorField.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\FileTab.cs" />

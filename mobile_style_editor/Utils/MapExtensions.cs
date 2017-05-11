@@ -35,7 +35,10 @@ namespace mobile_style_editor
 				Device.BeginInvokeOnMainThread(delegate
 				{
 					MapView.Layers.Add(layer);
-                    completed();
+                    if (completed != null)
+                    {
+                        completed();
+                    }
 				});
 #else
 				if (MapView.Layers.Count == 0)

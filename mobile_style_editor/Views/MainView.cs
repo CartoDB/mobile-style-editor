@@ -184,8 +184,13 @@ namespace mobile_style_editor
 		{
 #if __ANDROID__
 			mapView.RemoveFromParent();
+#elif __UWP__
+            if (mapView.Parent != null)
+            {
+                (mapView.Parent as NativeViewWrapperRenderer).Children.Remove(mapView);
+            }
 #endif
-			AddSubview(mapView.ToView(), 0, 0, Width, Height);
+            AddSubview(mapView.ToView(), 0, 0, Width, Height);
 		}
 
 		public void Update(byte[] data, Action completed)

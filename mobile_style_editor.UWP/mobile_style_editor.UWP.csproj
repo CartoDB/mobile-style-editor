@@ -105,7 +105,7 @@
     <Content Include="Assets\icon_github.png" />
     <Content Include="Assets\icon_text.png" />
     <Content Include="Assets\icon_folder.png" />
-    <None Include="Assets\icon_arrow_back.png" />
+    <Content Include="Assets\icon_arrow_back.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
