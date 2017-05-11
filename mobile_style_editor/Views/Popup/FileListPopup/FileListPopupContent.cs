@@ -12,7 +12,7 @@ namespace mobile_style_editor
 		{
 			double padding = 0;
 
-			int itemsPerRow = 6;
+			int itemsPerRow = 7;
 
 			double x = padding;
 			double y = padding;
