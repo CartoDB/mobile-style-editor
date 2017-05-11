@@ -51,7 +51,7 @@ namespace mobile_style_editor
 
 			y += h + headerPadding;
 
-			// For some reason listview is too short, adding a random constant: 15
+			// For some reason listview is too short, substracting a random constant: 15
 			h = Height - (headerHeight + headerPadding + 15);
 
 			AddSubview(styleList, x, y, w, h);
