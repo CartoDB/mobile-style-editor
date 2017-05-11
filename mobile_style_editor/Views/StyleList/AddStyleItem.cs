@@ -26,7 +26,7 @@ namespace mobile_style_editor
 			titleLabel.FontAttributes = FontAttributes.Bold;
 
 			titleLabel.VerticalTextAlignment = TextAlignment.Center;
-			titleLabel.Text = "ADD YOUR OWN STYLE";
+			titleLabel.Text = "ADD STYLE";
 
 			separator = new BaseView();
 			separator.BackgroundColor = Colors.CartoNavy;

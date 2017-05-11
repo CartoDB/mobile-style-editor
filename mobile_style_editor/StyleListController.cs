@@ -183,7 +183,11 @@ namespace mobile_style_editor
 			List<string> paths = FileUtils.GetStylesFromFolder(MyStyleFolder);
 
 			List<DownloadResult> data = FileUtils.GetDataFromPaths(paths);
-			ContentView.MyStyles.ShowSampleStyles(data);
+
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.MyStyles.ShowSampleStyles(data);
+			});
 		}
 
 		public void OnGithubFileDownloadComplete(object sender, EventArgs e)
@@ -205,6 +209,8 @@ namespace mobile_style_editor
 
 		void OnFileDownloadComplete(object sender, DownloadEventArgs e)
 		{
+			FileUtils.SaveToAppFolder(e.Stream, MyStyleFolder, e.Name);
+
 			Device.BeginInvokeOnMainThread(delegate
 			{
 				ContentView.HideLoading();
