@@ -60,8 +60,7 @@ namespace mobile_style_editor
 		{
 			Show();
 			FileContent.Populate(files.ToObjects());
-			Header.Select.IsVisible = false;
-			Header.BackButton.IsVisible = false;
+			Header.IsVisible = false;
 		}
 
 		public void Show(List<StoredStyle> styles)
@@ -74,8 +73,7 @@ namespace mobile_style_editor
 
 		public void Show(List<GithubFile> files)
 		{
-			Header.Select.IsVisible = true;
-			Header.BackButton.IsVisible = true;
+			Header.IsVisible = true;
 
 			Show();
 			GithubFiles = files;
