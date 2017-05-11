@@ -9,15 +9,13 @@ namespace mobile_style_editor
 	{
 		public FileListPopupContent FileContent { get { return Content as FileListPopupContent; } }
 
-		public BackButton BackButton { get; private set; }
-		public SelectButton Select { get; private set; }
+		public FileListHeader Header { get; private set; }
 
 		public FileListPopup()
 		{
 			Content = new FileListPopupContent();
 
-			BackButton = new BackButton();
-			Select = new SelectButton();
+			Header = new FileListHeader();
 
 			Hide(false);
 		}
@@ -50,26 +48,20 @@ namespace mobile_style_editor
 
 			double padding = 10;
 
-			w = verticalPadding;
+			w = contentWidth;
 			h = verticalPadding - 3 * padding;
 			x = horizontalPadding;
 			y = verticalPadding - h;
 
-			AddSubview(BackButton, x, y, w, h);
-
-			w = 3 * h;
-			x = horizontalPadding + contentWidth - w;
-			y = verticalPadding - h;
-
-			AddSubview(Select, x, y, w, h);
+			AddSubview(Header, x, y, w, h);
 		}
 
 		public void Show(List<DriveFile> files)
 		{
 			Show();
 			FileContent.Populate(files.ToObjects());
-			Select.IsVisible = false;
-			BackButton.IsVisible = false;
+			Header.Select.IsVisible = false;
+			Header.BackButton.IsVisible = false;
 		}
 
 		public void Show(List<StoredStyle> styles)
@@ -82,8 +74,8 @@ namespace mobile_style_editor
 
 		public void Show(List<GithubFile> files)
 		{
-			Select.IsVisible = true;
-			BackButton.IsVisible = true;
+			Header.Select.IsVisible = true;
+			Header.BackButton.IsVisible = true;
 
 			Show();
 			GithubFiles = files;
@@ -91,11 +83,11 @@ namespace mobile_style_editor
 
 			if (files.Any(file => file.IsProjectFile))
 			{
-				Select.Enable();
+				Header.Select.Enable();
 			}
 			else
 			{
-				Select.Disable();
+				Header.Select.Disable();
 			}
 		}
 
@@ -155,5 +147,70 @@ namespace mobile_style_editor
 			AddSubview(label, 0, 0, Width, Height);
 		}
 			
+	}
+
+	public class FileListHeader : BaseView
+	{
+		public BackButton BackButton { get; private set; }
+
+		public Label Label { get; private set; }
+
+		public SelectButton Select { get; private set; }
+
+		public void OnBackPress()
+		{
+			string[] split = Text.Split('/');
+			string last = split[split.Length - 1];
+
+			if (last.Equals(""))
+			{
+				last = split[split.Length - 2];
+			}
+
+			Text = Text.Replace(last, "");
+		}
+
+		public string Text
+		{
+			get { return Label.Text; }
+			set { Label.Text = value; }
+		}
+
+		public FileListHeader()
+		{
+			Label = new Label();
+			Label.VerticalTextAlignment = TextAlignment.Center;
+			Label.HorizontalTextAlignment = TextAlignment.Center;
+			Label.TextColor = Color.White;
+			Label.BackgroundColor = Colors.CartoNavy;
+			Label.FontSize = 12;
+
+			BackButton = new BackButton();
+
+			Select = new SelectButton();
+		}
+
+		public override void LayoutSubviews()
+		{
+			double backSize = Height * 2;
+			double selectSize = Height * 3;
+
+			double x = 0;
+			double y = 0;
+			double h = Height;
+			double w = backSize;
+
+			AddSubview(BackButton, x, y, w, h);
+
+			x += w;
+			w = Width - (backSize + selectSize);
+
+			AddSubview(Label, x, y, w, h);
+
+			x += w;
+			w = selectSize;
+
+			AddSubview(Select, x, y, w, h);
+		}
 	}
 }

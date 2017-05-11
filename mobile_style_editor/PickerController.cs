@@ -30,8 +30,8 @@ namespace mobile_style_editor
 			ContentView.Drive.Click += OnDriveButtonClick;
 			ContentView.Database.Click += OnDatabaseButtonClick;
 
-			ContentView.Popup.BackButton.Click += OnPopupBackButtonClick;
-			ContentView.Popup.Select.Click += OnSelectClick;
+			ContentView.Popup.Header.BackButton.Click += OnPopupBackButtonClick;
+			ContentView.Popup.Header.Select.Click += OnSelectClick;
 
 			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 
@@ -53,8 +53,8 @@ namespace mobile_style_editor
 			ContentView.Drive.Click -= OnDriveButtonClick;
 			ContentView.Database.Click -= OnDatabaseButtonClick;
 
-			ContentView.Popup.BackButton.Click -= OnPopupBackButtonClick;
-			ContentView.Popup.Select.Click -= OnSelectClick;
+			ContentView.Popup.Header.BackButton.Click -= OnPopupBackButtonClick;
+			ContentView.Popup.Header.Select.Click -= OnSelectClick;
 
 			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 

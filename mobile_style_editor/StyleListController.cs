@@ -50,8 +50,8 @@ namespace mobile_style_editor
 			ContentView.MyStyles.ItemClick += OnStyleClick;
 			ContentView.Templates.ItemClick += OnStyleClick;
 
-			ContentView.Popup.BackButton.Click += OnPopupBackButtonClick;
-			ContentView.Popup.Select.Click += OnSelectClick;
+			ContentView.Popup.Header.BackButton.Click += OnPopupBackButtonClick;
+			ContentView.Popup.Header.Select.Click += OnSelectClick;
 
 			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 
@@ -75,8 +75,8 @@ namespace mobile_style_editor
 			ContentView.MyStyles.ItemClick -= OnStyleClick;
 			ContentView.Templates.ItemClick -= OnStyleClick;
 
-			ContentView.Popup.BackButton.Click -= OnPopupBackButtonClick;
-			ContentView.Popup.Select.Click -= OnSelectClick;
+			ContentView.Popup.Header.BackButton.Click -= OnPopupBackButtonClick;
+			ContentView.Popup.Header.Select.Click -= OnSelectClick;
 
 			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 
@@ -104,9 +104,16 @@ namespace mobile_style_editor
 				return;
 			}
 
+			if (storedContents.Count == 1)
+			{
+				ContentView.Popup.Header.BackButton.Disable();
+			}
+
 			List<GithubFile> files = storedContents[storedContents.Count - 1];
 			ContentView.Popup.Show(files);
 			storedContents.Remove(files);
+
+			ContentView.Popup.Header.OnBackPress();
 		}
 
 		async void OnSelectClick(object sender, EventArgs e)
@@ -204,12 +211,15 @@ namespace mobile_style_editor
 
 		const string GithubOwner = "CartoDB";
 		const string GithubRepo = "mobile-styles";
+		static string BasePath = (GithubRepo + "/").ToUpper();
 
 		async void OnGithubButtonClick(object sender, EventArgs e)
 		{
 			ContentView.ShowLoading();
 			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo);
 			OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
+
+			ContentView.Popup.Header.Text = BasePath;
 		}
 
 #if __UWP__
@@ -328,7 +338,9 @@ namespace mobile_style_editor
 					var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, path);
 					ContentView.Popup.Show(contents.ToGithubFiles());
 					ContentView.HideLoading();
-					// TODO save previous folder and download new files from path
+
+					ContentView.Popup.Header.BackButton.Enable();
+					ContentView.Popup.Header.Text = BasePath + path.ToUpper();
 				}
 			}
 		}
