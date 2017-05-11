@@ -93,7 +93,19 @@ namespace mobile_style_editor
 
 			using (Stream output = File.Create(path))
 			{
-				input.Seek(0, SeekOrigin.Begin);
+				try
+				{
+					input.Seek(0, SeekOrigin.Begin);
+				}
+				catch (Exception e)
+				{
+					/*
+					 * Seek may or may not be necessary, depending on which type of file we're saving.
+					 * Try every time and catch exceptions where it's not supported
+					 */
+					Console.WriteLine("Exception (" + e + "): " + e.Message);
+				}
+
 				input.CopyTo(output);
 			}
 
@@ -102,7 +114,16 @@ namespace mobile_style_editor
 
 		public static List<string> GetStylesFromFolder(string folder)
 		{
-			string[] files = Directory.GetFiles(Path.Combine(GetLocalPath(), folder));
+			string[] files = { };
+
+			try
+			{
+				files = Directory.GetFiles(Path.Combine(GetLocalPath(), folder));
+			}
+			catch(Exception e)
+			{
+				Console.WriteLine("Message: " + e.Message);
+			}
 
 			return files.Where(file => file.Contains(Parser.ZipExtension)).ToList();
 		}

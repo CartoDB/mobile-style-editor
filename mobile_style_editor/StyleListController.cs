@@ -181,7 +181,6 @@ namespace mobile_style_editor
 		void ShowMyStyles()
 		{
 			List<string> paths = FileUtils.GetStylesFromFolder(MyStyleFolder);
-
 			List<DownloadResult> data = FileUtils.GetDataFromPaths(paths);
 
 			Device.BeginInvokeOnMainThread(delegate
@@ -216,6 +215,7 @@ namespace mobile_style_editor
 				ContentView.HideLoading();
 			});
             ShowMyStyles();
+            
 		}
 
 		const string GithubOwner = "CartoDB";

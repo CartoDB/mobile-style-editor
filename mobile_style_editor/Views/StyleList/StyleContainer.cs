@@ -46,7 +46,6 @@ namespace mobile_style_editor
 				h = 1;
                 AddSubview(separator, 2 * padding, y + h, w - 2 * padding, h);
 				y += headerPadding;
-
 			}
 
 			y += h + headerPadding;
