@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Carto.Ui;
 using Xamarin.Forms;
 
@@ -418,8 +419,21 @@ namespace mobile_style_editor
 
 				results.Add(new DownloadResult { Path = path, Filename = filename });
 			}
-
+			
 			return results;
+		}
+
+		public async Task<List<Octokit.RepositoryContent>> DownloadList()
+		{
+			return await HubClient.Instance.GetZipFiles("CartoDB", "mobile-sample-styles");
+		}
+		
+		public async Task<DownloadResult> DownloadFile(Octokit.RepositoryContent content)
+		{
+			var file = await HubClient.Instance.DownloadFile(content);
+			List<string> data = FileUtils.SaveToAppFolder(file.Stream, file.Name);
+			
+			return new DownloadResult { Path = data[1], Filename = data[0] };
 		}
 
 	}
