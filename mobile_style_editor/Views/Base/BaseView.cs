@@ -116,7 +116,10 @@ namespace mobile_style_editor
 
 		public void HideLoading()
 		{
-			Loader.IsRunning = false;
+			if (Loader != null)
+			{
+				Loader.IsRunning = false;
+			}
 		}
 
         Label toast;

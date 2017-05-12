@@ -53,11 +53,13 @@ namespace mobile_style_editor
 #if __ANDROID__
 			foreach (StyleListItem view in MyStyles.Items)
 			{
+				view.MapView.Alpha = 0f;
 				view.MapView.Visibility = Android.Views.ViewStates.Gone;
 			}
 
 			foreach (StyleListItem view in Templates.Items)
 			{
+				view.MapView.Alpha = 0f;
 				view.MapView.Visibility = Android.Views.ViewStates.Gone;
 			}
 #endif
@@ -69,11 +71,14 @@ namespace mobile_style_editor
 			foreach (StyleListItem view in MyStyles.Items)
 			{
 				view.MapView.Visibility = Android.Views.ViewStates.Visible;
+				view.MapView.Animate().Alpha(1.0f).SetDuration(250).Start();
 			}
 
 			foreach (StyleListItem view in Templates.Items)
 			{
 				view.MapView.Visibility = Android.Views.ViewStates.Visible;
+
+				view.MapView.Animate().Alpha(1.0f).SetDuration(250).Start();
 			}
 #endif
 		}

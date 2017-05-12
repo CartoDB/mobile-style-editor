@@ -7,13 +7,26 @@ namespace mobile_style_editor
 {
 	public class FileUtils
 	{
-		public static bool HasLocalCopy(string name)
+		public static bool HasLocalCopy(string folder, string name)
 		{
-			return File.Exists(Path.Combine(Parser.ApplicationFolder, name));
+			string path = GetLocalPath(folder);
+			return File.Exists(Path.Combine(path, name));
 		}
 
-		public static string GetLocalPath()
+		public static string GetLocalPath(string folder = null)
 		{
+			if (folder != null)
+			{
+				string path = Path.Combine(Parser.ApplicationFolder, folder);
+
+				if (!Directory.Exists(path))
+				{
+					Directory.CreateDirectory(path);
+				}
+
+				return path;
+			}
+			
 			return Parser.ApplicationFolder;
 		}
 

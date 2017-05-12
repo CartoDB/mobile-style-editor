@@ -226,6 +226,7 @@ namespace mobile_style_editor
 		}
 
 		const string MyStyleFolder = "my-styles";
+		const string TemplateFolder = "template-styles";
 
 		void OnFileDownloadComplete(object sender, DownloadEventArgs e)
 		{
@@ -409,10 +410,26 @@ namespace mobile_style_editor
 		
 		public async Task<DownloadResult> DownloadFile(Octokit.RepositoryContent content)
 		{
-			var file = await HubClient.Instance.DownloadFile(content);
-			List<string> data = FileUtils.SaveToAppFolder(file.Stream, file.Name);
-			
-			return new DownloadResult { Path = data[1], Filename = data[0] };
+			bool existsLocally = FileUtils.HasLocalCopy(TemplateFolder, content.Name);
+
+			string path;
+			string filename;
+
+			if (!existsLocally)
+			{
+				var file = await HubClient.Instance.DownloadFile(content);
+				List<string> data = FileUtils.SaveToAppFolder(file.Stream, TemplateFolder, file.Name);
+
+				path = data[1];
+				filename = data[0];
+			}
+			else
+			{
+				path = FileUtils.GetLocalPath(TemplateFolder);		
+ 				filename = content.Name;
+			}
+
+			return new DownloadResult { Path = path, Filename = filename };
 		}
 
 	}
