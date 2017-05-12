@@ -3,10 +3,8 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class ToolbarButton : BaseView
+	public class ToolbarButton : ClickView
 	{
-		public EventHandler<EventArgs> Click;
-
 		Label label;
 
 		public ToolbarButton(string text)
@@ -19,17 +17,6 @@ namespace mobile_style_editor
 			label.HorizontalTextAlignment = TextAlignment.Center;
 			label.BackgroundColor = Colors.CartoRed;
 			label.TextColor = Color.White;
-
-			TapGestureRecognizer recognizer = new TapGestureRecognizer();
-			recognizer.Tapped += delegate
-			{
-				if (Click != null)
-				{
-					Click(this, EventArgs.Empty);
-				}
-			};
-
-			GestureRecognizers.Add(recognizer);
 		}
 
 		public override void LayoutSubviews()

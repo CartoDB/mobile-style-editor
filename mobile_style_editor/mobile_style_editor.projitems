@@ -66,6 +66,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\AddStyleItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\DownloadResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderer\ClickViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />
@@ -80,6 +81,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileTabPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Github\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Renderer\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />
