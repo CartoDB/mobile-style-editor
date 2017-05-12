@@ -250,7 +250,6 @@ namespace mobile_style_editor
 			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo);
 			OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
 
-			ContentView.Popup.Header.BackButton.Disable();
 			ContentView.Popup.Header.Text = BasePath;
 		}
 
