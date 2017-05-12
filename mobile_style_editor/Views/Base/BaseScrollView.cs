@@ -139,11 +139,11 @@ namespace mobile_style_editor
 				if (Height > Width)
 				{
 					Console.WriteLine("H > W");
-					return Ratio > 1.5;
+					return Ratio < 1.5;
 				}
 
 				Console.WriteLine("W > H");
-				return Ratio > 1.7;
+				return Ratio < 1.7;
 #endif
 			}
 		}
