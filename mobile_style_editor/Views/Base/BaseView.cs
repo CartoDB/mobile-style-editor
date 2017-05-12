@@ -93,7 +93,7 @@ namespace mobile_style_editor
 		{
 			if (Loader != null && Loader.IsRunning)
 			{
-                RemoveChild(Loader);
+				RemoveChild(Loader);
 				Loader = null;
 				ShowLoading();
 			}
@@ -122,44 +122,68 @@ namespace mobile_style_editor
 			}
 		}
 
-        Label toast;
-        System.Threading.Timer timer;
-        public void Toast(string text)
-        {
-            if (toast == null)
-            {
-                toast = new Label();
-                toast.VerticalTextAlignment = TextAlignment.Center;
-                toast.HorizontalTextAlignment = TextAlignment.Center;
-                toast.BackgroundColor = Color.FromRgba(0, 0, 0, 190);
-                toast.TextColor = Color.White;
+		Label toast;
+		System.Threading.Timer timer;
+		public void Toast(string text)
+		{
+			if (toast == null)
+			{
+				toast = new Label();
+				toast.VerticalTextAlignment = TextAlignment.Center;
+				toast.HorizontalTextAlignment = TextAlignment.Center;
+				toast.BackgroundColor = Color.FromRgba(0, 0, 0, 190);
+				toast.TextColor = Color.White;
 
-                double padding = 30;
-                double w = 300;
-                double h = 35;
-                double x = Width / 2 - w / 2;
-                double y = Height - (h + padding);
+				double padding = 30;
+				double w = 300;
+				double h = 35;
+				double x = Width / 2 - w / 2;
+				double y = Height - (h + padding);
 
-                AddSubview(toast, x, y, w, h);
-            }
-            toast.Text = text;
-            toast.FadeTo(1.0);
-            
-            if (timer != null)
-            {
-                timer.Dispose();
-                timer = null;
-            }
+				AddSubview(toast, x, y, w, h);
+			}
+			toast.Text = text;
+			toast.FadeTo(1.0);
 
-            timer = new System.Threading.Timer((object state) =>
-            {
-                Device.BeginInvokeOnMainThread(delegate
-                {
-                    toast.FadeTo(0.0);
-                    timer = null;
-                });
-            }, null, 500, System.Threading.Timeout.Infinite);
-        }
+			if (timer != null)
+			{
+				timer.Dispose();
+				timer = null;
+			}
 
-    }
+			timer = new System.Threading.Timer((object state) =>
+			{
+				Device.BeginInvokeOnMainThread(delegate
+				{
+					toast.FadeTo(0.0);
+					timer = null;
+				});
+			}, null, 500, System.Threading.Timeout.Infinite);
+		}
+
+		#region Device Info
+		public double Ratio { get { return Height > Width ? Height / Width : Width / Height; } }
+
+		public bool IsTablet
+		{
+			get
+			{
+#if __IOS__
+				return UIKit.UIDevice.CurrentDevice.Model.Contains("iPad");
+#else
+			   /*
+ 				* TODO Pulled these constants out of my ass. May need to tweak in the fut				 
+				*/
+
+				if (Height > Width)
+				{
+					return Ratio < 1.4;
+				}
+
+				return Ratio < 1.6;
+#endif
+			}
+		}
+		#endregion
+	}
 }
