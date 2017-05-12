@@ -48,7 +48,7 @@ namespace mobile_style_editor
 					else if (action == Android.Views.MotionEventActions.Up)
 					{
 						Alpha = 1.0f;
-						View.Click?.Invoke(sender, EventArgs.Empty);
+						View.Click?.Invoke(View, EventArgs.Empty);
 					}
 					else if (action == Android.Views.MotionEventActions.Cancel)
 					{
