@@ -10,6 +10,7 @@ namespace mobile_style_editor
 		public ClickView()
 		{
 			IsEnabled = true;
+			BackgroundColor = Color.FromRgba(0, 0, 0, 0);
 
 			TapGestureRecognizer recognizer = new TapGestureRecognizer();
 			recognizer.Tapped += delegate

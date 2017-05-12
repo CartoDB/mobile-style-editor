@@ -34,10 +34,33 @@ namespace mobile_style_editor
 			if (e.NewElement != null)
 			{
 				View = e.NewElement as ClickView;
+#if __ANDROID__
+				SetBackgroundColor(View.BackgroundColor.ToNativeColor());
+
+				Touch += (object sender, TouchEventArgs args) =>
+				{
+					var action = args.Event.Action;
+
+					if (action == Android.Views.MotionEventActions.Down)
+					{
+						Alpha = 0.5f;
+					}
+					else if (action == Android.Views.MotionEventActions.Up)
+					{
+						Alpha = 1.0f;
+						View.Click?.Invoke(sender, EventArgs.Empty);
+					}
+					else if (action == Android.Views.MotionEventActions.Cancel)
+					{
+						Alpha = 1.0f;
+					}
+				};
+#else
 				Control.BackgroundColor = View.BackgroundColor.ToNativeColor();
+#endif
 			}
 		}
-
+#if __IOS__
 		public override void TouchesBegan(Foundation.NSSet touches, UIKit.UIEvent evt)
 		{
 			base.TouchesBegan(touches, evt);
@@ -55,5 +78,8 @@ namespace mobile_style_editor
 			base.TouchesCancelled(touches, evt);
 			View.Opacity = 1.0f;
 		}
+#elif __UWP__
+
+#endif
 	}
 }
