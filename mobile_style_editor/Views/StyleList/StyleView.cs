@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class StyleView : BaseView
+	public class StyleView : BaseScrollView
 	{
 		public StyleContainer MyStyles { get; private set; }
 
@@ -16,6 +16,8 @@ namespace mobile_style_editor
 
 		public StyleView()
 		{
+			Orientation = ScrollOrientation.Horizontal;
+
 			BackgroundColor = Colors.CartoRed;
 
 			MyStyles = new StyleContainer();
@@ -38,6 +40,11 @@ namespace mobile_style_editor
 			double y = 0;
 			double w = Width / 2;
 			double h = Height;
+
+			if (!IsTablet)
+			{
+				w = Width;
+			}
 
 			AddSubview(MyStyles, x, y, w, h);
 

@@ -112,7 +112,7 @@ namespace mobile_style_editor
 			{
 				ContentView.HideLoading();
 				ContentView.Popup.Hide();
-				Toast.Show(text);
+				Toast.Show(text, ContentView);
 			});
 		}
 
@@ -141,7 +141,7 @@ namespace mobile_style_editor
 		{
 			if (currentWorkingName == null)
 			{
-				Toast.Show("You don't seem to have made any changes");
+				Toast.Show("You don't seem to have made any changes", ContentView);
 				return;
 			}
 
@@ -160,7 +160,7 @@ namespace mobile_style_editor
 
 					if (string.IsNullOrWhiteSpace(name))
 					{
-						Toast.Show("Please provide a name for your style");
+						Toast.Show("Please provide a name for your style", ContentView);
 						return;
 					}
 

@@ -99,7 +99,6 @@ namespace mobile_style_editor
 			}
 		}
 
-
 		public ActivityIndicator Loader { get; private set; }
 
 		public void ShowLoading()
