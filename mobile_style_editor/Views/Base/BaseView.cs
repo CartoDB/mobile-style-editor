@@ -91,9 +91,11 @@ namespace mobile_style_editor
 
 		public virtual void LayoutSubviews()
 		{
-			if (ClearChildrenOnLayout)
+			if (Loader != null && Loader.IsRunning)
 			{
-				//Children.Clear();
+                RemoveChild(Loader);
+				Loader = null;
+				ShowLoading();
 			}
 		}
 

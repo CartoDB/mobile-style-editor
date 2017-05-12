@@ -7,7 +7,9 @@ namespace mobile_style_editor
 
 		public string Filename { get; set; }
 
-		public string CleanName { get { return Filename.Replace(Parser.ZipExtension, ""); } }
+		public string CleanName { get { return ToCleanName(Filename); } }
+
+		public int Index { get; set; }
 
 		public byte[] Data
 		{
@@ -17,5 +19,9 @@ namespace mobile_style_editor
 			}
 		}
 
+		public static string ToCleanName(string name)
+		{
+			return name.Replace(Parser.ZipExtension, "").ToUpper();
+		}
 	}
 }

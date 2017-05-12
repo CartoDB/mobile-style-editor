@@ -50,8 +50,6 @@ namespace mobile_style_editor
 
 		public override void LayoutSubviews()
 		{
-			base.LayoutSubviews();
-
 			double padding = 5;
 
 			double divider = 5;
@@ -90,6 +88,8 @@ namespace mobile_style_editor
 			h = unitHeight;
 
 			AddSubview(label, x, y, w, h);
+			
+			base.LayoutSubviews();
 		}
 
 		public void Update(DownloadResult result)
@@ -97,7 +97,16 @@ namespace mobile_style_editor
 			Data = result;
 
 			MapView.Update(result.Data, null);
-			label.Text = result.CleanName.ToUpper();
+			label.Text = result.CleanName;
+
+			HideLoading();
+		}
+		
+		public void Update(Octokit.RepositoryContent content)
+		{
+			label.Text = DownloadResult.ToCleanName(content.Name);
+
+			ShowLoading();
 		}
 	}
 }

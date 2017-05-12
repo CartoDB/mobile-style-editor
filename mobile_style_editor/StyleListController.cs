@@ -40,8 +40,24 @@ namespace mobile_style_editor
 
 			if (!filesDownloaded)
 			{
-				List<DownloadResult> results = await GetContents();
-				ContentView.Templates.ShowSampleStyles(results);
+				/*
+				 * TODO?
+				 * The following logic relies on the fact that it is an ordered list.
+				 * Will render the wrong map if 
+				 * 
+				 */
+				List<Octokit.RepositoryContent> contents = await DownloadList();
+				ContentView.Templates.RenderList(contents);
+
+				int index = 0;
+
+				foreach (var content in contents)
+				{
+					DownloadResult result = await DownloadFile(content);
+					ContentView.Templates.RenderMap(result, index);
+					index++;
+				}
+
 				filesDownloaded = true;
 			}
 
@@ -384,43 +400,6 @@ namespace mobile_style_editor
 				ContentView.HideMapViews();
 #endif
 			});
-		}
-
-		public async System.Threading.Tasks.Task<List<DownloadResult>> GetContents()
-		{
-			List<Octokit.RepositoryContent> zipfiles = await HubClient.Instance.GetZipFiles("CartoDB", "mobile-sample-styles");
-
-			List<DownloadResult> results = new List<DownloadResult>();
-
-			foreach (var content in zipfiles)
-			{
-				bool existsLocally = FileUtils.HasLocalCopy(content.Name);
-
-				string path = "";
-				string filename = "";
-
-				if (existsLocally)
-				{
-					Console.WriteLine("Using local file: " + content.Name);
-
-					path = FileUtils.GetLocalPath();
-					filename = content.Name;
-				}
-				else
-				{
-					Console.WriteLine("Downloading: " + content.Name);
-
-					var file = await HubClient.Instance.DownloadFile(content);
-					List<string> data = FileUtils.SaveToAppFolder(file.Stream, file.Name);
-
-					path = data[1];
-					filename = data[0];
-				}
-
-				results.Add(new DownloadResult { Path = path, Filename = filename });
-			}
-			
-			return results;
 		}
 
 		public async Task<List<Octokit.RepositoryContent>> DownloadList()

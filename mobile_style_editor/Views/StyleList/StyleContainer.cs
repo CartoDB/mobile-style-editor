@@ -66,6 +66,36 @@ namespace mobile_style_editor
 			UpdateListLayout();
 		}
 
+		public void RenderList(List<Octokit.RepositoryContent> contents)
+		{
+			styleList.Children.Clear();
+
+			foreach (var content in contents)
+			{
+				var item = new StyleListItem();
+
+				item.Click += (object sender, EventArgs e) =>
+				{
+					if (ItemClick != null)
+					{
+						ItemClick(sender, e);
+					}
+				};
+
+				styleList.AddSubview(item);
+
+				item.Update(content);
+			}
+
+			UpdateListLayout();
+		}
+
+		public void RenderMap(DownloadResult result, int index)
+		{
+			StyleListItem item = Items[index];
+			item.Update(result);
+		}
+
 		public void ShowSampleStyles(List<DownloadResult> results)
 		{
 			styleList.Children.Clear();	
