@@ -35,10 +35,17 @@ namespace mobile_style_editor
 			{
 				View = e.NewElement as ClickView;
 #if __ANDROID__
+				
 				SetBackgroundColor(View.BackgroundColor.ToNativeColor());
 
 				Touch += (object sender, TouchEventArgs args) =>
 				{
+					Console.WriteLine("Action: " + args.Event.Action);
+					if (!View.IsEnabled)
+					{
+						return;
+					}
+
 					var action = args.Event.Action;
 
 					if (action == Android.Views.MotionEventActions.Down)
@@ -49,6 +56,7 @@ namespace mobile_style_editor
 					{
 						Alpha = 1.0f;
 						View.Click?.Invoke(View, EventArgs.Empty);
+
 					}
 					else if (action == Android.Views.MotionEventActions.Cancel)
 					{
