@@ -35,7 +35,6 @@ namespace mobile_style_editor
 			{
 				View = e.NewElement as ClickView;
 #if __ANDROID__
-				
 				SetBackgroundColor(View.BackgroundColor.ToNativeColor());
 
 				Touch += (object sender, TouchEventArgs args) =>
