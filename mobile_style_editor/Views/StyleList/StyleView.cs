@@ -41,9 +41,14 @@ namespace mobile_style_editor
 			double w = Width / 2;
 			double h = Height;
 
-			if (!IsTablet)
+			if (!IsTablet || !IsLandscape)
 			{
 				w = Width;
+			}
+
+			if (!IsTablet && IsLandscape)
+			{
+				w = Width / 2;
 			}
 
 			AddSubview(MyStyles, x, y, w, h);

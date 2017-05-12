@@ -147,6 +147,8 @@ namespace mobile_style_editor
 #endif
 			}
 		}
+
+		public bool IsLandscape { get { return Height < Width; } }
 	}
 		#endregion
 }
