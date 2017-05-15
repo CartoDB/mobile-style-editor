@@ -6,6 +6,8 @@ namespace mobile_style_editor
 {
 	public class WebviewPopup : BasePopup
 	{
+		public EventHandler<AuthenticationEventArgs> Authenticated;
+
 		WebView webView;
 
 		public WebviewPopup()
@@ -42,21 +44,41 @@ namespace mobile_style_editor
 
 		void OnNavigationEnd(object sender, WebNavigatedEventArgs e)
 		{
+			string code = null;
+			string error = null;
+
 			if (e.Result == WebNavigationResult.Success)
 			{
 				string url = e.Url;
 
 				if (url.Contains(CodeParameter))
 				{
-					string code = url.Split(new string[] { CodeParameter }, StringSplitOptions.None)[1];
-					Console.WriteLine(code);
+					code = url.Split(new string[] { CodeParameter }, StringSplitOptions.None)[1];
 				}
 				else
 				{
-					// TODO ErrorHandling
-					Console.WriteLine(e);
+					error = "Authentication was successful, but unable to parse Authentication Code";
 				}
+			}
+			else
+			{
+				error = "Authentication failed. Please try again later";
+			}
+
+			if (Authenticated != null)
+			{
+				Authenticated(this, new AuthenticationEventArgs { Code = code, Error = error });
 			}
 		}
 	}
+
+	public class AuthenticationEventArgs : EventArgs
+	{
+		public string Code { get; set; }
+
+		public string Error { get; set; }
+
+		public bool IsOk { get { return !string.IsNullOrEmpty(Code); } }
+	}
+
 }

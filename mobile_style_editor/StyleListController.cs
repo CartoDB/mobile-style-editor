@@ -71,6 +71,8 @@ namespace mobile_style_editor
 
 			ContentView.Tabs.TabClicked += OnTabClick;
 
+			ContentView.Webview.Authenticated += OnAuthenticated;
+
 			ContentView.Popup.Header.BackButton.Click += OnPopupBackButtonClick;
 			ContentView.Popup.Header.Select.Click += OnSelectClick;
 
@@ -103,6 +105,8 @@ namespace mobile_style_editor
 			
 			ContentView.Tabs.TabClicked += OnTabClick;
 
+			ContentView.Webview.Authenticated -= OnAuthenticated;
+
 			ContentView.Popup.Header.BackButton.Click -= OnPopupBackButtonClick;
 			ContentView.Popup.Header.Select.Click -= OnSelectClick;
 
@@ -116,6 +120,14 @@ namespace mobile_style_editor
 			DriveClientiOS.Instance.DownloadComplete -= OnFileDownloadComplete;
 			DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
 #endif
+		}
+
+		public void OnAuthenticated(object sender, AuthenticationEventArgs e)
+		{
+			if (e.IsOk)
+			{
+				Console.WriteLine("Success: " + e.Code);
+			}
 		}
 
 		public void OnTabClick(object sender, EventArgs e)
