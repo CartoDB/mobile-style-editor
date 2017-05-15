@@ -17,9 +17,11 @@ namespace mobile_style_editor
 		public StyleTab()
 		{
 			label = new Label();
+			label.FontSize = 13;
 			label.TextColor = Colors.CartoNavy;
 			label.VerticalTextAlignment = TextAlignment.Center;
 			label.HorizontalTextAlignment = TextAlignment.Center;
+			label.FontAttributes = FontAttributes.Bold;
 		}
 
 		public override void LayoutSubviews()

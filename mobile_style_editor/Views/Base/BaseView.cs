@@ -161,6 +161,9 @@ namespace mobile_style_editor
 		}
 
 		#region Device Info
+
+		public bool IsSmallScreen { get { return !IsTablet && !IsLandscape; } }
+
 		public double Ratio { get { return Height > Width ? Height / Width : Width / Height; } }
 
 		public bool IsTablet
@@ -170,19 +173,33 @@ namespace mobile_style_editor
 #if __IOS__
 				return UIKit.UIDevice.CurrentDevice.Model.Contains("iPad");
 #else
-			   /*
- 				* TODO Pulled these constants out of my ass. May need to tweak in the fut				 
-				*/
-
-				if (Height > Width)
+				/*
+				 * TODO 
+				 * There is no functional difference between an Android tablet and a phone
+				 * Determine it based on height/width ratio
+				 * 
+				 * Pulled these constants out of my ass. May need to tweak.
+				 * 
+				 * Alternative would be:
+				 * http://stackoverflow.com/questions/11330363/how-to-detect-device-is-android-phone-or-android-tablet
+				 * 
+				 */
+				Console.WriteLine("Ratio: " + Ratio + " (IsLandscape: " + IsLandscape + ")");
+				if (!IsLandscape)
 				{
+					// 1.22 on Nutiteq's Samsung Tablet
+					// 1.42 on Aare's sony Z1
 					return Ratio < 1.4;
 				}
 
-				return Ratio < 1.6;
+				// 1.50 on Nutiteq's Samsung Tablet
+				// 2.08 on Aare's Sony Z1
+				return Ratio < 1.7;
 #endif
 			}
 		}
-		#endregion
+
+		public bool IsLandscape { get { return Height < Width; } }
 	}
+	#endregion
 }

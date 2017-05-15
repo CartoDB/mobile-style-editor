@@ -69,6 +69,8 @@ namespace mobile_style_editor
 			ContentView.MyStyles.ItemClick += OnStyleClick;
 			ContentView.Templates.ItemClick += OnStyleClick;
 
+			ContentView.Tabs.TabClicked += OnTabClick;
+
 			ContentView.Popup.Header.BackButton.Click += OnPopupBackButtonClick;
 			ContentView.Popup.Header.Select.Click += OnSelectClick;
 
@@ -97,6 +99,8 @@ namespace mobile_style_editor
 
 			ContentView.MyStyles.ItemClick -= OnStyleClick;
 			ContentView.Templates.ItemClick -= OnStyleClick;
+			
+			ContentView.Tabs.TabClicked += OnTabClick;
 
 			ContentView.Popup.Header.BackButton.Click -= OnPopupBackButtonClick;
 			ContentView.Popup.Header.Select.Click -= OnSelectClick;
@@ -111,6 +115,11 @@ namespace mobile_style_editor
 			DriveClientiOS.Instance.DownloadComplete -= OnFileDownloadComplete;
 			DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
 #endif
+		}
+
+		public void OnTabClick(object sender, EventArgs e)
+		{
+			ContentView.ScrollTo((StyleTab)sender);
 		}
 
 		List<List<GithubFile>> storedContents = new List<List<GithubFile>>();
