@@ -37,6 +37,8 @@ namespace mobile_style_editor
 			Tabs = new StyleTabBar();
 
 			Popup = new FileListPopup();
+
+			container.IsEnabled = false;
 		}
 
 		public override void LayoutSubviews()

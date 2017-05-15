@@ -49,6 +49,7 @@ namespace mobile_style_editor
 			y = Height - h;
 
 			AddSubview(Indicator, x, y, w, h);
+			Indicator.TranslationX = 0;
 		}
 
 		void OnTabClick(object sender, EventArgs e)
@@ -73,7 +74,8 @@ namespace mobile_style_editor
 
 		public void MoveTo(double x)
 		{
-			UpdateLayout(x, Y, Width, Height);
+			//UpdateLayout(x, Y, Width, Height);
+			this.TranslateTo(x, 0);
 		}
 	}
 }
