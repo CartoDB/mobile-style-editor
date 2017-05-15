@@ -135,14 +135,16 @@ namespace mobile_style_editor
 				/*
 				 * TODO Pulled these constants out of my ass. May need to tweak in the fut				 
 				 */
-				Console.WriteLine("Ratio: " + Ratio);
-				if (Height > Width)
+				Console.WriteLine("Ratio: " + Ratio + " (IsLandscape: " + IsLandscape + ")");
+				if (!IsLandscape)
 				{
-					Console.WriteLine("H > W");
-					return Ratio < 1.5;
+					// 1.22 on Nutiteq's Samsung Tablet
+					// 1.42 on Aare's sony Z1
+					return Ratio < 1.4;
 				}
 
-				Console.WriteLine("W > H");
+				// 1.50 on Nutiteq's Samsung Tablet
+				// 2.08 on Aare's Sony Z1
 				return Ratio < 1.7;
 #endif
 			}
