@@ -38,39 +38,19 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
-
-			//if (LocalStorage.Instance.HasAccessToken)
-			//{
-			//	string token = LocalStorage.Instance.AccessToken;
-			//	HubClient.Instance.Authenticate(token);
-			//}
-			//else
-			//{
-				
-			//}
-
-			if (!filesDownloaded)
+			
+			
+			if (LocalStorage.Instance.HasAccessToken)
 			{
-				/*
-				 * TODO
-				 * The following logic relies on the fact that it is an ordered list.
-				 * Will render the wrong map if the order has somehow changed
-				 * 
-				 */
-				List<Octokit.RepositoryContent> contents = await DownloadList();
-				ContentView.Templates.RenderList(contents);
-
-				int index = 0;
-
-				foreach (var content in contents)
-				{
-					DownloadResult result = await DownloadFile(content);
-					ContentView.Templates.RenderMap(result, index);
-					index++;
-				}
-
-				filesDownloaded = true;
+				string token = LocalStorage.Instance.AccessToken;
+				HubClient.Instance.Authenticate(token);
 			}
+			else
+			{
+				
+			}
+
+			PopulateTemplateList();
 
 			ShowMyStyles();
 
@@ -101,6 +81,32 @@ namespace mobile_style_editor
 #if __ANDROID__
 			ContentView.ShowMapViews();
 #endif
+		}
+
+		async void PopulateTemplateList()
+		{
+			if (!filesDownloaded)
+			{
+				/*
+				 * TODO
+				 * The following logic relies on the fact that it is an ordered list.
+				 * Will render the wrong map if the order has somehow changed
+				 * 
+				 */
+				List<Octokit.RepositoryContent> contents = await DownloadList();
+				ContentView.Templates.RenderList(contents);
+
+				int index = 0;
+
+				foreach (var content in contents)
+				{
+					DownloadResult result = await DownloadFile(content);
+					ContentView.Templates.RenderMap(result, index);
+					index++;
+				}
+
+				filesDownloaded = true;
+			}
 		}
 
 		protected override void OnDisappearing()

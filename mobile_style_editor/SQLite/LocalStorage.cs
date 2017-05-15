@@ -4,11 +4,25 @@
 using System;
 using System.Collections.Generic;
 using SQLite;
+using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
 	public class LocalStorage
 	{
+		const string ACCESSTOKEN = "access_token";
+
+		public bool HasAccessToken
+		{ 
+			get { return Application.Current.Properties.ContainsKey(ACCESSTOKEN); }
+		}
+
+		public string AccessToken 
+		{ 
+			get { return (string)Application.Current.Properties[ACCESSTOKEN]; } 
+			set { Application.Current.Properties[ACCESSTOKEN] = value; }
+		}
+
 		public static LocalStorage Instance = new LocalStorage();
 
 		SQLiteConnection db;
