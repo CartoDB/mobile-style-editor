@@ -38,12 +38,23 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
+
+			//if (LocalStorage.Instance.HasAccessToken)
+			//{
+			//	string token = LocalStorage.Instance.AccessToken;
+			//	HubClient.Instance.Authenticate(token);
+			//}
+			//else
+			//{
+				
+			//}
+
 			if (!filesDownloaded)
 			{
 				/*
-				 * TODO?
+				 * TODO
 				 * The following logic relies on the fact that it is an ordered list.
-				 * Will render the wrong map if 
+				 * Will render the wrong map if the order has somehow changed
 				 * 
 				 */
 				List<Octokit.RepositoryContent> contents = await DownloadList();

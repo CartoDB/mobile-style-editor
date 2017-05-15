@@ -13,8 +13,6 @@ namespace mobile_style_editor
 
 		SQLiteConnection db;
 
-		public List<StoredStyle> Styles { get { return db.Query<StoredStyle>("select * from StoredStyle"); } }
-
         LocalStorage()
         {
 #if __UWP__
@@ -22,7 +20,7 @@ namespace mobile_style_editor
 #else
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 #endif
-            const string file = "mobile_styles.db";
+            const string file = "carto_style_editor.db";
 
             try
             {
@@ -41,10 +39,6 @@ namespace mobile_style_editor
             db.CreateTable<StoredStyle>();
         }
 
-		public void AddStyle(string name, string path)
-		{
-			db.Insert(new StoredStyle { Name = name, Path = path });	
-		}
 	}
 }
 #endif
