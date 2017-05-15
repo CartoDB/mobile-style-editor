@@ -72,9 +72,8 @@ namespace mobile_style_editor
 
 		public async Task<string> Authenticate(string id, string secret, string code)
 		{
-			var request2 = new OauthTokenRequest(id, secret, code);
-
-			OauthToken token = await client.Oauth.CreateAccessToken(request2);
+			var request = new OauthTokenRequest(id, secret, code);
+			OauthToken token = await client.Oauth.CreateAccessToken(request);
 			return token.AccessToken;
 		}
 

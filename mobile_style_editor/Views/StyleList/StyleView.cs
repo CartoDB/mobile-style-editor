@@ -118,7 +118,7 @@ namespace mobile_style_editor
 		public void OpenWebviewPopup(GithubAuthenticationData data)
 		{
 			Webview.Show();
-			Webview.Open(data.Url);
+			Webview.Open(data);
 		}
 
 		public void ScrollTo(StyleTab styleTab)

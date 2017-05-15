@@ -35,9 +35,14 @@ namespace mobile_style_editor
 			Content.AddSubview(webView, x, y, w, h);
 		}
 
-		public void Open(string url)
+		string id, secret;
+
+		public void Open(GithubAuthenticationData data)
 		{
-			webView.Source = url;
+			id = data.Id;
+			secret = data.Secret;
+
+			webView.Source = data.Url;
 		}
 
 		const string CodeParameter = "?code=";
@@ -67,13 +72,17 @@ namespace mobile_style_editor
 
 			if (Authenticated != null)
 			{
-				Authenticated(this, new AuthenticationEventArgs { Code = code, Error = error });
+				Authenticated(this, new AuthenticationEventArgs { Id = id, Secret = secret, Code = code, Error = error });
 			}
 		}
 	}
 
 	public class AuthenticationEventArgs : EventArgs
 	{
+		public string Id { get; set; }
+
+		public string Secret { get; set; }
+
 		public string Code { get; set; }
 
 		public string Error { get; set; }

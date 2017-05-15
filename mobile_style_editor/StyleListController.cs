@@ -122,11 +122,14 @@ namespace mobile_style_editor
 #endif
 		}
 
-		public void OnAuthenticated(object sender, AuthenticationEventArgs e)
+		public async void OnAuthenticated(object sender, AuthenticationEventArgs e)
 		{
 			if (e.IsOk)
 			{
-				Console.WriteLine("Success: " + e.Code);
+				Console.WriteLine("Code: " + e.Code);
+				ContentView.Webview.Hide();
+				string token = await HubClient.Instance.Authenticate(e.Id, e.Secret, e.Code);
+				Console.WriteLine("Token: " + token);
 			}
 		}
 
