@@ -49,6 +49,25 @@ namespace mobile_style_editor
 
 			client = new GitHubClient(new ProductHeaderValue("com.carto.style.editor"));
 			client.Credentials = credentials;
+
+			CreateToken();
+		}
+
+		public async void CreateToken()
+		{
+			string id = "";
+			string secret = "";
+			string code = "";
+
+			var request = new OauthLoginRequest(id);
+
+			var url = client.Oauth.GetGitHubLoginUrl(request);
+
+			var request2 = new OauthTokenRequest(id, secret, code);
+
+			OauthToken token = await client.Oauth.CreateAccessToken(request2);
+
+			Console.WriteLine(token);
 		}
 
 		public async Task<User> GetUser(string name)
