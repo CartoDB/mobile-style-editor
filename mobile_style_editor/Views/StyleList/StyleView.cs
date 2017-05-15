@@ -40,7 +40,7 @@ namespace mobile_style_editor
 			Popup = new FileListPopup();
 			Webview = new WebviewPopup();
 
-			container.IsEnabled = false;
+			//container.IsEnabled = false;
 		}
 
 		public override void LayoutSubviews()
