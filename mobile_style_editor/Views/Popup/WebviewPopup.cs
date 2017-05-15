@@ -11,7 +11,6 @@ namespace mobile_style_editor
 		public WebviewPopup()
 		{
 			webView = new WebView();
-			webView.Navigating += OnNavigating;
 			webView.Navigated += OnNavigationEnd;
 
 			Content = new BasePopupContent();
