@@ -38,19 +38,17 @@ namespace mobile_style_editor
 		{
 			base.OnAppearing();
 
-			
-			
 			if (LocalStorage.Instance.HasAccessToken)
 			{
 				string token = LocalStorage.Instance.AccessToken;
 				HubClient.Instance.Authenticate(token);
+				PopulateTemplateList();
 			}
 			else
 			{
-				
+				GithubAuthenticationData data = HubClient.Instance.PrepareAuthention();
+				ContentView.OpenWebviewPopup(data);
 			}
-
-			PopulateTemplateList();
 
 			ShowMyStyles();
 
@@ -146,8 +144,10 @@ namespace mobile_style_editor
 				ContentView.Webview.Hide();
 				string token = await HubClient.Instance.CreateAccessToken(e.Id, e.Secret, e.Code);
 				Console.WriteLine("Token: " + token);
-
+				
+				LocalStorage.Instance.AccessToken = token;
 				HubClient.Instance.Authenticate(token);
+				PopulateTemplateList();
 			}
 		}
 

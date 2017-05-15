@@ -65,6 +65,7 @@ namespace mobile_style_editor
 			string secret = dict["client_secret"];
 
 			var request = new OauthLoginRequest(id);
+			request.Scopes.Add("repo");
 
 			var url = client.Oauth.GetGitHubLoginUrl(request);
 
@@ -79,6 +80,7 @@ namespace mobile_style_editor
 		public async Task<string> CreateAccessToken(string id, string secret, string code)
 		{
 			var request = new OauthTokenRequest(id, secret, code);
+
 			OauthToken token = await client.Oauth.CreateAccessToken(request);
 			return token.AccessToken;
 		}

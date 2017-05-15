@@ -20,7 +20,19 @@ namespace mobile_style_editor
 		public string AccessToken 
 		{ 
 			get { return (string)Application.Current.Properties[ACCESSTOKEN]; } 
-			set { Application.Current.Properties[ACCESSTOKEN] = value; }
+			set 
+			{
+				if (!HasAccessToken)
+				{
+					Application.Current.Properties.Add(ACCESSTOKEN, value);
+				}
+				else
+				{
+					Application.Current.Properties[ACCESSTOKEN] = value;
+				}
+
+				Application.Current.SavePropertiesAsync();
+			}
 		}
 
 		public static LocalStorage Instance = new LocalStorage();
