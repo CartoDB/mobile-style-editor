@@ -19,21 +19,45 @@ namespace mobile_style_editor
 
 		public override void LayoutSubviews()
 		{
-			Content.AddSubview(webView, Content.X, Content.Y, Content.Width, Content.Height);
+			double padding = 20;
+
+			double x = padding;
+			double y = padding;
+			double w = Width - (2 * padding);
+			double h = Height - (2 * padding);
+
+			AddSubview(Content, x, y, w, h);
+
+			x = 0;
+			y = 0;
+
+			Content.AddSubview(webView, x, y, w, h);
 		}
 
 		public void Open(string url)
 		{
 			webView.Source = url;
 		}
-		void OnNavigating(object sender, WebNavigatingEventArgs e)
-		{
-			Console.WriteLine(e);
-		}
+
+		const string CodeParameter = "?code=";
 
 		void OnNavigationEnd(object sender, WebNavigatedEventArgs e)
 		{
-			Console.WriteLine(e.Result);
+			if (e.Result == WebNavigationResult.Success)
+			{
+				string url = e.Url;
+
+				if (url.Contains(CodeParameter))
+				{
+					string code = url.Split(new string[] { CodeParameter }, StringSplitOptions.None)[1];
+					Console.WriteLine(code);
+				}
+				else
+				{
+					// TODO ErrorHandling
+					Console.WriteLine(e);
+				}
+			}
 		}
 	}
 }

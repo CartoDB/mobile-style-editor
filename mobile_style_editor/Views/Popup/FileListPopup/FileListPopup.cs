@@ -39,7 +39,7 @@ namespace mobile_style_editor
 			double y = verticalPadding;
 
 			double contentHeight = Height - 2 * verticalPadding;
-			double contentWidth = Width - 2 * horizontalPadding; ;
+			double contentWidth = Width - 2 * horizontalPadding;
 
 			double w = contentWidth;
 			double h = contentHeight;
