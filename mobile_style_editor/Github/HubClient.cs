@@ -53,9 +53,10 @@ namespace mobile_style_editor
 
 		public GithubAuthenticationData PrepareAuthention()
 		{
-			string id = "";
-			string secret = "";
-			string code = "";
+			Dictionary<string, string> dict = GetCredentials();
+
+			string id = dict["client_id"];
+			string secret = dict["client_secret"];
 
 			var request = new OauthLoginRequest(id);
 
@@ -65,7 +66,6 @@ namespace mobile_style_editor
 			{
 				Id = id,
 				Secret = secret,
-				Code = code,
 				Url = url.AbsoluteUri
 			};
 		}
@@ -247,6 +247,9 @@ namespace mobile_style_editor
 					Variant variant = Variant.FromString(result);
 					dictionary.Add("username", variant.GetObjectElement("username").String);
 					dictionary.Add("pa_token", variant.GetObjectElement("pa_token").String);
+
+					dictionary.Add("client_id", variant.GetObjectElement("client_id").String);
+					dictionary.Add("client_secret", variant.GetObjectElement("client_secret").String);
 				}
 			}
 
