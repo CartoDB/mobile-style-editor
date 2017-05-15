@@ -16,7 +16,7 @@ namespace mobile_style_editor
 
 		public EventHandler<EventArgs> FileDownloadStarted;
 
-		readonly GitHubClient client;
+		GitHubClient client;
 
 		/*
          * TODO - Improve authentication logic. Currently based on Personal Access Token
@@ -51,6 +51,12 @@ namespace mobile_style_editor
 			client.Credentials = credentials;
 		}
 
+		public void Authenticate(string token)
+		{
+			client = new GitHubClient(new ProductHeaderValue("com.carto.style.editor"));
+			client.Credentials = new Credentials(token);
+		}
+
 		public GithubAuthenticationData PrepareAuthention()
 		{
 			Dictionary<string, string> dict = GetCredentials();
@@ -70,7 +76,7 @@ namespace mobile_style_editor
 			};
 		}
 
-		public async Task<string> Authenticate(string id, string secret, string code)
+		public async Task<string> CreateAccessToken(string id, string secret, string code)
 		{
 			var request = new OauthTokenRequest(id, secret, code);
 			OauthToken token = await client.Oauth.CreateAccessToken(request);

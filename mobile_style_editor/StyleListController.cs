@@ -71,7 +71,7 @@ namespace mobile_style_editor
 
 			ContentView.Tabs.TabClicked += OnTabClick;
 
-			ContentView.Webview.Authenticated += OnAuthenticated;
+			ContentView.Webview.Authenticated += OnCodeReceived;
 
 			ContentView.Popup.Header.BackButton.Click += OnPopupBackButtonClick;
 			ContentView.Popup.Header.Select.Click += OnSelectClick;
@@ -90,7 +90,6 @@ namespace mobile_style_editor
 #if __ANDROID__
 			ContentView.ShowMapViews();
 #endif
-			//ContentView.OpenWebviewPopup(HubClient.Instance.PrepareAuthention());
 		}
 
 		protected override void OnDisappearing()
@@ -105,7 +104,7 @@ namespace mobile_style_editor
 			
 			ContentView.Tabs.TabClicked += OnTabClick;
 
-			ContentView.Webview.Authenticated -= OnAuthenticated;
+			ContentView.Webview.Authenticated -= OnCodeReceived;
 
 			ContentView.Popup.Header.BackButton.Click -= OnPopupBackButtonClick;
 			ContentView.Popup.Header.Select.Click -= OnSelectClick;
@@ -122,14 +121,16 @@ namespace mobile_style_editor
 #endif
 		}
 
-		public async void OnAuthenticated(object sender, AuthenticationEventArgs e)
+		public async void OnCodeReceived(object sender, AuthenticationEventArgs e)
 		{
 			if (e.IsOk)
 			{
 				Console.WriteLine("Code: " + e.Code);
 				ContentView.Webview.Hide();
-				string token = await HubClient.Instance.Authenticate(e.Id, e.Secret, e.Code);
+				string token = await HubClient.Instance.CreateAccessToken(e.Id, e.Secret, e.Code);
 				Console.WriteLine("Token: " + token);
+
+				HubClient.Instance.Authenticate(token);
 			}
 		}
 
@@ -272,6 +273,7 @@ namespace mobile_style_editor
 		async void OnGithubButtonClick(object sender, EventArgs e)
 		{
 			ContentView.ShowLoading();
+
 			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo);
 			OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
 
