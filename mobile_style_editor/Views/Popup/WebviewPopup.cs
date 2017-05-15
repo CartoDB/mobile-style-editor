@@ -13,6 +13,8 @@ namespace mobile_style_editor
 			webView = new WebView();
 			webView.Navigating += OnNavigating;
 			webView.Navigated += OnNavigationEnd;
+
+			Content = new BasePopupContent();
 		}
 
 		public override void LayoutSubviews()
@@ -20,6 +22,10 @@ namespace mobile_style_editor
 			Content.AddSubview(webView, Content.X, Content.Y, Content.Width, Content.Height);
 		}
 
+		public void Open(string url)
+		{
+			webView.Source = url;
+		}
 		void OnNavigating(object sender, WebNavigatingEventArgs e)
 		{
 			Console.WriteLine(e);

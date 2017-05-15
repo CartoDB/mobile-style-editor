@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using Xamarin.Forms;
 
@@ -15,6 +15,7 @@ namespace mobile_style_editor
 		public AddStyleItem AddStyle { get; private set; }
 
 		public FileListPopup Popup { get; private set; }
+		public WebviewPopup Webview { get; private set; }
 
 		public StyleTabBar Tabs { get; private set; }
 
@@ -37,6 +38,7 @@ namespace mobile_style_editor
 			Tabs = new StyleTabBar();
 
 			Popup = new FileListPopup();
+			Webview = new WebviewPopup();
 
 			container.IsEnabled = false;
 		}
@@ -75,6 +77,7 @@ namespace mobile_style_editor
 			AddSubview(Tabs, x, y, w, h);
 
 			AddSubview(Popup, 0, 0, Width, Height);
+			AddSubview(Webview, 0, 0, Width, Height);
 		}
 
 		public void HideMapViews()
@@ -110,6 +113,12 @@ namespace mobile_style_editor
 				view.MapView.Animate().Alpha(1.0f).SetDuration(250).Start();
 			}
 #endif
+		}
+
+		public void OpenWebviewPopup(GithubAuthenticationData data)
+		{
+			Webview.Show();
+			Webview.Open(data.Url);
 		}
 
 		public void ScrollTo(StyleTab styleTab)

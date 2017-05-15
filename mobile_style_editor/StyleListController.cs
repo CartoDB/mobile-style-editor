@@ -88,6 +88,7 @@ namespace mobile_style_editor
 #if __ANDROID__
 			ContentView.ShowMapViews();
 #endif
+			//ContentView.OpenWebviewPopup(HubClient.Instance.PrepareAuthention());
 		}
 
 		protected override void OnDisappearing()
