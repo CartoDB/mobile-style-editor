@@ -29,5 +29,7 @@ namespace mobile_style_editor
 		public static Color Heather = Color.FromRgb(117, 184, 193);
 
 		public static Color SoftGray = Color.FromRgb(249, 249, 249);
+
+		public static Color CartoPurple = Color.FromRgb(105, 110, 236);
 	}
 }

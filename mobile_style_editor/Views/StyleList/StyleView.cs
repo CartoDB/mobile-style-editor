@@ -14,6 +14,8 @@ namespace mobile_style_editor
 
 		public FileListPopup Popup { get; private set; }
 
+		public StyleTabBar Tabs { get; private set; }
+
 		public StyleView()
 		{
 			Orientation = ScrollOrientation.Horizontal;
@@ -28,6 +30,8 @@ namespace mobile_style_editor
 
 			AddStyle = new AddStyleItem();
 			MyStyles.Footer = AddStyle;
+
+			Tabs = new StyleTabBar();
 
 			Popup = new FileListPopup();
 		}
