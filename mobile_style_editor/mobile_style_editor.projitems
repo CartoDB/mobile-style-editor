@@ -20,13 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Parser\ZipData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\UWPHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ViewExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Editor\CSSEditorView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Editor\EditorField.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\FileTab.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\FileTabs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\MainView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\Toolbar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\FileUtils.cs" />
@@ -37,7 +31,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\ConfirmationPopupContent.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Toolbar\ToolbarButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\LocalStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\StoredStyle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\PopupType.cs" />
@@ -49,13 +42,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClientiOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\GoogleExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\ListDownloadEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\PickerView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\PickerViewItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClientUWP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileTabPopup\FileTabPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\ClickView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\HubClient.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Utilities\ZoomControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\GithubFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\DownloadedGithubFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StyleListController.cs" />
@@ -70,13 +60,19 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\SelectButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\FileListHeader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\BackButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\CSSEditorView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\EditorField.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Picker\PickerView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Picker\Subviews\PickerViewItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\FileTab.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\FileTabs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\Toolbar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\ToolbarButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\MainView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Utilities\ZoomControl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Views\Editor\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Views\Toolbar\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Views\Picker\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Views\Picker\Subviews\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\" />
@@ -86,6 +82,11 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\" />
     <Folder Include="$(MSBuildThisFileDirectory)Renderer\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Main\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Editor\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Picker\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />
