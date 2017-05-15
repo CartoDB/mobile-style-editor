@@ -41,7 +41,7 @@ namespace mobile_style_editor
 			double w = Width / 2;
 			double h = Height;
 
-			if (!IsTablet && !IsLandscape)
+			if (IsSmallScreen)
 			{
 				w = Width;
 			}
