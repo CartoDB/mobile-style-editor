@@ -72,6 +72,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Utilities\ZoomControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\Tabs\StyleTabBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\Tabs\StyleTab.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\WebviewPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Github\GithubAuthenticationData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
