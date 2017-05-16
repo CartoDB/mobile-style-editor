@@ -41,19 +41,11 @@ namespace mobile_style_editor
 
 		HubClient()
 		{
-			Dictionary<string, string> dict = GetCredentials();
-			Username = dict["username"];
-			PAToken = dict["pa_token"];
-
-			var credentials = new Credentials(Username, PAToken);
-
 			client = new GitHubClient(new ProductHeaderValue("com.carto.style.editor"));
-			client.Credentials = credentials;
 		}
 
 		public void Authenticate(string token)
 		{
-			client = new GitHubClient(new ProductHeaderValue("com.carto.style.editor"));
 			client.Credentials = new Credentials(token);
 		}
 
@@ -85,14 +77,13 @@ namespace mobile_style_editor
 			return token.AccessToken;
 		}
 
-		public async Task<User> GetUser(string name)
+		public async Task<IReadOnlyList<Repository>> GetAllRepositories()
 		{
-			return await client.User.Get(name);
-		}
-
-		public async Task<IReadOnlyList<Repository>> GetRepositories(string username)
-		{
-			return await client.Repository.GetAllForUser(username);
+			/*
+			 * This method only works when user has been Authenticate()-d,
+			 * else there is no "Current" user
+			 */
+			return await client.Repository.GetAllForCurrent();
 		}
 
 		public Task<IReadOnlyList<RepositoryContent>> GetRepositoryContent(string owner, string name, string path = null)
