@@ -25,14 +25,9 @@ namespace mobile_style_editor
             MapView.RegisterLicense(CartoLicense);
 #endif
 			MainPage = new NavigationPage(new StyleListController()) {
-            //MainPage = new NavigationPage(new PickerController()) {
 				BarBackgroundColor = Colors.CartoNavy, 
 				BarTextColor = Color.White
 			};
-
-			//MainPage = new NavigationPage(new MainController(
-			//	"/data/user/0/com.carto.style.editor/files/.config", 
-			//	"nutiteq-bright-blue.zip"));
 		}
 
 		protected override void OnStart()

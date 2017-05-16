@@ -184,6 +184,7 @@ namespace mobile_style_editor
 				 * http://stackoverflow.com/questions/11330363/how-to-detect-device-is-android-phone-or-android-tablet
 				 * 
 				 */
+
 				Console.WriteLine("Ratio: " + Ratio + " (IsLandscape: " + IsLandscape + ")");
 				if (!IsLandscape)
 				{
