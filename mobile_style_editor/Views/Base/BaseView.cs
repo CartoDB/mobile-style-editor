@@ -164,7 +164,16 @@ namespace mobile_style_editor
 
 		public bool IsSmallScreen { get { return !IsTablet && !IsLandscape; } }
 
-		public double Ratio { get { return Height > Width ? Height / Width : Width / Height; } }
+		public double Ratio
+		{
+			get
+			{
+				double width = EditorApplication.Width;
+				double height = EditorApplication.Height;
+
+				return height > width ? height / width : width / height;
+			}
+		}
 
 		public bool IsTablet
 		{

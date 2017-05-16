@@ -15,6 +15,17 @@ namespace mobile_style_editor
 #elif __UWP__
         const string CartoLicense = "XTUMwQ0ZEdHlmdlhhOGZoemNodFJTS0FPNUVlb3dLSVNBaFVBcFFRcjFyVHpBbkJJdG11YWV4WE92SDNoMllJPQoKYXBwVG9rZW49ZDY1Y2RmYzAtMGVkMC00MDJkLTgwOWEtN2RlNjNkNjBhMDgwCnByb2R1Y3RJZD0xZTcxYjA5NC1kMzY5LTQ0ZTMtYWEwZi1iZTg0NmUzZjZkN2QKcHJvZHVjdHM9c2RrLXdpbnBob25lLTQuKgpvbmxpbmVMaWNlbnNlPTEKd2F0ZXJtYXJrPWN1c3RvbQo=";
 #endif
+
+		public static double Height { get { return NavigationPage.Height; } }
+
+		public static double Width { get { return NavigationPage.Width; } }
+
+		public static readonly NavigationPage NavigationPage = new NavigationPage(new StyleListController())
+		{
+			BarBackgroundColor = Colors.CartoNavy,
+			BarTextColor = Color.White
+		};
+
         public EditorApplication()
 		{
 #if __IOS__
@@ -24,10 +35,7 @@ namespace mobile_style_editor
 #elif __UWP__
             MapView.RegisterLicense(CartoLicense);
 #endif
-			MainPage = new NavigationPage(new StyleListController()) {
-				BarBackgroundColor = Colors.CartoNavy, 
-				BarTextColor = Color.White
-			};
+			MainPage = NavigationPage;
 		}
 
 		protected override void OnStart()
