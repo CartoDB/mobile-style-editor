@@ -153,6 +153,17 @@ namespace mobile_style_editor
 				LocalStorage.Instance.AccessToken = token;
 				HubClient.Instance.Authenticate(token);
 				PopulateTemplateList();
+
+				if (ClickedGithubButton)
+				{
+					/*
+					 * User clicked the button unauthenticated,
+					 * went through the whole authentication process,
+					 * now repeat step 1 as authenticated user
+					 */
+					OnGithubButtonClick(null, null);
+					ClickedGithubButton = false;
+				}
 			}
 		}
 
@@ -291,6 +302,8 @@ namespace mobile_style_editor
 		const string GithubRepo = "mobile-styles";
 		static string BasePath = (GithubRepo + "/").ToUpper();
 
+		bool ClickedGithubButton;
+
 		async void OnGithubButtonClick(object sender, EventArgs e)
 		{
 			if (HubClient.Instance.IsAuthenticated)
@@ -304,6 +317,7 @@ namespace mobile_style_editor
 			}
 			else
 			{
+				ClickedGithubButton = true;
 				InitializeAuthentication();
 			}
 
