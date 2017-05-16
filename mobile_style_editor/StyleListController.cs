@@ -34,7 +34,7 @@ namespace mobile_style_editor
 
 		bool filesDownloaded;
 
-		protected override async void OnAppearing()
+		protected override void OnAppearing()
 		{
 			base.OnAppearing();
 
@@ -80,7 +80,7 @@ namespace mobile_style_editor
 #endif
 		}
 
-		async void PopulateTemplateList()
+		async Task<bool> PopulateTemplateList()
 		{
 			if (!filesDownloaded)
 			{
@@ -103,7 +103,10 @@ namespace mobile_style_editor
 				}
 
 				filesDownloaded = true;
+				return true;
 			}
+
+			return false;
 		}
 
 		void InitializeAuthentication()
@@ -303,8 +306,8 @@ namespace mobile_style_editor
 			ShowMyStyles();
 		}
 
-		string GithubOwner = "CartoDB";
-		string GithubRepo = "mobile-styles";
+		string GithubOwner = "";
+		string GithubRepo = "";
 		string GithubPath = "";
 		string BasePath { get { return (GithubRepo + "/").ToUpper(); } }
 

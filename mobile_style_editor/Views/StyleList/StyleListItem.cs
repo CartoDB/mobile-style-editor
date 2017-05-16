@@ -17,8 +17,9 @@ namespace mobile_style_editor
 	{
 		public DownloadResult Data { get; private set; }
 
+#if __ANDROID
 		ClickView overlay;
-
+#endif
 		public MapView MapView { get; private set; }
 
 		Label label;
