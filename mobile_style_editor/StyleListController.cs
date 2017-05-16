@@ -67,7 +67,7 @@ namespace mobile_style_editor
 
 			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 
-			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadComplete;
+			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
 #if __ANDROID__
 			DriveClientDroid.Instance.DownloadStarted += OnDownloadStarted;
 			DriveClientDroid.Instance.DownloadComplete += OnFileDownloadComplete;
@@ -126,7 +126,7 @@ namespace mobile_style_editor
 
 			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
 
-			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadComplete;
+			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadStarted;
 #if __ANDROID__
 			DriveClientDroid.Instance.DownloadStarted -= OnDownloadStarted;
 			DriveClientDroid.Instance.DownloadComplete -= OnFileDownloadComplete;
@@ -253,7 +253,7 @@ namespace mobile_style_editor
 			});
 		}
 
-		public void OnGithubFileDownloadComplete(object sender, EventArgs e)
+		public void OnGithubFileDownloadStarted(object sender, EventArgs e)
 		{
 			string name = (string)sender;
 			Toast.Show("Downloading: " + name, ContentView);

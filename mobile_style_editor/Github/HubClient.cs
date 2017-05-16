@@ -16,28 +16,38 @@ namespace mobile_style_editor
 
 		public EventHandler<EventArgs> FileDownloadStarted;
 
-		GitHubClient client;
+		readonly GitHubClient client;
 
 		/*
-         * TODO - Improve authentication logic. Currently based on Personal Access Token
-         * 
-		 * Create your own personal access token at: https://github.com/settings/tokens/new
-		 * and use it instead of your password to authenticate your account
+		 * Current flow:
 		 * 
-		 * I've included my own token in the assets, but not in the repository,
-		 * so depending on your IDE, it may cause a compile-time or a runtime error
-		 * unless you include the file in your solution as well
+		 * (1) Registered OAuth Application on github.com: Carto Style Editor (creates ClientId and ClientSecret),
+		 * that we use to open the Webview at the correct (login) url, from PrepareAuthentication()
 		 * 
-		 * Because of the low rate limit for un-authenticated users, 
+		 * (2) If login is successful (two-factor authentication support included),
+		 * we are redirected (currently https://www.carto.com)
+		 * with Login Code as a parameter of the url (?=<code>), that we retrieve from the Webview
+		 * 
+		 * (3) The code, as well as the ClientId and ClientSecret are required to get Access Token (CreateAccessToken())
+		 * 
+		 * (4) When the token is created, we use it to Authenticate() and store it as a preference (cf. LocalStorage.cs).
+		 * 
+		 * This process is only required once, as later we retrieve the stored access token,
+		 * use that to Authenticate() and we can start retrieving repository content
+		 * 
+		 * TODO Ask if a user would like their access token to be stored locally,
+		 * it's not nice (and probably illegal) to store and use personal information without their consent
+		 * 
+		 * NOTES:
+		 * 
+         * Because of the low rate limit for un-authenticated users,
 		 * authentication is necessary even when accessing public repositories:
-         * https://developer.github.com/changes/2012-10-14-rate-limit-changes/
-         * 
-         * I've included sample code on the bottom of this page that you can uncomment and test for yourself
-         * The repository is public, you should be able to do everything but final line, UpdateFile
+		 * https://developer.github.com/changes/2012-10-14-rate-limit-changes/
+		 * 
+		 * This entire complicated login process is required only so each user could authenticate themself,
+		 * for inhouse use-cases we could simply create one access token in one account and use that,
+		 * (https://github.com/settings/tokens) instead of this entire process
 		 */
-
-		string Username = "<your-user-name>";
-		string PAToken = "<your-personal-access-token>";
 
 		HubClient()
 		{
