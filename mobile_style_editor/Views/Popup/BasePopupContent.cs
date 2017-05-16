@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class BasePopupContent : BaseView
+	public class BasePopupContent : BaseScrollView
 	{
 		public EventHandler<EventArgs> Click;
 
