@@ -77,6 +77,11 @@ namespace mobile_style_editor
 			text.FontSize = 12f;
 			text.HorizontalTextAlignment = TextAlignment.Center;
 
+			if (!IsTablet)
+			{
+				text.FontSize = 9;
+			}
+
 			if (DriveFile != null)
 			{
 				text.Text = DriveFile.Name;

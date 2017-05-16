@@ -14,6 +14,11 @@ namespace mobile_style_editor
 
 			int itemsPerRow = 7;
 
+			if (!IsTablet)
+			{
+				itemsPerRow = 5;
+			}
+
 			double x = padding;
 			double y = padding;
 			double w = Width / itemsPerRow;
