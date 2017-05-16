@@ -254,6 +254,11 @@ namespace mobile_style_editor
 
 			Toast.Show("Done!", ContentView);
 
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.HideLoading();
+			});
+
 			ShowMyStyles();
 		}
 
