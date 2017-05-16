@@ -45,7 +45,8 @@ namespace mobile_style_editor
 
 			foreach (RepositoryContent file in files)
 			{
-				list.Add(GithubFile.FromRepositoryContent(file));	
+				var converted = GithubFile.FromRepositoryContent(file);
+				list.Add(converted);	
 			}
 
 			return list;
