@@ -47,6 +47,7 @@ namespace mobile_style_editor
 		 * This entire complicated login process is required only so each user could authenticate themself,
 		 * for inhouse use-cases we could simply create one access token in one account and use that,
 		 * (https://github.com/settings/tokens) instead of this entire process
+		 * 
 		 */
 
 		HubClient()
