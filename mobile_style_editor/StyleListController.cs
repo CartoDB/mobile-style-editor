@@ -46,8 +46,7 @@ namespace mobile_style_editor
 			}
 			else
 			{
-				GithubAuthenticationData data = HubClient.Instance.PrepareAuthention();
-				ContentView.OpenWebviewPopup(data);
+				InitializeAuthentication();
 			}
 
 			ShowMyStyles();
@@ -105,6 +104,12 @@ namespace mobile_style_editor
 
 				filesDownloaded = true;
 			}
+		}
+
+		void InitializeAuthentication()
+		{
+			GithubAuthenticationData data = HubClient.Instance.PrepareAuthention();
+			ContentView.OpenWebviewPopup(data);
 		}
 
 		protected override void OnDisappearing()
@@ -184,7 +189,6 @@ namespace mobile_style_editor
 
 		async void OnSelectClick(object sender, EventArgs e)
 		{
-
 			if (ContentView.Popup.GithubFiles == null)
 			{
 				return;
@@ -289,12 +293,20 @@ namespace mobile_style_editor
 
 		async void OnGithubButtonClick(object sender, EventArgs e)
 		{
-			ContentView.ShowLoading();
+			if (HubClient.Instance.IsAuthenticated)
+			{
+				ContentView.ShowLoading();
 
-			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo);
-			OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
+				var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo);
+				OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
 
-			ContentView.Popup.Header.Text = BasePath;
+				ContentView.Popup.Header.Text = BasePath;
+			}
+			else
+			{
+				InitializeAuthentication();
+			}
+
 		}
 
 #if __UWP__

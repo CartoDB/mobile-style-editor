@@ -16,8 +16,6 @@ namespace mobile_style_editor
 
 		public EventHandler<EventArgs> FileDownloadStarted;
 
-		readonly GitHubClient client;
-
 		/*
 		 * Current flow:
 		 * 
@@ -49,6 +47,16 @@ namespace mobile_style_editor
 		 * (https://github.com/settings/tokens) instead of this entire process
 		 * 
 		 */
+
+		readonly GitHubClient client;
+
+		public bool IsAuthenticated
+		{
+			get
+			{
+				return client.Credentials.AuthenticationType == AuthenticationType.Oauth && client.Credentials.Password != null;
+			}
+		}
 
 		HubClient()
 		{
