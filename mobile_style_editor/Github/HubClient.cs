@@ -107,12 +107,12 @@ namespace mobile_style_editor
 
 		public Task<IReadOnlyList<RepositoryContent>> GetRepositoryContent(string owner, string name, string path = null)
 		{
-			if (path != null)
+			if (string.IsNullOrWhiteSpace(path))
 			{
-				return client.Repository.Content.GetAllContents(owner, name, path);
+				return client.Repository.Content.GetAllContents(owner, name);
 			}
 
-			return client.Repository.Content.GetAllContents(owner, name);
+			return client.Repository.Content.GetAllContents(owner, name, path);
 		}
 
 		public async Task<List<RepositoryContent>> GetZipFiles(string owner, string name, string path = null)

@@ -294,13 +294,14 @@ namespace mobile_style_editor
 			{
 				ContentView.HideLoading();
 			});
-			ShowMyStyles();
 
+			ShowMyStyles();
 		}
 
-		const string GithubOwner = "CartoDB";
-		const string GithubRepo = "mobile-styles";
-		static string BasePath = (GithubRepo + "/").ToUpper();
+		string GithubOwner = "CartoDB";
+		string GithubRepo = "mobile-styles";
+		string GithubPath = "";
+		string BasePath { get { return (GithubRepo + "/").ToUpper(); } }
 
 		bool ClickedGithubButton;
 
@@ -310,7 +311,7 @@ namespace mobile_style_editor
 			{
 				ContentView.ShowLoading();
 
-				var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo);
+				var contents = await HubClient.Instance.GetAllRepositories();
 				OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
 
 				ContentView.Popup.Header.Text = BasePath;
@@ -428,23 +429,44 @@ namespace mobile_style_editor
 			}
 			else if (item.GithubFile != null)
 			{
-				if (!item.GithubFile.IsDirectory)
+				/*
+				 * Ignore file clicks
+				 */
+				if (item.GithubFile.IsDirectory)
 				{
-					// Do nothing if it's a file click
-					return;
-				}
-				else
-				{
-					storedContents.Add(ContentView.Popup.GithubFiles);
-					string path = item.GithubFile.Path;
-					var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, path);
-					ContentView.Popup.Show(contents.ToGithubFiles());
-					ContentView.HideLoading();
+					if (item.GithubFile.IsRepository)
+					{
+						GithubOwner = item.GithubFile.Owner;
+						GithubRepo = item.GithubFile.Name;
+					}
 
-					ContentView.Popup.Header.BackButton.Enable();
-					ContentView.Popup.Header.Text = BasePath + path.ToUpper();
+					GithubPath = item.GithubFile.Path;
+					await LoadGithubContents();
 				}
 			}
+		}
+
+		async Task<bool> LoadGithubContents()
+		{
+			storedContents.Add(ContentView.Popup.GithubFiles);
+
+			if (GithubPath == null)
+			{
+				// Path will be null if we're dealing with a repository
+				GithubPath = "";
+			}
+		
+ 			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, GithubPath);
+			ContentView.Popup.Show(contents.ToGithubFiles());
+			ContentView.HideLoading();
+
+			Device.BeginInvokeOnMainThread(delegate
+			{
+				ContentView.Popup.Header.BackButton.Enable();
+				ContentView.Popup.Header.Text = BasePath + GithubPath.ToUpper();
+			});
+
+			return true;
 		}
 
 		public

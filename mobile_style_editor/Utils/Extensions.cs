@@ -50,5 +50,17 @@ namespace mobile_style_editor
 
 			return list;
 		}
+
+		public static List<GithubFile> ToGithubFiles(this IReadOnlyList<Repository> files)
+		{
+			List<GithubFile> list = new List<GithubFile>();
+
+			foreach (Repository file in files)
+			{
+				list.Add(GithubFile.FromRepository(file));	
+			}
+
+			return list;
+		}
 	}
 }

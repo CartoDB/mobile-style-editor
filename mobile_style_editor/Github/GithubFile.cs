@@ -21,7 +21,11 @@ namespace mobile_style_editor
 
 		public bool IsZip { get { return Extension.Equals("zip"); } }
 
-		internal static GithubFile FromRepositoryContent(RepositoryContent file)
+		public string Owner { get; set; }
+
+		public bool IsRepository { get { return Sha == null && Path == null; } }
+
+		public static GithubFile FromRepositoryContent(RepositoryContent file)
 		{
 			GithubFile item = new GithubFile();
 			item.Name = file.Name;
@@ -36,6 +40,16 @@ namespace mobile_style_editor
 			item.Extension = split[split.Length - 1];
 
 			return item;
+		}
+
+		public static GithubFile FromRepository(Repository file)
+		{
+			GithubFile item = new GithubFile();
+			item.Name = file.Name;
+			item.Owner = file.Owner.Login;
+			item.IsDirectory = true;
+
+ 			return item;
 		}
 
 		public bool IsProjectFile
