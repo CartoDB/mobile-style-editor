@@ -11,6 +11,10 @@ using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.UWP;
 #endif
 
+#if __UWP__
+
+#else
+
 [assembly: ExportRenderer(typeof(ClickView), typeof(ClickViewRenderer))]
 namespace mobile_style_editor
 {
@@ -90,3 +94,4 @@ namespace mobile_style_editor
 #endif
 	}
 }
+#endif

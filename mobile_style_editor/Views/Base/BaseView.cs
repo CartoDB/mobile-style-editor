@@ -33,7 +33,7 @@ namespace mobile_style_editor
 		}
 
 		public void AddSubview(View view, double x, double y, double w, double h)
-		{
+		{   
 			if (view.Parent == null)
 			{
 				Children.Add(view, GetConstraint(x), GetConstraint(y), GetConstraint(w), GetConstraint(h, ConstraintProperty_Height));

@@ -17,39 +17,37 @@ namespace mobile_style_editor
 	{
 		public DownloadResult Data { get; private set; }
 
-#if __ANDROID__
+#if __IOS__
+#else
 		ClickView overlay;
 #endif
-		public MapView MapView { get; private set; }
+        public MapContainer MapView { get; private set; }
 
 		Label label;
 
-		public StyleListItem()
-		{
-			BackgroundColor = Colors.CartoRedDark;
+        public StyleListItem()
+        {
+            BackgroundColor = Colors.CartoRedDark;
 
-			label = new Label();
-			label.VerticalTextAlignment = TextAlignment.Center;
-			label.TextColor = Color.White;
-			label.FontSize = 11;
+            label = new Label();
+            label.VerticalTextAlignment = TextAlignment.Center;
+            label.TextColor = Color.White;
+            label.FontSize = 11;
 
-			MapView = new MapView(
-#if __ANDROID__
-				Forms.Context
+            MapView = new MapContainer();
+
+#if __IOS__
+            MapView.UserInteractionEnabled = false;
+#else
+            overlay = new ClickView();
+            overlay.Click += delegate
+            {
+                Click(this, EventArgs.Empty);
+            };
 #endif
-			);
-
-#if __ANDROID__
-			overlay = new ClickView();
-			overlay.Click += delegate {
-				Click(this, EventArgs.Empty);
-			};
-#elif __IOS__
-			MapView.UserInteractionEnabled = false;
-#endif
-		}
-
-		public override void LayoutSubviews()
+        }
+        
+        public override void LayoutSubviews()
 		{
 			double padding = 5;
 
@@ -61,31 +59,17 @@ namespace mobile_style_editor
 			double w = Width - 2 * padding;
 			double h = unitHeight * (divider - 1);
 
+#if __UWP__
+#else
+            AddSubview(MapView, x, y, w, h);
+#endif
+
 #if __IOS__
-            AddSubview(MapView.ToView(), x, y, w, h);
-#elif __ANDROID__
-			if (MapView.Parent != null)
-			{
-				MapView.RemoveFromParent();
-			}
-            AddSubview(MapView.ToView(), x, y, w, h);
-
-			RemoveChild(overlay);
-            AddSubview(overlay, x, y, w, h);
-#elif __UWP__
-
-            // TODO Crashes application
-            if (mapView.Parent == null)
-            {
-                //AddSubview(mapView.ToView(), x, y, w, h);
-            } else
-            {
-                //mapView.ToView().UpdateLayout(x, y, w, h);
-            }
+#else
             AddSubview(overlay, x, y, w, h);
 #endif
 
-			y += h + padding;
+            y += h + padding;
 			h = unitHeight;
 
 			AddSubview(label, x, y, w, h);
