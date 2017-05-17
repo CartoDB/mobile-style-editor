@@ -17,10 +17,11 @@ namespace mobile_style_editor
 	{
 		public DownloadResult Data { get; private set; }
 
-#if __ANDROID__
+#if __IOS__
+#else
 		ClickView overlay;
 #endif
-		public MapView MapView { get; private set; }
+        public MapView MapView { get; private set; }
 
 		Label label;
 
@@ -75,7 +76,7 @@ namespace mobile_style_editor
 #elif __UWP__
 
             // TODO Crashes application
-            if (mapView.Parent == null)
+            if (MapView.Parent == null)
             {
                 //AddSubview(mapView.ToView(), x, y, w, h);
             } else

@@ -1,9 +1,10 @@
 ﻿
-#if __UWP__
-#else
 using System;
 using System.Collections.Generic;
+#if __UWP__
+#else
 using SQLite;
+#endif
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -37,34 +38,23 @@ namespace mobile_style_editor
 
 		public static LocalStorage Instance = new LocalStorage();
 
-		SQLiteConnection db;
-
+        #if __UWP__
+#else
+        SQLiteConnection db;
+#endif
         LocalStorage()
         {
 #if __UWP__
-            string folder = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+            //string folder = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #else
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-#endif
             const string file = "carto_style_editor.db";
 
-            try
-            {
-                db = new SQLiteConnection(System.IO.Path.Combine(folder, file));
-            }
-            catch (Exception e)
-            {
-                // TODO UWP Throws:
-                // Unable to load DLL 'sqlite3': The specified module could not be found. (Exception from HRESULT: 0x8007007E)
-                
-                // Probably LocalStorage isn't necessary at this point anyway.
-                // Should fix so it wouldn't save style urls, but rather read all files from stored styles directory
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-
+            db = new SQLiteConnection(System.IO.Path.Combine(folder, file));
             db.CreateTable<StoredStyle>();
+#endif
+
         }
 
-	}
+    }
 }
-#endif
