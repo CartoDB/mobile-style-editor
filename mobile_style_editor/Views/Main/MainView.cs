@@ -162,7 +162,7 @@ namespace mobile_style_editor
 	 * Container class to fix view hierarchy
      *
 	 * mapView.ToView() caused the map to always be on top of sibling views,
-	 * if we place it in a contain, it won't have any siblings to be on top of
+	 * if we place it in a container, it won't have any siblings to be on top of
 	 */
 	public class MapContainer : BaseView
 	{
@@ -191,7 +191,7 @@ namespace mobile_style_editor
             }
 #endif
             AddSubview(mapView.ToView(), 0, 0, Width, Height);
-		}
+        }
 
 		public void Update(byte[] data, Action completed)
 		{
