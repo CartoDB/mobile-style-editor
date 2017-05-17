@@ -93,7 +93,6 @@ namespace mobile_style_editor
 			var token = new TokenResponse { RefreshToken = RefreshToken };
 
 			credentials = new UserCredential(flow, "user", token);
-
 		}
 
 		public void DownloadStyleList()
