@@ -353,7 +353,7 @@ namespace mobile_style_editor
 
 		void OnGithubButtonClick(object sender, EventArgs e)
 		{
-			if (ContentView.Loader.IsRunning)
+			if (ContentView.Loader != null && ContentView.Loader.IsRunning)
 			{
 				return;
 			}
