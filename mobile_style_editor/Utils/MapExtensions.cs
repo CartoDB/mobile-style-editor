@@ -16,9 +16,9 @@ namespace mobile_style_editor
 
 		public static void Update(this MapView MapView, byte[] data, Action completed)
 		{
-			System.Threading.Tasks.Task.Run(delegate
-			{
-				BinaryData styleAsset = new BinaryData(data);
+            System.Threading.Tasks.Task.Run(delegate
+            {
+                BinaryData styleAsset = new BinaryData(data);
 
 				var package = new ZippedAssetPackage(styleAsset);
 				var styleSet = new CompiledStyleSet(package);
@@ -70,7 +70,7 @@ namespace mobile_style_editor
 					});
 				}
 #endif
-			});
-		}
+            });
+        }
 	}
 }

@@ -29,17 +29,20 @@ namespace mobile_style_editor
 			LayoutSubviews();
 		}
 
+        public void Clear()
+        {
+            content.Children.Clear();
+        }
+
 		public void AddSubview(View view)
 		{
 			content.AddSubview(view);
-			//content.Children.Add(view, ZeroConstraint, ZeroConstraint, ZeroConstraint, ZeroConstraint);
 		}
 
 		public void AddSubview(View view, double x, double y, double w, double h)
 		{
 			content.AddSubview(view, x, y, w, h);
-			//content.Children.Add(view, GetConstraint(x), GetConstraint(y), GetConstraint(w), GetConstraint(h));
-		}
+        }
 
 		Constraint GetConstraint(double number)
 		{

@@ -68,7 +68,7 @@ namespace mobile_style_editor
 
 		public void RenderList(List<Octokit.RepositoryContent> contents)
 		{
-			styleList.Children.Clear();
+			styleList.Clear();
 
 			foreach (var content in contents)
 			{
@@ -98,7 +98,7 @@ namespace mobile_style_editor
 
 		public void ShowSampleStyles(List<DownloadResult> results)
 		{
-			styleList.Children.Clear();	
+			styleList.Clear();	
 
 			foreach (DownloadResult result in results)
 			{

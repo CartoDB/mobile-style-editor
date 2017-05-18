@@ -21,7 +21,7 @@ namespace mobile_style_editor
 			string folder = "";
 
 #if __UWP__
-			folder += "Assets/"
+            folder += "Assets/";
 #endif
 			using (var stream = new FileStream(folder + "drive_client_ids.json", FileMode.Open, FileAccess.Read))
 			{
