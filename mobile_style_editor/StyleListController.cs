@@ -148,7 +148,7 @@ namespace mobile_style_editor
 		public void OnPageClick(object sender, EventArgs e)
 		{
 			PageView page = (PageView)sender;
-			ContentView.Popup.FileContent.Populate(page.GithubFiles.ToObjects());
+			ContentView.Popup.Show(page.GithubFiles);
 		}
 
 		public async void OnCodeReceived(object sender, AuthenticationEventArgs e)
