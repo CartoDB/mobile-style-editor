@@ -63,9 +63,29 @@ namespace mobile_style_editor
 			client = new GitHubClient(new ProductHeaderValue("com.carto.style.editor"));
 		}
 
+		const int PageSize = 50;
+		const int PageCount = 1;
+		int StartPage = 1;
+
+		ApiOptions Options
+		{
+			get {
+				var options = new ApiOptions();
+
+				options.PageSize = PageSize;
+				options.PageCount = PageCount;
+
+				options.StartPage = StartPage;
+
+				return options;
+			}
+		}
+
 		public void Authenticate(string token)
 		{
 			client.Credentials = new Credentials(token);
+
+			//var repositories = await client.Repository.GetAllForCurrent(Options);
 		}
 
 		public GithubAuthenticationData PrepareAuthention()
