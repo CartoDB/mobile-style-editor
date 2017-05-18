@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Reflection;
+using System.Text;
 using Carto.Ui;
 using Xamarin.Forms;
 
@@ -40,7 +42,7 @@ namespace mobile_style_editor
 
 		protected override void OnStart()
 		{
-			
+
 		}
 
 		protected override void OnSleep()

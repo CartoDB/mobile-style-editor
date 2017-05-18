@@ -103,14 +103,14 @@ namespace mobile_style_editor
 			foreach (StyleListItem view in MyStyles.Items)
 			{
 				view.MapView.Visibility = Android.Views.ViewStates.Visible;
-				view.MapView.Animate().Alpha(1.0f).SetDuration(250).Start();
+				view.MapView.AnimateAlpha(1.0f);
 			}
 
 			foreach (StyleListItem view in Templates.Items)
 			{
 				view.MapView.Visibility = Android.Views.ViewStates.Visible;
 
-				view.MapView.Animate().Alpha(1.0f).SetDuration(250).Start();
+				view.MapView.AnimateAlpha(1.0f);
 			}
 #endif
 		}

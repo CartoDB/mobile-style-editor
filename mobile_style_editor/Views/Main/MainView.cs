@@ -166,6 +166,27 @@ namespace mobile_style_editor
 	 */
 	public class MapContainer : BaseView
 	{
+#if __IOS__
+		public bool UserInteractionEnabled
+		{
+			get { return mapView.UserInteractionEnabled; }
+			set { mapView.UserInteractionEnabled = value; }
+		}
+#endif
+
+#if __ANDROID__
+		public float Alpha
+		{
+			get { return mapView.Alpha; }
+			set { mapView.Alpha = value; }
+		}
+
+		public Android.Views.ViewStates Visibility
+		{
+			get { return mapView.Visibility; }
+			set { mapView.Visibility = value; }
+		}
+#endif
 		MapView mapView;
 
 		public float Zoom { get { return mapView.Zoom; } set { mapView.Zoom = value; } }
@@ -190,8 +211,8 @@ namespace mobile_style_editor
                 (mapView.Parent as NativeViewWrapperRenderer).Children.Remove(mapView);
             }
 #endif
-            AddSubview(mapView.ToView(), 0, 0, Width, Height);
-        }
+			AddSubview(mapView.ToView(), 0, 0, Width, Height);
+		}
 
 		public void Update(byte[] data, Action completed)
 		{
@@ -202,6 +223,13 @@ namespace mobile_style_editor
 		{
 			mapView.SetZoom(zoom, duration);
 		}
+
+#if __ANDROID__
+		public void AnimateAlpha(float alpha, long duration = 250)
+		{
+			mapView.Animate().Alpha(alpha).SetDuration(duration).Start();
+		}
+#endif
 
 	}
 }
