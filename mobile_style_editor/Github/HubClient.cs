@@ -125,14 +125,23 @@ namespace mobile_style_editor
 			return await client.Repository.GetAllForCurrent();
 		}
 
-		public Task<IReadOnlyList<RepositoryContent>> GetRepositoryContent(string owner, string name, string path = null)
+		public async Task<IReadOnlyList<RepositoryContent>> GetRepositoryContent(string owner, string name, string path = null)
 		{
-			if (string.IsNullOrWhiteSpace(path))
+			try
 			{
-				return client.Repository.Content.GetAllContents(owner, name);
-			}
+				if (string.IsNullOrWhiteSpace(path))
+				{
+					return await client.Repository.Content.GetAllContents(owner, name);
+				}
 
-			return client.Repository.Content.GetAllContents(owner, name, path);
+				return await client.Repository.Content.GetAllContents(owner, name, path);
+			}
+			catch (NotFoundException)
+			{
+				// For some reasons, Octokit throws an exception when a repository is completely empty.
+				// In that case, return an empty list
+				return new System.Collections.ObjectModel.ReadOnlyCollection<RepositoryContent>(new List<RepositoryContent>());
+			}
 		}
 
 		public async Task<List<RepositoryContent>> GetZipFiles(string owner, string name, string path = null)
