@@ -76,5 +76,33 @@ namespace mobile_style_editor
 			pages.Clear();
 			Children.Clear();
 		}
+
+		public void Show(bool animated = true)
+		{
+			IsVisible = true;
+
+			if (!animated)
+			{
+				Opacity = 1;
+			}
+			else
+			{
+				this.FadeTo(1);
+			}
+		}
+
+		public virtual async void Hide(bool animated = true)
+		{
+			if (!animated)
+			{
+				Opacity = 0;
+			}
+			else
+			{
+				await this.FadeTo(0);
+			}
+
+			IsVisible = false;
+		}
 	}
 }

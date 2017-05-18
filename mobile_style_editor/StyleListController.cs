@@ -199,6 +199,7 @@ namespace mobile_style_editor
 			if (storedContents.Count == 1)
 			{
 				ContentView.Popup.Header.BackButton.Disable();
+				ContentView.Popup.Pages.Show();
 			}
 
 			List<GithubFile> files = storedContents[storedContents.Count - 1];
@@ -478,6 +479,7 @@ namespace mobile_style_editor
 					{
 						GithubOwner = item.GithubFile.Owner;
 						GithubRepo = item.GithubFile.Name;
+						ContentView.Popup.Pages.Hide();
 					}
 
 					GithubPath = item.GithubFile.Path;
