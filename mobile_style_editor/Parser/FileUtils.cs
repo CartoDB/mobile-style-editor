@@ -147,9 +147,13 @@ namespace mobile_style_editor
 
 			foreach (string path in paths)
 			{
-				string[] split = path.Split('/');
+                char separator = '/';
+#if __UWP__
+                separator = '\\';
+#endif
+                string[] split = path.Split(separator);
 				string filename = split[split.Length - 1];
-				string filepath = path.Replace("/" + filename, "");
+				string filepath = path.Replace(separator + filename, "");
 
 				results.Add(new DownloadResult { Filename = filename, Path = filepath });
 			}
