@@ -7,6 +7,7 @@ namespace mobile_style_editor
 {
 	public class PaginationView : BaseView
 	{
+		public double ContentHeight;
 		public EventHandler<EventArgs> PageClicked;
 
 		List<PageView> pages = new List<PageView>();
@@ -22,8 +23,8 @@ namespace mobile_style_editor
 
 			double x = 0;
 			double y = 0;
-			double w = 30;
-			double h = 30;
+			double w = ContentHeight;
+			double h = ContentHeight;
 
 			foreach (PageView page in pages)
 			{

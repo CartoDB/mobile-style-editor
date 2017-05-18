@@ -20,6 +20,7 @@ namespace mobile_style_editor
 			Header = new FileListHeader();
 
 			Pages = new PaginationView();
+			Pages.ContentHeight = 40;
 
 			base.Hide(false);
 		}
@@ -61,7 +62,7 @@ namespace mobile_style_editor
 			AddSubview(Header, x, y, w, h);
 
 			w = contentWidth;
-			h = 40;
+			h = Pages.ContentHeight;
 			x = contentX;
 			y = contentY + contentHeight;
 
