@@ -33,9 +33,9 @@ namespace mobile_style_editor
 			Templates.Header = StyleContainer.GetHeaderLabel("TEMPLATE STYLES");
 
 			AddStyle = new AddStyleItem();
-			MyStyles.Footer = AddStyle;
+            MyStyles.Footer = AddStyle;
 
-			Tabs = new StyleTabBar();
+            Tabs = new StyleTabBar();
 
 			Popup = new FileListPopup();
 			Webview = new WebviewPopup();

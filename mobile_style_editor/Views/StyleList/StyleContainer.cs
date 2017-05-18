@@ -45,18 +45,18 @@ namespace mobile_style_editor
 			double w = Width - 2 * padding;
 			double h = headerHeight;
 
-			if (Header != null)
-			{
+            if (Header != null)
+            {
                 AddSubview(Header, x, y, w, h);
 
-				// Separator
-				y += h + 3;
-				h = 1;
+                // Separator
+                y += h + 3;
+                h = 1;
                 AddSubview(separator, 2 * padding, y + h, w - 2 * padding, h);
-				y += headerPadding;
-			}
+                y += headerPadding;
+            }
 
-			y += h + headerPadding;
+            y += h + headerPadding;
 
 			// For some reason listview is too short, substracting a random constant: 15
 			h = Height - (headerHeight + headerPadding + 15);
@@ -92,9 +92,9 @@ namespace mobile_style_editor
 
 		public void RenderMap(DownloadResult result, int index)
 		{
-			StyleListItem item = Items[index];
-			item.Update(result);
-		}
+            StyleListItem item = Items[index];
+            item.Update(result);
+        }
 
 		public void ShowSampleStyles(List<DownloadResult> results)
 		{
@@ -103,6 +103,7 @@ namespace mobile_style_editor
 			foreach (DownloadResult result in results)
 			{
 				var item = new StyleListItem();
+
 				item.Click += (object sender, EventArgs e) =>
 				{
 					if (ItemClick != null)
@@ -135,13 +136,11 @@ namespace mobile_style_editor
 				}
 			}
 
-
-			if (Footer != null)
-			{
-				styleList.AddSubview(Footer, x, y, w, h);
-			}
-
-		}
+            if (Footer != null)
+            {
+                styleList.AddSubview(Footer, x, y, w, h);
+            }
+        }
 
 		public static BaseView GetHeaderLabel(string text)
 		{

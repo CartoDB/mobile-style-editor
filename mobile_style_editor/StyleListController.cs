@@ -98,8 +98,8 @@ namespace mobile_style_editor
 				foreach (var content in contents)
 				{
 					DownloadResult result = await DownloadFile(content);
-					ContentView.Templates.RenderMap(result, index);
-					index++;
+                    ContentView.Templates.RenderMap(result, index);
+                    index++;
 				}
 
 				filesDownloaded = true;
