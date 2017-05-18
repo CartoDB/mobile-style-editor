@@ -193,7 +193,6 @@ namespace mobile_style_editor
 
 		public MapContainer()
 		{
-
 			mapView = new MapView(
 #if __ANDROID__
 			Forms.Context

@@ -49,8 +49,6 @@ namespace mobile_style_editor
 				InitializeAuthentication();
 			}
 
-			ShowMyStyles();
-
 			ContentView.AddStyle.Drive.Click += OnDriveButtonClick;
 			ContentView.AddStyle.Github.Click += OnGithubButtonClick;
 
@@ -78,9 +76,10 @@ namespace mobile_style_editor
 #if __ANDROID__
 			ContentView.ShowMapViews();
 #endif
-		}
+            ShowMyStyles();
+        }
 
-		async Task<bool> PopulateTemplateList()
+        async Task<bool> PopulateTemplateList()
 		{
 			if (!filesDownloaded)
 			{
@@ -273,7 +272,7 @@ namespace mobile_style_editor
 			Device.BeginInvokeOnMainThread(delegate
 			{
 				ContentView.MyStyles.ShowSampleStyles(data);
-			});
+            });
 		}
 
 		public void OnGithubFileDownloadStarted(object sender, EventArgs e)
