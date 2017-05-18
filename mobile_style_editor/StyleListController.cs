@@ -63,6 +63,7 @@ namespace mobile_style_editor
 			ContentView.Popup.Header.Select.Click += OnSelectClick;
 
 			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
+			ContentView.Popup.Pages.PageClicked += OnPageClick;
 
 			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
 #if __ANDROID__
@@ -132,6 +133,7 @@ namespace mobile_style_editor
 			ContentView.Popup.Header.Select.Click -= OnSelectClick;
 
 			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
+			ContentView.Popup.Pages.PageClicked -= OnPageClick;
 
 			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadStarted;
 #if __ANDROID__
@@ -141,6 +143,12 @@ namespace mobile_style_editor
 			DriveClientiOS.Instance.DownloadComplete -= OnFileDownloadComplete;
 			DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
 #endif
+		}
+
+		public void OnPageClick(object sender, EventArgs e)
+		{
+			PageView page = (PageView)sender;
+			ContentView.Popup.FileContent.Populate(page.GithubFiles.ToObjects());
 		}
 
 		public async void OnCodeReceived(object sender, AuthenticationEventArgs e)
@@ -312,16 +320,37 @@ namespace mobile_style_editor
 
 		bool ClickedGithubButton;
 
-		async void OnGithubButtonClick(object sender, EventArgs e)
+		int counter = 1;
+
+		async void DownloadRepositories()
+		{
+			if (counter == 1)
+			{
+				ContentView.ShowLoading();
+			}
+
+			var contents = await HubClient.Instance.GetRepositories(counter);
+			ContentView.Popup.Pages.AddPage(contents.ToGithubFiles(), counter);
+
+			if (counter == 1)
+			{
+				OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
+				ContentView.Popup.Header.Text = BasePath;
+				ContentView.Popup.Pages.HighlightFirst();
+			}
+
+			if (contents.Count == HubClient.PageSize)
+			{
+				counter++;
+				DownloadRepositories();
+			}
+		}
+
+		void OnGithubButtonClick(object sender, EventArgs e)
 		{
 			if (HubClient.Instance.IsAuthenticated)
 			{
-				ContentView.ShowLoading();
-
-				var contents = await HubClient.Instance.GetAllRepositories();
-				OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
-
-				ContentView.Popup.Header.Text = BasePath;
+				DownloadRepositories();
 			}
 			else
 			{

@@ -76,6 +76,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Github\GithubAuthenticationData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Pagination\PaginationView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Pagination\PageView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
@@ -94,6 +96,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Utilities\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\Tabs\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Pagination\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />

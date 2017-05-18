@@ -63,29 +63,24 @@ namespace mobile_style_editor
 			client = new GitHubClient(new ProductHeaderValue("com.carto.style.editor"));
 		}
 
-		const int PageSize = 50;
+		public const int PageSize = 50;
 		const int PageCount = 1;
-		int StartPage = 1;
 
-		ApiOptions Options
+		ApiOptions GetOptions(int page)
 		{
-			get {
-				var options = new ApiOptions();
+			var options = new ApiOptions();
 
-				options.PageSize = PageSize;
-				options.PageCount = PageCount;
+			options.PageSize = PageSize;
+			options.PageCount = PageCount;
 
-				options.StartPage = StartPage;
+			options.StartPage = page;
 
-				return options;
-			}
+			return options;
 		}
 
 		public void Authenticate(string token)
 		{
 			client.Credentials = new Credentials(token);
-
-			//var repositories = await client.Repository.GetAllForCurrent(Options);
 		}
 
 		public GithubAuthenticationData PrepareAuthention()
@@ -116,12 +111,17 @@ namespace mobile_style_editor
 			return token.AccessToken;
 		}
 
-		public async Task<IReadOnlyList<Repository>> GetAllRepositories()
+		public async Task<IReadOnlyList<Repository>> GetRepositories(int page = -1)
 		{
 			/*
 			 * This method only works when user has been Authenticate()-d,
 			 * else there is no "Current" user
 			 */
+			if (page != -1)
+			{
+				return await client.Repository.GetAllForCurrent(GetOptions(page));
+			}
+
 			return await client.Repository.GetAllForCurrent();
 		}
 

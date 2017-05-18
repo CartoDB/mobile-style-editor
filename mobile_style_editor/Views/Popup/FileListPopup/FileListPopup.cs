@@ -11,11 +11,15 @@ namespace mobile_style_editor
 
 		public FileListHeader Header { get; private set; }
 
+		public PaginationView Pages { get; private set; }
+
 		public FileListPopup()
 		{
 			Content = new FileListPopupContent();
 
 			Header = new FileListHeader();
+
+			Pages = new PaginationView();
 
 			Hide(false);
 		}
@@ -35,12 +39,13 @@ namespace mobile_style_editor
 
 			verticalPadding = 70;
 
-			double x = horizontalPadding;
-			double y = verticalPadding;
-
 			double contentHeight = Height - 2 * verticalPadding;
 			double contentWidth = Width - 2 * horizontalPadding;
+			double contentX = horizontalPadding;
+			double contentY = verticalPadding;
 
+			double x = contentX;
+			double y = contentY;
 			double w = contentWidth;
 			double h = contentHeight;
 
@@ -54,6 +59,13 @@ namespace mobile_style_editor
 			y = verticalPadding - h;
 
 			AddSubview(Header, x, y, w, h);
+
+			w = contentWidth;
+			h = 40;
+			x = contentX;
+			y = contentY + contentHeight;
+
+			AddSubview(Pages, x, y, w, h);
 		}
 
 		public void Show(List<DriveFile> files)
