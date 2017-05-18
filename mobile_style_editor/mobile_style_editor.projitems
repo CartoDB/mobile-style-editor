@@ -75,6 +75,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\WebviewPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\GithubAuthenticationData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseGrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
