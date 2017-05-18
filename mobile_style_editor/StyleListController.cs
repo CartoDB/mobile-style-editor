@@ -353,6 +353,11 @@ namespace mobile_style_editor
 
 		void OnGithubButtonClick(object sender, EventArgs e)
 		{
+			if (ContentView.Loader.IsRunning)
+			{
+				return;
+			}
+ 			
 			if (HubClient.Instance.IsAuthenticated)
 			{
 				DownloadRepositories();
