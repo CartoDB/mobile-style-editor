@@ -21,7 +21,7 @@ namespace mobile_style_editor
 
 			Pages = new PaginationView();
 
-			Hide(false);
+			base.Hide(false);
 		}
 
 		public override void LayoutSubviews()
@@ -99,6 +99,15 @@ namespace mobile_style_editor
 			{
 				Header.Select.Disable();
 			}
+		}
+
+		public override async void Hide(bool animated = true)
+		{
+			if (Pages != null)
+			{
+				Pages.Reset();
+			}
+			base.Hide(animated);
 		}
 
 	}

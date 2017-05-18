@@ -48,7 +48,7 @@ namespace mobile_style_editor
 			}
 		}
 
-		public async void Hide(bool animated = true)
+		public virtual async void Hide(bool animated = true)
 		{
 			if (!animated)
 			{

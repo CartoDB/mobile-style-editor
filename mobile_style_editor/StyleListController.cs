@@ -344,6 +344,10 @@ namespace mobile_style_editor
 				counter++;
 				DownloadRepositories();
 			}
+			else
+			{
+				counter = 1;
+			}
 		}
 
 		void OnGithubButtonClick(object sender, EventArgs e)

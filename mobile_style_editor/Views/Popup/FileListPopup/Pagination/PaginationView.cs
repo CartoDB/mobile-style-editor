@@ -70,5 +70,11 @@ namespace mobile_style_editor
 				PageClicked(sender, e);	
 			}
 		}
+
+		public void Reset()
+		{
+			pages.Clear();
+			Children.Clear();
+		}
 	}
 }
