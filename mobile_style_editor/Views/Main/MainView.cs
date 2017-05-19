@@ -38,6 +38,7 @@ namespace mobile_style_editor
             Toolbar = new Toolbar();
 
             MapView = new MapContainer();
+            MapView.IsZoomVisible = true;
 
             Editor = new CSSEditorView();
 
@@ -165,7 +166,11 @@ namespace mobile_style_editor
 	 * if we place it in a container, it won't have any siblings to be on top of
 	 */
     public class MapContainer : BaseView
-    {
+	{
+		public bool IsZoomVisible { get; set; }
+
+        public Label zoomLabel;        
+
 #if __IOS__
         public bool UserInteractionEnabled
         {
@@ -190,7 +195,9 @@ namespace mobile_style_editor
         MapView mapView;
 
         public float Zoom { get { return mapView.Zoom; } set { mapView.Zoom = value; } }
-
+        
+        string ZoomText { get { return "ZOOM: " + Math.Round(mapView.Zoom, 1); } }
+        
         public MapContainer()
         {
             mapView = new MapView(
@@ -198,6 +205,17 @@ namespace mobile_style_editor
 			Forms.Context
 #endif
             );
+
+            mapView.MapEventListener = new MapListener(this);
+
+            zoomLabel = new Label();
+            zoomLabel.VerticalTextAlignment = TextAlignment.Center;
+            zoomLabel.HorizontalTextAlignment = TextAlignment.Center;
+            zoomLabel.TextColor = Color.White;
+            zoomLabel.BackgroundColor = Colors.CartoNavyTransparent;
+            zoomLabel.FontAttributes = FontAttributes.Bold;
+            zoomLabel.FontSize = 12;
+            zoomLabel.Text = ZoomText;
         }
 
         public override void LayoutSubviews()
@@ -211,6 +229,14 @@ namespace mobile_style_editor
             }
 #endif
             AddSubview(mapView.ToView(), 0, 0, Width, Height);
+
+            if (IsZoomVisible)
+            {
+                double w = 80;
+                double h = 30;
+
+                AddSubview(zoomLabel, Width - w, 0, w, h);
+            }
         }
 
         public void Update(byte[] data, Action completed)
@@ -230,5 +256,24 @@ namespace mobile_style_editor
 		}
 #endif
 
+        public void OnMapMoved()
+        {
+            zoomLabel.Text = ZoomText;
+        }
     }
+
+	public class MapListener : MapEventListener
+	{
+        public MapContainer MapView { get; private set; }
+
+		public MapListener(MapContainer map)
+		{
+			MapView = map;
+		}
+
+		public override void OnMapMoved()
+		{
+            MapView.OnMapMoved();
+		}
+	}
 }
