@@ -201,6 +201,14 @@ namespace mobile_style_editor
 		void OnRefresh(object sender, EventArgs e)
 		{
 			int index = ContentView.FileTabs.ActiveIndex;
+
+            if (ContentView.Toolbar.Tabs.IsVisible)
+            {
+                // If Tool Tabs are visible, get that index instead of Popup tabs index,
+                // cf Toolbar.cs line 67 for a more detailed explanation
+                index = ContentView.Toolbar.Tabs.ActiveIndex;    
+            }
+
 			string text = ContentView.Editor.Text;
 
 			if (index == -1)
@@ -214,6 +222,9 @@ namespace mobile_style_editor
 			Task.Run(delegate
 			{
 				string path = data.StyleFilePaths[index];
+
+                // Update file content in ZipData as well, in addition to saving it,
+                data.DecompressedFiles[index] = text;
 
 				FileUtils.OverwriteFileAtPath(path, text);
 				string name = "temporary-" + data.Filename;
