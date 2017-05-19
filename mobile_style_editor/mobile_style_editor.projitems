@@ -79,6 +79,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Pagination\PaginationView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Pagination\PageView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\ExpandButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Utilities\MapContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
