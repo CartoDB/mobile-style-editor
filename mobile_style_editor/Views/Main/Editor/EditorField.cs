@@ -119,6 +119,7 @@ namespace mobile_style_editor
 #elif __IOS__
 			ReturnKeyType = UIReturnKeyType.Done;
 			Delegate = this;
+            AutocorrectionType = UITextAutocorrectionType.No;
 #elif __UWP__
             Window.Current.CoreWindow.KeyDown += (s, e) =>
             {
