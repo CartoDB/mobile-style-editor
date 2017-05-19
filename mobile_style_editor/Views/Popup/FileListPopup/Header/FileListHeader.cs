@@ -3,7 +3,6 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-
 	public class FileListHeader : BaseView
 	{
 		public BackButton BackButton { get; private set; }
@@ -43,6 +42,13 @@ namespace mobile_style_editor
 			BackButton = new BackButton();
 
 			Select = new SelectButton();
+
+			var recognizer = new TapGestureRecognizer();
+			recognizer.Tapped += delegate {
+				// Do nothing, just to catch clicks and not close the popup
+			};
+
+			Label.GestureRecognizers.Add(recognizer);
 		}
 
 		public override void LayoutSubviews()

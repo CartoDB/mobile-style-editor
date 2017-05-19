@@ -78,6 +78,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Pagination\PaginationView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Pagination\PageView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\ExpandButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
