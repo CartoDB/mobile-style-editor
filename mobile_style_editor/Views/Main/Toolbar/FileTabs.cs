@@ -66,6 +66,8 @@ namespace mobile_style_editor
 
 				index++;
 			}
+
+            Highlight(0);
 		}
 
 		void OnTap(object sender, EventArgs e)

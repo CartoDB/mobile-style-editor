@@ -15,6 +15,8 @@ namespace mobile_style_editor
 	{
 		public ExpandButton ExpandButton { get; set; }
 
+		public FileTabs Tabs { get; set; }
+
 		public ToolbarButton UploadButton { get; private set; }
 
 		public ToolbarButton SaveButton { get; private set; }
@@ -24,6 +26,9 @@ namespace mobile_style_editor
 			BackgroundColor = Colors.CartoNavy;
 
 			ExpandButton = new ExpandButton();
+
+            Tabs = new FileTabs();
+            Tabs.IsVisible = false;
 
 			UploadButton = new ToolbarButton("UPLOAD");
 
@@ -38,6 +43,7 @@ namespace mobile_style_editor
 			double h = Height;
 
 			AddSubview(ExpandButton, x, y, w, h);
+            AddSubview(Tabs, x, y, Width, h);
 
 			double padding = 10;
 
@@ -53,10 +59,24 @@ namespace mobile_style_editor
 			//AddSubview(SaveButton, x, y, w, h);
 		}
 
-		public void Initialize(ZipData data)
-		{
-			ExpandButton.Update(data.StyleFileNames[0]);
-		}
+        /*
+         * The default visible view is Expand button, 
+         * if there are three or less tabs, show all of them via FileTabs
+         * 
+         */
+        public void Initialize(ZipData data)
+        {
+            if (data.StyleFileNames.Count <= 3)
+            {
+                Tabs.IsVisible = true;
+                Tabs.Update(data);
+                ExpandButton.IsVisible = false;
+            }
+            else
+            {
+                ExpandButton.Update(data.StyleFileNames[0]);
+            }
+        }
 
 	}
 }

@@ -51,6 +51,7 @@ namespace mobile_style_editor
 			});
 
 			ContentView.FileTabs.OnTabTap += OnTabTapped;
+            ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
 
 			ContentView.Toolbar.ExpandButton.Click += OnFileTabExpand;
 			ContentView.Toolbar.UploadButton.Click += OnUploadButtonClicked;
@@ -76,6 +77,7 @@ namespace mobile_style_editor
 			base.OnDisappearing();
 
 			ContentView.FileTabs.OnTabTap -= OnTabTapped;
+            ContentView.Toolbar.Tabs.OnTabTap -= OnTabTapped;
 
 			ContentView.Toolbar.ExpandButton.Click -= OnFileTabExpand;
 			ContentView.Toolbar.UploadButton.Click -= OnUploadButtonClicked;
@@ -241,8 +243,20 @@ namespace mobile_style_editor
 			FileTab tab = (FileTab)sender;
 
 			ContentView.Editor.Update(tab.Index);
-			ContentView.FileTabs.Toggle();
-			ContentView.Toolbar.ExpandButton.Update(tab.Text);
+
+            /*
+             * If parent is FileTabs, all tabs are visible, ExpandButton is hidden
+             * If ExpandButton is visible, tab.Parent will be FileTabPopup
+             */
+            if (tab.Parent is FileTabs)
+            {
+                // Do nothing. No UI-updates to handle
+            }
+            else
+            {
+                ContentView.FileTabs.Toggle();
+                ContentView.Toolbar.ExpandButton.Update(tab.Text);
+            }
 		}
 
 	}
