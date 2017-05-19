@@ -67,17 +67,17 @@ namespace mobile_style_editor
 
 			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
 #if __ANDROID__
-			DriveClientDroid.Instance.DownloadStarted += OnDownloadStarted;
-			DriveClientDroid.Instance.DownloadComplete += OnFileDownloadComplete;
+            DriveClientDroid.Instance.DownloadStarted += OnDownloadStarted;
+            DriveClientDroid.Instance.DownloadComplete += OnFileDownloadComplete;
 #elif __IOS__
 			DriveClientiOS.Instance.DownloadComplete += OnFileDownloadComplete;
 			DriveClientiOS.Instance.ListDownloadComplete += OnListDownloadComplete;
 #endif
 
 #if __ANDROID__
-			ContentView.ShowMapViews();
+            ContentView.ShowMapViews();
 #endif
-            ShowMyStyles();
+			ShowMyStyles();
         }
 
         async Task<bool> PopulateTemplateList()
@@ -144,7 +144,7 @@ namespace mobile_style_editor
 			DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
 #endif
 		}
-
+                                                                                
 		public void OnPageClick(object sender, EventArgs e)
 		{
 			PageView page = (PageView)sender;
