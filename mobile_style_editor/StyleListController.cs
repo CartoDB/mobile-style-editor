@@ -37,7 +37,7 @@ namespace mobile_style_editor
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-
+			
 			if (LocalStorage.Instance.HasAccessToken)
 			{
 				string token = LocalStorage.Instance.AccessToken;

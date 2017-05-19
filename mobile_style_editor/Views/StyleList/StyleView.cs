@@ -121,6 +121,12 @@ namespace mobile_style_editor
 			Webview.Open(data);
 		}
 
+		public void OpenWebviewPopup(string url)
+		{
+			Webview.Show();
+			Webview.Open(url);
+		}
+
 		public void ScrollTo(StyleTab styleTab)
 		{
 			double x = styleTab.X;

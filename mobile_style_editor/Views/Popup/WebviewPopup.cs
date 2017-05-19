@@ -45,6 +45,11 @@ namespace mobile_style_editor
 			webView.Source = data.Url;
 		}
 
+		public void Open(string url)
+		{
+			webView.Source = url;
+		}
+
 		const string CodeParameter = "?code=";
 
 		void OnNavigationEnd(object sender, WebNavigatedEventArgs e)
