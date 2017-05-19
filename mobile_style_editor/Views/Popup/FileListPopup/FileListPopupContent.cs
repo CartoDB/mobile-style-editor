@@ -54,20 +54,22 @@ namespace mobile_style_editor
 
 			foreach (object item in items)
 			{
-				FileListPopupItem view;
-
+				FileListPopupItem view = new FileListPopupItem();
+				
 				if (item is DriveFile)
 				{
-					view = new FileListPopupItem((DriveFile)item);
+					view.DriveFile = (DriveFile)item;
 				}
 				else if (item is StoredStyle)
 				{
-					view = new FileListPopupItem((StoredStyle)item);
+					view.Style = (StoredStyle)item;
 				}
 				else
 				{
-					view = new FileListPopupItem((GithubFile)item);
+					view.GithubFile = (GithubFile)item;
 				}
+
+				view.Initialize();
 
 				view.Click += OnItemClick;
 

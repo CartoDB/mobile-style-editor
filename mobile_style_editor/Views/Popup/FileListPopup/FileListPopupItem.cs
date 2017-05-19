@@ -5,37 +5,16 @@ namespace mobile_style_editor
 {
 	public class FileListPopupItem : ClickView
 	{
-		public DriveFile DriveFile { get; private set; }
-		public GithubFile GithubFile { get; private set; }
-		public new StoredStyle Style { get; private set; }
+		public DriveFile DriveFile { get; set; }
+		public GithubFile GithubFile { get; set; }
+		public new StoredStyle Style { get; set; }
 
 		BaseView container;
 
 		Image image;
 		Label text;
 
-		public FileListPopupItem(GithubFile file)
-		{
-			GithubFile = file;
-
-			Initialize();
-		}
-
-		public FileListPopupItem(DriveFile file)
-		{
-			DriveFile = file;
-
-			Initialize();
-		}
-
-		public FileListPopupItem(StoredStyle style)
-		{
-			Style = style;
-
-            Initialize();
-		}
-
-		void Initialize()
+		public void Initialize()
 		{
 			container = new BaseView();
 
