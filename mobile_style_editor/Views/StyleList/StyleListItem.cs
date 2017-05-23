@@ -77,15 +77,22 @@ namespace mobile_style_editor
 			base.LayoutSubviews();
 		}
 
-		public void Update(DownloadResult result)
-		{
-			Data = result;
+        public void Update(DownloadResult result)
+        {
+            Data = result;
 
-			MapView.Update(result.Data, null);
-			label.Text = result.CleanName;
+            label.Text = result.CleanName;
+            MapView.Update(result.Data, null,
+                           (obj) =>
+                           {
+                               Device.BeginInvokeOnMainThread(delegate
+                               {
+                                   label.Text = result.CleanName + " (" + obj + ")";
+                               });
+                           });
 
-			HideLoading();
-		}
+            HideLoading();
+        }
 		
 		public void Update(Octokit.RepositoryContent content)
 		{

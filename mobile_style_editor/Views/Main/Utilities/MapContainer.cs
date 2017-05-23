@@ -92,9 +92,9 @@ namespace mobile_style_editor
 			}
 		}
 
-		public void Update(byte[] data, Action completed)
+		public void Update(byte[] data, Action completed, Action<string> failed)
 		{
-			mapView.Update(data, completed);
+			mapView.Update(data, completed, failed);
 		}
 
 		public void SetZoom(float zoom, float duration)

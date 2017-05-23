@@ -44,7 +44,21 @@ namespace mobile_style_editor
                 if (MapView.Layers.Count == 0)
                 {
                     var source = new CartoOnlineTileDataSource(OSM);
-                    var decoder = new MBVectorTileDecoder(styleSet);
+
+                    MBVectorTileDecoder decoder = null;
+
+                    try
+                    {
+                        decoder = new MBVectorTileDecoder(styleSet);
+                    }
+                    catch (System.ApplicationException e)
+                    {
+                        if (failed != null)
+                        {
+                            failed(e.Message);
+                            return;
+                        }
+                    }
 
                     var layer = new VectorTileLayer(source, decoder);
                     Device.BeginInvokeOnMainThread(delegate
