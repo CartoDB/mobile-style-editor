@@ -3,8 +3,10 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class FileTab : Label
+    public class FileTab : BaseView
 	{
+        Label label;
+
 		public int Index { get; private set; }
 
 		public EventHandler<EventArgs> Tapped;
@@ -14,22 +16,27 @@ namespace mobile_style_editor
 
 		public bool IsHighlighted
 		{
-			get { return TextColor.Equals(highlightedColor); }
+			get { return label.TextColor.Equals(highlightedColor); }
 		}
+
+        public string Text { get { return label.Text; } set { label.Text = value; } }
 
 		public FileTab(string text, int index)
 		{
 			Index = index;
-            Text = text.ToUpper();
 
-			Normalize();
+            label = new Label();
 
-			FontSize = 10f;
-            //FontFamily = "Courier New";
-            FontAttributes = FontAttributes.Bold;
+            label.Text = text.ToUpper();
 
-			VerticalTextAlignment = TextAlignment.Center;
-			HorizontalTextAlignment = TextAlignment.Center;
+			label.FontSize = 10f;
+            label.FontAttributes = FontAttributes.Bold;
+            label.BackgroundColor = Colors.CartoNavyLight;
+
+			label.VerticalTextAlignment = TextAlignment.Center;
+			label.HorizontalTextAlignment = TextAlignment.Center;
+
+            Normalize();
 
 			TapGestureRecognizer recognizer = new TapGestureRecognizer();
 			recognizer.Tapped += delegate
@@ -43,25 +50,21 @@ namespace mobile_style_editor
 			GestureRecognizers.Add(recognizer);
 		}
 
+        public override void LayoutSubviews()
+        {
+            double padding = 3;
+
+            AddSubview(label, padding, 2 * padding, Width - 2 * padding, Height - 4 * padding);
+        }
+
 		public void Highlight()
 		{
-			TextColor = highlightedColor;
+			label.TextColor = highlightedColor;
 		}
 
 		public void Normalize()
 		{
-			TextColor = normalizedColor;
-		}
-
-		public void UpdateLayout(double x, double y, double w, double h)
-		{
-			var constraint = BoundsConstraint.FromExpression(() => new Rectangle(x, y, w, h), new View[0]);
-			RelativeLayout.SetBoundsConstraint(this, constraint);
-
-			if (Parent != null && Parent is RelativeLayout)
-			{
-				(Parent as RelativeLayout).ForceLayout();
-			}
+			label.TextColor = normalizedColor;
 		}
 
 	}

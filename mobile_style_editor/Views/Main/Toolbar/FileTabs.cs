@@ -39,8 +39,7 @@ namespace mobile_style_editor
 
 			double x = 0;
 			double y = 0;
-            double w = 80;
-			//double h = Height / 4;
+            double w = 100;
 			double h = Height;
 
 			List<string> names = data.StyleFileNames;
