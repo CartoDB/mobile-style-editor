@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 using System;
 using Xamarin.Forms;
 
@@ -20,49 +20,49 @@ using Windows.UI.Xaml;
 namespace mobile_style_editor
 {
 #if __IOS__
-	public class EditorField : UITextView, IUITextViewDelegate
+    public class EditorField : UITextView, IUITextViewDelegate
 #elif __ANDROID__
 	public class EditorField : EditText
 #elif __UWP__
         public class EditorField : Windows.UI.Xaml.Controls.RichEditBox
 #endif
-	{
-		public EventHandler<EventArgs> EditingEnded;
+    {
+        public EventHandler<EventArgs> EditingEnded;
 
-		Color textColor;
-		public
+        Color textColor;
+        public
 #if __IOS__
-		new
+        new
 #endif
-		Color TextColor
-		{
-			get { return textColor; }
-			set
-			{
-				textColor = value;
+        Color TextColor
+        {
+            get { return textColor; }
+            set
+            {
+                textColor = value;
 #if __IOS__
-				base.TextColor = backgroundColor.ToNativeColor();
+                base.TextColor = backgroundColor.ToNativeColor();
 #elif __ANDROID__
 				SetTextColor(textColor.ToNativeColor());
 #elif __UWP__
                
 #endif
             }
-		}
+        }
 
-		Color backgroundColor;
-		public
+        Color backgroundColor;
+        public
 #if __IOS__
-		new
+        new
 #endif
-		Color BackgroundColor
-		{
-			get { return backgroundColor; }
-			set
-			{
-				backgroundColor = value;
+        Color BackgroundColor
+        {
+            get { return backgroundColor; }
+            set
+            {
+                backgroundColor = value;
 #if __IOS__
-				base.BackgroundColor = backgroundColor.ToNativeColor();
+                base.BackgroundColor = backgroundColor.ToNativeColor();
 #elif __ANDROID__
 				SetBackgroundColor(backgroundColor.ToNativeColor());
 #elif __UWP__
@@ -70,7 +70,7 @@ namespace mobile_style_editor
                 Background = new Windows.UI.Xaml.Media.SolidColorBrush(value.ToNativeColor());
 #endif
             }
-		}
+        }
 
 #if __UWP__
         public string Text
@@ -91,9 +91,9 @@ namespace mobile_style_editor
 #if __ANDROID__
 		: base(Forms.Context)
 #endif
-		{
+        {
 #if __IOS__
-			BackgroundColor = Color.FromRgb(20, 20, 20);
+            BackgroundColor = Color.FromRgb(20, 20, 20);
 #else
 			BackgroundColor = Color.FromRgb(50, 50, 50);
 #endif
@@ -117,9 +117,11 @@ namespace mobile_style_editor
 			SetRawInputType(Android.Text.InputTypes.ClassText);
 
 #elif __IOS__
-			ReturnKeyType = UIReturnKeyType.Done;
-			Delegate = this;
+            ReturnKeyType = UIReturnKeyType.Done;
+            Delegate = this;
             AutocorrectionType = UITextAutocorrectionType.No;
+
+            RegisterForKeyboardNotifications();
 #elif __UWP__
             Window.Current.CoreWindow.KeyDown += (s, e) =>
             {
@@ -156,7 +158,7 @@ namespace mobile_style_editor
         }
 
 
-		const string NewLine = "\n";
+        const string NewLine = "\n";
 
 #if __ANDROID__
 		Android.Graphics.Rect rect;
@@ -209,57 +211,57 @@ namespace mobile_style_editor
 
 #elif __IOS__
 
-		[Foundation.Export("textView:shouldChangeTextInRange:replacementText:")]
-		public new bool ShouldChangeText(UITextView textView, Foundation.NSRange range, string text)
-		{
-			if (text.Equals("\n"))
-			{
+        [Foundation.Export("textView:shouldChangeTextInRange:replacementText:")]
+        public new bool ShouldChangeText(UITextView textView, Foundation.NSRange range, string text)
+        {
+            if (text.Equals("\n"))
+            {
                 Text.Insert((int)range.Length, text);
-				//if (EditingEnded != null)
-				//{
-				//	EditingEnded(this, EventArgs.Empty);
-				//}
+                //if (EditingEnded != null)
+                //{
+                //	EditingEnded(this, EventArgs.Empty);
+                //}
 
-				//ResignFirstResponder();
-				//return false;
-			}
+                //ResignFirstResponder();
+                //return false;
+            }
 
-			return true;
-		}
+            return true;
+        }
 #endif
-		string current;
+        string current;
 
-		public void Update(string text, int selection = -1)
-		{
-			current = text;
+        public void Update(string text, int selection = -1)
+        {
+            current = text;
 
-			var watch = new System.Diagnostics.Stopwatch();
-			watch.Start();
+            var watch = new System.Diagnostics.Stopwatch();
+            watch.Start();
 
-			System.Threading.Tasks.Task.Run(delegate
-			{
-				string[] lines = text.Split('\n');
+            System.Threading.Tasks.Task.Run(delegate
+            {
+                string[] lines = text.Split('\n');
 
 #if __ANDROID__
 				var builder = new Droid.SimpleSpanBuilder();
 #elif __IOS__
 
-			var builder = new iOS.AttributedTextBuilder();
+                var builder = new iOS.AttributedTextBuilder();
 #elif __UWP__
             var builder = new UWP.SimpleSpanBuilder(this);
 #endif
                 float size = 1f;
 
-				// White
-				Color generalColor = Color.White;
-				// Light gray
-				Color commentColor = Color.FromRgb(120, 120, 120);
-				// Carto green
-				Color blockHeaderColor = Color.FromRgb(145, 198, 112);
-				// Dark magenta
-				Color constantColor = Color.FromRgb(150, 0, 150);
+                // White
+                Color generalColor = Color.White;
+                // Light gray
+                Color commentColor = Color.FromRgb(120, 120, 120);
+                // Carto green
+                Color blockHeaderColor = Color.FromRgb(145, 198, 112);
+                // Dark magenta
+                Color constantColor = Color.FromRgb(150, 0, 150);
 
-				bool isInCommentBlock = false;
+                bool isInCommentBlock = false;
 
 #if __UWP__
                 Device.BeginInvokeOnMainThread(delegate
@@ -269,70 +271,70 @@ namespace mobile_style_editor
 #endif
 
                 foreach (string line in lines)
-				{
-					string trimmed = line.Trim();
-					string withNewLine = line + "\n";
+                {
+                    string trimmed = line.Trim();
+                    string withNewLine = line + "\n";
 
-					if (isInCommentBlock)
-					{
-						if (trimmed.Contains("*/"))
-						{
-							int nonCommentIndex = line.IndexOf("*/", StringComparison.Ordinal) + 2;
-							string comment = line.Substring(0, nonCommentIndex);
-							string nonComment = line.Substring(nonCommentIndex, line.Length - nonCommentIndex);
+                    if (isInCommentBlock)
+                    {
+                        if (trimmed.Contains("*/"))
+                        {
+                            int nonCommentIndex = line.IndexOf("*/", StringComparison.Ordinal) + 2;
+                            string comment = line.Substring(0, nonCommentIndex);
+                            string nonComment = line.Substring(nonCommentIndex, line.Length - nonCommentIndex);
 
-							builder.Append(comment, commentColor.ToNativeColor(), size);
-							builder.Append(nonComment + "\n", generalColor.ToNativeColor(), size);
-							isInCommentBlock = false;
-						}
-						else
-						{
-							builder.Append(withNewLine, commentColor.ToNativeColor(), size);
-						}
-						continue;
-					}
+                            builder.Append(comment, commentColor.ToNativeColor(), size);
+                            builder.Append(nonComment + "\n", generalColor.ToNativeColor(), size);
+                            isInCommentBlock = false;
+                        }
+                        else
+                        {
+                            builder.Append(withNewLine, commentColor.ToNativeColor(), size);
+                        }
+                        continue;
+                    }
 
-					if (trimmed.StartsWith("//", StringComparison.Ordinal))
-					{
-						builder.Append(withNewLine, commentColor.ToNativeColor(), size);
-					}
-					else if (trimmed.StartsWith("@", StringComparison.Ordinal))
-					{
-						builder.Append(withNewLine, constantColor.ToNativeColor(), size);
-					}
-					else if (trimmed.Contains("/*"))
-					{
-						int commentIndex = line.IndexOf("/*", StringComparison.Ordinal);
-						string nonComment = line.Substring(0, commentIndex);
-						string comment = line.Substring(commentIndex, line.Length - commentIndex);
+                    if (trimmed.StartsWith("//", StringComparison.Ordinal))
+                    {
+                        builder.Append(withNewLine, commentColor.ToNativeColor(), size);
+                    }
+                    else if (trimmed.StartsWith("@", StringComparison.Ordinal))
+                    {
+                        builder.Append(withNewLine, constantColor.ToNativeColor(), size);
+                    }
+                    else if (trimmed.Contains("/*"))
+                    {
+                        int commentIndex = line.IndexOf("/*", StringComparison.Ordinal);
+                        string nonComment = line.Substring(0, commentIndex);
+                        string comment = line.Substring(commentIndex, line.Length - commentIndex);
 
-						builder.Append(nonComment, generalColor.ToNativeColor(), size);
-						builder.Append(comment + "\n", commentColor.ToNativeColor(), size);
-						isInCommentBlock = true;
-					}
-					else
-					{
-						if (trimmed.Contains("{"))
-						{
-							int bracketIndex = line.IndexOf("{", StringComparison.Ordinal);
-							string blockHeader = line.Substring(0, bracketIndex);
-							string remaining = line.Substring(bracketIndex, line.Length - bracketIndex);
+                        builder.Append(nonComment, generalColor.ToNativeColor(), size);
+                        builder.Append(comment + "\n", commentColor.ToNativeColor(), size);
+                        isInCommentBlock = true;
+                    }
+                    else
+                    {
+                        if (trimmed.Contains("{"))
+                        {
+                            int bracketIndex = line.IndexOf("{", StringComparison.Ordinal);
+                            string blockHeader = line.Substring(0, bracketIndex);
+                            string remaining = line.Substring(bracketIndex, line.Length - bracketIndex);
 
-							builder.Append(blockHeader, blockHeaderColor.ToNativeColor(), size);
-							builder.Append(remaining + "\n", generalColor.ToNativeColor(), size);
-						}
-						else if (trimmed.Contains("#") || trimmed.Contains("["))
-						{
-							builder.Append(withNewLine, blockHeaderColor.ToNativeColor(), size);
-						}
-						else
-						{
-							builder.Append(withNewLine, generalColor.ToNativeColor(), size);
-						}
-					}
-				}
-				Device.BeginInvokeOnMainThread(delegate
-				{
+                            builder.Append(blockHeader, blockHeaderColor.ToNativeColor(), size);
+                            builder.Append(remaining + "\n", generalColor.ToNativeColor(), size);
+                        }
+                        else if (trimmed.Contains("#") || trimmed.Contains("["))
+                        {
+                            builder.Append(withNewLine, blockHeaderColor.ToNativeColor(), size);
+                        }
+                        else
+                        {
+                            builder.Append(withNewLine, generalColor.ToNativeColor(), size);
+                        }
+                    }
+                }
+                Device.BeginInvokeOnMainThread(delegate
+                {
 #if __ANDROID__
 					TextFormatted = builder.Build();
 
@@ -341,17 +343,17 @@ namespace mobile_style_editor
 						SetSelection(selection);
 					}
 #elif __IOS__
-			        AttributedText = builder.Build();
-			        this.SetNeedsDisplay();
+                    AttributedText = builder.Build();
+                    this.SetNeedsDisplay();
 #elif __UWP__
                     Document.ApplyDisplayUpdates();
 #endif
-				});
+                });
 
-				System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
-				watch.Stop();
-			});
-		}
+                System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
+                watch.Stop();
+            });
+        }
 
 #if __ANDROID__
 		public int ContentHeight
@@ -371,7 +373,30 @@ namespace mobile_style_editor
 			}
 		}
 #elif __IOS__
+
+        void RegisterForKeyboardNotifications()
+        {
+			UIKeyboard.Notifications.ObserveWillShow(OnKeyboardShow);
+			UIKeyboard.Notifications.ObserveWillHide(OnKeyboardHide);            
+        }
+
+		private void OnKeyboardShow(object sender, UIKeyboardEventArgs e)
+		{
+			// Need to calculate keyboard exact size due to Apple suggestions
+			ScrollEnabled = true;
+			float size = (float)e.FrameEnd.Height;
+
+			var inset = new UIEdgeInsets(0, 0, size, 0);
+			ContentInset = inset;
+		}
+
+		private void OnKeyboardHide(object sender, UIKeyboardEventArgs e)
+        {
+            ContentInset = new UIEdgeInsets(0, 0, 0, 0);
+		}
+
 #endif
-	}
+
+    }
 
 }
