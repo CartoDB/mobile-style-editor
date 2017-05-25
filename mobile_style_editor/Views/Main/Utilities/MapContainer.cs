@@ -143,51 +143,6 @@ public SourceLabel SourceLabel { get; private set; }
         {
             MapView.OnMapMoved();
         }
-    }
 
-    public class SourceLabel : BaseView
-    {
-        Label label;
-        Entry field;
-        
-        public string Text { get { return field.Text;  } set { field.Text = value; } }
-        
-        public SourceLabel()
-        {
-            BackgroundColor = Colors.CartoNavyTransparent;
-
-            label = new Label();
-            label.Text = "SOURCE";
-            label.VerticalTextAlignment = TextAlignment.Center;
-            label.HorizontalTextAlignment = TextAlignment.Center;
-            label.FontAttributes = FontAttributes.Bold;
-            label.FontSize = 12;
-            label.TextColor = Color.White;
-
-            field = new Entry();
-            field.FontSize = 12;
-            field.FontAttributes = FontAttributes.Bold;
-            field.BackgroundColor = Colors.CartoNavyTransparent;
-            field.TextColor = Color.White;
-            
-        }
-
-        public override void LayoutSubviews()
-        {
-            double padding = 5;
-            double third = (Width - 3 * padding) / 3;
-
-            double x = padding;
-            double y = padding;
-            double w = third;
-            double h = Height - 2 * padding;
-
-            AddSubview(label, x, y, w, h);
-
-            x += w + padding;
-            w = 2 * third;
-
-            AddSubview(field, x, y, w, h);
-        }
     }
 }

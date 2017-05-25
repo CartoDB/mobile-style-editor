@@ -62,6 +62,8 @@ namespace mobile_style_editor
 
             ContentView.Popup.Content.Confirm.Clicked += OnConfirmButtonClicked;
 
+            ContentView.MapView.SourceLabel.Done += OnSourceChanged;
+
 #if __ANDROID__
 			DriveClientDroid.Instance.UploadComplete += OnUploadComplete;
 #elif __IOS__
@@ -88,6 +90,8 @@ namespace mobile_style_editor
 
 			ContentView.Popup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
 
+            ContentView.MapView.SourceLabel.Done -= OnSourceChanged;
+
 #if __ANDROID__
 			DriveClientDroid.Instance.UploadComplete -= OnUploadComplete;
 #elif __IOS__
@@ -97,6 +101,18 @@ namespace mobile_style_editor
             ContentView.Zoom.Out.Click -= ZoomOut;
 #endif
 		}
+
+        void OnSourceChanged(object sender, EventArgs e)
+        {
+            ContentView.ShowLoading();;
+
+            string osm = (sender as SourceLabel).Text;
+            MapExtensions.SourceId = osm;
+
+            ContentView.UpdateMap(delegate {
+                ContentView.HideLoading();
+            });
+        }
 
         void ZoomIn(object sender, EventArgs e)
         {

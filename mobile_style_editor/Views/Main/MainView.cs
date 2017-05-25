@@ -136,8 +136,17 @@ namespace mobile_style_editor
             Toolbar.ExpandButton.UpdateImage();
         }
 
+        byte[] currentData;
+
+        public void UpdateMap(Action completed)
+        {
+            UpdateMap(currentData, completed);           
+        }
+
         public void UpdateMap(byte[] data, Action completed)
         {
+            currentData = data;
+
             MapView.Update(true, data, completed, (obj) =>
                     {
                         Device.BeginInvokeOnMainThread(delegate
@@ -147,7 +156,7 @@ namespace mobile_style_editor
                         });
                     });
 
-            MapView.SourceLabel.Text = MapExtensions.OSM;
+            MapView.SourceLabel.Text = MapExtensions.SourceId;
         }
 
         double editorOriginalHeight;

@@ -12,7 +12,8 @@ namespace mobile_style_editor
 {
 	public static class MapExtensions
 	{
-		public static string OSM = "nutiteq.osm";
+		public static string SourceId = "nutiteq.osm";
+        static string CurrentSourceId;
 
         public static void Update(this MapView MapView, bool withListener, byte[] data, Action completed, Action<string> failed = null)
         {
@@ -40,10 +41,20 @@ namespace mobile_style_editor
                         completed();
                     }
 				});
-#else
+#else           
+                if (MapView.Layers.Count > 0)
+                {
+                    if (!SourceId.Equals(CurrentSourceId))
+                    {
+                        // If SourceId has changed, clear layers and rebuild everything
+                        MapView.Layers.Clear();
+                    }
+                }
+
                 if (MapView.Layers.Count == 0)
                 {
-                    var source = new CartoOnlineTileDataSource(OSM);
+                    var source = new CartoOnlineTileDataSource(SourceId);
+                    CurrentSourceId = SourceId;
 
                     MBVectorTileDecoder decoder = null;
 
