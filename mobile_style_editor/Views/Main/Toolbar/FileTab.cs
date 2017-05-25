@@ -20,12 +20,13 @@ namespace mobile_style_editor
 		public FileTab(string text, int index)
 		{
 			Index = index;
-			Text = text;
+            Text = text.ToUpper();
 
 			Normalize();
 
-			FontSize = 12f;
-			FontFamily = "Courier New";
+			FontSize = 10f;
+            //FontFamily = "Courier New";
+            FontAttributes = FontAttributes.Bold;
 
 			VerticalTextAlignment = TextAlignment.Center;
 			HorizontalTextAlignment = TextAlignment.Center;

@@ -59,14 +59,15 @@ namespace mobile_style_editor
 			//AddSubview(SaveButton, x, y, w, h);
 		}
 
-        /*
+        const int MaxCount = 4;
+		/*
          * The default visible view is Expand button, 
-         * if there are three or less tabs, show all of them via FileTabs
+         * if there are MaxCount or fewer tabs, show all of them via FileTabs
          * 
          */
-        public void Initialize(ZipData data)
+		public void Initialize(ZipData data)
         {
-            if (data.StyleFileNames.Count <= 3)
+            if (data.StyleFileNames.Count <= MaxCount)
             {
                 Tabs.IsVisible = true;
                 Tabs.Update(data);

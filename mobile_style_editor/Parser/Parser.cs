@@ -116,6 +116,10 @@ namespace mobile_style_editor
 								}
 							}
 						}
+
+                        data.StyleFileNames.Add(ProjectFile);
+                        data.StyleFilePaths.Add(path);
+                        data.DecompressedFiles.Add(content);
 					}
 #if __UWP__
                     }

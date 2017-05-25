@@ -39,7 +39,7 @@ namespace mobile_style_editor
 
 			double x = 0;
 			double y = 0;
-			double w = Width / 7;
+            double w = 80;
 			//double h = Height / 4;
 			double h = Height;
 
