@@ -154,6 +154,10 @@ namespace mobile_style_editor
             IsSpellCheckEnabled = false;
 #endif
         }
+
+
+		const string NewLine = "\n";
+
 #if __ANDROID__
 		Android.Graphics.Rect rect;
 		Android.Graphics.Paint paint;
@@ -185,13 +189,21 @@ namespace mobile_style_editor
 		{
 			if (actionCode == ImeAction.Done)
 			{
-				if (EditingEnded != null)
+				if (SelectionStart == TextFormatted.Length())
 				{
-					var manager = (InputMethodManager)Context.GetSystemService("input_method");
-					manager.ToggleSoftInput(ShowFlags.Forced, 0);
-
-					EditingEnded(this, EventArgs.Empty);
+					return;
 				}
+
+				current = current.Insert(SelectionStart, NewLine);
+				Update(current, SelectionStart + NewLine.Length);
+
+				//if (EditingEnded != null)
+				//{
+				//	var manager = (InputMethodManager)Context.GetSystemService("input_method");
+				//	manager.ToggleSoftInput(ShowFlags.Forced, 0);
+
+				//	EditingEnded(this, EventArgs.Empty);
+				//}
 			}
 		}
 
@@ -202,21 +214,25 @@ namespace mobile_style_editor
 		{
 			if (text.Equals("\n"))
 			{
-				if (EditingEnded != null)
-				{
-					EditingEnded(this, EventArgs.Empty);
-				}
+                Text.Insert((int)range.Length, text);
+				//if (EditingEnded != null)
+				//{
+				//	EditingEnded(this, EventArgs.Empty);
+				//}
 
-				ResignFirstResponder();
-				return false;
+				//ResignFirstResponder();
+				//return false;
 			}
 
 			return true;
 		}
 #endif
+		string current;
 
-		public void Update(string text)
+		public void Update(string text, int selection = -1)
 		{
+			current = text;
+
 			var watch = new System.Diagnostics.Stopwatch();
 			watch.Start();
 
@@ -319,6 +335,11 @@ namespace mobile_style_editor
 				{
 #if __ANDROID__
 					TextFormatted = builder.Build();
+
+					if (selection != -1)
+					{
+						SetSelection(selection);
+					}
 #elif __IOS__
 			        AttributedText = builder.Build();
 			        this.SetNeedsDisplay();
