@@ -216,7 +216,9 @@ namespace mobile_style_editor
         {
             if (text.Equals("\n"))
             {
-                Text.Insert((int)range.Length, text);
+                int selection = (int)range.Location;
+                current = current.Insert(selection, text);
+                Update(current, selection + 1);
                 //if (EditingEnded != null)
                 //{
                 //	EditingEnded(this, EventArgs.Empty);
@@ -344,7 +346,13 @@ namespace mobile_style_editor
 					}
 #elif __IOS__
                     AttributedText = builder.Build();
-                    this.SetNeedsDisplay();
+                    SetNeedsDisplay();
+                    
+                    if (selection != -1)
+                    {
+                        SelectedRange = new Foundation.NSRange(selection, 0);
+                        SetContentOffset(ContentOffset, true);
+                    }
 #elif __UWP__
                     Document.ApplyDisplayUpdates();
 #endif
