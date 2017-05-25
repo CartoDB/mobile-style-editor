@@ -12,7 +12,7 @@ namespace mobile_style_editor
 {
 	public static class MapExtensions
 	{
-		const string OSM = "nutiteq.osm";
+		public static string OSM = "nutiteq.osm";
 
         public static void Update(this MapView MapView, bool withListener, byte[] data, Action completed, Action<string> failed = null)
         {

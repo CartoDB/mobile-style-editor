@@ -39,6 +39,7 @@ namespace mobile_style_editor
 
             MapView = new MapContainer();
             MapView.IsZoomVisible = true;
+            MapView.IsSourceLabelVisible = true;
 
             Editor = new CSSEditorView();
 
@@ -145,6 +146,8 @@ namespace mobile_style_editor
                             HideLoading();
                         });
                     });
+
+            MapView.SourceLabel.Text = MapExtensions.OSM;
         }
 
         double editorOriginalHeight;
