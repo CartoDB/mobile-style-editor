@@ -52,6 +52,7 @@ namespace mobile_style_editor
                 (Field.Parent as NativeViewWrapperRenderer).Children.Remove(Field);
             }
 #endif
+            RemoveChild(Field.ToView());
             AddSubview(Field.ToView(), x, y, w, h);
 
             double padding = 10;
@@ -65,6 +66,7 @@ namespace mobile_style_editor
             // Accommodate for wide scrollbar
             x -= 12;
 #endif
+            RemoveChild(RefreshButton);
             AddSubview(RefreshButton, x, y, w, h);
         }
 

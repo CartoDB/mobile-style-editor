@@ -87,6 +87,7 @@ public SourceLabel SourceLabel { get; private set; }
                 (mapView.Parent as NativeViewWrapperRenderer).Children.Remove(mapView);
             }
 #endif
+            RemoveChild(mapView.ToView());
             AddSubview(mapView.ToView(), 0, 0, Width, Height);
 	
             double h = 40;
@@ -96,6 +97,7 @@ public SourceLabel SourceLabel { get; private set; }
             {
                 double w = 90;
 
+                RemoveChild(zoomLabel);
                 AddSubview(zoomLabel, Width - w - padding, padding, w, h);
             }
 
@@ -103,6 +105,7 @@ public SourceLabel SourceLabel { get; private set; }
             {
                 double w = 200;
 
+                RemoveChild(SourceLabel);
                 AddSubview(SourceLabel, padding, padding, w, h);
             }
         }
