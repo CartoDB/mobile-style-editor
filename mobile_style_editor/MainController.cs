@@ -6,73 +6,73 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class MainController : ContentPage
-	{
-		MainView ContentView;
+    public class MainController : ContentPage
+    {
+        MainView ContentView;
 
-		ZipData data;
+        ZipData data;
 
-		string folder, filename;
+        string folder, filename;
 
-		public MainController(string folder, string filename)
-		{
-			this.folder = folder;
-			this.filename = filename;
+        public MainController(string folder, string filename)
+        {
+            this.folder = folder;
+            this.filename = filename;
 
-			ContentView = new MainView();
-			Content = ContentView;
+            ContentView = new MainView();
+            Content = ContentView;
 
-			Title = "CARTO STYLE EDITOR";
-		}
+            Title = "CARTO STYLE EDITOR";
+        }
 
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
-			ContentView.ShowLoading();
+            ContentView.ShowLoading();
 
-			Task.Run(delegate
-			{
-				data = Parser.GetZipData(folder, filename);
-				Device.BeginInvokeOnMainThread(delegate
-				{
-					ContentView.Initialize(data);
-				});
+            Task.Run(delegate
+            {
+                data = Parser.GetZipData(folder, filename);
+                Device.BeginInvokeOnMainThread(delegate
+                {
+                    ContentView.Initialize(data);
+                });
 
-				byte[] zipBytes = FileUtils.PathToByteData(data.DecompressedPath + Parser.ZipExtension);
+                byte[] zipBytes = FileUtils.PathToByteData(data.DecompressedPath + Parser.ZipExtension);
 
-				Device.BeginInvokeOnMainThread(delegate
-				{
-					ContentView.UpdateMap(zipBytes, delegate
-					{
-						ContentView.HideLoading();
-					});
-				});
-			});
+                Device.BeginInvokeOnMainThread(delegate
+                {
+                    ContentView.UpdateMap(zipBytes, delegate
+                    {
+                        ContentView.HideLoading();
+                    });
+                });
+            });
 
-			ContentView.FileTabs.OnTabTap += OnTabTapped;
+            ContentView.FileTabs.OnTabTap += OnTabTapped;
             ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
 
-			ContentView.Toolbar.ExpandButton.Click += OnFileTabExpand;
-			ContentView.Toolbar.UploadButton.Click += OnUploadButtonClicked;
-			ContentView.Toolbar.SaveButton.Click += OnSaveButtonClicked;
+            ContentView.Toolbar.ExpandButton.Click += OnFileTabExpand;
+            ContentView.Toolbar.UploadButton.Click += OnUploadButtonClicked;
+            ContentView.Toolbar.SaveButton.Click += OnSaveButtonClicked;
 
-			ContentView.Editor.RefreshButton.Clicked += OnRefresh;
-			ContentView.Editor.Field.EditingEnded += OnRefresh;
+            ContentView.Editor.RefreshButton.Clicked += OnRefresh;
+            ContentView.Editor.Field.EditingEnded += OnRefresh;
 
-			ContentView.Popup.Content.Confirm.Clicked += OnConfirmButtonClicked;
+            ContentView.Popup.Content.Confirm.Clicked += OnConfirmButtonClicked;
 
 #if __ANDROID__
 			DriveClientDroid.Instance.UploadComplete += OnUploadComplete;
 #elif __IOS__
-			DriveClientiOS.Instance.UploadComplete += OnUploadComplete;
+            DriveClientiOS.Instance.UploadComplete += OnUploadComplete;
 #elif __UWP__
             ContentView.Zoom.In.Click += ZoomIn;
             ContentView.Zoom.Out.Click += ZoomOut;
 #endif
         }
 
-		protected override void OnDisappearing()
+        protected override void OnDisappearing()
 		{
 			base.OnDisappearing();
 
@@ -96,7 +96,7 @@ namespace mobile_style_editor
             ContentView.Zoom.In.Click -= ZoomIn;
             ContentView.Zoom.Out.Click -= ZoomOut;
 #endif
-        }
+		}
 
         void ZoomIn(object sender, EventArgs e)
         {
