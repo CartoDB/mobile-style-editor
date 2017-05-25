@@ -14,7 +14,7 @@ namespace mobile_style_editor
 	{
 		const string OSM = "nutiteq.osm";
 
-        public static void Update(this MapView MapView, byte[] data, Action completed, Action<string> failed = null)
+        public static void Update(this MapView MapView, bool withListener, byte[] data, Action completed, Action<string> failed = null)
         {
             System.Threading.Tasks.Task.Run(delegate
             {
@@ -61,6 +61,14 @@ namespace mobile_style_editor
                     }
 
                     var layer = new VectorTileLayer(source, decoder);
+
+                    if (withListener) {
+                        var popupSource = new LocalVectorDataSource(MapView.Options.BaseProjection);
+                        var popupLayer = new VectorLayer(popupSource);
+                        MapView.Layers.Add(popupLayer);
+                        layer.VectorTileEventListener = new VectorEventListener(popupSource);
+                    }
+
                     Device.BeginInvokeOnMainThread(delegate
                     {
                         MapView.Layers.Add(layer);
@@ -72,7 +80,7 @@ namespace mobile_style_editor
                 }
                 else
                 {
-                    var decoder = (MBVectorTileDecoder)(MapView.Layers[0] as VectorTileLayer).TileDecoder;
+                    var decoder = (MBVectorTileDecoder)(MapView.Layers[MapView.Layers.Count -1] as VectorTileLayer).TileDecoder;
 
                     Device.BeginInvokeOnMainThread(delegate
                     {

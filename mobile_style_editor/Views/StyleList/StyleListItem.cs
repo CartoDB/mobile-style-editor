@@ -82,7 +82,7 @@ namespace mobile_style_editor
             Data = result;
 
             label.Text = result.CleanName;
-            MapView.Update(result.Data, null,
+            MapView.Update(false, result.Data, null,
                            (obj) =>
                            {
                                Device.BeginInvokeOnMainThread(delegate

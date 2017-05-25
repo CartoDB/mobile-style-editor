@@ -137,7 +137,7 @@ namespace mobile_style_editor
 
         public void UpdateMap(byte[] data, Action completed)
         {
-            MapView.Update(data, completed, (obj) =>
+            MapView.Update(true, data, completed, (obj) =>
                     {
                         Device.BeginInvokeOnMainThread(delegate
                         {
