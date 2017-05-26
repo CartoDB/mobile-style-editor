@@ -545,30 +545,30 @@ namespace mobile_style_editor
 		{
 			return await HubClient.Instance.GetZipFiles("CartoDB", "mobile-sample-styles");
 		}
-		
-		public async Task<DownloadResult> DownloadFile(Octokit.RepositoryContent content)
-		{
-			bool existsLocally = FileUtils.HasLocalCopy(TemplateFolder, content.Name);
 
-			string path;
-			string filename;
+        public async Task<DownloadResult> DownloadFile(Octokit.RepositoryContent content)
+        {
+            bool existsLocally = FileUtils.HasLocalCopy(TemplateFolder, content.Name);
 
-			if (!existsLocally)
-			{
-				var file = await HubClient.Instance.DownloadFile(content);
-				List<string> data = FileUtils.SaveToAppFolder(file.Stream, TemplateFolder, file.Name);
+            string path;
+            string filename;
 
-				path = data[1];
-				filename = data[0];
-			}
-			else
-			{
-				path = FileUtils.GetLocalPath(TemplateFolder);		
- 				filename = content.Name;
-			}
+            if (!existsLocally)
+            {
+                var file = await HubClient.Instance.DownloadFile(content);
+                List<string> data = FileUtils.SaveToAppFolder(file.Stream, TemplateFolder, file.Name);
 
-			return new DownloadResult { Path = path, Filename = filename };
-		}
+                path = data[1];
+                filename = data[0];
+            }
+            else
+            {
+                path = FileUtils.GetLocalPath(TemplateFolder);
+                filename = content.Name;
+            }
+
+            return new DownloadResult { Path = path, Filename = filename };
+        }
 
 	}
 }

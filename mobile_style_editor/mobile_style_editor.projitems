@@ -82,6 +82,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Utilities\MapContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\VectorEventListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Utilities\SourceLabel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Email.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />

@@ -42,7 +42,7 @@ namespace mobile_style_editor
 
 		protected override void OnStart()
 		{
-
+            
 		}
 
 		protected override void OnSleep()
