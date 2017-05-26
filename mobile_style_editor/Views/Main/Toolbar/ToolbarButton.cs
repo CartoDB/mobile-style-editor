@@ -12,7 +12,8 @@ namespace mobile_style_editor
 			label = new Label();
 			label.Text = text;
 			label.FontFamily = "Helvetica Neue";
-			label.FontSize = 13;
+			label.FontSize = 12;
+            label.FontAttributes = FontAttributes.Bold;
 			label.VerticalTextAlignment = TextAlignment.Center;
 			label.HorizontalTextAlignment = TextAlignment.Center;
 			label.BackgroundColor = Colors.CartoRed;

@@ -13,8 +13,23 @@ namespace mobile_style_editor
         ZipData data;
 
         string folder, filename;
+		
+        string TemporaryName { get { return "temporary-" + data.Filename; } }
 
-        public MainController(string folder, string filename)
+		string CalculatedPath
+		{
+			get
+			{
+				if (currentWorkingName == null)
+				{
+					return Path.Combine(folder, filename);
+				}
+
+				return Path.Combine(Parser.ApplicationFolder, TemporaryName);
+			}
+		}
+
+		public MainController(string folder, string filename)
         {
             this.folder = folder;
             this.filename = filename;
@@ -56,6 +71,7 @@ namespace mobile_style_editor
             ContentView.Toolbar.ExpandButton.Click += OnFileTabExpand;
             ContentView.Toolbar.UploadButton.Click += OnUploadButtonClicked;
             ContentView.Toolbar.SaveButton.Click += OnSaveButtonClicked;
+            ContentView.Toolbar.EmailButton.Click += OnEmailButtonClicked;
 
             ContentView.Editor.RefreshButton.Clicked += OnRefresh;
             ContentView.Editor.Field.EditingEnded += OnRefresh;
@@ -84,6 +100,7 @@ namespace mobile_style_editor
 			ContentView.Toolbar.ExpandButton.Click -= OnFileTabExpand;
 			ContentView.Toolbar.UploadButton.Click -= OnUploadButtonClicked;
 			ContentView.Toolbar.SaveButton.Click -= OnSaveButtonClicked;
+            ContentView.Toolbar.EmailButton.Click = OnEmailButtonClicked;
 
 			ContentView.Editor.RefreshButton.Clicked -= OnRefresh;
 			ContentView.Editor.Field.EditingEnded -= OnRefresh;
@@ -154,6 +171,12 @@ namespace mobile_style_editor
 		{
 			ShowPopup(PopupType.Save);
 		}
+
+        void OnEmailButtonClicked(object sender, EventArgs e)
+        {
+            string path = CalculatedPath;
+            Email.OpenSender(path);
+        }
 
 		void ShowPopup(PopupType type)
 		{
@@ -243,7 +266,7 @@ namespace mobile_style_editor
                 data.DecompressedFiles[index] = text;
 
 				FileUtils.OverwriteFileAtPath(path, text);
-				string name = "temporary-" + data.Filename;
+                string name = TemporaryName;
 
 				string zipPath = Parser.Compress(data.DecompressedPath, name);
 
@@ -252,8 +275,9 @@ namespace mobile_style_editor
 
 				Device.BeginInvokeOnMainThread(delegate
 				{
-					// Save current working data (name & bytes as stream) to conveniently upload
-					// Doing this on the main thread to assure thread safety
+                    // Save current working data (name & bytes as stream) to conveniently upload
+                    // Doing this on the main thread to assure thread safety
+
 					currentWorkingName = name;
 					currentWorkingStream = new MemoryStream(zipBytes);
 

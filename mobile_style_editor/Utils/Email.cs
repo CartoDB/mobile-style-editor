@@ -20,15 +20,20 @@ namespace mobile_style_editor
         public static Context Context { get { return Xamarin.Forms.Forms.Context; } }
 #endif
 
-        public static void Send(string path)
+        public static void OpenSender(string path)
         {
 #if __IOS__
-            NSData data = NSData.FromStream(new MemoryStream(FileUtils.PathToByteData(path)));
+            string[] split = path.Split('/');
+            string name = split[split.Length - 1];
+
+            var stream = new MemoryStream(FileUtils.PathToByteData(path));
+
+            NSData data = NSData.FromStream(stream);
 
             var controller = new MFMailComposeViewController();
             controller.SetSubject("subject");
             controller.SetMessageBody("body", false);
-            controller.AddAttachmentData(data, "application/zip", "filename.zip");
+            controller.AddAttachmentData(data, "application/zip", name);
 
             Controller.PresentViewController(controller, true, null);
 

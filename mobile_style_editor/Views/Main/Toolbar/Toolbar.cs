@@ -21,6 +21,8 @@ namespace mobile_style_editor
 
 		public ToolbarButton SaveButton { get; private set; }
 
+        public ToolbarButton EmailButton { get; private set; }
+
 		public Toolbar()
 		{
 			BackgroundColor = Colors.CartoNavy;
@@ -33,6 +35,8 @@ namespace mobile_style_editor
 			UploadButton = new ToolbarButton("UPLOAD");
 
 			SaveButton = new ToolbarButton("SAVE");
+
+            EmailButton = new ToolbarButton("EMAIL");
 		}
 
 		public override void LayoutSubviews()
@@ -57,6 +61,8 @@ namespace mobile_style_editor
 			x += w + padding;
 
 			//AddSubview(SaveButton, x, y, w, h);
+
+            AddSubview(EmailButton, x, y, w, h);
 		}
 
         const int MaxCount = 4;
