@@ -40,6 +40,7 @@ namespace mobile_style_editor
             MapView = new MapContainer();
             MapView.IsZoomVisible = true;
             MapView.IsSourceLabelVisible = true;
+            MapView.IsRefreshButtonVisibile = true;
 
             Editor = new CSSEditorView();
 

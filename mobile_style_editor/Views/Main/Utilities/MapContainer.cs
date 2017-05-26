@@ -23,10 +23,14 @@ namespace mobile_style_editor
         public bool IsZoomVisible { get; set; }
 
         public bool IsSourceLabelVisible { get; set; }
+        
+        public bool IsRefreshButtonVisibile { get; set; }
 
         Label zoomLabel;
         
-public SourceLabel SourceLabel { get; private set; }
+        public SourceLabel SourceLabel { get; private set; }
+
+        public RefreshButton RefreshButton { get; private set; }
 
 #if __IOS__
         public bool UserInteractionEnabled
@@ -75,6 +79,8 @@ public SourceLabel SourceLabel { get; private set; }
             zoomLabel.Text = ZoomText;
 
             SourceLabel = new SourceLabel();
+
+            RefreshButton = new RefreshButton();
         }
 
         public override void LayoutSubviews()
@@ -107,6 +113,15 @@ public SourceLabel SourceLabel { get; private set; }
 
                 RemoveChild(SourceLabel);
                 AddSubview(SourceLabel, padding, padding, w, h);
+            }
+
+            if (IsRefreshButtonVisibile)
+            {
+                double size = 50;
+                double buttonPadding = size / 2;
+
+                RemoveChild(RefreshButton);
+                AddSubview(RefreshButton, Width - (size + buttonPadding), size + buttonPadding, size, size);
             }
         }
 
@@ -147,5 +162,26 @@ public SourceLabel SourceLabel { get; private set; }
             MapView.OnMapMoved();
         }
 
+    }
+
+    public class RefreshButton : ClickView
+    {
+        Image image;
+
+        public RefreshButton()
+        {
+            image = new Image();
+
+            string folder = "";
+#if __UWP__
+            folder = "Assets/";
+#endif
+            image.Source = new FileImageSource { File = folder + "icon_refresh_2.png" };
+        }
+
+        public override void LayoutSubviews()
+        {
+            AddSubview(image, 0, 0, Width, Height);
+        }
     }
 }

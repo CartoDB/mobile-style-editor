@@ -73,8 +73,7 @@ namespace mobile_style_editor
             ContentView.Toolbar.SaveButton.Click += OnSaveButtonClicked;
             ContentView.Toolbar.EmailButton.Click += OnEmailButtonClicked;
 
-            ContentView.Editor.RefreshButton.Clicked += OnRefresh;
-            ContentView.Editor.Field.EditingEnded += OnRefresh;
+            ContentView.MapView.RefreshButton.Click += OnRefresh;
 
             ContentView.Popup.Content.Confirm.Clicked += OnConfirmButtonClicked;
 
@@ -102,9 +101,8 @@ namespace mobile_style_editor
 			ContentView.Toolbar.SaveButton.Click -= OnSaveButtonClicked;
             ContentView.Toolbar.EmailButton.Click = OnEmailButtonClicked;
 
-			ContentView.Editor.RefreshButton.Clicked -= OnRefresh;
-			ContentView.Editor.Field.EditingEnded -= OnRefresh;
-
+            ContentView.MapView.RefreshButton.Click -= OnRefresh;
+			
 			ContentView.Popup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
 
             ContentView.MapView.SourceLabel.Done -= OnSourceChanged;
