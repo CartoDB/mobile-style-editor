@@ -108,6 +108,7 @@ namespace mobile_style_editor
 				Loader = new ActivityIndicator();
 				double size = 50;
 				AddSubview(Loader, Width / 2 - size / 2, Height / 2 - size / 2, size, size);
+                RaiseChild(Loader);
 			}
 
 			Loader.IsRunning = true;
