@@ -120,8 +120,8 @@ namespace mobile_style_editor
                 double size = 50;
                 double buttonPadding = size / 2;
 
-                RemoveChild(RefreshButton);
                 AddSubview(RefreshButton, Width - (size + buttonPadding), size + buttonPadding, size, size);
+                RaiseChild(RefreshButton);
             }
         }
 
@@ -164,9 +164,9 @@ namespace mobile_style_editor
 
     }
 
-    public class RefreshButton : ClickView
+public class RefreshButton : ClickView
     {
-        Image image;
+		Image image;
 
         public RefreshButton()
         {
