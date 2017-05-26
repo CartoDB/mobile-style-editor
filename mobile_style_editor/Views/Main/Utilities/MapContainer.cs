@@ -103,16 +103,16 @@ namespace mobile_style_editor
             {
                 double w = 90;
 
-                RemoveChild(zoomLabel);
                 AddSubview(zoomLabel, Width - w - padding, padding, w, h);
+                RaiseChild(zoomLabel);
             }
 
             if (IsSourceLabelVisible)
             {
                 double w = 200;
 
-                RemoveChild(SourceLabel);
                 AddSubview(SourceLabel, padding, padding, w, h);
+                RaiseChild(SourceLabel); 
             }
 
             if (IsRefreshButtonVisibile)

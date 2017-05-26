@@ -31,10 +31,28 @@ namespace mobile_style_editor
             NSData data = NSData.FromStream(stream);
 
             var controller = new MFMailComposeViewController();
-            controller.SetSubject("subject");
-            controller.SetMessageBody("body", false);
+            controller.SetSubject("Style: " + name);
+            controller.SetMessageBody("Date: " + DateTime.Now.ToString("F"), false);
             controller.AddAttachmentData(data, "application/zip", name);
 
+            controller.Finished += (object sender, MFComposeResultEventArgs e) => {
+
+                string message = "";
+
+                if (e.Result == MFMailComposeResult.Sent) {
+                    message = "Mail sent";
+                } else if (e.Result == MFMailComposeResult.Failed) {
+                    message = "Failed :" + e.Error;
+                } else if (e.Result == MFMailComposeResult.Cancelled) {
+                    message = "Cancelled";
+                } else if (e.Result == MFMailComposeResult.Saved) {
+                    message = "Saved";
+                }
+
+                Toast.Show(message, new BaseView());
+                controller.DismissViewController(true, null);
+            };
+			
             Controller.PresentViewController(controller, true, null);
 
 #elif __ANDROID__
