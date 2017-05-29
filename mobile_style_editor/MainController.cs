@@ -13,27 +13,29 @@ namespace mobile_style_editor
         ZipData data;
 
         string folder, filename;
-		
+
         string TemporaryName { get { return "temporary-" + data.Filename; } }
 
-		string CalculatedPath
-		{
-			get
-			{
-				if (currentWorkingName == null)
-				{
-					return Path.Combine(folder, filename);
-				}
+        bool ContainsUnsavedChanged { get; set; }
 
-				return Path.Combine(Parser.ApplicationFolder, TemporaryName);
-			}
-		}
-
-		public MainController(string folder, string filename)
+        string CalculatedPath
         {
-			NavigationPage.SetHasNavigationBar(this, false);
+            get
+            {
+                if (currentWorkingName == null)
+                {
+                    return Path.Combine(folder, filename);
+                }
 
-			this.folder = folder;
+                return Path.Combine(Parser.ApplicationFolder, TemporaryName);
+            }
+        }
+
+        public MainController(string folder, string filename)
+        {
+            NavigationPage.SetHasNavigationBar(this, false);
+
+            this.folder = folder;
             this.filename = filename;
 
             ContentView = new MainView();
@@ -93,38 +95,51 @@ namespace mobile_style_editor
         }
 
         protected override void OnDisappearing()
-		{
-			base.OnDisappearing();
+        {
+            base.OnDisappearing();
 
             ContentView.NavigationBar.Back.Click -= OnBackButtonPressed;
 
-			ContentView.FileTabs.OnTabTap -= OnTabTapped;
+            ContentView.FileTabs.OnTabTap -= OnTabTapped;
             ContentView.Toolbar.Tabs.OnTabTap -= OnTabTapped;
 
-			ContentView.Toolbar.ExpandButton.Click -= OnFileTabExpand;
-			ContentView.Toolbar.UploadButton.Click -= OnUploadButtonClicked;
-			ContentView.Toolbar.SaveButton.Click -= OnSaveButtonClicked;
+            ContentView.Toolbar.ExpandButton.Click -= OnFileTabExpand;
+            ContentView.Toolbar.UploadButton.Click -= OnUploadButtonClicked;
+            ContentView.Toolbar.SaveButton.Click -= OnSaveButtonClicked;
             ContentView.Toolbar.EmailButton.Click = OnEmailButtonClicked;
 
             ContentView.MapView.RefreshButton.Click -= OnRefresh;
-			
-			ContentView.Popup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
+
+            ContentView.Popup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
 
             ContentView.MapView.SourceLabel.Done -= OnSourceChanged;
 
 #if __ANDROID__
 			DriveClientDroid.Instance.UploadComplete -= OnUploadComplete;
 #elif __IOS__
-			DriveClientiOS.Instance.UploadComplete -= OnUploadComplete;
+            DriveClientiOS.Instance.UploadComplete -= OnUploadComplete;
 #elif __UWP__
             ContentView.Zoom.In.Click -= ZoomIn;
             ContentView.Zoom.Out.Click -= ZoomOut;
 #endif
-		}
+        }
 
-        void OnBackButtonPressed(object sender, EventArgs e)
+        async void OnBackButtonPressed(object sender, EventArgs e)
         {
-            Navigation.PopAsync(true);    
+            if (ContainsUnsavedChanged)
+            {
+				string message = "If you go back now, you will lose unsaved changes";
+				var accepted = await DisplayAlert("Attention!", message, "Ok", "Cancel");
+
+				if (accepted)
+				{
+					await Navigation.PopAsync(true);
+				}
+            }
+            else
+            {
+                await Navigation.PopAsync(true);
+            }
         }
 
         void OnSourceChanged(object sender, EventArgs e)
@@ -159,7 +174,6 @@ namespace mobile_style_editor
 			});
 		}
 
-
 		void OnFileTabExpand(object sender, EventArgs e)
 		{
 			ContentView.ToggleTabs();
@@ -183,7 +197,15 @@ namespace mobile_style_editor
         void OnEmailButtonClicked(object sender, EventArgs e)
         {
             string path = CalculatedPath;
-            Email.OpenSender(path);
+            Email.OpenSender(path, delegate {
+                
+                Device.BeginInvokeOnMainThread(delegate {
+                    ContainsUnsavedChanged = false;   
+                });
+
+            },(obj) => {
+                DisplayAlert("Whoops", obj, "Ok");   
+            });
         }
 
 		void ShowPopup(PopupType type)
@@ -293,6 +315,8 @@ namespace mobile_style_editor
 					{
 						ContentView.HideLoading();
 					});
+
+                    ContainsUnsavedChanged = true;
 				});
 			});
 		}

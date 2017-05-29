@@ -20,7 +20,7 @@ namespace mobile_style_editor
         public static Context Context { get { return Xamarin.Forms.Forms.Context; } }
 #endif
 
-        public static void OpenSender(string path)
+        public static void OpenSender(string path, Action success, Action<string> error)
         {
 #if __IOS__
             string[] split = path.Split('/');
@@ -30,30 +30,48 @@ namespace mobile_style_editor
 
             NSData data = NSData.FromStream(stream);
 
-            var controller = new MFMailComposeViewController();
-            controller.SetSubject("Style: " + name);
-            controller.SetMessageBody("Date: " + DateTime.Now.ToString("F"), false);
-            controller.AddAttachmentData(data, "application/zip", name);
+            try
+            {
+                MFMailComposeViewController controller = new MFMailComposeViewController();
 
-            controller.Finished += (object sender, MFComposeResultEventArgs e) => {
+                controller.SetSubject("Style: " + name);
+                controller.SetMessageBody("Date: " + DateTime.Now.ToString("F"), false);
+                controller.AddAttachmentData(data, "application/zip", name);
 
-                string message = "";
+                controller.Finished += (object sender, MFComposeResultEventArgs e) =>
+                {
 
-                if (e.Result == MFMailComposeResult.Sent) {
-                    message = "Mail sent";
-                } else if (e.Result == MFMailComposeResult.Failed) {
-                    message = "Failed :" + e.Error;
-                } else if (e.Result == MFMailComposeResult.Cancelled) {
-                    message = "Cancelled";
-                } else if (e.Result == MFMailComposeResult.Saved) {
-                    message = "Saved";
-                }
+                    string message = "";
 
-                Toast.Show(message, new BaseView());
-                controller.DismissViewController(true, null);
-            };
-			
-            Controller.PresentViewController(controller, true, null);
+                    if (e.Result == MFMailComposeResult.Sent)
+                    {
+                        message = "Mail sent";
+                        success();
+                    }
+                    else if (e.Result == MFMailComposeResult.Failed)
+                    {
+                        message = "Failed :" + e.Error;
+                    }
+                    else if (e.Result == MFMailComposeResult.Cancelled)
+                    {
+                        message = "Cancelled";
+                    }
+                    else if (e.Result == MFMailComposeResult.Saved)
+                    {
+                        message = "Saved";
+                        success();
+                    }
+
+                    Toast.Show(message, new BaseView());
+                    controller.DismissViewController(true, null);
+                };
+
+                Controller.PresentViewController(controller, true, null);
+            }
+            catch
+            {
+                //error("You don't seem to have any mail clients set up");
+            }
 
 #elif __ANDROID__
             Intent intent = new Intent(Intent.ActionSend);
