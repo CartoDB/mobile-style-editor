@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-    public class MainController : ContentPage
+    public class MainController : BaseController
     {
         MainView ContentView;
 
@@ -129,12 +129,9 @@ namespace mobile_style_editor
             if (ContainsUnsavedChanged)
             {
 				string message = "If you go back now, you will lose unsaved changes";
-				var accepted = await DisplayAlert("Attention!", message, "Ok", "Cancel");
-
-				if (accepted)
-				{
-					await Navigation.PopAsync(true);
-				}
+				Alert("Attention!", message, null, async delegate {
+                    await Navigation.PopAsync(true);  
+                });
             }
             else
             {
@@ -155,15 +152,13 @@ namespace mobile_style_editor
 			}
 		}
 
-		async void HandleUnsavedChanges()
+		void HandleUnsavedChanges()
 		{
 			string message = "If you go back now, you will lose unsaved changes";
-			var accepted = await DisplayAlert("Attention!", message, "Ok", "Cancel");
-
-			if (accepted)
-			{
-				await Navigation.PopAsync(true);
-			}
+            Alert("Attention!", message, null, async delegate
+            {
+                await Navigation.PopAsync(true);
+            });
 		}
 
         void OnSourceChanged(object sender, EventArgs e)
@@ -228,7 +223,7 @@ namespace mobile_style_editor
                 });
 
             },(obj) => {
-                DisplayAlert("Whoops", obj, "Ok");   
+                Alert("Whoops", obj, null);
             });
         }
 

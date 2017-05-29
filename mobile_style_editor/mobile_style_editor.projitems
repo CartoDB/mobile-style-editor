@@ -86,6 +86,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\ContentView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\Navigation\Navigationbar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\Navigation\NavigationBackButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BaseController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
