@@ -27,6 +27,126 @@ namespace mobile_style_editor.Droid
 		public static void UpdateIdValues()
 		{
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::mobile_style_editor.Droid.Resource.Attribute.actionBarSize;
+			global::HockeyApp.Resource.Color.hockeyapp_background_header = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_background_header;
+			global::HockeyApp.Resource.Color.hockeyapp_background_light = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_background_light;
+			global::HockeyApp.Resource.Color.hockeyapp_background_white = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_background_white;
+			global::HockeyApp.Resource.Color.hockeyapp_button_background = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_button_background;
+			global::HockeyApp.Resource.Color.hockeyapp_button_background_pressed = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_button_background_pressed;
+			global::HockeyApp.Resource.Color.hockeyapp_button_background_selected = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_button_background_selected;
+			global::HockeyApp.Resource.Color.hockeyapp_text_black = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_text_black;
+			global::HockeyApp.Resource.Color.hockeyapp_text_light = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_text_light;
+			global::HockeyApp.Resource.Color.hockeyapp_text_normal = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_text_normal;
+			global::HockeyApp.Resource.Color.hockeyapp_text_white = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_text_white;
+			global::HockeyApp.Resource.Drawable.hockeyapp_btn_background = global::mobile_style_editor.Droid.Resource.Drawable.hockeyapp_btn_background;
+			global::HockeyApp.Resource.Id.button_add_response = global::mobile_style_editor.Droid.Resource.Id.button_add_response;
+			global::HockeyApp.Resource.Id.button_attachment = global::mobile_style_editor.Droid.Resource.Id.button_attachment;
+			global::HockeyApp.Resource.Id.button_login = global::mobile_style_editor.Droid.Resource.Id.button_login;
+			global::HockeyApp.Resource.Id.button_refresh = global::mobile_style_editor.Droid.Resource.Id.button_refresh;
+			global::HockeyApp.Resource.Id.button_send = global::mobile_style_editor.Droid.Resource.Id.button_send;
+			global::HockeyApp.Resource.Id.button_update = global::mobile_style_editor.Droid.Resource.Id.button_update;
+			global::HockeyApp.Resource.Id.input_email = global::mobile_style_editor.Droid.Resource.Id.input_email;
+			global::HockeyApp.Resource.Id.input_message = global::mobile_style_editor.Droid.Resource.Id.input_message;
+			global::HockeyApp.Resource.Id.input_name = global::mobile_style_editor.Droid.Resource.Id.input_name;
+			global::HockeyApp.Resource.Id.input_password = global::mobile_style_editor.Droid.Resource.Id.input_password;
+			global::HockeyApp.Resource.Id.input_subject = global::mobile_style_editor.Droid.Resource.Id.input_subject;
+			global::HockeyApp.Resource.Id.label_author = global::mobile_style_editor.Droid.Resource.Id.label_author;
+			global::HockeyApp.Resource.Id.label_date = global::mobile_style_editor.Droid.Resource.Id.label_date;
+			global::HockeyApp.Resource.Id.label_last_updated = global::mobile_style_editor.Droid.Resource.Id.label_last_updated;
+			global::HockeyApp.Resource.Id.label_message = global::mobile_style_editor.Droid.Resource.Id.label_message;
+			global::HockeyApp.Resource.Id.label_text = global::mobile_style_editor.Droid.Resource.Id.label_text;
+			global::HockeyApp.Resource.Id.label_title = global::mobile_style_editor.Droid.Resource.Id.label_title;
+			global::HockeyApp.Resource.Id.label_version = global::mobile_style_editor.Droid.Resource.Id.label_version;
+			global::HockeyApp.Resource.Id.list_attachments = global::mobile_style_editor.Droid.Resource.Id.list_attachments;
+			global::HockeyApp.Resource.Id.list_feedback_messages = global::mobile_style_editor.Droid.Resource.Id.list_feedback_messages;
+			global::HockeyApp.Resource.Id.text_headline = global::mobile_style_editor.Droid.Resource.Id.text_headline;
+			global::HockeyApp.Resource.Id.view_header = global::mobile_style_editor.Droid.Resource.Id.view_header;
+			global::HockeyApp.Resource.Id.web_update_details = global::mobile_style_editor.Droid.Resource.Id.web_update_details;
+			global::HockeyApp.Resource.Id.wrapper_attachments = global::mobile_style_editor.Droid.Resource.Id.wrapper_attachments;
+			global::HockeyApp.Resource.Id.wrapper_feedback = global::mobile_style_editor.Droid.Resource.Id.wrapper_feedback;
+			global::HockeyApp.Resource.Id.wrapper_feedback_scroll = global::mobile_style_editor.Droid.Resource.Id.wrapper_feedback_scroll;
+			global::HockeyApp.Resource.Id.wrapper_messages = global::mobile_style_editor.Droid.Resource.Id.wrapper_messages;
+			global::HockeyApp.Resource.Id.wrapper_messages_buttons = global::mobile_style_editor.Droid.Resource.Id.wrapper_messages_buttons;
+			global::HockeyApp.Resource.Layout.hockeyapp_activity_expiry_info = global::mobile_style_editor.Droid.Resource.Layout.hockeyapp_activity_expiry_info;
+			global::HockeyApp.Resource.Layout.hockeyapp_activity_feedback = global::mobile_style_editor.Droid.Resource.Layout.hockeyapp_activity_feedback;
+			global::HockeyApp.Resource.Layout.hockeyapp_activity_login = global::mobile_style_editor.Droid.Resource.Layout.hockeyapp_activity_login;
+			global::HockeyApp.Resource.Layout.hockeyapp_activity_update = global::mobile_style_editor.Droid.Resource.Layout.hockeyapp_activity_update;
+			global::HockeyApp.Resource.Layout.hockeyapp_fragment_update = global::mobile_style_editor.Droid.Resource.Layout.hockeyapp_fragment_update;
+			global::HockeyApp.Resource.Layout.hockeyapp_view_feedback_message = global::mobile_style_editor.Droid.Resource.Layout.hockeyapp_view_feedback_message;
+			global::HockeyApp.Resource.String.hockeyapp_crash_dialog_app_name_fallback = global::mobile_style_editor.Droid.Resource.String.hockeyapp_crash_dialog_app_name_fallback;
+			global::HockeyApp.Resource.String.hockeyapp_crash_dialog_message = global::mobile_style_editor.Droid.Resource.String.hockeyapp_crash_dialog_message;
+			global::HockeyApp.Resource.String.hockeyapp_crash_dialog_negative_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_crash_dialog_negative_button;
+			global::HockeyApp.Resource.String.hockeyapp_crash_dialog_neutral_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_crash_dialog_neutral_button;
+			global::HockeyApp.Resource.String.hockeyapp_crash_dialog_positive_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_crash_dialog_positive_button;
+			global::HockeyApp.Resource.String.hockeyapp_crash_dialog_title = global::mobile_style_editor.Droid.Resource.String.hockeyapp_crash_dialog_title;
+			global::HockeyApp.Resource.String.hockeyapp_dialog_error_message = global::mobile_style_editor.Droid.Resource.String.hockeyapp_dialog_error_message;
+			global::HockeyApp.Resource.String.hockeyapp_dialog_error_title = global::mobile_style_editor.Droid.Resource.String.hockeyapp_dialog_error_title;
+			global::HockeyApp.Resource.String.hockeyapp_dialog_negative_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_dialog_negative_button;
+			global::HockeyApp.Resource.String.hockeyapp_dialog_positive_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_dialog_positive_button;
+			global::HockeyApp.Resource.String.hockeyapp_download_failed_dialog_message = global::mobile_style_editor.Droid.Resource.String.hockeyapp_download_failed_dialog_message;
+			global::HockeyApp.Resource.String.hockeyapp_download_failed_dialog_negative_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_download_failed_dialog_negative_button;
+			global::HockeyApp.Resource.String.hockeyapp_download_failed_dialog_positive_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_download_failed_dialog_positive_button;
+			global::HockeyApp.Resource.String.hockeyapp_download_failed_dialog_title = global::mobile_style_editor.Droid.Resource.String.hockeyapp_download_failed_dialog_title;
+			global::HockeyApp.Resource.String.hockeyapp_error_no_network_message = global::mobile_style_editor.Droid.Resource.String.hockeyapp_error_no_network_message;
+			global::HockeyApp.Resource.String.hockeyapp_expiry_info_text = global::mobile_style_editor.Droid.Resource.String.hockeyapp_expiry_info_text;
+			global::HockeyApp.Resource.String.hockeyapp_expiry_info_title = global::mobile_style_editor.Droid.Resource.String.hockeyapp_expiry_info_title;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_attach_file = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_attach_file;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_attach_picture = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_attach_picture;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_attachment_button_text = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_attachment_button_text;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_attachment_error = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_attachment_error;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_attachment_loading = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_attachment_loading;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_email_hint = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_email_hint;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_failed_text = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_failed_text;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_failed_title = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_failed_title;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_fetching_feedback_text = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_fetching_feedback_text;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_generic_error = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_generic_error;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_last_updated_text = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_last_updated_text;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_max_attachments_allowed = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_max_attachments_allowed;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_message_hint = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_message_hint;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_name_hint = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_name_hint;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_refresh_button_text = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_refresh_button_text;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_response_button_text = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_response_button_text;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_select_file = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_select_file;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_select_picture = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_select_picture;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_send_button_text = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_send_button_text;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_send_generic_error = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_send_generic_error;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_send_network_error = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_send_network_error;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_sending_feedback_text = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_sending_feedback_text;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_subject_hint = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_subject_hint;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_title = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_title;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_validate_email_empty = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_validate_email_empty;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_validate_email_error = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_validate_email_error;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_validate_name_error = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_validate_name_error;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_validate_subject_error = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_validate_subject_error;
+			global::HockeyApp.Resource.String.hockeyapp_feedback_validate_text_error = global::mobile_style_editor.Droid.Resource.String.hockeyapp_feedback_validate_text_error;
+			global::HockeyApp.Resource.String.hockeyapp_login_email_hint = global::mobile_style_editor.Droid.Resource.String.hockeyapp_login_email_hint;
+			global::HockeyApp.Resource.String.hockeyapp_login_headline_text = global::mobile_style_editor.Droid.Resource.String.hockeyapp_login_headline_text;
+			global::HockeyApp.Resource.String.hockeyapp_login_headline_text_email_only = global::mobile_style_editor.Droid.Resource.String.hockeyapp_login_headline_text_email_only;
+			global::HockeyApp.Resource.String.hockeyapp_login_login_button_text = global::mobile_style_editor.Droid.Resource.String.hockeyapp_login_login_button_text;
+			global::HockeyApp.Resource.String.hockeyapp_login_missing_credentials_toast = global::mobile_style_editor.Droid.Resource.String.hockeyapp_login_missing_credentials_toast;
+			global::HockeyApp.Resource.String.hockeyapp_login_password_hint = global::mobile_style_editor.Droid.Resource.String.hockeyapp_login_password_hint;
+			global::HockeyApp.Resource.String.hockeyapp_paint_dialog_message = global::mobile_style_editor.Droid.Resource.String.hockeyapp_paint_dialog_message;
+			global::HockeyApp.Resource.String.hockeyapp_paint_dialog_negative_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_paint_dialog_negative_button;
+			global::HockeyApp.Resource.String.hockeyapp_paint_dialog_neutral_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_paint_dialog_neutral_button;
+			global::HockeyApp.Resource.String.hockeyapp_paint_dialog_positive_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_paint_dialog_positive_button;
+			global::HockeyApp.Resource.String.hockeyapp_paint_indicator_toast = global::mobile_style_editor.Droid.Resource.String.hockeyapp_paint_indicator_toast;
+			global::HockeyApp.Resource.String.hockeyapp_paint_menu_clear = global::mobile_style_editor.Droid.Resource.String.hockeyapp_paint_menu_clear;
+			global::HockeyApp.Resource.String.hockeyapp_paint_menu_save = global::mobile_style_editor.Droid.Resource.String.hockeyapp_paint_menu_save;
+			global::HockeyApp.Resource.String.hockeyapp_paint_menu_undo = global::mobile_style_editor.Droid.Resource.String.hockeyapp_paint_menu_undo;
+			global::HockeyApp.Resource.String.hockeyapp_permission_dialog_negative_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_permission_dialog_negative_button;
+			global::HockeyApp.Resource.String.hockeyapp_permission_dialog_positive_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_permission_dialog_positive_button;
+			global::HockeyApp.Resource.String.hockeyapp_permission_update_message = global::mobile_style_editor.Droid.Resource.String.hockeyapp_permission_update_message;
+			global::HockeyApp.Resource.String.hockeyapp_permission_update_title = global::mobile_style_editor.Droid.Resource.String.hockeyapp_permission_update_title;
+			global::HockeyApp.Resource.String.hockeyapp_update_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_update_button;
+			global::HockeyApp.Resource.String.hockeyapp_update_dialog_message = global::mobile_style_editor.Droid.Resource.String.hockeyapp_update_dialog_message;
+			global::HockeyApp.Resource.String.hockeyapp_update_dialog_negative_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_update_dialog_negative_button;
+			global::HockeyApp.Resource.String.hockeyapp_update_dialog_positive_button = global::mobile_style_editor.Droid.Resource.String.hockeyapp_update_dialog_positive_button;
+			global::HockeyApp.Resource.String.hockeyapp_update_dialog_title = global::mobile_style_editor.Droid.Resource.String.hockeyapp_update_dialog_title;
+			global::HockeyApp.Resource.String.hockeyapp_update_mandatory_toast = global::mobile_style_editor.Droid.Resource.String.hockeyapp_update_mandatory_toast;
+			global::HockeyApp.Resource.String.hockeyapp_update_version_details_label = global::mobile_style_editor.Droid.Resource.String.hockeyapp_update_version_details_label;
+			global::HockeyApp.Resource.String.library_name = global::mobile_style_editor.Droid.Resource.String.library_name;
+			global::HockeyApp.Resource.Style.HockeyApp_ButtonStyle = global::mobile_style_editor.Droid.Resource.Style.HockeyApp_ButtonStyle;
+			global::HockeyApp.Resource.Style.HockeyApp_EditTextStyle = global::mobile_style_editor.Droid.Resource.Style.HockeyApp_EditTextStyle;
+			global::HockeyApp.Resource.Style.HockeyApp_SingleLineInputStyle = global::mobile_style_editor.Droid.Resource.Style.HockeyApp_SingleLineInputStyle;
 		}
 		
 		public partial class Animation
@@ -1179,44 +1299,44 @@ namespace mobile_style_editor.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f080052
-			public const int abc_background_cache_hint_selector_material_dark = 2131230802;
+			// aapt resource value: 0x7f08005c
+			public const int abc_background_cache_hint_selector_material_dark = 2131230812;
 			
-			// aapt resource value: 0x7f080053
-			public const int abc_background_cache_hint_selector_material_light = 2131230803;
+			// aapt resource value: 0x7f08005d
+			public const int abc_background_cache_hint_selector_material_light = 2131230813;
 			
-			// aapt resource value: 0x7f080054
-			public const int abc_btn_colored_borderless_text_material = 2131230804;
+			// aapt resource value: 0x7f08005e
+			public const int abc_btn_colored_borderless_text_material = 2131230814;
 			
-			// aapt resource value: 0x7f080055
-			public const int abc_btn_colored_text_material = 2131230805;
+			// aapt resource value: 0x7f08005f
+			public const int abc_btn_colored_text_material = 2131230815;
 			
-			// aapt resource value: 0x7f080056
-			public const int abc_color_highlight_material = 2131230806;
+			// aapt resource value: 0x7f080060
+			public const int abc_color_highlight_material = 2131230816;
 			
-			// aapt resource value: 0x7f080057
-			public const int abc_hint_foreground_material_dark = 2131230807;
+			// aapt resource value: 0x7f080061
+			public const int abc_hint_foreground_material_dark = 2131230817;
 			
-			// aapt resource value: 0x7f080058
-			public const int abc_hint_foreground_material_light = 2131230808;
+			// aapt resource value: 0x7f080062
+			public const int abc_hint_foreground_material_light = 2131230818;
 			
 			// aapt resource value: 0x7f080018
 			public const int abc_input_method_navigation_guard = 2131230744;
 			
-			// aapt resource value: 0x7f080059
-			public const int abc_primary_text_disable_only_material_dark = 2131230809;
+			// aapt resource value: 0x7f080063
+			public const int abc_primary_text_disable_only_material_dark = 2131230819;
 			
-			// aapt resource value: 0x7f08005a
-			public const int abc_primary_text_disable_only_material_light = 2131230810;
+			// aapt resource value: 0x7f080064
+			public const int abc_primary_text_disable_only_material_light = 2131230820;
 			
-			// aapt resource value: 0x7f08005b
-			public const int abc_primary_text_material_dark = 2131230811;
+			// aapt resource value: 0x7f080065
+			public const int abc_primary_text_material_dark = 2131230821;
 			
-			// aapt resource value: 0x7f08005c
-			public const int abc_primary_text_material_light = 2131230812;
+			// aapt resource value: 0x7f080066
+			public const int abc_primary_text_material_light = 2131230822;
 			
-			// aapt resource value: 0x7f08005d
-			public const int abc_search_url_text = 2131230813;
+			// aapt resource value: 0x7f080067
+			public const int abc_search_url_text = 2131230823;
 			
 			// aapt resource value: 0x7f080019
 			public const int abc_search_url_text_normal = 2131230745;
@@ -1227,32 +1347,32 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f08001b
 			public const int abc_search_url_text_selected = 2131230747;
 			
-			// aapt resource value: 0x7f08005e
-			public const int abc_secondary_text_material_dark = 2131230814;
+			// aapt resource value: 0x7f080068
+			public const int abc_secondary_text_material_dark = 2131230824;
 			
-			// aapt resource value: 0x7f08005f
-			public const int abc_secondary_text_material_light = 2131230815;
+			// aapt resource value: 0x7f080069
+			public const int abc_secondary_text_material_light = 2131230825;
 			
-			// aapt resource value: 0x7f080060
-			public const int abc_tint_btn_checkable = 2131230816;
+			// aapt resource value: 0x7f08006a
+			public const int abc_tint_btn_checkable = 2131230826;
 			
-			// aapt resource value: 0x7f080061
-			public const int abc_tint_default = 2131230817;
+			// aapt resource value: 0x7f08006b
+			public const int abc_tint_default = 2131230827;
 			
-			// aapt resource value: 0x7f080062
-			public const int abc_tint_edittext = 2131230818;
+			// aapt resource value: 0x7f08006c
+			public const int abc_tint_edittext = 2131230828;
 			
-			// aapt resource value: 0x7f080063
-			public const int abc_tint_seek_thumb = 2131230819;
+			// aapt resource value: 0x7f08006d
+			public const int abc_tint_seek_thumb = 2131230829;
 			
-			// aapt resource value: 0x7f080064
-			public const int abc_tint_spinner = 2131230820;
+			// aapt resource value: 0x7f08006e
+			public const int abc_tint_spinner = 2131230830;
 			
-			// aapt resource value: 0x7f080065
-			public const int abc_tint_switch_thumb = 2131230821;
+			// aapt resource value: 0x7f08006f
+			public const int abc_tint_switch_thumb = 2131230831;
 			
-			// aapt resource value: 0x7f080066
-			public const int abc_tint_switch_track = 2131230822;
+			// aapt resource value: 0x7f080070
+			public const int abc_tint_switch_track = 2131230832;
 			
 			// aapt resource value: 0x7f08001c
 			public const int accent_material_dark = 2131230748;
@@ -1308,8 +1428,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f080003
 			public const int cardview_shadow_start_color = 2131230723;
 			
-			// aapt resource value: 0x7f080067
-			public const int common_google_signin_btn_text_dark = 2131230823;
+			// aapt resource value: 0x7f080071
+			public const int common_google_signin_btn_text_dark = 2131230833;
 			
 			// aapt resource value: 0x7f080004
 			public const int common_google_signin_btn_text_dark_default = 2131230724;
@@ -1323,8 +1443,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f080007
 			public const int common_google_signin_btn_text_dark_pressed = 2131230727;
 			
-			// aapt resource value: 0x7f080068
-			public const int common_google_signin_btn_text_light = 2131230824;
+			// aapt resource value: 0x7f080072
+			public const int common_google_signin_btn_text_light = 2131230834;
 			
 			// aapt resource value: 0x7f080008
 			public const int common_google_signin_btn_text_light_default = 2131230728;
@@ -1341,8 +1461,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f08000c
 			public const int design_bottom_navigation_shadow_color = 2131230732;
 			
-			// aapt resource value: 0x7f080069
-			public const int design_error = 2131230825;
+			// aapt resource value: 0x7f080073
+			public const int design_error = 2131230835;
 			
 			// aapt resource value: 0x7f08000d
 			public const int design_fab_shadow_end_color = 2131230733;
@@ -1374,8 +1494,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f080016
 			public const int design_textinput_error_color_light = 2131230742;
 			
-			// aapt resource value: 0x7f08006a
-			public const int design_tint_password_toggle = 2131230826;
+			// aapt resource value: 0x7f080074
+			public const int design_tint_password_toggle = 2131230836;
 			
 			// aapt resource value: 0x7f08002a
 			public const int dim_foreground_disabled_material_dark = 2131230762;
@@ -1400,6 +1520,36 @@ namespace mobile_style_editor.Droid
 			
 			// aapt resource value: 0x7f080031
 			public const int highlighted_text_material_light = 2131230769;
+			
+			// aapt resource value: 0x7f080052
+			public const int hockeyapp_background_header = 2131230802;
+			
+			// aapt resource value: 0x7f080053
+			public const int hockeyapp_background_light = 2131230803;
+			
+			// aapt resource value: 0x7f080054
+			public const int hockeyapp_background_white = 2131230804;
+			
+			// aapt resource value: 0x7f080055
+			public const int hockeyapp_button_background = 2131230805;
+			
+			// aapt resource value: 0x7f080056
+			public const int hockeyapp_button_background_pressed = 2131230806;
+			
+			// aapt resource value: 0x7f080057
+			public const int hockeyapp_button_background_selected = 2131230807;
+			
+			// aapt resource value: 0x7f080058
+			public const int hockeyapp_text_black = 2131230808;
+			
+			// aapt resource value: 0x7f080059
+			public const int hockeyapp_text_light = 2131230809;
+			
+			// aapt resource value: 0x7f08005a
+			public const int hockeyapp_text_normal = 2131230810;
+			
+			// aapt resource value: 0x7f08005b
+			public const int hockeyapp_text_white = 2131230811;
 			
 			// aapt resource value: 0x7f080032
 			public const int material_blue_grey_800 = 2131230770;
@@ -1494,11 +1644,11 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f08004f
 			public const int switch_thumb_disabled_material_light = 2131230799;
 			
-			// aapt resource value: 0x7f08006b
-			public const int switch_thumb_material_dark = 2131230827;
+			// aapt resource value: 0x7f080075
+			public const int switch_thumb_material_dark = 2131230837;
 			
-			// aapt resource value: 0x7f08006c
-			public const int switch_thumb_material_light = 2131230828;
+			// aapt resource value: 0x7f080076
+			public const int switch_thumb_material_light = 2131230838;
 			
 			// aapt resource value: 0x7f080050
 			public const int switch_thumb_normal_material_dark = 2131230800;
@@ -2228,26 +2378,26 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f02012a
-			public const int avd_hide_password_1 = 2130837802;
-			
 			// aapt resource value: 0x7f02012b
-			public const int avd_hide_password_2 = 2130837803;
+			public const int avd_hide_password_1 = 2130837803;
 			
 			// aapt resource value: 0x7f02012c
-			public const int avd_hide_password_3 = 2130837804;
+			public const int avd_hide_password_2 = 2130837804;
+			
+			// aapt resource value: 0x7f02012d
+			public const int avd_hide_password_3 = 2130837805;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f02012d
-			public const int avd_show_password_1 = 2130837805;
-			
 			// aapt resource value: 0x7f02012e
-			public const int avd_show_password_2 = 2130837806;
+			public const int avd_show_password_1 = 2130837806;
 			
 			// aapt resource value: 0x7f02012f
-			public const int avd_show_password_3 = 2130837807;
+			public const int avd_show_password_2 = 2130837807;
+			
+			// aapt resource value: 0x7f020130
+			public const int avd_show_password_3 = 2130837808;
 			
 			// aapt resource value: 0x7f020055
 			public const int common_full_open_on_phone = 2130837589;
@@ -2331,562 +2481,565 @@ namespace mobile_style_editor.Droid
 			public const int design_snackbar_background = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int ic_audiotrack_dark = 2130837616;
+			public const int hockeyapp_btn_background = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int ic_audiotrack_light = 2130837617;
+			public const int ic_audiotrack_dark = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int ic_dialog_close_dark = 2130837618;
+			public const int ic_audiotrack_light = 2130837618;
 			
 			// aapt resource value: 0x7f020073
-			public const int ic_dialog_close_light = 2130837619;
+			public const int ic_dialog_close_dark = 2130837619;
 			
 			// aapt resource value: 0x7f020074
-			public const int ic_group_collapse_00 = 2130837620;
+			public const int ic_dialog_close_light = 2130837620;
 			
 			// aapt resource value: 0x7f020075
-			public const int ic_group_collapse_01 = 2130837621;
+			public const int ic_group_collapse_00 = 2130837621;
 			
 			// aapt resource value: 0x7f020076
-			public const int ic_group_collapse_02 = 2130837622;
+			public const int ic_group_collapse_01 = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int ic_group_collapse_03 = 2130837623;
+			public const int ic_group_collapse_02 = 2130837623;
 			
 			// aapt resource value: 0x7f020078
-			public const int ic_group_collapse_04 = 2130837624;
+			public const int ic_group_collapse_03 = 2130837624;
 			
 			// aapt resource value: 0x7f020079
-			public const int ic_group_collapse_05 = 2130837625;
+			public const int ic_group_collapse_04 = 2130837625;
 			
 			// aapt resource value: 0x7f02007a
-			public const int ic_group_collapse_06 = 2130837626;
+			public const int ic_group_collapse_05 = 2130837626;
 			
 			// aapt resource value: 0x7f02007b
-			public const int ic_group_collapse_07 = 2130837627;
+			public const int ic_group_collapse_06 = 2130837627;
 			
 			// aapt resource value: 0x7f02007c
-			public const int ic_group_collapse_08 = 2130837628;
+			public const int ic_group_collapse_07 = 2130837628;
 			
 			// aapt resource value: 0x7f02007d
-			public const int ic_group_collapse_09 = 2130837629;
+			public const int ic_group_collapse_08 = 2130837629;
 			
 			// aapt resource value: 0x7f02007e
-			public const int ic_group_collapse_10 = 2130837630;
+			public const int ic_group_collapse_09 = 2130837630;
 			
 			// aapt resource value: 0x7f02007f
-			public const int ic_group_collapse_11 = 2130837631;
+			public const int ic_group_collapse_10 = 2130837631;
 			
 			// aapt resource value: 0x7f020080
-			public const int ic_group_collapse_12 = 2130837632;
+			public const int ic_group_collapse_11 = 2130837632;
 			
 			// aapt resource value: 0x7f020081
-			public const int ic_group_collapse_13 = 2130837633;
+			public const int ic_group_collapse_12 = 2130837633;
 			
 			// aapt resource value: 0x7f020082
-			public const int ic_group_collapse_14 = 2130837634;
+			public const int ic_group_collapse_13 = 2130837634;
 			
 			// aapt resource value: 0x7f020083
-			public const int ic_group_collapse_15 = 2130837635;
+			public const int ic_group_collapse_14 = 2130837635;
 			
 			// aapt resource value: 0x7f020084
-			public const int ic_group_expand_00 = 2130837636;
+			public const int ic_group_collapse_15 = 2130837636;
 			
 			// aapt resource value: 0x7f020085
-			public const int ic_group_expand_01 = 2130837637;
+			public const int ic_group_expand_00 = 2130837637;
 			
 			// aapt resource value: 0x7f020086
-			public const int ic_group_expand_02 = 2130837638;
+			public const int ic_group_expand_01 = 2130837638;
 			
 			// aapt resource value: 0x7f020087
-			public const int ic_group_expand_03 = 2130837639;
+			public const int ic_group_expand_02 = 2130837639;
 			
 			// aapt resource value: 0x7f020088
-			public const int ic_group_expand_04 = 2130837640;
+			public const int ic_group_expand_03 = 2130837640;
 			
 			// aapt resource value: 0x7f020089
-			public const int ic_group_expand_05 = 2130837641;
+			public const int ic_group_expand_04 = 2130837641;
 			
 			// aapt resource value: 0x7f02008a
-			public const int ic_group_expand_06 = 2130837642;
+			public const int ic_group_expand_05 = 2130837642;
 			
 			// aapt resource value: 0x7f02008b
-			public const int ic_group_expand_07 = 2130837643;
+			public const int ic_group_expand_06 = 2130837643;
 			
 			// aapt resource value: 0x7f02008c
-			public const int ic_group_expand_08 = 2130837644;
+			public const int ic_group_expand_07 = 2130837644;
 			
 			// aapt resource value: 0x7f02008d
-			public const int ic_group_expand_09 = 2130837645;
+			public const int ic_group_expand_08 = 2130837645;
 			
 			// aapt resource value: 0x7f02008e
-			public const int ic_group_expand_10 = 2130837646;
+			public const int ic_group_expand_09 = 2130837646;
 			
 			// aapt resource value: 0x7f02008f
-			public const int ic_group_expand_11 = 2130837647;
+			public const int ic_group_expand_10 = 2130837647;
 			
 			// aapt resource value: 0x7f020090
-			public const int ic_group_expand_12 = 2130837648;
+			public const int ic_group_expand_11 = 2130837648;
 			
 			// aapt resource value: 0x7f020091
-			public const int ic_group_expand_13 = 2130837649;
+			public const int ic_group_expand_12 = 2130837649;
 			
 			// aapt resource value: 0x7f020092
-			public const int ic_group_expand_14 = 2130837650;
+			public const int ic_group_expand_13 = 2130837650;
 			
 			// aapt resource value: 0x7f020093
-			public const int ic_group_expand_15 = 2130837651;
+			public const int ic_group_expand_14 = 2130837651;
 			
 			// aapt resource value: 0x7f020094
-			public const int ic_media_pause_dark = 2130837652;
+			public const int ic_group_expand_15 = 2130837652;
 			
 			// aapt resource value: 0x7f020095
-			public const int ic_media_pause_light = 2130837653;
+			public const int ic_media_pause_dark = 2130837653;
 			
 			// aapt resource value: 0x7f020096
-			public const int ic_media_play_dark = 2130837654;
+			public const int ic_media_pause_light = 2130837654;
 			
 			// aapt resource value: 0x7f020097
-			public const int ic_media_play_light = 2130837655;
+			public const int ic_media_play_dark = 2130837655;
 			
 			// aapt resource value: 0x7f020098
-			public const int ic_mr_button_connected_00_dark = 2130837656;
+			public const int ic_media_play_light = 2130837656;
 			
 			// aapt resource value: 0x7f020099
-			public const int ic_mr_button_connected_00_light = 2130837657;
+			public const int ic_mr_button_connected_00_dark = 2130837657;
 			
 			// aapt resource value: 0x7f02009a
-			public const int ic_mr_button_connected_01_dark = 2130837658;
+			public const int ic_mr_button_connected_00_light = 2130837658;
 			
 			// aapt resource value: 0x7f02009b
-			public const int ic_mr_button_connected_01_light = 2130837659;
+			public const int ic_mr_button_connected_01_dark = 2130837659;
 			
 			// aapt resource value: 0x7f02009c
-			public const int ic_mr_button_connected_02_dark = 2130837660;
+			public const int ic_mr_button_connected_01_light = 2130837660;
 			
 			// aapt resource value: 0x7f02009d
-			public const int ic_mr_button_connected_02_light = 2130837661;
+			public const int ic_mr_button_connected_02_dark = 2130837661;
 			
 			// aapt resource value: 0x7f02009e
-			public const int ic_mr_button_connected_03_dark = 2130837662;
+			public const int ic_mr_button_connected_02_light = 2130837662;
 			
 			// aapt resource value: 0x7f02009f
-			public const int ic_mr_button_connected_03_light = 2130837663;
+			public const int ic_mr_button_connected_03_dark = 2130837663;
 			
 			// aapt resource value: 0x7f0200a0
-			public const int ic_mr_button_connected_04_dark = 2130837664;
+			public const int ic_mr_button_connected_03_light = 2130837664;
 			
 			// aapt resource value: 0x7f0200a1
-			public const int ic_mr_button_connected_04_light = 2130837665;
+			public const int ic_mr_button_connected_04_dark = 2130837665;
 			
 			// aapt resource value: 0x7f0200a2
-			public const int ic_mr_button_connected_05_dark = 2130837666;
+			public const int ic_mr_button_connected_04_light = 2130837666;
 			
 			// aapt resource value: 0x7f0200a3
-			public const int ic_mr_button_connected_05_light = 2130837667;
+			public const int ic_mr_button_connected_05_dark = 2130837667;
 			
 			// aapt resource value: 0x7f0200a4
-			public const int ic_mr_button_connected_06_dark = 2130837668;
+			public const int ic_mr_button_connected_05_light = 2130837668;
 			
 			// aapt resource value: 0x7f0200a5
-			public const int ic_mr_button_connected_06_light = 2130837669;
+			public const int ic_mr_button_connected_06_dark = 2130837669;
 			
 			// aapt resource value: 0x7f0200a6
-			public const int ic_mr_button_connected_07_dark = 2130837670;
+			public const int ic_mr_button_connected_06_light = 2130837670;
 			
 			// aapt resource value: 0x7f0200a7
-			public const int ic_mr_button_connected_07_light = 2130837671;
+			public const int ic_mr_button_connected_07_dark = 2130837671;
 			
 			// aapt resource value: 0x7f0200a8
-			public const int ic_mr_button_connected_08_dark = 2130837672;
+			public const int ic_mr_button_connected_07_light = 2130837672;
 			
 			// aapt resource value: 0x7f0200a9
-			public const int ic_mr_button_connected_08_light = 2130837673;
+			public const int ic_mr_button_connected_08_dark = 2130837673;
 			
 			// aapt resource value: 0x7f0200aa
-			public const int ic_mr_button_connected_09_dark = 2130837674;
+			public const int ic_mr_button_connected_08_light = 2130837674;
 			
 			// aapt resource value: 0x7f0200ab
-			public const int ic_mr_button_connected_09_light = 2130837675;
+			public const int ic_mr_button_connected_09_dark = 2130837675;
 			
 			// aapt resource value: 0x7f0200ac
-			public const int ic_mr_button_connected_10_dark = 2130837676;
+			public const int ic_mr_button_connected_09_light = 2130837676;
 			
 			// aapt resource value: 0x7f0200ad
-			public const int ic_mr_button_connected_10_light = 2130837677;
+			public const int ic_mr_button_connected_10_dark = 2130837677;
 			
 			// aapt resource value: 0x7f0200ae
-			public const int ic_mr_button_connected_11_dark = 2130837678;
+			public const int ic_mr_button_connected_10_light = 2130837678;
 			
 			// aapt resource value: 0x7f0200af
-			public const int ic_mr_button_connected_11_light = 2130837679;
+			public const int ic_mr_button_connected_11_dark = 2130837679;
 			
 			// aapt resource value: 0x7f0200b0
-			public const int ic_mr_button_connected_12_dark = 2130837680;
+			public const int ic_mr_button_connected_11_light = 2130837680;
 			
 			// aapt resource value: 0x7f0200b1
-			public const int ic_mr_button_connected_12_light = 2130837681;
+			public const int ic_mr_button_connected_12_dark = 2130837681;
 			
 			// aapt resource value: 0x7f0200b2
-			public const int ic_mr_button_connected_13_dark = 2130837682;
+			public const int ic_mr_button_connected_12_light = 2130837682;
 			
 			// aapt resource value: 0x7f0200b3
-			public const int ic_mr_button_connected_13_light = 2130837683;
+			public const int ic_mr_button_connected_13_dark = 2130837683;
 			
 			// aapt resource value: 0x7f0200b4
-			public const int ic_mr_button_connected_14_dark = 2130837684;
+			public const int ic_mr_button_connected_13_light = 2130837684;
 			
 			// aapt resource value: 0x7f0200b5
-			public const int ic_mr_button_connected_14_light = 2130837685;
+			public const int ic_mr_button_connected_14_dark = 2130837685;
 			
 			// aapt resource value: 0x7f0200b6
-			public const int ic_mr_button_connected_15_dark = 2130837686;
+			public const int ic_mr_button_connected_14_light = 2130837686;
 			
 			// aapt resource value: 0x7f0200b7
-			public const int ic_mr_button_connected_15_light = 2130837687;
+			public const int ic_mr_button_connected_15_dark = 2130837687;
 			
 			// aapt resource value: 0x7f0200b8
-			public const int ic_mr_button_connected_16_dark = 2130837688;
+			public const int ic_mr_button_connected_15_light = 2130837688;
 			
 			// aapt resource value: 0x7f0200b9
-			public const int ic_mr_button_connected_16_light = 2130837689;
+			public const int ic_mr_button_connected_16_dark = 2130837689;
 			
 			// aapt resource value: 0x7f0200ba
-			public const int ic_mr_button_connected_17_dark = 2130837690;
+			public const int ic_mr_button_connected_16_light = 2130837690;
 			
 			// aapt resource value: 0x7f0200bb
-			public const int ic_mr_button_connected_17_light = 2130837691;
+			public const int ic_mr_button_connected_17_dark = 2130837691;
 			
 			// aapt resource value: 0x7f0200bc
-			public const int ic_mr_button_connected_18_dark = 2130837692;
+			public const int ic_mr_button_connected_17_light = 2130837692;
 			
 			// aapt resource value: 0x7f0200bd
-			public const int ic_mr_button_connected_18_light = 2130837693;
+			public const int ic_mr_button_connected_18_dark = 2130837693;
 			
 			// aapt resource value: 0x7f0200be
-			public const int ic_mr_button_connected_19_dark = 2130837694;
+			public const int ic_mr_button_connected_18_light = 2130837694;
 			
 			// aapt resource value: 0x7f0200bf
-			public const int ic_mr_button_connected_19_light = 2130837695;
+			public const int ic_mr_button_connected_19_dark = 2130837695;
 			
 			// aapt resource value: 0x7f0200c0
-			public const int ic_mr_button_connected_20_dark = 2130837696;
+			public const int ic_mr_button_connected_19_light = 2130837696;
 			
 			// aapt resource value: 0x7f0200c1
-			public const int ic_mr_button_connected_20_light = 2130837697;
+			public const int ic_mr_button_connected_20_dark = 2130837697;
 			
 			// aapt resource value: 0x7f0200c2
-			public const int ic_mr_button_connected_21_dark = 2130837698;
+			public const int ic_mr_button_connected_20_light = 2130837698;
 			
 			// aapt resource value: 0x7f0200c3
-			public const int ic_mr_button_connected_21_light = 2130837699;
+			public const int ic_mr_button_connected_21_dark = 2130837699;
 			
 			// aapt resource value: 0x7f0200c4
-			public const int ic_mr_button_connected_22_dark = 2130837700;
+			public const int ic_mr_button_connected_21_light = 2130837700;
 			
 			// aapt resource value: 0x7f0200c5
-			public const int ic_mr_button_connected_22_light = 2130837701;
+			public const int ic_mr_button_connected_22_dark = 2130837701;
 			
 			// aapt resource value: 0x7f0200c6
-			public const int ic_mr_button_connecting_00_dark = 2130837702;
+			public const int ic_mr_button_connected_22_light = 2130837702;
 			
 			// aapt resource value: 0x7f0200c7
-			public const int ic_mr_button_connecting_00_light = 2130837703;
+			public const int ic_mr_button_connecting_00_dark = 2130837703;
 			
 			// aapt resource value: 0x7f0200c8
-			public const int ic_mr_button_connecting_01_dark = 2130837704;
+			public const int ic_mr_button_connecting_00_light = 2130837704;
 			
 			// aapt resource value: 0x7f0200c9
-			public const int ic_mr_button_connecting_01_light = 2130837705;
+			public const int ic_mr_button_connecting_01_dark = 2130837705;
 			
 			// aapt resource value: 0x7f0200ca
-			public const int ic_mr_button_connecting_02_dark = 2130837706;
+			public const int ic_mr_button_connecting_01_light = 2130837706;
 			
 			// aapt resource value: 0x7f0200cb
-			public const int ic_mr_button_connecting_02_light = 2130837707;
+			public const int ic_mr_button_connecting_02_dark = 2130837707;
 			
 			// aapt resource value: 0x7f0200cc
-			public const int ic_mr_button_connecting_03_dark = 2130837708;
+			public const int ic_mr_button_connecting_02_light = 2130837708;
 			
 			// aapt resource value: 0x7f0200cd
-			public const int ic_mr_button_connecting_03_light = 2130837709;
+			public const int ic_mr_button_connecting_03_dark = 2130837709;
 			
 			// aapt resource value: 0x7f0200ce
-			public const int ic_mr_button_connecting_04_dark = 2130837710;
+			public const int ic_mr_button_connecting_03_light = 2130837710;
 			
 			// aapt resource value: 0x7f0200cf
-			public const int ic_mr_button_connecting_04_light = 2130837711;
+			public const int ic_mr_button_connecting_04_dark = 2130837711;
 			
 			// aapt resource value: 0x7f0200d0
-			public const int ic_mr_button_connecting_05_dark = 2130837712;
+			public const int ic_mr_button_connecting_04_light = 2130837712;
 			
 			// aapt resource value: 0x7f0200d1
-			public const int ic_mr_button_connecting_05_light = 2130837713;
+			public const int ic_mr_button_connecting_05_dark = 2130837713;
 			
 			// aapt resource value: 0x7f0200d2
-			public const int ic_mr_button_connecting_06_dark = 2130837714;
+			public const int ic_mr_button_connecting_05_light = 2130837714;
 			
 			// aapt resource value: 0x7f0200d3
-			public const int ic_mr_button_connecting_06_light = 2130837715;
+			public const int ic_mr_button_connecting_06_dark = 2130837715;
 			
 			// aapt resource value: 0x7f0200d4
-			public const int ic_mr_button_connecting_07_dark = 2130837716;
+			public const int ic_mr_button_connecting_06_light = 2130837716;
 			
 			// aapt resource value: 0x7f0200d5
-			public const int ic_mr_button_connecting_07_light = 2130837717;
+			public const int ic_mr_button_connecting_07_dark = 2130837717;
 			
 			// aapt resource value: 0x7f0200d6
-			public const int ic_mr_button_connecting_08_dark = 2130837718;
+			public const int ic_mr_button_connecting_07_light = 2130837718;
 			
 			// aapt resource value: 0x7f0200d7
-			public const int ic_mr_button_connecting_08_light = 2130837719;
+			public const int ic_mr_button_connecting_08_dark = 2130837719;
 			
 			// aapt resource value: 0x7f0200d8
-			public const int ic_mr_button_connecting_09_dark = 2130837720;
+			public const int ic_mr_button_connecting_08_light = 2130837720;
 			
 			// aapt resource value: 0x7f0200d9
-			public const int ic_mr_button_connecting_09_light = 2130837721;
+			public const int ic_mr_button_connecting_09_dark = 2130837721;
 			
 			// aapt resource value: 0x7f0200da
-			public const int ic_mr_button_connecting_10_dark = 2130837722;
+			public const int ic_mr_button_connecting_09_light = 2130837722;
 			
 			// aapt resource value: 0x7f0200db
-			public const int ic_mr_button_connecting_10_light = 2130837723;
+			public const int ic_mr_button_connecting_10_dark = 2130837723;
 			
 			// aapt resource value: 0x7f0200dc
-			public const int ic_mr_button_connecting_11_dark = 2130837724;
+			public const int ic_mr_button_connecting_10_light = 2130837724;
 			
 			// aapt resource value: 0x7f0200dd
-			public const int ic_mr_button_connecting_11_light = 2130837725;
+			public const int ic_mr_button_connecting_11_dark = 2130837725;
 			
 			// aapt resource value: 0x7f0200de
-			public const int ic_mr_button_connecting_12_dark = 2130837726;
+			public const int ic_mr_button_connecting_11_light = 2130837726;
 			
 			// aapt resource value: 0x7f0200df
-			public const int ic_mr_button_connecting_12_light = 2130837727;
+			public const int ic_mr_button_connecting_12_dark = 2130837727;
 			
 			// aapt resource value: 0x7f0200e0
-			public const int ic_mr_button_connecting_13_dark = 2130837728;
+			public const int ic_mr_button_connecting_12_light = 2130837728;
 			
 			// aapt resource value: 0x7f0200e1
-			public const int ic_mr_button_connecting_13_light = 2130837729;
+			public const int ic_mr_button_connecting_13_dark = 2130837729;
 			
 			// aapt resource value: 0x7f0200e2
-			public const int ic_mr_button_connecting_14_dark = 2130837730;
+			public const int ic_mr_button_connecting_13_light = 2130837730;
 			
 			// aapt resource value: 0x7f0200e3
-			public const int ic_mr_button_connecting_14_light = 2130837731;
+			public const int ic_mr_button_connecting_14_dark = 2130837731;
 			
 			// aapt resource value: 0x7f0200e4
-			public const int ic_mr_button_connecting_15_dark = 2130837732;
+			public const int ic_mr_button_connecting_14_light = 2130837732;
 			
 			// aapt resource value: 0x7f0200e5
-			public const int ic_mr_button_connecting_15_light = 2130837733;
+			public const int ic_mr_button_connecting_15_dark = 2130837733;
 			
 			// aapt resource value: 0x7f0200e6
-			public const int ic_mr_button_connecting_16_dark = 2130837734;
+			public const int ic_mr_button_connecting_15_light = 2130837734;
 			
 			// aapt resource value: 0x7f0200e7
-			public const int ic_mr_button_connecting_16_light = 2130837735;
+			public const int ic_mr_button_connecting_16_dark = 2130837735;
 			
 			// aapt resource value: 0x7f0200e8
-			public const int ic_mr_button_connecting_17_dark = 2130837736;
+			public const int ic_mr_button_connecting_16_light = 2130837736;
 			
 			// aapt resource value: 0x7f0200e9
-			public const int ic_mr_button_connecting_17_light = 2130837737;
+			public const int ic_mr_button_connecting_17_dark = 2130837737;
 			
 			// aapt resource value: 0x7f0200ea
-			public const int ic_mr_button_connecting_18_dark = 2130837738;
+			public const int ic_mr_button_connecting_17_light = 2130837738;
 			
 			// aapt resource value: 0x7f0200eb
-			public const int ic_mr_button_connecting_18_light = 2130837739;
+			public const int ic_mr_button_connecting_18_dark = 2130837739;
 			
 			// aapt resource value: 0x7f0200ec
-			public const int ic_mr_button_connecting_19_dark = 2130837740;
+			public const int ic_mr_button_connecting_18_light = 2130837740;
 			
 			// aapt resource value: 0x7f0200ed
-			public const int ic_mr_button_connecting_19_light = 2130837741;
+			public const int ic_mr_button_connecting_19_dark = 2130837741;
 			
 			// aapt resource value: 0x7f0200ee
-			public const int ic_mr_button_connecting_20_dark = 2130837742;
+			public const int ic_mr_button_connecting_19_light = 2130837742;
 			
 			// aapt resource value: 0x7f0200ef
-			public const int ic_mr_button_connecting_20_light = 2130837743;
+			public const int ic_mr_button_connecting_20_dark = 2130837743;
 			
 			// aapt resource value: 0x7f0200f0
-			public const int ic_mr_button_connecting_21_dark = 2130837744;
+			public const int ic_mr_button_connecting_20_light = 2130837744;
 			
 			// aapt resource value: 0x7f0200f1
-			public const int ic_mr_button_connecting_21_light = 2130837745;
+			public const int ic_mr_button_connecting_21_dark = 2130837745;
 			
 			// aapt resource value: 0x7f0200f2
-			public const int ic_mr_button_connecting_22_dark = 2130837746;
+			public const int ic_mr_button_connecting_21_light = 2130837746;
 			
 			// aapt resource value: 0x7f0200f3
-			public const int ic_mr_button_connecting_22_light = 2130837747;
+			public const int ic_mr_button_connecting_22_dark = 2130837747;
 			
 			// aapt resource value: 0x7f0200f4
-			public const int ic_mr_button_disabled_dark = 2130837748;
+			public const int ic_mr_button_connecting_22_light = 2130837748;
 			
 			// aapt resource value: 0x7f0200f5
-			public const int ic_mr_button_disabled_light = 2130837749;
+			public const int ic_mr_button_disabled_dark = 2130837749;
 			
 			// aapt resource value: 0x7f0200f6
-			public const int ic_mr_button_disconnected_dark = 2130837750;
+			public const int ic_mr_button_disabled_light = 2130837750;
 			
 			// aapt resource value: 0x7f0200f7
-			public const int ic_mr_button_disconnected_light = 2130837751;
+			public const int ic_mr_button_disconnected_dark = 2130837751;
 			
 			// aapt resource value: 0x7f0200f8
-			public const int ic_mr_button_grey = 2130837752;
+			public const int ic_mr_button_disconnected_light = 2130837752;
 			
 			// aapt resource value: 0x7f0200f9
-			public const int ic_vol_type_speaker_dark = 2130837753;
+			public const int ic_mr_button_grey = 2130837753;
 			
 			// aapt resource value: 0x7f0200fa
-			public const int ic_vol_type_speaker_group_dark = 2130837754;
+			public const int ic_vol_type_speaker_dark = 2130837754;
 			
 			// aapt resource value: 0x7f0200fb
-			public const int ic_vol_type_speaker_group_light = 2130837755;
+			public const int ic_vol_type_speaker_group_dark = 2130837755;
 			
 			// aapt resource value: 0x7f0200fc
-			public const int ic_vol_type_speaker_light = 2130837756;
+			public const int ic_vol_type_speaker_group_light = 2130837756;
 			
 			// aapt resource value: 0x7f0200fd
-			public const int ic_vol_type_tv_dark = 2130837757;
+			public const int ic_vol_type_speaker_light = 2130837757;
 			
 			// aapt resource value: 0x7f0200fe
-			public const int ic_vol_type_tv_light = 2130837758;
+			public const int ic_vol_type_tv_dark = 2130837758;
 			
 			// aapt resource value: 0x7f0200ff
-			public const int icon = 2130837759;
+			public const int ic_vol_type_tv_light = 2130837759;
 			
 			// aapt resource value: 0x7f020100
-			public const int icon_arrow_back = 2130837760;
+			public const int icon = 2130837760;
 			
 			// aapt resource value: 0x7f020101
-			public const int icon_database = 2130837761;
+			public const int icon_arrow_back = 2130837761;
 			
 			// aapt resource value: 0x7f020102
-			public const int icon_drive = 2130837762;
+			public const int icon_database = 2130837762;
 			
 			// aapt resource value: 0x7f020103
-			public const int icon_expand_more = 2130837763;
+			public const int icon_drive = 2130837763;
 			
 			// aapt resource value: 0x7f020104
-			public const int icon_folder = 2130837764;
+			public const int icon_expand_more = 2130837764;
 			
 			// aapt resource value: 0x7f020105
-			public const int icon_github = 2130837765;
+			public const int icon_folder = 2130837765;
 			
 			// aapt resource value: 0x7f020106
-			public const int icon_refresh = 2130837766;
+			public const int icon_github = 2130837766;
 			
 			// aapt resource value: 0x7f020107
-			public const int icon_refresh_2 = 2130837767;
+			public const int icon_refresh = 2130837767;
 			
 			// aapt resource value: 0x7f020108
-			public const int icon_save_white = 2130837768;
+			public const int icon_refresh_2 = 2130837768;
 			
 			// aapt resource value: 0x7f020109
-			public const int icon_text = 2130837769;
+			public const int icon_save_white = 2130837769;
 			
 			// aapt resource value: 0x7f02010a
-			public const int icon_zip = 2130837770;
+			public const int icon_text = 2130837770;
 			
 			// aapt resource value: 0x7f02010b
-			public const int mr_button_connected_dark = 2130837771;
+			public const int icon_zip = 2130837771;
 			
 			// aapt resource value: 0x7f02010c
-			public const int mr_button_connected_light = 2130837772;
+			public const int mr_button_connected_dark = 2130837772;
 			
 			// aapt resource value: 0x7f02010d
-			public const int mr_button_connecting_dark = 2130837773;
+			public const int mr_button_connected_light = 2130837773;
 			
 			// aapt resource value: 0x7f02010e
-			public const int mr_button_connecting_light = 2130837774;
+			public const int mr_button_connecting_dark = 2130837774;
 			
 			// aapt resource value: 0x7f02010f
-			public const int mr_button_dark = 2130837775;
+			public const int mr_button_connecting_light = 2130837775;
 			
 			// aapt resource value: 0x7f020110
-			public const int mr_button_light = 2130837776;
+			public const int mr_button_dark = 2130837776;
 			
 			// aapt resource value: 0x7f020111
-			public const int mr_dialog_close_dark = 2130837777;
+			public const int mr_button_light = 2130837777;
 			
 			// aapt resource value: 0x7f020112
-			public const int mr_dialog_close_light = 2130837778;
+			public const int mr_dialog_close_dark = 2130837778;
 			
 			// aapt resource value: 0x7f020113
-			public const int mr_dialog_material_background_dark = 2130837779;
+			public const int mr_dialog_close_light = 2130837779;
 			
 			// aapt resource value: 0x7f020114
-			public const int mr_dialog_material_background_light = 2130837780;
+			public const int mr_dialog_material_background_dark = 2130837780;
 			
 			// aapt resource value: 0x7f020115
-			public const int mr_group_collapse = 2130837781;
+			public const int mr_dialog_material_background_light = 2130837781;
 			
 			// aapt resource value: 0x7f020116
-			public const int mr_group_expand = 2130837782;
+			public const int mr_group_collapse = 2130837782;
 			
 			// aapt resource value: 0x7f020117
-			public const int mr_media_pause_dark = 2130837783;
+			public const int mr_group_expand = 2130837783;
 			
 			// aapt resource value: 0x7f020118
-			public const int mr_media_pause_light = 2130837784;
+			public const int mr_media_pause_dark = 2130837784;
 			
 			// aapt resource value: 0x7f020119
-			public const int mr_media_play_dark = 2130837785;
+			public const int mr_media_pause_light = 2130837785;
 			
 			// aapt resource value: 0x7f02011a
-			public const int mr_media_play_light = 2130837786;
+			public const int mr_media_play_dark = 2130837786;
 			
 			// aapt resource value: 0x7f02011b
-			public const int mr_vol_type_audiotrack_dark = 2130837787;
+			public const int mr_media_play_light = 2130837787;
 			
 			// aapt resource value: 0x7f02011c
-			public const int mr_vol_type_audiotrack_light = 2130837788;
+			public const int mr_vol_type_audiotrack_dark = 2130837788;
 			
 			// aapt resource value: 0x7f02011d
-			public const int navigation_empty_icon = 2130837789;
+			public const int mr_vol_type_audiotrack_light = 2130837789;
 			
 			// aapt resource value: 0x7f02011e
-			public const int notification_action_background = 2130837790;
+			public const int navigation_empty_icon = 2130837790;
 			
 			// aapt resource value: 0x7f02011f
-			public const int notification_bg = 2130837791;
+			public const int notification_action_background = 2130837791;
 			
 			// aapt resource value: 0x7f020120
-			public const int notification_bg_low = 2130837792;
+			public const int notification_bg = 2130837792;
 			
 			// aapt resource value: 0x7f020121
-			public const int notification_bg_low_normal = 2130837793;
+			public const int notification_bg_low = 2130837793;
 			
 			// aapt resource value: 0x7f020122
-			public const int notification_bg_low_pressed = 2130837794;
+			public const int notification_bg_low_normal = 2130837794;
 			
 			// aapt resource value: 0x7f020123
-			public const int notification_bg_normal = 2130837795;
+			public const int notification_bg_low_pressed = 2130837795;
 			
 			// aapt resource value: 0x7f020124
-			public const int notification_bg_normal_pressed = 2130837796;
+			public const int notification_bg_normal = 2130837796;
 			
 			// aapt resource value: 0x7f020125
-			public const int notification_icon_background = 2130837797;
-			
-			// aapt resource value: 0x7f020128
-			public const int notification_template_icon_bg = 2130837800;
-			
-			// aapt resource value: 0x7f020129
-			public const int notification_template_icon_low_bg = 2130837801;
+			public const int notification_bg_normal_pressed = 2130837797;
 			
 			// aapt resource value: 0x7f020126
-			public const int notification_tile_bg = 2130837798;
+			public const int notification_icon_background = 2130837798;
+			
+			// aapt resource value: 0x7f020129
+			public const int notification_template_icon_bg = 2130837801;
+			
+			// aapt resource value: 0x7f02012a
+			public const int notification_template_icon_low_bg = 2130837802;
 			
 			// aapt resource value: 0x7f020127
-			public const int notify_panel_notification_icon_bg = 2130837799;
+			public const int notification_tile_bg = 2130837799;
+			
+			// aapt resource value: 0x7f020128
+			public const int notify_panel_notification_icon_bg = 2130837800;
 			
 			static Drawable()
 			{
@@ -2901,8 +3054,8 @@ namespace mobile_style_editor.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0c00a3
-			public const int action0 = 2131493027;
+			// aapt resource value: 0x7f0c00bf
+			public const int action0 = 2131493055;
 			
 			// aapt resource value: 0x7f0c006b
 			public const int action_bar = 2131492971;
@@ -2925,17 +3078,17 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c0048
 			public const int action_bar_title = 2131492936;
 			
-			// aapt resource value: 0x7f0c00a0
-			public const int action_container = 2131493024;
+			// aapt resource value: 0x7f0c00bc
+			public const int action_container = 2131493052;
 			
 			// aapt resource value: 0x7f0c006c
 			public const int action_context_bar = 2131492972;
 			
-			// aapt resource value: 0x7f0c00a7
-			public const int action_divider = 2131493031;
+			// aapt resource value: 0x7f0c00c3
+			public const int action_divider = 2131493059;
 			
-			// aapt resource value: 0x7f0c00a1
-			public const int action_image = 2131493025;
+			// aapt resource value: 0x7f0c00bd
+			public const int action_image = 2131493053;
 			
 			// aapt resource value: 0x7f0c0005
 			public const int action_menu_divider = 2131492869;
@@ -2952,11 +3105,11 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c004a
 			public const int action_mode_close_button = 2131492938;
 			
-			// aapt resource value: 0x7f0c00a2
-			public const int action_text = 2131493026;
+			// aapt resource value: 0x7f0c00be
+			public const int action_text = 2131493054;
 			
-			// aapt resource value: 0x7f0c00b0
-			public const int actions = 2131493040;
+			// aapt resource value: 0x7f0c00cc
+			public const int actions = 2131493068;
 			
 			// aapt resource value: 0x7f0c004b
 			public const int activity_chooser_view_content = 2131492939;
@@ -2991,8 +3144,26 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c0052
 			public const int buttonPanel = 2131492946;
 			
-			// aapt resource value: 0x7f0c00a4
-			public const int cancel_action = 2131493028;
+			// aapt resource value: 0x7f0c0093
+			public const int button_add_response = 2131493011;
+			
+			// aapt resource value: 0x7f0c008e
+			public const int button_attachment = 2131493006;
+			
+			// aapt resource value: 0x7f0c0098
+			public const int button_login = 2131493016;
+			
+			// aapt resource value: 0x7f0c0094
+			public const int button_refresh = 2131493012;
+			
+			// aapt resource value: 0x7f0c008f
+			public const int button_send = 2131493007;
+			
+			// aapt resource value: 0x7f0c009c
+			public const int button_update = 2131493020;
+			
+			// aapt resource value: 0x7f0c00c0
+			public const int cancel_action = 2131493056;
 			
 			// aapt resource value: 0x7f0c001e
 			public const int center = 2131492894;
@@ -3006,8 +3177,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c0062
 			public const int checkbox = 2131492962;
 			
-			// aapt resource value: 0x7f0c00ac
-			public const int chronometer = 2131493036;
+			// aapt resource value: 0x7f0c00c8
+			public const int chronometer = 2131493064;
 			
 			// aapt resource value: 0x7f0c0029
 			public const int clip_horizontal = 2131492905;
@@ -3060,8 +3231,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c0021
 			public const int end = 2131492897;
 			
-			// aapt resource value: 0x7f0c00b6
-			public const int end_padder = 2131493046;
+			// aapt resource value: 0x7f0c00d2
+			public const int end_padder = 2131493074;
 			
 			// aapt resource value: 0x7f0c0018
 			public const int enterAlways = 2131492888;
@@ -3099,8 +3270,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c0050
 			public const int icon = 2131492944;
 			
-			// aapt resource value: 0x7f0c00b1
-			public const int icon_group = 2131493041;
+			// aapt resource value: 0x7f0c00cd
+			public const int icon_group = 2131493069;
 			
 			// aapt resource value: 0x7f0c0012
 			public const int icon_only = 2131492882;
@@ -3111,11 +3282,47 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c004d
 			public const int image = 2131492941;
 			
-			// aapt resource value: 0x7f0c00ad
-			public const int info = 2131493037;
+			// aapt resource value: 0x7f0c00c9
+			public const int info = 2131493065;
+			
+			// aapt resource value: 0x7f0c008a
+			public const int input_email = 2131493002;
+			
+			// aapt resource value: 0x7f0c008c
+			public const int input_message = 2131493004;
+			
+			// aapt resource value: 0x7f0c0089
+			public const int input_name = 2131493001;
+			
+			// aapt resource value: 0x7f0c0097
+			public const int input_password = 2131493015;
+			
+			// aapt resource value: 0x7f0c008b
+			public const int input_subject = 2131493003;
 			
 			// aapt resource value: 0x7f0c000c
 			public const int item_touch_helper_previous_elevation = 2131492876;
+			
+			// aapt resource value: 0x7f0c009e
+			public const int label_author = 2131493022;
+			
+			// aapt resource value: 0x7f0c009f
+			public const int label_date = 2131493023;
+			
+			// aapt resource value: 0x7f0c0091
+			public const int label_last_updated = 2131493009;
+			
+			// aapt resource value: 0x7f0c0086
+			public const int label_message = 2131492998;
+			
+			// aapt resource value: 0x7f0c00a0
+			public const int label_text = 2131493024;
+			
+			// aapt resource value: 0x7f0c009a
+			public const int label_title = 2131493018;
+			
+			// aapt resource value: 0x7f0c009b
+			public const int label_version = 2131493019;
 			
 			// aapt resource value: 0x7f0c007b
 			public const int largeLabel = 2131492987;
@@ -3126,23 +3333,29 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c0017
 			public const int light = 2131492887;
 			
-			// aapt resource value: 0x7f0c00b2
-			public const int line1 = 2131493042;
+			// aapt resource value: 0x7f0c00ce
+			public const int line1 = 2131493070;
 			
-			// aapt resource value: 0x7f0c00b4
-			public const int line3 = 2131493044;
+			// aapt resource value: 0x7f0c00d0
+			public const int line3 = 2131493072;
 			
 			// aapt resource value: 0x7f0c0037
 			public const int listMode = 2131492919;
 			
+			// aapt resource value: 0x7f0c00a1
+			public const int list_attachments = 2131493025;
+			
+			// aapt resource value: 0x7f0c0095
+			public const int list_feedback_messages = 2131493013;
+			
 			// aapt resource value: 0x7f0c004f
 			public const int list_item = 2131492943;
 			
-			// aapt resource value: 0x7f0c00ba
-			public const int masked = 2131493050;
+			// aapt resource value: 0x7f0c00d6
+			public const int masked = 2131493078;
 			
-			// aapt resource value: 0x7f0c00a6
-			public const int media_actions = 2131493030;
+			// aapt resource value: 0x7f0c00c2
+			public const int media_actions = 2131493058;
 			
 			// aapt resource value: 0x7f0c0042
 			public const int middle = 2131492930;
@@ -3150,80 +3363,80 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c002e
 			public const int mini = 2131492910;
 			
-			// aapt resource value: 0x7f0c0092
-			public const int mr_art = 2131493010;
+			// aapt resource value: 0x7f0c00ae
+			public const int mr_art = 2131493038;
 			
-			// aapt resource value: 0x7f0c0087
-			public const int mr_chooser_list = 2131492999;
+			// aapt resource value: 0x7f0c00a3
+			public const int mr_chooser_list = 2131493027;
 			
-			// aapt resource value: 0x7f0c008a
-			public const int mr_chooser_route_desc = 2131493002;
+			// aapt resource value: 0x7f0c00a6
+			public const int mr_chooser_route_desc = 2131493030;
 			
-			// aapt resource value: 0x7f0c0088
-			public const int mr_chooser_route_icon = 2131493000;
+			// aapt resource value: 0x7f0c00a4
+			public const int mr_chooser_route_icon = 2131493028;
 			
-			// aapt resource value: 0x7f0c0089
-			public const int mr_chooser_route_name = 2131493001;
+			// aapt resource value: 0x7f0c00a5
+			public const int mr_chooser_route_name = 2131493029;
 			
-			// aapt resource value: 0x7f0c0086
-			public const int mr_chooser_title = 2131492998;
+			// aapt resource value: 0x7f0c00a2
+			public const int mr_chooser_title = 2131493026;
 			
-			// aapt resource value: 0x7f0c008f
-			public const int mr_close = 2131493007;
+			// aapt resource value: 0x7f0c00ab
+			public const int mr_close = 2131493035;
 			
-			// aapt resource value: 0x7f0c0095
-			public const int mr_control_divider = 2131493013;
+			// aapt resource value: 0x7f0c00b1
+			public const int mr_control_divider = 2131493041;
 			
-			// aapt resource value: 0x7f0c009b
-			public const int mr_control_play_pause = 2131493019;
+			// aapt resource value: 0x7f0c00b7
+			public const int mr_control_play_pause = 2131493047;
 			
-			// aapt resource value: 0x7f0c009e
-			public const int mr_control_subtitle = 2131493022;
+			// aapt resource value: 0x7f0c00ba
+			public const int mr_control_subtitle = 2131493050;
 			
-			// aapt resource value: 0x7f0c009d
-			public const int mr_control_title = 2131493021;
+			// aapt resource value: 0x7f0c00b9
+			public const int mr_control_title = 2131493049;
 			
-			// aapt resource value: 0x7f0c009c
-			public const int mr_control_title_container = 2131493020;
+			// aapt resource value: 0x7f0c00b8
+			public const int mr_control_title_container = 2131493048;
 			
-			// aapt resource value: 0x7f0c0090
-			public const int mr_custom_control = 2131493008;
+			// aapt resource value: 0x7f0c00ac
+			public const int mr_custom_control = 2131493036;
 			
-			// aapt resource value: 0x7f0c0091
-			public const int mr_default_control = 2131493009;
+			// aapt resource value: 0x7f0c00ad
+			public const int mr_default_control = 2131493037;
 			
-			// aapt resource value: 0x7f0c008c
-			public const int mr_dialog_area = 2131493004;
+			// aapt resource value: 0x7f0c00a8
+			public const int mr_dialog_area = 2131493032;
 			
-			// aapt resource value: 0x7f0c008b
-			public const int mr_expandable_area = 2131493003;
+			// aapt resource value: 0x7f0c00a7
+			public const int mr_expandable_area = 2131493031;
 			
-			// aapt resource value: 0x7f0c009f
-			public const int mr_group_expand_collapse = 2131493023;
+			// aapt resource value: 0x7f0c00bb
+			public const int mr_group_expand_collapse = 2131493051;
 			
-			// aapt resource value: 0x7f0c0093
-			public const int mr_media_main_control = 2131493011;
+			// aapt resource value: 0x7f0c00af
+			public const int mr_media_main_control = 2131493039;
 			
-			// aapt resource value: 0x7f0c008e
-			public const int mr_name = 2131493006;
+			// aapt resource value: 0x7f0c00aa
+			public const int mr_name = 2131493034;
 			
-			// aapt resource value: 0x7f0c0094
-			public const int mr_playback_control = 2131493012;
+			// aapt resource value: 0x7f0c00b0
+			public const int mr_playback_control = 2131493040;
 			
-			// aapt resource value: 0x7f0c008d
-			public const int mr_title_bar = 2131493005;
+			// aapt resource value: 0x7f0c00a9
+			public const int mr_title_bar = 2131493033;
 			
-			// aapt resource value: 0x7f0c0096
-			public const int mr_volume_control = 2131493014;
+			// aapt resource value: 0x7f0c00b2
+			public const int mr_volume_control = 2131493042;
 			
-			// aapt resource value: 0x7f0c0097
-			public const int mr_volume_group_list = 2131493015;
+			// aapt resource value: 0x7f0c00b3
+			public const int mr_volume_group_list = 2131493043;
 			
-			// aapt resource value: 0x7f0c0099
-			public const int mr_volume_item_icon = 2131493017;
+			// aapt resource value: 0x7f0c00b5
+			public const int mr_volume_item_icon = 2131493045;
 			
-			// aapt resource value: 0x7f0c009a
-			public const int mr_volume_slider = 2131493018;
+			// aapt resource value: 0x7f0c00b6
+			public const int mr_volume_slider = 2131493046;
 			
 			// aapt resource value: 0x7f0c0032
 			public const int multiply = 2131492914;
@@ -3240,14 +3453,14 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c002f
 			public const int normal = 2131492911;
 			
-			// aapt resource value: 0x7f0c00af
-			public const int notification_background = 2131493039;
+			// aapt resource value: 0x7f0c00cb
+			public const int notification_background = 2131493067;
 			
-			// aapt resource value: 0x7f0c00a9
-			public const int notification_main_column = 2131493033;
+			// aapt resource value: 0x7f0c00c5
+			public const int notification_main_column = 2131493061;
 			
-			// aapt resource value: 0x7f0c00a8
-			public const int notification_main_column_container = 2131493032;
+			// aapt resource value: 0x7f0c00c4
+			public const int notification_main_column_container = 2131493060;
 			
 			// aapt resource value: 0x7f0c0027
 			public const int parallax = 2131492903;
@@ -3270,11 +3483,11 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c0024
 			public const int right = 2131492900;
 			
-			// aapt resource value: 0x7f0c00ae
-			public const int right_icon = 2131493038;
+			// aapt resource value: 0x7f0c00ca
+			public const int right_icon = 2131493066;
 			
-			// aapt resource value: 0x7f0c00aa
-			public const int right_side = 2131493034;
+			// aapt resource value: 0x7f0c00c6
+			public const int right_side = 2131493062;
 			
 			// aapt resource value: 0x7f0c0033
 			public const int screen = 2131492915;
@@ -3339,8 +3552,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c003d
 			public const int showTitle = 2131492925;
 			
-			// aapt resource value: 0x7f0c00b7
-			public const int sliding_tabs = 2131493047;
+			// aapt resource value: 0x7f0c00d3
+			public const int sliding_tabs = 2131493075;
 			
 			// aapt resource value: 0x7f0c007a
 			public const int smallLabel = 2131492986;
@@ -3375,8 +3588,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c0025
 			public const int start = 2131492901;
 			
-			// aapt resource value: 0x7f0c00a5
-			public const int status_bar_latest_event_content = 2131493029;
+			// aapt resource value: 0x7f0c00c1
+			public const int status_bar_latest_event_content = 2131493057;
 			
 			// aapt resource value: 0x7f0c0065
 			public const int submenuarrow = 2131492965;
@@ -3387,17 +3600,20 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c0038
 			public const int tabMode = 2131492920;
 			
-			// aapt resource value: 0x7f0c00b5
-			public const int text = 2131493045;
+			// aapt resource value: 0x7f0c00d1
+			public const int text = 2131493073;
 			
-			// aapt resource value: 0x7f0c00b3
-			public const int text2 = 2131493043;
+			// aapt resource value: 0x7f0c00cf
+			public const int text2 = 2131493071;
 			
 			// aapt resource value: 0x7f0c0059
 			public const int textSpacerNoButtons = 2131492953;
 			
 			// aapt resource value: 0x7f0c0058
 			public const int textSpacerNoTitle = 2131492952;
+			
+			// aapt resource value: 0x7f0c0096
+			public const int text_headline = 2131493014;
 			
 			// aapt resource value: 0x7f0c0085
 			public const int text_input_password_toggle = 2131492997;
@@ -3408,8 +3624,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c0001
 			public const int textinput_error = 2131492865;
 			
-			// aapt resource value: 0x7f0c00ab
-			public const int time = 2131493035;
+			// aapt resource value: 0x7f0c00c7
+			public const int time = 2131493063;
 			
 			// aapt resource value: 0x7f0c0051
 			public const int title = 2131492945;
@@ -3420,8 +3636,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c005e
 			public const int title_template = 2131492958;
 			
-			// aapt resource value: 0x7f0c00b8
-			public const int toolbar = 2131493048;
+			// aapt resource value: 0x7f0c00d4
+			public const int toolbar = 2131493076;
 			
 			// aapt resource value: 0x7f0c0026
 			public const int top = 2131492902;
@@ -3444,14 +3660,20 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0c003e
 			public const int useLogo = 2131492926;
 			
+			// aapt resource value: 0x7f0c0099
+			public const int view_header = 2131493017;
+			
 			// aapt resource value: 0x7f0c0002
 			public const int view_offset_helper = 2131492866;
 			
-			// aapt resource value: 0x7f0c00b9
-			public const int visible = 2131493049;
+			// aapt resource value: 0x7f0c00d5
+			public const int visible = 2131493077;
 			
-			// aapt resource value: 0x7f0c0098
-			public const int volume_item_container = 2131493016;
+			// aapt resource value: 0x7f0c00b4
+			public const int volume_item_container = 2131493044;
+			
+			// aapt resource value: 0x7f0c009d
+			public const int web_update_details = 2131493021;
 			
 			// aapt resource value: 0x7f0c0014
 			public const int wide = 2131492884;
@@ -3461,6 +3683,21 @@ namespace mobile_style_editor.Droid
 			
 			// aapt resource value: 0x7f0c0040
 			public const int wrap_content = 2131492928;
+			
+			// aapt resource value: 0x7f0c008d
+			public const int wrapper_attachments = 2131493005;
+			
+			// aapt resource value: 0x7f0c0088
+			public const int wrapper_feedback = 2131493000;
+			
+			// aapt resource value: 0x7f0c0087
+			public const int wrapper_feedback_scroll = 2131492999;
+			
+			// aapt resource value: 0x7f0c0090
+			public const int wrapper_messages = 2131493008;
+			
+			// aapt resource value: 0x7f0c0092
+			public const int wrapper_messages_buttons = 2131493010;
 			
 			static Id()
 			{
@@ -3670,85 +3907,103 @@ namespace mobile_style_editor.Droid
 			public const int design_text_input_password_icon = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int mr_chooser_dialog = 2130903081;
+			public const int hockeyapp_activity_expiry_info = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int mr_chooser_list_item = 2130903082;
+			public const int hockeyapp_activity_feedback = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public const int mr_controller_material_dialog_b = 2130903083;
+			public const int hockeyapp_activity_login = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int mr_controller_volume_item = 2130903084;
+			public const int hockeyapp_activity_update = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int mr_playback_control = 2130903085;
+			public const int hockeyapp_fragment_update = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public const int mr_volume_control = 2130903086;
+			public const int hockeyapp_view_feedback_message = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public const int notification_action = 2130903087;
+			public const int mr_chooser_dialog = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int notification_action_tombstone = 2130903088;
+			public const int mr_chooser_list_item = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int notification_media_action = 2130903089;
+			public const int mr_controller_material_dialog_b = 2130903089;
 			
 			// aapt resource value: 0x7f030032
-			public const int notification_media_cancel_action = 2130903090;
+			public const int mr_controller_volume_item = 2130903090;
 			
 			// aapt resource value: 0x7f030033
-			public const int notification_template_big_media = 2130903091;
+			public const int mr_playback_control = 2130903091;
 			
 			// aapt resource value: 0x7f030034
-			public const int notification_template_big_media_custom = 2130903092;
+			public const int mr_volume_control = 2130903092;
 			
 			// aapt resource value: 0x7f030035
-			public const int notification_template_big_media_narrow = 2130903093;
+			public const int notification_action = 2130903093;
 			
 			// aapt resource value: 0x7f030036
-			public const int notification_template_big_media_narrow_custom = 2130903094;
+			public const int notification_action_tombstone = 2130903094;
 			
 			// aapt resource value: 0x7f030037
-			public const int notification_template_custom_big = 2130903095;
+			public const int notification_media_action = 2130903095;
 			
 			// aapt resource value: 0x7f030038
-			public const int notification_template_icon_group = 2130903096;
+			public const int notification_media_cancel_action = 2130903096;
 			
 			// aapt resource value: 0x7f030039
-			public const int notification_template_lines_media = 2130903097;
+			public const int notification_template_big_media = 2130903097;
 			
 			// aapt resource value: 0x7f03003a
-			public const int notification_template_media = 2130903098;
+			public const int notification_template_big_media_custom = 2130903098;
 			
 			// aapt resource value: 0x7f03003b
-			public const int notification_template_media_custom = 2130903099;
+			public const int notification_template_big_media_narrow = 2130903099;
 			
 			// aapt resource value: 0x7f03003c
-			public const int notification_template_part_chronometer = 2130903100;
+			public const int notification_template_big_media_narrow_custom = 2130903100;
 			
 			// aapt resource value: 0x7f03003d
-			public const int notification_template_part_time = 2130903101;
+			public const int notification_template_custom_big = 2130903101;
 			
 			// aapt resource value: 0x7f03003e
-			public const int select_dialog_item_material = 2130903102;
+			public const int notification_template_icon_group = 2130903102;
 			
 			// aapt resource value: 0x7f03003f
-			public const int select_dialog_multichoice_material = 2130903103;
+			public const int notification_template_lines_media = 2130903103;
 			
 			// aapt resource value: 0x7f030040
-			public const int select_dialog_singlechoice_material = 2130903104;
+			public const int notification_template_media = 2130903104;
 			
 			// aapt resource value: 0x7f030041
-			public const int support_simple_spinner_dropdown_item = 2130903105;
+			public const int notification_template_media_custom = 2130903105;
 			
 			// aapt resource value: 0x7f030042
-			public const int Tabbar = 2130903106;
+			public const int notification_template_part_chronometer = 2130903106;
 			
 			// aapt resource value: 0x7f030043
-			public const int Toolbar = 2130903107;
+			public const int notification_template_part_time = 2130903107;
+			
+			// aapt resource value: 0x7f030044
+			public const int select_dialog_item_material = 2130903108;
+			
+			// aapt resource value: 0x7f030045
+			public const int select_dialog_multichoice_material = 2130903109;
+			
+			// aapt resource value: 0x7f030046
+			public const int select_dialog_singlechoice_material = 2130903110;
+			
+			// aapt resource value: 0x7f030047
+			public const int support_simple_spinner_dropdown_item = 2130903111;
+			
+			// aapt resource value: 0x7f030048
+			public const int Tabbar = 2130903112;
+			
+			// aapt resource value: 0x7f030049
+			public const int Toolbar = 2130903113;
 			
 			static Layout()
 			{
@@ -3916,6 +4171,222 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f0a000f
 			public const int common_signin_button_text_long = 2131361807;
 			
+			// aapt resource value: 0x7f0a004f
+			public const int hockeyapp_crash_dialog_app_name_fallback = 2131361871;
+			
+			// aapt resource value: 0x7f0a0050
+			public const int hockeyapp_crash_dialog_message = 2131361872;
+			
+			// aapt resource value: 0x7f0a0051
+			public const int hockeyapp_crash_dialog_negative_button = 2131361873;
+			
+			// aapt resource value: 0x7f0a0052
+			public const int hockeyapp_crash_dialog_neutral_button = 2131361874;
+			
+			// aapt resource value: 0x7f0a0053
+			public const int hockeyapp_crash_dialog_positive_button = 2131361875;
+			
+			// aapt resource value: 0x7f0a0054
+			public const int hockeyapp_crash_dialog_title = 2131361876;
+			
+			// aapt resource value: 0x7f0a0055
+			public const int hockeyapp_dialog_error_message = 2131361877;
+			
+			// aapt resource value: 0x7f0a0056
+			public const int hockeyapp_dialog_error_title = 2131361878;
+			
+			// aapt resource value: 0x7f0a0057
+			public const int hockeyapp_dialog_negative_button = 2131361879;
+			
+			// aapt resource value: 0x7f0a0058
+			public const int hockeyapp_dialog_positive_button = 2131361880;
+			
+			// aapt resource value: 0x7f0a0059
+			public const int hockeyapp_download_failed_dialog_message = 2131361881;
+			
+			// aapt resource value: 0x7f0a005a
+			public const int hockeyapp_download_failed_dialog_negative_button = 2131361882;
+			
+			// aapt resource value: 0x7f0a005b
+			public const int hockeyapp_download_failed_dialog_positive_button = 2131361883;
+			
+			// aapt resource value: 0x7f0a005c
+			public const int hockeyapp_download_failed_dialog_title = 2131361884;
+			
+			// aapt resource value: 0x7f0a005d
+			public const int hockeyapp_error_no_network_message = 2131361885;
+			
+			// aapt resource value: 0x7f0a005e
+			public const int hockeyapp_expiry_info_text = 2131361886;
+			
+			// aapt resource value: 0x7f0a005f
+			public const int hockeyapp_expiry_info_title = 2131361887;
+			
+			// aapt resource value: 0x7f0a0060
+			public const int hockeyapp_feedback_attach_file = 2131361888;
+			
+			// aapt resource value: 0x7f0a0061
+			public const int hockeyapp_feedback_attach_picture = 2131361889;
+			
+			// aapt resource value: 0x7f0a0062
+			public const int hockeyapp_feedback_attachment_button_text = 2131361890;
+			
+			// aapt resource value: 0x7f0a0063
+			public const int hockeyapp_feedback_attachment_error = 2131361891;
+			
+			// aapt resource value: 0x7f0a0064
+			public const int hockeyapp_feedback_attachment_loading = 2131361892;
+			
+			// aapt resource value: 0x7f0a0065
+			public const int hockeyapp_feedback_email_hint = 2131361893;
+			
+			// aapt resource value: 0x7f0a0066
+			public const int hockeyapp_feedback_failed_text = 2131361894;
+			
+			// aapt resource value: 0x7f0a0067
+			public const int hockeyapp_feedback_failed_title = 2131361895;
+			
+			// aapt resource value: 0x7f0a0068
+			public const int hockeyapp_feedback_fetching_feedback_text = 2131361896;
+			
+			// aapt resource value: 0x7f0a0069
+			public const int hockeyapp_feedback_generic_error = 2131361897;
+			
+			// aapt resource value: 0x7f0a006a
+			public const int hockeyapp_feedback_last_updated_text = 2131361898;
+			
+			// aapt resource value: 0x7f0a006b
+			public const int hockeyapp_feedback_max_attachments_allowed = 2131361899;
+			
+			// aapt resource value: 0x7f0a006c
+			public const int hockeyapp_feedback_message_hint = 2131361900;
+			
+			// aapt resource value: 0x7f0a006d
+			public const int hockeyapp_feedback_name_hint = 2131361901;
+			
+			// aapt resource value: 0x7f0a006e
+			public const int hockeyapp_feedback_refresh_button_text = 2131361902;
+			
+			// aapt resource value: 0x7f0a006f
+			public const int hockeyapp_feedback_response_button_text = 2131361903;
+			
+			// aapt resource value: 0x7f0a0070
+			public const int hockeyapp_feedback_select_file = 2131361904;
+			
+			// aapt resource value: 0x7f0a0071
+			public const int hockeyapp_feedback_select_picture = 2131361905;
+			
+			// aapt resource value: 0x7f0a0072
+			public const int hockeyapp_feedback_send_button_text = 2131361906;
+			
+			// aapt resource value: 0x7f0a0073
+			public const int hockeyapp_feedback_send_generic_error = 2131361907;
+			
+			// aapt resource value: 0x7f0a0074
+			public const int hockeyapp_feedback_send_network_error = 2131361908;
+			
+			// aapt resource value: 0x7f0a0075
+			public const int hockeyapp_feedback_sending_feedback_text = 2131361909;
+			
+			// aapt resource value: 0x7f0a0076
+			public const int hockeyapp_feedback_subject_hint = 2131361910;
+			
+			// aapt resource value: 0x7f0a0077
+			public const int hockeyapp_feedback_title = 2131361911;
+			
+			// aapt resource value: 0x7f0a0078
+			public const int hockeyapp_feedback_validate_email_empty = 2131361912;
+			
+			// aapt resource value: 0x7f0a0079
+			public const int hockeyapp_feedback_validate_email_error = 2131361913;
+			
+			// aapt resource value: 0x7f0a007a
+			public const int hockeyapp_feedback_validate_name_error = 2131361914;
+			
+			// aapt resource value: 0x7f0a007b
+			public const int hockeyapp_feedback_validate_subject_error = 2131361915;
+			
+			// aapt resource value: 0x7f0a007c
+			public const int hockeyapp_feedback_validate_text_error = 2131361916;
+			
+			// aapt resource value: 0x7f0a007d
+			public const int hockeyapp_login_email_hint = 2131361917;
+			
+			// aapt resource value: 0x7f0a007e
+			public const int hockeyapp_login_headline_text = 2131361918;
+			
+			// aapt resource value: 0x7f0a007f
+			public const int hockeyapp_login_headline_text_email_only = 2131361919;
+			
+			// aapt resource value: 0x7f0a0080
+			public const int hockeyapp_login_login_button_text = 2131361920;
+			
+			// aapt resource value: 0x7f0a0081
+			public const int hockeyapp_login_missing_credentials_toast = 2131361921;
+			
+			// aapt resource value: 0x7f0a0082
+			public const int hockeyapp_login_password_hint = 2131361922;
+			
+			// aapt resource value: 0x7f0a0083
+			public const int hockeyapp_paint_dialog_message = 2131361923;
+			
+			// aapt resource value: 0x7f0a0084
+			public const int hockeyapp_paint_dialog_negative_button = 2131361924;
+			
+			// aapt resource value: 0x7f0a0085
+			public const int hockeyapp_paint_dialog_neutral_button = 2131361925;
+			
+			// aapt resource value: 0x7f0a0086
+			public const int hockeyapp_paint_dialog_positive_button = 2131361926;
+			
+			// aapt resource value: 0x7f0a0087
+			public const int hockeyapp_paint_indicator_toast = 2131361927;
+			
+			// aapt resource value: 0x7f0a0088
+			public const int hockeyapp_paint_menu_clear = 2131361928;
+			
+			// aapt resource value: 0x7f0a0089
+			public const int hockeyapp_paint_menu_save = 2131361929;
+			
+			// aapt resource value: 0x7f0a008a
+			public const int hockeyapp_paint_menu_undo = 2131361930;
+			
+			// aapt resource value: 0x7f0a008b
+			public const int hockeyapp_permission_dialog_negative_button = 2131361931;
+			
+			// aapt resource value: 0x7f0a008c
+			public const int hockeyapp_permission_dialog_positive_button = 2131361932;
+			
+			// aapt resource value: 0x7f0a008d
+			public const int hockeyapp_permission_update_message = 2131361933;
+			
+			// aapt resource value: 0x7f0a008e
+			public const int hockeyapp_permission_update_title = 2131361934;
+			
+			// aapt resource value: 0x7f0a008f
+			public const int hockeyapp_update_button = 2131361935;
+			
+			// aapt resource value: 0x7f0a0090
+			public const int hockeyapp_update_dialog_message = 2131361936;
+			
+			// aapt resource value: 0x7f0a0091
+			public const int hockeyapp_update_dialog_negative_button = 2131361937;
+			
+			// aapt resource value: 0x7f0a0092
+			public const int hockeyapp_update_dialog_positive_button = 2131361938;
+			
+			// aapt resource value: 0x7f0a0093
+			public const int hockeyapp_update_dialog_title = 2131361939;
+			
+			// aapt resource value: 0x7f0a0094
+			public const int hockeyapp_update_mandatory_toast = 2131361940;
+			
+			// aapt resource value: 0x7f0a0095
+			public const int hockeyapp_update_version_details_label = 2131361941;
+			
+			// aapt resource value: 0x7f0a004e
+			public const int library_name = 2131361870;
+			
 			// aapt resource value: 0x7f0a0011
 			public const int mr_button_content_description = 2131361809;
 			
@@ -4025,8 +4496,8 @@ namespace mobile_style_editor.Droid
 			// aapt resource value: 0x7f070011
 			public const int Animation_Design_BottomSheetDialog = 2131165201;
 			
-			// aapt resource value: 0x7f07018b
-			public const int AppCompatDialogStyle = 2131165579;
+			// aapt resource value: 0x7f07018e
+			public const int AppCompatDialogStyle = 2131165582;
 			
 			// aapt resource value: 0x7f0700cd
 			public const int Base_AlertDialog_AppCompat = 2131165389;
@@ -4503,10 +4974,19 @@ namespace mobile_style_editor.Droid
 			public const int CardView_Light = 2131165187;
 			
 			// aapt resource value: 0x7f070189
-			public const int MyTheme = 2131165577;
+			public const int HockeyApp_ButtonStyle = 2131165577;
 			
 			// aapt resource value: 0x7f07018a
-			public const int MyTheme_Base = 2131165578;
+			public const int HockeyApp_EditTextStyle = 2131165578;
+			
+			// aapt resource value: 0x7f07018b
+			public const int HockeyApp_SingleLineInputStyle = 2131165579;
+			
+			// aapt resource value: 0x7f07018c
+			public const int MyTheme = 2131165580;
+			
+			// aapt resource value: 0x7f07018d
+			public const int MyTheme_Base = 2131165581;
 			
 			// aapt resource value: 0x7f070048
 			public const int Platform_AppCompat = 2131165256;

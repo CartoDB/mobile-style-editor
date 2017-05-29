@@ -142,6 +142,30 @@ namespace mobile_style_editor
             }
         }
 
+		protected override bool OnBackButtonPressed()
+		{
+			if (ContainsUnsavedChanged)
+			{
+				HandleUnsavedChanges();
+				return true;
+			}
+			else
+			{
+				return base.OnBackButtonPressed();
+			}
+		}
+
+		async void HandleUnsavedChanges()
+		{
+			string message = "If you go back now, you will lose unsaved changes";
+			var accepted = await DisplayAlert("Attention!", message, "Ok", "Cancel");
+
+			if (accepted)
+			{
+				await Navigation.PopAsync(true);
+			}
+		}
+
         void OnSourceChanged(object sender, EventArgs e)
         {
             ContentView.ShowLoading();;

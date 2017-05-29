@@ -141,6 +141,12 @@
     <Reference Include="ToastIOS">
       <HintPath>..\Components\ToastIOS-1.6\lib\ios-unified\ToastIOS.dll</HintPath>
     </Reference>
+    <Reference Include="HockeySDK">
+      <HintPath>..\Components\hockeyappios-4.1.2.0\lib\ios-unified\HockeySDK.dll</HintPath>
+    </Reference>
+    <Reference Include="HockeySDK.iOSBindings">
+      <HintPath>..\Components\hockeyappios-4.1.2.0\lib\ios-unified\HockeySDK.iOSBindings.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -245,6 +251,10 @@
     </XamarinComponentReference>
     <XamarinComponentReference Include="ToastIOS">
       <Version>1.6</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="hockeyappios">
+      <Version>4.1.2.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

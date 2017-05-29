@@ -135,6 +135,12 @@
     <Reference Include="Octokit">
       <HintPath>..\packages\Octokit.0.24.1-alpha0001\lib\netstandard1.1\Octokit.dll</HintPath>
     </Reference>
+    <Reference Include="HockeySDK.AndroidBindings">
+      <HintPath>..\Components\hockeyappandroid-4.1.2.0\lib\android\HockeySDK.AndroidBindings.dll</HintPath>
+    </Reference>
+    <Reference Include="HockeySDK">
+      <HintPath>..\Components\hockeyappandroid-4.1.2.0\lib\android\HockeySDK.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -176,6 +182,10 @@
   <ItemGroup>
     <XamarinComponentReference Include="sqlite-net">
       <Version>1.0.11</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="hockeyappandroid">
+      <Version>4.1.2.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
