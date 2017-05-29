@@ -5,9 +5,12 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class StyleContainer : BaseView
-	{
-		public EventHandler<EventArgs> ItemClick;
+    public class StyleContainer : BaseView
+    {
+        public EventHandler<EventArgs> ItemClick;
+
+        public bool ContainsRefreshButton { get; set; }
+        public RefreshButton RefreshButton { get; private set; }
 
 		public BaseView Header { get; set; }
 
@@ -29,6 +32,8 @@ namespace mobile_style_editor
 			styleList = new BaseScrollView();
 
 			separator = new BaseView { BackgroundColor = Color.FromRgb(220, 220, 220) };
+
+            RefreshButton = new RefreshButton();
 		}
 
 		double padding = 5;
@@ -64,6 +69,17 @@ namespace mobile_style_editor
 			AddSubview(styleList, x, y, w, h);
 
 			UpdateListLayout();
+
+            if (ContainsRefreshButton)
+            {
+                w = 30;
+                h = w;
+                x = Width - (w + padding);
+                y = padding;
+
+                AddSubview(RefreshButton, x, y, w, h);
+                RaiseChild(RefreshButton);
+            }
 		}
 
 		public void RenderList(List<Octokit.RepositoryContent> contents)

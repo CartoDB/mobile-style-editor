@@ -56,6 +56,8 @@ namespace mobile_style_editor
 			ContentView.MyStyles.ItemClick += OnStyleClick;
 			ContentView.Templates.ItemClick += OnStyleClick;
 
+            ContentView.Templates.RefreshButton.Click += OnTemplateRefreshClick;
+
 			ContentView.Tabs.TabClicked += OnTabClick;
 
 			ContentView.Webview.Authenticated += OnCodeReceived;
@@ -84,7 +86,7 @@ namespace mobile_style_editor
         List<Octokit.RepositoryContent> contents;
         bool FilesDownloaded { get { return contents != null; } }
 
-        async Task<bool> PopulateTemplateList()
+        async Task<bool> PopulateTemplateList(bool checkLocal = true)
 		{
 			if (!FilesDownloaded)
 			{
@@ -94,7 +96,7 @@ namespace mobile_style_editor
 				 * Will render the wrong map if the order has somehow changed
 				 * 
 				 */
-				contents = await DownloadList();
+                contents = await DownloadList();
 				ContentView.Templates.RenderList(contents);
 			}
 
@@ -102,7 +104,7 @@ namespace mobile_style_editor
 
 			foreach (var content in contents)
 			{
-				DownloadResult result = await DownloadFile(content);
+                DownloadResult result = await DownloadFile(content, checkLocal);
 				ContentView.Templates.RenderMap(result, index);
 				index++;
 			}
@@ -126,6 +128,8 @@ namespace mobile_style_editor
 			ContentView.MyStyles.ItemClick -= OnStyleClick;
 			ContentView.Templates.ItemClick -= OnStyleClick;
 			
+            ContentView.Templates.RefreshButton.Click -= OnTemplateRefreshClick;
+
 			ContentView.Tabs.TabClicked += OnTabClick;
 
 			ContentView.Webview.Authenticated -= OnCodeReceived;
@@ -145,7 +149,13 @@ namespace mobile_style_editor
 			DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
 #endif
 		}
-                                                                                
+                             
+        void OnTemplateRefreshClick(object sender, EventArgs e)
+        {
+            contents = null;
+            PopulateTemplateList(false);
+        }
+
 		public void OnPageClick(object sender, EventArgs e)
 		{
 			PageView page = (PageView)sender;
@@ -547,9 +557,18 @@ namespace mobile_style_editor
 			return await HubClient.Instance.GetZipFiles("CartoDB", "mobile-sample-styles");
 		}
 
-        public async Task<DownloadResult> DownloadFile(Octokit.RepositoryContent content)
+        public async Task<DownloadResult> DownloadFile(Octokit.RepositoryContent content, bool checkLocal = true)
         {
-            bool existsLocally = FileUtils.HasLocalCopy(TemplateFolder, content.Name);
+            bool existsLocally = true;
+
+            if (checkLocal)
+            {
+                existsLocally = FileUtils.HasLocalCopy(TemplateFolder, content.Name);
+            }
+            else
+            {
+                existsLocally = false;
+            }
 
             string path;
             string filename;

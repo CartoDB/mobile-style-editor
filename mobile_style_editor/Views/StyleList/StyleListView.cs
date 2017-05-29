@@ -33,6 +33,7 @@ namespace mobile_style_editor
 
 			Templates = new StyleContainer();
 			Templates.Header = StyleContainer.GetHeaderLabel("TEMPLATE STYLES");
+            Templates.ContainsRefreshButton = true;
 
 			AddStyle = new AddStyleItem();
             MyStyles.Footer = AddStyle;
@@ -41,8 +42,6 @@ namespace mobile_style_editor
 
 			Popup = new FileListPopup();
 			Webview = new WebviewPopup();
-
-			//container.IsEnabled = false;
 		}
 
 		public override void LayoutSubviews()
