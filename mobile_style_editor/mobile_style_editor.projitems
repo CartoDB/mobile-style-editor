@@ -53,7 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseScrollView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleListItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\MapExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleListView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\AddStyleItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\DownloadResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\ClickViewRenderer.cs" />

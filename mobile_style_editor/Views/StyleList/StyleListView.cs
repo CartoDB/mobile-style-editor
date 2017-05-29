@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-    public class StyleView : ContentView
+    public class StyleListView : ContentView
 	{
 		BaseScrollView container;
 
@@ -19,7 +19,7 @@ namespace mobile_style_editor
 
 		public StyleTabBar Tabs { get; private set; }
 
-		public StyleView()
+		public StyleListView()
 		{
             IsNavigationBarVisible = true;
 

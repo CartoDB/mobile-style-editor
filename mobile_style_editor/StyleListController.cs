@@ -18,13 +18,13 @@ namespace mobile_style_editor
 {
 	public class StyleListController : ContentPage
 	{
-		public StyleView ContentView { get; private set; }
+		public StyleListView ContentView { get; private set; }
 
 		public StyleListController()
 		{
 			NavigationPage.SetHasNavigationBar(this, false);
 
-			ContentView = new StyleView();
+			ContentView = new StyleListView();
 			Content = ContentView;
 
             ContentView.NavigationBar.IsBackButtonVisible = false;
