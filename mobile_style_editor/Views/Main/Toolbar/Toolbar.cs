@@ -56,11 +56,9 @@ namespace mobile_style_editor
 			x = Width - (2 * w + 3 * padding);
 			y = Height / 2 - h / 2;
 
-			//AddSubview(UploadButton, x, y, w, h);
+			AddSubview(SaveButton, x, y, w, h);
 
 			x += w + padding;
-
-			//AddSubview(SaveButton, x, y, w, h);
 
             AddSubview(EmailButton, x, y, w, h);
 		}

@@ -210,7 +210,23 @@ namespace mobile_style_editor
 
 		void OnSaveButtonClicked(object sender, EventArgs e)
 		{
-			ShowPopup(PopupType.Save);
+            string message = "If you overwrite a saved style, the original style will be lost forever";
+            Alert("Warning!", message, null, delegate {
+
+                ContentView.ShowLoading();
+                Task.Run(delegate
+                {
+                    string source = Path.Combine(Parser.ApplicationFolder, currentWorkingName);
+                    string destination = Path.Combine(folder, filename);
+                    File.Copy(source, destination, true);
+
+                    Device.BeginInvokeOnMainThread(delegate {
+                        ContainsUnsavedChanged = false;    
+                        ContentView.HideLoading();
+                    });
+
+                });
+            });
 		}
 
         void OnEmailButtonClicked(object sender, EventArgs e)

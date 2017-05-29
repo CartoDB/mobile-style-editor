@@ -35,8 +35,6 @@ namespace mobile_style_editor
 #endif
 		}
 
-		bool filesDownloaded;
-
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
@@ -83,9 +81,12 @@ namespace mobile_style_editor
 			ShowMyStyles();
         }
 
+        List<Octokit.RepositoryContent> contents;
+        bool FilesDownloaded { get { return contents != null; } }
+
         async Task<bool> PopulateTemplateList()
 		{
-			if (!filesDownloaded)
+			if (!FilesDownloaded)
 			{
 				/*
 				 * TODO
@@ -93,20 +94,17 @@ namespace mobile_style_editor
 				 * Will render the wrong map if the order has somehow changed
 				 * 
 				 */
-				List<Octokit.RepositoryContent> contents = await DownloadList();
+				contents = await DownloadList();
 				ContentView.Templates.RenderList(contents);
+			}
 
-				int index = 0;
+			int index = 0;
 
-				foreach (var content in contents)
-				{
-					DownloadResult result = await DownloadFile(content);
-                    ContentView.Templates.RenderMap(result, index);
-                    index++;
-				}
-
-				filesDownloaded = true;
-				return true;
+			foreach (var content in contents)
+			{
+				DownloadResult result = await DownloadFile(content);
+				ContentView.Templates.RenderMap(result, index);
+				index++;
 			}
 
 			return false;
