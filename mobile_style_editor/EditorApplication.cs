@@ -1,4 +1,4 @@
-
+﻿
 using Carto.Ui;
 using Xamarin.Forms;
 
@@ -54,8 +54,6 @@ namespace mobile_style_editor
 #elif __UWP__
 #endif
 			MainPage = NavigationPage;
-
-			//throw new System.Exception();
 		}
 
 		protected override void OnStart()
