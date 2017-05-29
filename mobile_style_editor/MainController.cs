@@ -39,7 +39,7 @@ namespace mobile_style_editor
             ContentView = new MainView();
             Content = ContentView;
 
-            ContentView.Navigationbar.Title.Text = filename.ToUpper();
+            ContentView.NavigationBar.Title.Text = filename.ToUpper();
         }
 
         protected override void OnAppearing()
@@ -66,7 +66,7 @@ namespace mobile_style_editor
                     });
                 });
             });
-            ContentView.Navigationbar.Back.Click += OnBackButtonPressed;
+            ContentView.NavigationBar.Back.Click += OnBackButtonPressed;
 
             ContentView.FileTabs.OnTabTap += OnTabTapped;
             ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
@@ -96,7 +96,7 @@ namespace mobile_style_editor
 		{
 			base.OnDisappearing();
 
-            ContentView.Navigationbar.Back.Click -= OnBackButtonPressed;
+            ContentView.NavigationBar.Back.Click -= OnBackButtonPressed;
 
 			ContentView.FileTabs.OnTabTap -= OnTabTapped;
             ContentView.Toolbar.Tabs.OnTabTap -= OnTabTapped;

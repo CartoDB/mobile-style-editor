@@ -84,6 +84,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Utilities\SourceLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Email.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\ContentView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\Navigation\Navigationbar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\Navigation\NavigationBackButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
@@ -103,6 +105,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Utilities\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\Tabs\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Pagination\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Base\Navigation\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />

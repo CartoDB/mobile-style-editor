@@ -27,8 +27,8 @@ namespace mobile_style_editor
 			ContentView = new StyleView();
 			Content = ContentView;
 
-            ContentView.Navigationbar.IsBackButtonVisible = false;
-			ContentView.Navigationbar.Title.Text = "CARTO STYLE EDITOR";
+            ContentView.NavigationBar.IsBackButtonVisible = false;
+			ContentView.NavigationBar.Title.Text = "CARTO STYLE EDITOR";
 
 #if __IOS__
 			DriveClientiOS.Instance.Authenticate();
