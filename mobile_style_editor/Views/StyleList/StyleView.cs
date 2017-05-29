@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class StyleView : BaseView
+    public class StyleView : ContentView
 	{
 		BaseScrollView container;
 
@@ -21,6 +21,8 @@ namespace mobile_style_editor
 
 		public StyleView()
 		{
+            IsNavigationBarVisible = true;
+
 			container = new BaseScrollView();
 			container.Orientation = ScrollOrientation.Horizontal;
 

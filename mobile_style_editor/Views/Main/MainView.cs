@@ -19,7 +19,7 @@ using Xamarin.Forms.Platform.UWP;
 
 namespace mobile_style_editor
 {
-    public class MainView : BaseView
+    public class MainView : ContentView
     {
         public Toolbar Toolbar { get; private set; }
 
@@ -35,7 +35,9 @@ namespace mobile_style_editor
 
         public MainView()
         {
-            Toolbar = new Toolbar();
+            IsNavigationBarVisible = true;
+
+			Toolbar = new Toolbar();
 
             MapView = new MapContainer();
             MapView.IsZoomVisible = true;

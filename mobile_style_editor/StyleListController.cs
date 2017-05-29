@@ -22,6 +22,8 @@ namespace mobile_style_editor
 
 		public StyleListController()
 		{
+			NavigationPage.SetHasNavigationBar(this, false);
+
 			Title = "CARTO STYLE VIEWER";
 
 			ContentView = new StyleView();

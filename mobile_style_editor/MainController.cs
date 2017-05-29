@@ -31,7 +31,9 @@ namespace mobile_style_editor
 
 		public MainController(string folder, string filename)
         {
-            this.folder = folder;
+			NavigationPage.SetHasNavigationBar(this, false);
+
+			this.folder = folder;
             this.filename = filename;
 
             ContentView = new MainView();
