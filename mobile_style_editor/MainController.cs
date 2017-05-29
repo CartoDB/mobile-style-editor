@@ -39,7 +39,7 @@ namespace mobile_style_editor
             ContentView = new MainView();
             Content = ContentView;
 
-            Title = "CARTO STYLE EDITOR";
+            ContentView.Navigationbar.Title.Text = filename.ToUpper();
         }
 
         protected override void OnAppearing()
@@ -66,6 +66,7 @@ namespace mobile_style_editor
                     });
                 });
             });
+            ContentView.Navigationbar.Back.Click += OnBackButtonPressed;
 
             ContentView.FileTabs.OnTabTap += OnTabTapped;
             ContentView.Toolbar.Tabs.OnTabTap += OnTabTapped;
@@ -95,6 +96,8 @@ namespace mobile_style_editor
 		{
 			base.OnDisappearing();
 
+            ContentView.Navigationbar.Back.Click -= OnBackButtonPressed;
+
 			ContentView.FileTabs.OnTabTap -= OnTabTapped;
             ContentView.Toolbar.Tabs.OnTabTap -= OnTabTapped;
 
@@ -118,6 +121,11 @@ namespace mobile_style_editor
             ContentView.Zoom.Out.Click -= ZoomOut;
 #endif
 		}
+
+        void OnBackButtonPressed(object sender, EventArgs e)
+        {
+            Navigation.PopAsync(true);    
+        }
 
         void OnSourceChanged(object sender, EventArgs e)
         {
