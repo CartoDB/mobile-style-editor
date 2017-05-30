@@ -1,11 +1,12 @@
-﻿using System;
-using Android.Views;
+﻿
+using System;
 using mobile_style_editor;
 using Xamarin.Forms;
 
 #if __IOS__
 using Xamarin.Forms.Platform.iOS;
 #elif __ANDROID__
+using Android.Views;
 using Xamarin.Forms.Platform.Android;
 #elif __UWP__
 using Xamarin.Forms.Platform.UWP;
