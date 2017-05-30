@@ -62,11 +62,11 @@ namespace mobile_style_editor
 
 			ContentView.Webview.Authenticated += OnCodeReceived;
 
-			ContentView.Popup.Header.BackButton.Click += OnPopupBackButtonClick;
-			ContentView.Popup.Header.Select.Click += OnSelectClick;
+			ContentView.FileList.Header.BackButton.Click += OnPopupBackButtonClick;
+			ContentView.FileList.Header.Select.Click += OnSelectClick;
 
-			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
-			ContentView.Popup.Pages.PageClicked += OnPageClick;
+			ContentView.FileList.FileContent.ItemClick += OnItemClicked;
+			ContentView.FileList.Pages.PageClicked += OnPageClick;
 
             ContentView.Settings.Click += OnSettingsClick;
 
@@ -101,11 +101,11 @@ namespace mobile_style_editor
 
 			ContentView.Webview.Authenticated -= OnCodeReceived;
 
-			ContentView.Popup.Header.BackButton.Click -= OnPopupBackButtonClick;
-			ContentView.Popup.Header.Select.Click -= OnSelectClick;
+			ContentView.FileList.Header.BackButton.Click -= OnPopupBackButtonClick;
+			ContentView.FileList.Header.Select.Click -= OnSelectClick;
 
-			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
-			ContentView.Popup.Pages.PageClicked -= OnPageClick;
+			ContentView.FileList.FileContent.ItemClick -= OnItemClicked;
+			ContentView.FileList.Pages.PageClicked -= OnPageClick;
 
 			ContentView.Settings.Click -= OnSettingsClick;
 
@@ -168,7 +168,7 @@ namespace mobile_style_editor
 		public void OnPageClick(object sender, EventArgs e)
 		{
 			PageView page = (PageView)sender;
-			ContentView.Popup.Show(page.GithubFiles);
+			ContentView.FileList.Show(page.GithubFiles);
 		}
 
 		public async void OnCodeReceived(object sender, AuthenticationEventArgs e)
@@ -222,31 +222,31 @@ namespace mobile_style_editor
 
 			if (storedContents.Count == 1)
 			{
-				ContentView.Popup.Header.BackButton.Disable();
-				ContentView.Popup.Pages.Show();
+				ContentView.FileList.Header.BackButton.Disable();
+				ContentView.FileList.Pages.Show();
 			}
 
 			List<GithubFile> files = storedContents[storedContents.Count - 1];
-			ContentView.Popup.Show(files);
+			ContentView.FileList.Show(files);
 			storedContents.Remove(files);
 
-			ContentView.Popup.Header.OnBackPress();
+			ContentView.FileList.Header.OnBackPress();
 		}
 
 		async void OnSelectClick(object sender, EventArgs e)
 		{
-			if (ContentView.Popup.GithubFiles == null)
+			if (ContentView.FileList.GithubFiles == null)
 			{
 				return;
 			}
 
 			Device.BeginInvokeOnMainThread(delegate
 			{
-				ContentView.Popup.Hide();
+				ContentView.FileList.Hide();
 				ContentView.ShowLoading();
 			});
 
-			List<GithubFile> folder = ContentView.Popup.GithubFiles;
+			List<GithubFile> folder = ContentView.FileList.GithubFiles;
 			List<DownloadedGithubFile> files = await HubClient.Instance.DownloadFolder(GithubOwner, GithubRepo, folder);
 
 			Toast.Show("Saving...", ContentView);
@@ -318,7 +318,7 @@ namespace mobile_style_editor
 		{
 			Device.BeginInvokeOnMainThread(delegate
 			{
-				ContentView.Popup.Hide();
+				ContentView.FileList.Hide();
 				ContentView.ShowLoading();
 			});
 		}
@@ -355,13 +355,13 @@ namespace mobile_style_editor
 			}
 
 			var contents = await HubClient.Instance.GetRepositories(counter);
-			ContentView.Popup.Pages.AddPage(contents.ToGithubFiles(), counter);
+			ContentView.FileList.Pages.AddPage(contents.ToGithubFiles(), counter);
 
 			if (counter == 1)
 			{
 				OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
-				ContentView.Popup.Header.Text = BasePath;
-				ContentView.Popup.Pages.HighlightFirst();
+				ContentView.FileList.Header.Text = BasePath;
+				ContentView.FileList.Pages.HighlightFirst();
 			}
 
 			if (contents.Count == HubClient.PageSize)
@@ -427,11 +427,11 @@ namespace mobile_style_editor
 			{
 				if (e.DriveFiles != null)
 				{
-					ContentView.Popup.Show(e.DriveFiles);
+					ContentView.FileList.Show(e.DriveFiles);
 				}
 				else if (e.GithubFiles != null)
 				{
-					ContentView.Popup.Show(e.GithubFiles);
+					ContentView.FileList.Show(e.GithubFiles);
 				}
 
 				ContentView.HideLoading();
@@ -455,7 +455,7 @@ namespace mobile_style_editor
 					// Do not Hide the popup when dealing with github,
 					// as a new page should load almost immediately
 					// and we need to show content there as well
-					ContentView.Popup.Hide();
+					ContentView.FileList.Hide();
 				}
 
 				ContentView.ShowLoading();
@@ -508,7 +508,7 @@ namespace mobile_style_editor
 					{
 						GithubOwner = item.GithubFile.Owner;
 						GithubRepo = item.GithubFile.Name;
-						ContentView.Popup.Pages.Hide();
+						ContentView.FileList.Pages.Hide();
 					}
 
 					GithubPath = item.GithubFile.Path;
@@ -519,7 +519,7 @@ namespace mobile_style_editor
 
 		async Task<bool> LoadGithubContents()
 		{
-			storedContents.Add(ContentView.Popup.GithubFiles);
+			storedContents.Add(ContentView.FileList.GithubFiles);
 
 			if (GithubPath == null)
 			{
@@ -528,13 +528,13 @@ namespace mobile_style_editor
 			}
 		
  			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, GithubPath);
-			ContentView.Popup.Show(contents.ToGithubFiles());
+			ContentView.FileList.Show(contents.ToGithubFiles());
 			ContentView.HideLoading();
 
 			Device.BeginInvokeOnMainThread(delegate
 			{
-				ContentView.Popup.Header.BackButton.Enable();
-				ContentView.Popup.Header.Text = BasePath + GithubPath.ToUpper();
+				ContentView.FileList.Header.BackButton.Enable();
+				ContentView.FileList.Header.Text = BasePath + GithubPath.ToUpper();
 			});
 
 			return true;
