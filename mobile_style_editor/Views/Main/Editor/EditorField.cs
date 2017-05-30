@@ -1,4 +1,4 @@
-﻿﻿
+﻿﻿﻿
 using System;
 using Xamarin.Forms;
 
@@ -262,10 +262,10 @@ namespace mobile_style_editor
                 Color commentColor = Color.FromRgb(120, 120, 120);
                 // Carto green
                 Color blockHeaderColor = Color.FromRgb(145, 198, 112);
-                // Dark magenta
-                Color constantColor = Color.FromRgb(150, 0, 150);
+				// Dark magenta with a hint of green
+				Color constantColor = Color.FromRgb(180, 50, 180);
 
-                bool isInCommentBlock = false;
+				bool isInCommentBlock = false;
 
 #if __UWP__
                 Device.BeginInvokeOnMainThread(delegate
