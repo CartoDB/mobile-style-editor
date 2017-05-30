@@ -87,6 +87,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)BaseController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseEntry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\CustomEntryRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderer\CustomScrollViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />

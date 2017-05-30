@@ -137,6 +137,7 @@ namespace mobile_style_editor
 			{
 				x += styleTab.Width;
 			}
+
 			container.ScrollToAsync(x, y, true);
 		}
 	}
