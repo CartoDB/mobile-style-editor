@@ -10,8 +10,9 @@ namespace mobile_style_editor
         public BasePopupContent Content { get; protected set; }
 
 
-		protected double verticalPadding { get { return 70; } }
-		protected double horizontalPadding
+		protected double VerticalPadding { get { return 70; } }
+
+		protected double HorizontalPadding
 		{
 			get
 			{
@@ -27,10 +28,13 @@ namespace mobile_style_editor
 			}
 		}
 
-        protected double contentX { get { return horizontalPadding; } }
-        protected double contentY { get { return verticalPadding; } }
-		protected double contentWidth { get { return Width - 2 * horizontalPadding; } }
-		protected double contentHeight { get { return Height - 2 * verticalPadding; } }
+        protected double ContentX { get { return HorizontalPadding; } }
+
+        protected double ContentY { get { return VerticalPadding; } }
+
+		protected double ContentWidth { get { return Width - 2 * HorizontalPadding; } }
+
+		protected double ContentHeight { get { return Height - 2 * VerticalPadding; } }
 
 		public BasePopup()
         {
