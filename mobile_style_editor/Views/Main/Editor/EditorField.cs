@@ -159,6 +159,8 @@ namespace mobile_style_editor
 
 
         const string NewLine = "\n";
+        
+        string current;
 
 #if __ANDROID__
 		Android.Graphics.Rect rect;
@@ -211,27 +213,19 @@ namespace mobile_style_editor
 
 #elif __IOS__
 
-        [Foundation.Export("textView:shouldChangeTextInRange:replacementText:")]
+		[Foundation.Export("textView:shouldChangeTextInRange:replacementText:")]
         public new bool ShouldChangeText(UITextView textView, Foundation.NSRange range, string text)
         {
             if (text.Equals("\n"))
             {
                 int selection = (int)range.Location;
-                current = current.Insert(selection, text);
+                current = current.Insert(selection, NewLine);
                 Update(current, selection + 1);
-                //if (EditingEnded != null)
-                //{
-                //	EditingEnded(this, EventArgs.Empty);
-                //}
-
-                //ResignFirstResponder();
-                //return false;
             }
 
             return true;
         }
 #endif
-        string current;
 
         public void Update(string text, int selection = -1)
         {

@@ -149,7 +149,7 @@ namespace mobile_style_editor
         public void UpdateMap(byte[] data, Action completed)
         {
             currentData = data;
-
+	
             MapView.Update(true, data, completed, (obj) =>
                     {
                         Device.BeginInvokeOnMainThread(delegate
@@ -160,24 +160,6 @@ namespace mobile_style_editor
                     });
 
             MapView.SourceLabel.Text = MapExtensions.SourceId;
-        }
-
-        double editorOriginalHeight;
-
-        public void Redraw()
-        {
-            Toolbar.UpdateLayout(Toolbar.X, Toolbar.Y, Toolbar.Width, toolbarHeight);
-            Editor.UpdateLayout(Editor.X, Editor.Y + toolbarHeight, Editor.Width, editorOriginalHeight);
-
-            ForceLayout();
-        }
-
-        public void RedrawForKeyboard(double keyboardHeight)
-        {
-            editorOriginalHeight = Editor.Height;
-
-            Toolbar.UpdateLayout(Toolbar.X, Toolbar.Y, Toolbar.Width, 0);
-            Editor.UpdateLayout(Editor.X, Editor.Y - toolbarHeight, Editor.Width, Editor.Height - keyboardHeight + toolbarHeight);
         }
 
     }

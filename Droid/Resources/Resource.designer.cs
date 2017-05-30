@@ -26,7 +26,6 @@ namespace mobile_style_editor.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::mobile_style_editor.Droid.Resource.Attribute.actionBarSize;
 			global::HockeyApp.Resource.Color.hockeyapp_background_header = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_background_header;
 			global::HockeyApp.Resource.Color.hockeyapp_background_light = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_background_light;
 			global::HockeyApp.Resource.Color.hockeyapp_background_white = global::mobile_style_editor.Droid.Resource.Color.hockeyapp_background_white;
@@ -147,6 +146,7 @@ namespace mobile_style_editor.Droid
 			global::HockeyApp.Resource.Style.HockeyApp_ButtonStyle = global::mobile_style_editor.Droid.Resource.Style.HockeyApp_ButtonStyle;
 			global::HockeyApp.Resource.Style.HockeyApp_EditTextStyle = global::mobile_style_editor.Droid.Resource.Style.HockeyApp_EditTextStyle;
 			global::HockeyApp.Resource.Style.HockeyApp_SingleLineInputStyle = global::mobile_style_editor.Droid.Resource.Style.HockeyApp_SingleLineInputStyle;
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::mobile_style_editor.Droid.Resource.Attribute.actionBarSize;
 		}
 		
 		public partial class Animation
