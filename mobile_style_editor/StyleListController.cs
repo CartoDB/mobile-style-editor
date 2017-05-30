@@ -16,7 +16,7 @@ using Xamarin.Forms.Platform.UWP;
 
 namespace mobile_style_editor
 {
-	public class StyleListController : ContentPage
+    public class StyleListController : BaseController
 	{
 		public StyleListView ContentView { get; private set; }
 
@@ -170,8 +170,12 @@ namespace mobile_style_editor
 				ContentView.Webview.Hide();
 				string token = await HubClient.Instance.CreateAccessToken(e.Id, e.Secret, e.Code);
 				Console.WriteLine("Token: " + token);
+
+                string message = "Would you like to store your access token so you don't have to log in again?";
+                Alert("", message, null, delegate {
+                    LocalStorage.Instance.AccessToken = token;
+                });
 				
-				LocalStorage.Instance.AccessToken = token;
 				HubClient.Instance.Authenticate(token);
 				PopulateTemplateList();
 
