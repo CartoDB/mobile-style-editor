@@ -21,8 +21,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\UWPHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ViewExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\NativeLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\FileUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Colors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\BasePopup.cs" />
