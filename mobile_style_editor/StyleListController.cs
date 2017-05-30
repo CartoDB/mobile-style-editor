@@ -68,6 +68,8 @@ namespace mobile_style_editor
 			ContentView.Popup.FileContent.ItemClick += OnItemClicked;
 			ContentView.Popup.Pages.PageClicked += OnPageClick;
 
+            ContentView.Settings.Click += OnSettingsClick;
+
 			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
 #if __ANDROID__
             DriveClientDroid.Instance.DownloadStarted += OnDownloadStarted;
@@ -83,7 +85,46 @@ namespace mobile_style_editor
 			ShowMyStyles();
         }
 
-        List<Octokit.RepositoryContent> contents;
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
+
+			ContentView.AddStyle.Drive.Click -= OnDriveButtonClick;
+			ContentView.AddStyle.Github.Click -= OnGithubButtonClick;
+
+			ContentView.MyStyles.ItemClick -= OnStyleClick;
+			ContentView.Templates.ItemClick -= OnStyleClick;
+
+			ContentView.Templates.RefreshButton.Click -= OnTemplateRefreshClick;
+
+			ContentView.Tabs.TabClicked += OnTabClick;
+
+			ContentView.Webview.Authenticated -= OnCodeReceived;
+
+			ContentView.Popup.Header.BackButton.Click -= OnPopupBackButtonClick;
+			ContentView.Popup.Header.Select.Click -= OnSelectClick;
+
+			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
+			ContentView.Popup.Pages.PageClicked -= OnPageClick;
+
+			ContentView.Settings.Click -= OnSettingsClick;
+
+			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadStarted;
+#if __ANDROID__
+            DriveClientDroid.Instance.DownloadStarted -= OnDownloadStarted;
+            DriveClientDroid.Instance.DownloadComplete -= OnFileDownloadComplete;
+#elif __IOS__
+			DriveClientiOS.Instance.DownloadComplete -= OnFileDownloadComplete;
+			DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
+#endif
+		}
+
+        void OnSettingsClick(object sender, EventArgs e)
+        {
+            Console.WriteLine("Settigns button clicked");
+        }
+
+		List<Octokit.RepositoryContent> contents;
         bool FilesDownloaded { get { return contents != null; } }
 
         async Task<bool> PopulateTemplateList(bool checkLocal = true)
@@ -117,39 +158,7 @@ namespace mobile_style_editor
 			GithubAuthenticationData data = HubClient.Instance.PrepareAuthention();
 			ContentView.OpenWebviewPopup(data);
 		}
-
-		protected override void OnDisappearing()
-		{
-			base.OnDisappearing();
-
-			ContentView.AddStyle.Drive.Click -= OnDriveButtonClick;
-			ContentView.AddStyle.Github.Click -= OnGithubButtonClick;
-
-			ContentView.MyStyles.ItemClick -= OnStyleClick;
-			ContentView.Templates.ItemClick -= OnStyleClick;
-			
-            ContentView.Templates.RefreshButton.Click -= OnTemplateRefreshClick;
-
-			ContentView.Tabs.TabClicked += OnTabClick;
-
-			ContentView.Webview.Authenticated -= OnCodeReceived;
-
-			ContentView.Popup.Header.BackButton.Click -= OnPopupBackButtonClick;
-			ContentView.Popup.Header.Select.Click -= OnSelectClick;
-
-			ContentView.Popup.FileContent.ItemClick -= OnItemClicked;
-			ContentView.Popup.Pages.PageClicked -= OnPageClick;
-
-			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadStarted;
-#if __ANDROID__
-			DriveClientDroid.Instance.DownloadStarted -= OnDownloadStarted;
-			DriveClientDroid.Instance.DownloadComplete -= OnFileDownloadComplete;
-#elif __IOS__
-			DriveClientiOS.Instance.DownloadComplete -= OnFileDownloadComplete;
-			DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
-#endif
-		}
-                             
+                  
         void OnTemplateRefreshClick(object sender, EventArgs e)
         {
             contents = null;

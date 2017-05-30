@@ -247,6 +247,7 @@
     <BundleResource Include="Resources\icon_folder.png" />
     <BundleResource Include="Resources\icon_arrow_back.png" />
     <BundleResource Include="Resources\icon_refresh_2.png" />
+    <BundleResource Include="Resources\icon_settings.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="sqlite-net">

@@ -179,6 +179,7 @@
     <AndroidResource Include="Resources\drawable-nodpi\icon_folder.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_arrow_back.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_refresh_2.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\icon_settings.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SpanBuilder\" />

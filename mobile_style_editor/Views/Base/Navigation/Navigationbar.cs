@@ -18,6 +18,8 @@ namespace mobile_style_editor
 
 		public Label Title { get; private set; }
 
+        BaseView rightItem;
+
 		public NavigationBar()
 		{
 			BackgroundColor = Colors.CartoNavyLight;
@@ -67,12 +69,27 @@ namespace mobile_style_editor
 			h = Height - statusbarHeight;
 
 			AddSubview(Title, x, y, w, h);
+
+            if (rightItem != null) 
+            {
+                h = Height - statusbarHeight;
+                w = h;
+                x = Width - w;
+                y = BaseY;
+
+                AddSubview(rightItem, x, y, w, h);   
+            }
 		}
 
 		public void Add(BaseView parent, double width)
 		{
 			parent.AddSubview(parent, 0, BaseY, width, Height);
 		}
+
+        public void AddRightBarButton(BaseView view)
+        {
+            rightItem = view;
+        }
 	}
 
 }

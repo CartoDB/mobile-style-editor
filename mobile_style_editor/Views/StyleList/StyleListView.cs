@@ -5,19 +5,21 @@ using Xamarin.Forms;
 namespace mobile_style_editor
 {
     public class StyleListView : ContentView
-	{
-		BaseScrollView container;
+    {
+        BaseScrollView container;
 
-		public StyleContainer MyStyles { get; private set; }
+        public StyleContainer MyStyles { get; private set; }
 
-		public StyleContainer Templates { get; private set; }
+        public StyleContainer Templates { get; private set; }
 
-		public AddStyleItem AddStyle { get; private set; }
+        public AddStyleItem AddStyle { get; private set; }
 
-		public FileListPopup Popup { get; private set; }
-		public WebviewPopup Webview { get; private set; }
+        public FileListPopup Popup { get; private set; }
+        public WebviewPopup Webview { get; private set; }
 
-		public StyleTabBar Tabs { get; private set; }
+        public StyleTabBar Tabs { get; private set; }
+
+        public SettingsButton Settings { get; private set; }
 
 		public StyleListView()
 		{
@@ -43,6 +45,9 @@ namespace mobile_style_editor
 
 			Popup = new FileListPopup();
 			Webview = new WebviewPopup();
+
+            Settings = new SettingsButton();
+            NavigationBar.AddRightBarButton(Settings);
 		}
 
 		public override void LayoutSubviews()
