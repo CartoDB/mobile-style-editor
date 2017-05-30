@@ -63,7 +63,7 @@ namespace mobile_style_editor
             AddSubview(EmailButton, x, y, w, h);
 		}
 
-        const int MaxCount = 4;
+        public const int MaxCount = 4;
 		/*
          * The default visible view is Expand button, 
          * if there are MaxCount or fewer tabs, show all of them via FileTabs

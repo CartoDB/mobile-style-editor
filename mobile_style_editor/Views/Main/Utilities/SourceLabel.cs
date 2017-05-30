@@ -9,7 +9,7 @@ namespace mobile_style_editor
         public EventHandler<EventArgs> Done;
 
 		Label label;
-		Entry field;
+        BaseEntry field;
 
 		public string Text { get { return field.Text; } set { field.Text = value; } }
 
@@ -25,7 +25,7 @@ namespace mobile_style_editor
 			label.FontSize = 12;
 			label.TextColor = Color.White;
 
-			field = new Entry();
+			field = new BaseEntry();
 			field.FontSize = 12;
 			field.FontAttributes = FontAttributes.Bold;
 			field.BackgroundColor = Colors.CartoNavyTransparent;

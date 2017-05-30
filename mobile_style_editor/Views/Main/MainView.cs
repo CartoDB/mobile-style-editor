@@ -99,7 +99,10 @@ namespace mobile_style_editor
 
 				FileTabs.RowCount = rowCount;
 
-				AddSubview(FileTabs, x, y, w, h);
+                if (Data.StyleFileNames.Count > Toolbar.MaxCount)
+                {
+                    AddSubview(FileTabs, x, y, w, h);
+                }
 
 				Editor.Initialize(Data);
 				Toolbar.Initialize(Data);
