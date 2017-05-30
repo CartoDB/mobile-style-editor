@@ -195,7 +195,6 @@ namespace mobile_style_editor
 				 * 
 				 */
 
-				Console.WriteLine("Ratio: " + Ratio + " (IsLandscape: " + IsLandscape + ")");
 				if (!IsLandscape)
 				{
 					// 1.22 on Nutiteq's Samsung Tablet

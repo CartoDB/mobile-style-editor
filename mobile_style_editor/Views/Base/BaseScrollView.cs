@@ -6,7 +6,7 @@ namespace mobile_style_editor
 {
 	public class BaseScrollView : ScrollView
 	{
-        public bool ScrollEnabled { get; set; }
+        public bool ScrollEnabled { get; set; } = true;
 
 		BaseView content;
 
@@ -161,7 +161,6 @@ namespace mobile_style_editor
                  * 
 				 */
 
-				Console.WriteLine("Ratio: " + Ratio + " (IsLandscape: " + IsLandscape + ")");
 				if (!IsLandscape)
 				{
 					// 1.22 on Nutiteq's Samsung Tablet

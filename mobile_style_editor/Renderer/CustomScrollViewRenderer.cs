@@ -27,11 +27,12 @@ namespace mobile_style_editor
                 View = (BaseScrollView)e.NewElement;
 #if __IOS__
                 ScrollEnabled = View.ScrollEnabled;
-#elif __ANDROID__
-
 #endif
             }
         }
 
+#if __ANDROID__
+
+#endif
     }
 }
