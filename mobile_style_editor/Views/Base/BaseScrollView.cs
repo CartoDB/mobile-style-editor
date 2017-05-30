@@ -6,6 +6,8 @@ namespace mobile_style_editor
 {
 	public class BaseScrollView : ScrollView
 	{
+        public bool ScrollEnabled { get; set; }
+
 		BaseView content;
 
 		public IList<View> Children { get { return content.Children; } }

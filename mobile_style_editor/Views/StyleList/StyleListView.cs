@@ -25,6 +25,7 @@ namespace mobile_style_editor
 
 			container = new BaseScrollView();
 			container.Orientation = ScrollOrientation.Horizontal;
+            container.ScrollEnabled = false;
 
 			BackgroundColor = Colors.CartoRed;
 

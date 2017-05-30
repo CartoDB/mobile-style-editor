@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+using Android.Views;
 using mobile_style_editor;
 using Xamarin.Forms;
 
@@ -16,14 +17,19 @@ namespace mobile_style_editor
     public class CustomScrollViewRenderer : ScrollViewRenderer
     {
         BaseScrollView View { get; set; }
-        
+
         protected override void OnElementChanged(VisualElementChangedEventArgs e)
         {
             base.OnElementChanged(e);
-            
+
             if (e.NewElement != null)
             {
                 View = (BaseScrollView)e.NewElement;
+#if __IOS__
+                ScrollEnabled = View.ScrollEnabled;
+#elif __ANDROID__
+
+#endif
             }
         }
 

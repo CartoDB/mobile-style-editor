@@ -43,7 +43,6 @@ namespace mobile_style_editor
 
 				Touch += (object sender, TouchEventArgs args) =>
 				{
-					Console.WriteLine("Action: " + args.Event.Action);
 					if (!View.IsEnabled)
 					{
 						return;
