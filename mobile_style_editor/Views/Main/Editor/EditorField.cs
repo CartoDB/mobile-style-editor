@@ -262,10 +262,10 @@ namespace mobile_style_editor
                 Color commentColor = Color.FromRgb(120, 120, 120);
                 // Carto green
                 Color blockHeaderColor = Color.FromRgb(145, 198, 112);
-				// Dark magenta with a hint of green
-				Color constantColor = Color.FromRgb(180, 50, 180);
-
-				bool isInCommentBlock = false;
+				// Teal
+                Color constantColor = Color.FromRgb(0, 150, 150);
+				
+                bool isInCommentBlock = false;
 
 #if __UWP__
                 Device.BeginInvokeOnMainThread(delegate
