@@ -27,26 +27,26 @@ namespace mobile_style_editor
 
 		public override void LayoutSubviews()
 		{
-			double x = contentX;
-			double y = contentY;
-			double w = contentWidth;
-			double h = contentHeight;
+			double x = ContentX;
+			double y = ContentY;
+			double w = ContentWidth;
+			double h = ContentHeight;
 
 			AddSubview(Content, x, y, w, h);
 
 			double padding = 10;
 
-			w = contentWidth;
-			h = verticalPadding - 3 * padding;
-			x = horizontalPadding;
-			y = verticalPadding - h;
+			w = ContentWidth;
+			h = VerticalPadding - 3 * padding;
+			x = HorizontalPadding;
+			y = VerticalPadding - h;
 
 			AddSubview(Header, x, y, w, h);
 
-			w = contentWidth;
+			w = ContentWidth;
 			h = Pages.ContentHeight;
-			x = contentX;
-			y = contentY + contentHeight;
+			x = ContentX;
+			y = ContentY + ContentHeight;
 
 			AddSubview(Pages, x, y, w, h);
 		}

@@ -15,10 +15,10 @@ namespace mobile_style_editor
 
         public override void LayoutSubviews()
         {
-			double x = contentX;
-			double y = contentY;
-			double w = contentWidth;
-			double h = contentHeight;
+			double x = ContentX;
+			double y = ContentY;
+			double w = ContentWidth;
+			double h = ContentHeight;
 
 			AddSubview(Content, x, y, w, h);
         }
