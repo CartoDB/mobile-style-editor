@@ -89,6 +89,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\CustomEntryRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\CustomScrollViewRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\Settings\SettingsButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\SettingsPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\SettingsPopupContent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
@@ -110,6 +112,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Pagination\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\Navigation\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\Settings\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />

@@ -68,7 +68,7 @@ namespace mobile_style_editor
 			ContentView.FileList.FileContent.ItemClick += OnItemClicked;
 			ContentView.FileList.Pages.PageClicked += OnPageClick;
 
-            ContentView.Settings.Click += OnSettingsClick;
+            ContentView.SettingsButton.Click += OnSettingsClick;
 
 			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
 #if __ANDROID__
@@ -107,7 +107,7 @@ namespace mobile_style_editor
 			ContentView.FileList.FileContent.ItemClick -= OnItemClicked;
 			ContentView.FileList.Pages.PageClicked -= OnPageClick;
 
-			ContentView.Settings.Click -= OnSettingsClick;
+			ContentView.SettingsButton.Click -= OnSettingsClick;
 
 			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadStarted;
 #if __ANDROID__
@@ -121,7 +121,7 @@ namespace mobile_style_editor
 
         void OnSettingsClick(object sender, EventArgs e)
         {
-            Console.WriteLine("Settigns button clicked");
+            ContentView.Settings.Toggle();
         }
 
 		List<Octokit.RepositoryContent> contents;
@@ -391,7 +391,6 @@ namespace mobile_style_editor
 				ClickedGithubButton = true;
 				InitializeAuthentication();
 			}
-
 		}
 
 #if __UWP__

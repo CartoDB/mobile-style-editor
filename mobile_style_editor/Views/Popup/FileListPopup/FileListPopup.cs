@@ -27,24 +27,6 @@ namespace mobile_style_editor
 
 		public override void LayoutSubviews()
 		{
-			double verticalPadding, horizontalPadding;
-
-			if (Width > Height)
-			{
-				horizontalPadding = Width / 6;
-			}
-			else
-			{
-				horizontalPadding = Width / 15;
-			}
-
-			verticalPadding = 70;
-
-			double contentHeight = Height - 2 * verticalPadding;
-			double contentWidth = Width - 2 * horizontalPadding;
-			double contentX = horizontalPadding;
-			double contentY = verticalPadding;
-
 			double x = contentX;
 			double y = contentY;
 			double w = contentWidth;

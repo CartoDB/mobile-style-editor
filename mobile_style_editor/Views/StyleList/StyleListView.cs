@@ -16,10 +16,11 @@ namespace mobile_style_editor
 
         public FileListPopup FileList { get; private set; }
         public WebviewPopup Webview { get; private set; }
+        public SettingsPopup Settings { get; private set; }
 
         public StyleTabBar Tabs { get; private set; }
 
-        public SettingsButton Settings { get; private set; }
+        public SettingsButton SettingsButton { get; private set; }
 
 		public StyleListView()
 		{
@@ -45,9 +46,10 @@ namespace mobile_style_editor
 
 			FileList = new FileListPopup();
 			Webview = new WebviewPopup();
+            Settings = new SettingsPopup();
 
-            Settings = new SettingsButton();
-            NavigationBar.AddRightBarButton(Settings);
+            SettingsButton = new SettingsButton();
+            NavigationBar.AddRightBarButton(SettingsButton);
 		}
 
 		public override void LayoutSubviews()
@@ -85,6 +87,7 @@ namespace mobile_style_editor
 
 			AddSubview(FileList, 0, 0, Width, Height);
 			AddSubview(Webview, 0, 0, Width, Height);
+            AddSubview(Settings, 0, 0, Width, Height);
 		}
 
 		public void HideMapViews()
