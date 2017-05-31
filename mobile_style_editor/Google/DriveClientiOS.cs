@@ -11,6 +11,7 @@ using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Download;
 using Google.Apis.Drive.v3;
+using Google.Apis.Drive.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Upload;
 
@@ -94,6 +95,17 @@ namespace mobile_style_editor
 
 			credentials = new UserCredential(flow, "user", token);
 		}
+
+        public About GetUserInfo()
+        {
+            var resource = Service.About.Get();
+            resource.Fields = "storageQuota, user/displayName";
+			var info = resource.Execute();
+
+            Console.WriteLine(info);
+
+            return info;
+        }
 
 		public void DownloadStyleList()
 		{

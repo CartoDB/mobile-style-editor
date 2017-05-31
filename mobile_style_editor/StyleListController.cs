@@ -140,11 +140,14 @@ namespace mobile_style_editor
 
                     Stream stream = await HubClient.Instance.GetUserAvatar(user.AvatarUrl);
                     ContentView.Settings.SettingsContent.GithubInfo.Update(stream);
-                } else
+                } 
+                else
                 {
                     ContentView.Settings.SettingsContent.GithubInfo.IsVisible = false;
                     Console.WriteLine("Github not authenticated");    
                 }
+
+                //var info = DriveClientiOS.Instance.GetUserInfo();
             }
         }
 

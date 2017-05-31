@@ -5,13 +5,18 @@ namespace mobile_style_editor
 {
     public class SettingsPopupContent : BasePopupContent
     {
-        public UserInfo UserInfo { get; private set; }
+        public UserInfo GithubInfo { get; private set; }
+
+        public UserInfo DriveInfo { get; private set; }
 
         public BaseView separator1;
 
         public SettingsPopupContent()
         {
-            UserInfo = new UserInfo();
+            GithubInfo = new UserInfo();
+
+            DriveInfo = new UserInfo();
+            DriveInfo.LogoutButton.IsVisible = false;
 
             separator1 = new BaseView();
             separator1.BackgroundColor = Colors.CartoNavyTransparent;
@@ -19,12 +24,15 @@ namespace mobile_style_editor
 
         public override void LayoutSubviews()
         {
+            double itemWidth = Width;
+            double itemHeight = 100;
+
             double x = 0;
             double y = 0;
-            double w = Width;
-            double h = 100;
+            double w = itemWidth;
+            double h = itemHeight;
 
-            AddSubview(UserInfo, x, y, w, h);
+            AddSubview(GithubInfo, x, y, w, h);
 
             double separatorHeight = 1;
             double separatorPadding = Width / 12;
@@ -36,6 +44,11 @@ namespace mobile_style_editor
             h = separatorHeight;
 
             AddSubview(separator1, x, y, w, h);
+
+            y += h + separatorHeight;
+
+            AddSubview(DriveInfo, x, y, w, h);
         }
+
     }
 }
