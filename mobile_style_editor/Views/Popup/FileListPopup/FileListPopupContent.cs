@@ -48,14 +48,48 @@ namespace mobile_style_editor
 
 		}
 
+        Queue<FileListPopupItem> cache = new Queue<FileListPopupItem>();
+
 		public void Populate(List<object> items)
 		{
+			/*
+             * WOOP! 
+             * 
+             * This caching logic reduces average pagination speed from ~450 to ~350
+             * (Tested on Android, Samsung Galaxy Tab S2)
+             * Not as much as I'd hoped for, but it's something.
+             * 
+             * Updating layout in itself takes 100ms.
+             * A view's construction takes ~10ms, fetching it from cache takes ~1ms
+             * 
+             * Using the same HubClient.PageSize (25) views each time, just changing the content, 
+             * not even updating layout, and then hiding some if it's the final page
+             * would somewhat improve performance, but is rather unnecessary
+             *
+             */
+
 			Children.Clear();
+
+            var watch = new System.Diagnostics.Stopwatch();
+            watch.Start();
 
 			foreach (object item in items)
 			{
-				FileListPopupItem view = new FileListPopupItem();
-				
+                FileListPopupItem view;
+
+                if (cache.Count > 0)
+                {
+                    view = cache.Dequeue();
+					Console.WriteLine("Loading from Cache: " + watch.ElapsedMilliseconds);
+				}
+                else
+                {
+                    view = new FileListPopupItem();
+                    Console.WriteLine("Creating new instance: " + watch.ElapsedMilliseconds);
+                }
+
+                view.Reset();
+
 				if (item is DriveFile)
 				{
 					view.DriveFile = (DriveFile)item;
@@ -74,9 +108,23 @@ namespace mobile_style_editor
 				view.Click += OnItemClick;
 
 				AddSubview(view);
+
+                Console.WriteLine("Subview added: " + watch.ElapsedMilliseconds);
 			}
 
+            foreach (var view in Children)
+            {
+                if (view is FileListPopupItem)
+                {
+                    cache.Enqueue(view as FileListPopupItem);
+                }
+            }
+
+            Console.WriteLine("Before Layout: " + watch.ElapsedMilliseconds);
+
 			LayoutSubviews();
+
+			Console.WriteLine("Total: " + watch.ElapsedMilliseconds);
 		}
 
 		void OnItemClick(object sender, EventArgs e)

@@ -14,12 +14,19 @@ namespace mobile_style_editor
 		Image image;
 		Label text;
 
-		public void Initialize()
-		{
+        public FileListPopupItem()
+        {
 			container = new BaseView();
 
 			image = new Image();
 
+			text = new Label();
+			text.FontSize = 12f;
+			text.HorizontalTextAlignment = TextAlignment.Center;
+		}
+
+		public void Initialize()
+		{
             string folder = "";
 #if __UWP__
             folder = "Assets/";
@@ -52,10 +59,6 @@ namespace mobile_style_editor
 				image.Source = ImageSource.FromFile(folder + "icon_zip.png");
 			}
 
-			text = new Label();
-			text.FontSize = 12f;
-			text.HorizontalTextAlignment = TextAlignment.Center;
-
 			if (!IsTablet)
 			{
 				text.FontSize = 9;
@@ -74,6 +77,13 @@ namespace mobile_style_editor
 				text.Text = GithubFile.Name;
 			}
 		}
+
+        public void Reset()
+        {
+            DriveFile = null;
+            GithubFile = null;
+            Style = null;
+        }
 
 		public override void LayoutSubviews()
 		{
