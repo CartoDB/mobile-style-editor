@@ -69,7 +69,7 @@ namespace mobile_style_editor
 			ContentView.FileList.Pages.PageClicked += OnPageClick;
 
             ContentView.SettingsButton.Click += OnSettingsClick;
-            ContentView.Settings.SettingsContent.UserInfo.LogoutButton.Click += OnLogoutButtonClicked;
+            ContentView.Settings.SettingsContent.GithubInfo.LogoutButton.Click += OnLogoutButtonClicked;
 
 			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
 #if __ANDROID__
@@ -109,7 +109,7 @@ namespace mobile_style_editor
 			ContentView.FileList.Pages.PageClicked -= OnPageClick;
 
 			ContentView.SettingsButton.Click -= OnSettingsClick;
-            ContentView.Settings.SettingsContent.UserInfo.LogoutButton.Click -= OnLogoutButtonClicked;
+            ContentView.Settings.SettingsContent.GithubInfo.LogoutButton.Click -= OnLogoutButtonClicked;
 
 			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadStarted;
 #if __ANDROID__
@@ -129,20 +129,20 @@ namespace mobile_style_editor
             {
                 if (HubClient.Instance.IsAuthenticated)
                 {
-                    ContentView.Settings.SettingsContent.UserInfo.IsVisible = true;
+                    ContentView.Settings.SettingsContent.GithubInfo.IsVisible = true;
 
                     ContentView.Settings.SettingsContent.ShowLoading();
 
                     Octokit.User user = await HubClient.Instance.GetCurrentUser();
-                    ContentView.Settings.SettingsContent.UserInfo.Update(user);
+                    ContentView.Settings.SettingsContent.GithubInfo.Update(user);
 
                     ContentView.Settings.SettingsContent.HideLoading();
 
                     Stream stream = await HubClient.Instance.GetUserAvatar(user.AvatarUrl);
-                    ContentView.Settings.SettingsContent.UserInfo.Update(stream);
+                    ContentView.Settings.SettingsContent.GithubInfo.Update(stream);
                 } else
                 {
-                    ContentView.Settings.SettingsContent.UserInfo.IsVisible = false;
+                    ContentView.Settings.SettingsContent.GithubInfo.IsVisible = false;
                     Console.WriteLine("Github not authenticated");    
                 }
             }
