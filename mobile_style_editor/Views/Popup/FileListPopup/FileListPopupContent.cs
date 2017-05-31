@@ -70,9 +70,6 @@ namespace mobile_style_editor
 
 			Children.Clear();
 
-            var watch = new System.Diagnostics.Stopwatch();
-            watch.Start();
-
 			foreach (object item in items)
 			{
                 FileListPopupItem view;
@@ -80,12 +77,10 @@ namespace mobile_style_editor
                 if (cache.Count > 0)
                 {
                     view = cache.Dequeue();
-					Console.WriteLine("Loading from Cache: " + watch.ElapsedMilliseconds);
 				}
                 else
                 {
                     view = new FileListPopupItem();
-                    Console.WriteLine("Creating new instance: " + watch.ElapsedMilliseconds);
                 }
 
                 view.Reset();
@@ -108,8 +103,6 @@ namespace mobile_style_editor
 				view.Click += OnItemClick;
 
 				AddSubview(view);
-
-                Console.WriteLine("Subview added: " + watch.ElapsedMilliseconds);
 			}
 
             foreach (var view in Children)
@@ -120,11 +113,7 @@ namespace mobile_style_editor
                 }
             }
 
-            Console.WriteLine("Before Layout: " + watch.ElapsedMilliseconds);
-
 			LayoutSubviews();
-
-			Console.WriteLine("Total: " + watch.ElapsedMilliseconds);
 		}
 
 		void OnItemClick(object sender, EventArgs e)
