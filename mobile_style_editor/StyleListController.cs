@@ -127,15 +127,24 @@ namespace mobile_style_editor
 
             if (showing)
             {
-                ContentView.Settings.SettingsContent.ShowLoading();
+                if (HubClient.Instance.IsAuthenticated)
+                {
+                    ContentView.Settings.SettingsContent.UserInfo.IsVisible = true;
 
-                Octokit.User user = await HubClient.Instance.GetCurrentUser();
-                ContentView.Settings.SettingsContent.UserInfo.Update(user);
+                    ContentView.Settings.SettingsContent.ShowLoading();
 
-                ContentView.Settings.SettingsContent.HideLoading();
+                    Octokit.User user = await HubClient.Instance.GetCurrentUser();
+                    ContentView.Settings.SettingsContent.UserInfo.Update(user);
 
-                Stream stream = await HubClient.Instance.GetUserAvatar(user.AvatarUrl);
-                ContentView.Settings.SettingsContent.UserInfo.Update(stream);
+                    ContentView.Settings.SettingsContent.HideLoading();
+
+                    Stream stream = await HubClient.Instance.GetUserAvatar(user.AvatarUrl);
+                    ContentView.Settings.SettingsContent.UserInfo.Update(stream);
+                } else
+                {
+                    ContentView.Settings.SettingsContent.UserInfo.IsVisible = false;
+                    Console.WriteLine("Github not authenticated");    
+                }
             }
         }
 
