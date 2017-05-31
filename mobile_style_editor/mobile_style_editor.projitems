@@ -70,7 +70,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Utilities\ZoomControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\Tabs\StyleTabBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\Tabs\StyleTab.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\WebviewPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\GithubAuthenticationData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClient.cs" />
@@ -92,6 +91,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\SettingsPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\SettingsPopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\UserInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderer\CustomWebviewRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\WebViewPopup\WebviewPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\WebViewPopup\CustomWebView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
@@ -114,6 +116,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\Navigation\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\Settings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\WebViewPopup\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />

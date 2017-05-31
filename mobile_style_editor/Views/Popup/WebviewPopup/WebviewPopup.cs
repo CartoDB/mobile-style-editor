@@ -8,11 +8,11 @@ namespace mobile_style_editor
 	{
 		public EventHandler<AuthenticationEventArgs> Authenticated;
 
-		WebView webView;
+		CustomWebView webView;
 
 		public WebviewPopup()
 		{
-			webView = new WebView();
+			webView = new CustomWebView();
 			webView.Navigated += OnNavigationEnd;
 
 			Content = new BasePopupContent();
@@ -80,6 +80,11 @@ namespace mobile_style_editor
 				Authenticated(this, new AuthenticationEventArgs { Id = id, Secret = secret, Code = code, Error = error });
 			}
 		}
+
+        public void DeleteCookies(string domain)
+        {
+            webView.DeleteCookies(domain);
+        }
 	}
 
 	public class AuthenticationEventArgs : EventArgs
