@@ -48,11 +48,26 @@ namespace mobile_style_editor
         {
             string domain = (string)sender;
 
+            // TODO Don't remove all cookies or cache, but domain-specific
 #if __ANDROID__
-            CookieManager.Instance.SetCookie(domain, "");
-            string cookie = CookieManager.Instance.GetCookie(domain);
 
-            Console.WriteLine("Cookie: " + cookie);
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
+            {
+                CookieManager.Instance.RemoveAllCookies(null);
+                CookieManager.Instance.Flush();
+            }
+            else
+            {
+                CookieSyncManager manager = CookieSyncManager.CreateInstance(Forms.Context);
+                manager.StartSync();
+
+                CookieManager.Instance.RemoveAllCookie();
+                CookieManager.Instance.RemoveSessionCookie();
+
+                manager.StopSync();
+                manager.Sync();
+            }
+
 #elif __IOS__
             var cache = Foundation.NSUrlCache.SharedCache;
             cache.RemoveAllCachedResponses();
