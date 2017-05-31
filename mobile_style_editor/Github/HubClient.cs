@@ -12,6 +12,8 @@ namespace mobile_style_editor
 {
 	public class HubClient
 	{
+        public const string CookieDomain = ".github.com";
+
 		public static readonly HubClient Instance = new HubClient();
 
 		public EventHandler<EventArgs> FileDownloadStarted;

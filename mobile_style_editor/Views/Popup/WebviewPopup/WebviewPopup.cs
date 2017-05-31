@@ -37,13 +37,13 @@ namespace mobile_style_editor
 
 		string id, secret;
 
-		public void Open(GithubAuthenticationData data)
-		{
-			id = data.Id;
-			secret = data.Secret;
+        public void Open(GithubAuthenticationData data)
+        {
+            id = data.Id;
+            secret = data.Secret;
 
-			webView.Source = data.Url;
-		}
+           webView.Source = data.Url;
+        }
 
 		public void Open(string url)
 		{

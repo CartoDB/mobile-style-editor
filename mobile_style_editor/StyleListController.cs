@@ -146,7 +146,7 @@ namespace mobile_style_editor
             {
                 HubClient.Instance.LogOut();
                 LocalStorage.Instance.DeleteToken();
-                ContentView.Webview.DeleteCookies("github.com");
+                ContentView.Webview.DeleteCookies(HubClient.CookieDomain);
             });
         }
 
