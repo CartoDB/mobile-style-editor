@@ -48,7 +48,7 @@ namespace mobile_style_editor
 		 * 
 		 */
 
-		readonly GitHubClient client;
+		GitHubClient client;
 
 		public bool IsAuthenticated
 		{
@@ -60,8 +60,13 @@ namespace mobile_style_editor
 
 		HubClient()
 		{
-			client = new GitHubClient(new ProductHeaderValue("com.carto.style.editor"));
+			Initialize();
 		}
+
+        void Initialize()
+        {
+            client = new GitHubClient(new ProductHeaderValue("com.carto.style.editor"));
+        }
 
         public async Task<User> GetCurrentUser()
         {
@@ -79,7 +84,7 @@ namespace mobile_style_editor
 
         public void LogOut()
         {
-            
+            Initialize();
         }
 
 		public const int PageSize = 50;
