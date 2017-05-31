@@ -45,7 +45,6 @@ namespace mobile_style_editor
 					x += w + padding;
 				}
 			}
-
 		}
 
         Queue<FileListPopupItem> cache = new Queue<FileListPopupItem>();
