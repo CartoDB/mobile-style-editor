@@ -69,6 +69,7 @@ namespace mobile_style_editor
 			ContentView.FileList.Pages.PageClicked += OnPageClick;
 
             ContentView.SettingsButton.Click += OnSettingsClick;
+            ContentView.Settings.SettingsContent.UserInfo.LogoutButton.Click += OnLogoutButtonClicked;
 
 			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
 #if __ANDROID__
@@ -108,6 +109,7 @@ namespace mobile_style_editor
 			ContentView.FileList.Pages.PageClicked -= OnPageClick;
 
 			ContentView.SettingsButton.Click -= OnSettingsClick;
+            ContentView.Settings.SettingsContent.UserInfo.LogoutButton.Click -= OnLogoutButtonClicked;
 
 			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadStarted;
 #if __ANDROID__
@@ -119,9 +121,33 @@ namespace mobile_style_editor
 #endif
 		}
 
-        void OnSettingsClick(object sender, EventArgs e)
+        async void OnSettingsClick(object sender, EventArgs e)
         {
-            ContentView.Settings.Toggle();
+            bool showing = ContentView.Settings.Toggle();
+
+            if (showing)
+            {
+                ContentView.Settings.SettingsContent.ShowLoading();
+
+                Octokit.User user = await HubClient.Instance.GetCurrentUser();
+                ContentView.Settings.SettingsContent.UserInfo.Update(user);
+
+                ContentView.Settings.SettingsContent.HideLoading();
+
+                Stream stream = await HubClient.Instance.GetUserAvatar(user.AvatarUrl);
+                ContentView.Settings.SettingsContent.UserInfo.Update(stream);
+            }
+        }
+
+        void OnLogoutButtonClicked(object sender, EventArgs e)
+        {
+            string message = "Are you sure you wish to log out from Github?";
+            Alert("", message, null, delegate
+            {
+                HubClient.Instance.LogOut();
+                LocalStorage.Instance.DeleteToken();
+            });
+
         }
 
 		List<Octokit.RepositoryContent> contents;

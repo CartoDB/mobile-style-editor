@@ -89,15 +89,17 @@ namespace mobile_style_editor
             IsVisible = false;
         }
 
-        public void Toggle()
+        public bool Toggle()
         {
             if (IsVisible)
             {
                 Hide();
+                return false;
             }
             else
             {
                 Show();
+                return true;
             }
         }
     }

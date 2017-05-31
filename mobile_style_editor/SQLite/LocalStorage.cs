@@ -56,5 +56,9 @@ namespace mobile_style_editor
 
         }
 
+		public void DeleteToken()
+		{
+            Application.Current.Properties.Remove(ACCESSTOKEN);
+		}
     }
 }

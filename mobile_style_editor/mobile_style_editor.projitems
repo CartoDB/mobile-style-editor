@@ -91,6 +91,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\Settings\SettingsButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\SettingsPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\SettingsPopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />

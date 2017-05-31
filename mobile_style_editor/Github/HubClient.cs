@@ -63,6 +63,25 @@ namespace mobile_style_editor
 			client = new GitHubClient(new ProductHeaderValue("com.carto.style.editor"));
 		}
 
+        public async Task<User> GetCurrentUser()
+        {
+            return await client.User.Current();
+        }
+
+        public async Task<Stream> GetUserAvatar(string url)
+        {
+			using (var client = new HttpClient())
+			{
+				HttpResponseMessage response = await client.GetAsync(url);
+				return await response.Content.ReadAsStreamAsync();
+			}
+        }
+
+        public void LogOut()
+        {
+            
+        }
+
 		public const int PageSize = 50;
 		const int PageCount = 1;
 
