@@ -73,16 +73,16 @@ namespace mobile_style_editor
 			{
                 FileListPopupItem view;
 
-                if (cache.Count > 0)
-                {
-                    view = cache.Dequeue();
-				}
-                else
-                {
+    //            if (cache.Count > 0)
+    //            {
+    //                view = cache.Dequeue();
+				//}
+                //else
+                //{
                     view = new FileListPopupItem();
-                }
+                //}
 
-                view.Reset();
+                //view.Reset();
 
 				if (item is DriveFile)
 				{
@@ -99,18 +99,19 @@ namespace mobile_style_editor
 
 				view.Initialize();
 
+                view.Click -= OnItemClick;
 				view.Click += OnItemClick;
 
 				AddSubview(view);
 			}
 
-            foreach (var view in Children)
-            {
-                if (view is FileListPopupItem)
-                {
-                    cache.Enqueue(view as FileListPopupItem);
-                }
-            }
+            //foreach (var view in Children)
+            //{
+            //    if (view is FileListPopupItem)
+            //    {
+            //        cache.Enqueue(view as FileListPopupItem);
+            //    }
+            //}
 
 			LayoutSubviews();
 		}

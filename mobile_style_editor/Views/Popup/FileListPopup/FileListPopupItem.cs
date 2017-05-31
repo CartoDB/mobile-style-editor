@@ -50,6 +50,7 @@ namespace mobile_style_editor
 				}
 				else
 				{
+                    Enable();
 					image.Source = ImageSource.FromFile(folder + "icon_folder.png");
 				}
 

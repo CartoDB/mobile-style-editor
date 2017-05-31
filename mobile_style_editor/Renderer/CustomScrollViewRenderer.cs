@@ -33,7 +33,7 @@ namespace mobile_style_editor
         }
 
 #if __ANDROID__
-
+        
 #endif
     }
 }
