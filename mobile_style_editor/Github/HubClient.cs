@@ -89,7 +89,7 @@ namespace mobile_style_editor
             Initialize();
         }
 
-		public const int PageSize = 50;
+		public const int PageSize = 25;
 		const int PageCount = 1;
 
 		ApiOptions GetOptions(int page)
