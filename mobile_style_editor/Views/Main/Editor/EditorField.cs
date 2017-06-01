@@ -259,18 +259,18 @@ namespace mobile_style_editor
 
 			if (text.Equals(NewLine))
 			{
-				current = current.Insert(selection, NewLine);
-				Update(current, selection + 1);
+				//current = current.Insert(selection, NewLine);
+				//Update(current, selection + 1);
 			}
             else if (text.Equals(Backspace))
 			{
-                string substring = current.Substring(selection - 1, 1);
+                //string substring = current.Substring(selection - 1, 1);
                 
-                if (substring.Equals(NewLine))
-                {
-                    current = current.Remove(selection - 1, 1);
-                    Update(current, selection);
-                }
+                //if (substring.Equals(NewLine))
+                //{
+                //    current = current.Remove(selection - 1, 1);
+                //    Update(current, selection);
+                //}
 			}
 
             return true;
