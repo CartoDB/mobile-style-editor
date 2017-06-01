@@ -1,17 +1,19 @@
 ﻿
 using System;
 using Xamarin.Forms;
-using Android.Text;
 
 #if __IOS__
 using Xamarin.Forms.Platform.iOS;
 using UIKit;
+
 #elif __ANDROID__
 using Xamarin.Forms.Platform.Android;
 using Android.Runtime;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+using Android.Text;
+
 #elif __UWP__
 using Windows.System;
 using Windows.UI.Core;
