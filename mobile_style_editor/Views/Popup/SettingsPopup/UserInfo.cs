@@ -70,11 +70,11 @@ namespace mobile_style_editor
         }
 
         public void Update(Octokit.User user)
-        {
+		{
+			header.Text = "GITHUB";
+
             login.Text = user.Login;
             name.Text = user.Name;
-
-			header.Text = "LOGGED INTO GITHUB AS";
         }
 
         public void Update(System.IO.Stream stream)
@@ -82,5 +82,14 @@ namespace mobile_style_editor
             image.Source = ImageSource.FromStream(() => stream);
         }
 
+        public void Update(string displayName, string email, string imageUrl)
+        {
+            header.Text = "GOOGLE DRIVE";
+
+            login.Text = displayName;
+            name.Text = email;
+
+            image.Source = ImageSource.FromFile(imageUrl);
+        }
     }
 }

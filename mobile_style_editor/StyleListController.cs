@@ -140,14 +140,14 @@ namespace mobile_style_editor
 
                     Stream stream = await HubClient.Instance.GetUserAvatar(user.AvatarUrl);
                     ContentView.Settings.SettingsContent.GithubInfo.Update(stream);
-                } 
+				} 
                 else
                 {
                     ContentView.Settings.SettingsContent.GithubInfo.IsVisible = false;
                     Console.WriteLine("Github not authenticated");    
                 }
-
-                //var info = DriveClientiOS.Instance.GetUserInfo();
+                
+                ContentView.Settings.SettingsContent.DriveInfo.Update("Nuti Tab", "nutitab@gmail.com", "icon_avatar_template.png");
             }
         }
 

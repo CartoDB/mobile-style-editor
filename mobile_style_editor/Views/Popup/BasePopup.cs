@@ -9,6 +9,7 @@ namespace mobile_style_editor
 
         public BasePopupContent Content { get; protected set; }
 
+        public FileListHeader Header { get; private set; }
 
 		protected double VerticalPadding { get { return 70; } }
 
@@ -54,6 +55,27 @@ namespace mobile_style_editor
             Click += OnBackgroundClick;
 
             Hide(false);
+
+			Header = new FileListHeader();
+		}
+
+        public override void LayoutSubviews()
+        {
+			double x = ContentX;
+			double y = ContentY;
+			double w = ContentWidth;
+			double h = ContentHeight;
+
+			AddSubview(Content, x, y, w, h);
+
+			double padding = 10;
+
+			w = ContentWidth;
+			h = VerticalPadding - 3 * padding;
+			x = HorizontalPadding;
+			y = VerticalPadding - h;
+
+			AddSubview(Header, x, y, w, h);
         }
 
         void OnBackgroundClick(object sender, EventArgs e)

@@ -26,6 +26,7 @@ namespace mobile_style_editor
         {
             double itemWidth = Width;
             double itemHeight = 100;
+            double padding = itemHeight / 9;
 
             double x = 0;
             double y = 0;
@@ -45,7 +46,11 @@ namespace mobile_style_editor
 
             AddSubview(separator1, x, y, w, h);
 
-            y += h + separatorHeight;
+            y += h + separatorHeight + padding;
+
+            x = 0;
+            w = itemWidth;
+            h = itemHeight;
 
             AddSubview(DriveInfo, x, y, w, h);
         }

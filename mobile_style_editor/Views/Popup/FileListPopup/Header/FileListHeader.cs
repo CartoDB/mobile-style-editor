@@ -74,5 +74,20 @@ namespace mobile_style_editor
 			AddSubview(Select, x, y, w, h);
 		}
 
+        public void ShowButtons()
+        {
+            BackButton.IsVisible = true;
+            Select.IsVisible = true;
+
+            BackgroundColor = Color.Transparent;
+        }
+
+        public void HideButtons()
+        {
+            BackButton.IsVisible = false;
+            Select.IsVisible = false;
+
+            BackgroundColor = Colors.CartoNavy;
+        }
 	}
 }

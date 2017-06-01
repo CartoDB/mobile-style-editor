@@ -10,17 +10,15 @@ namespace mobile_style_editor
 		public SettingsPopup()
 		{
             Content = new SettingsPopupContent();
-			base.Hide(false);
+			
+            Header.HideButtons();
+
+            Header.Text = "SETTINGS";
         }
 
         public override void LayoutSubviews()
         {
-			double x = ContentX;
-			double y = ContentY;
-			double w = ContentWidth;
-			double h = ContentHeight;
-
-			AddSubview(Content, x, y, w, h);
+            base.LayoutSubviews();
         }
     }
 }
