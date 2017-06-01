@@ -49,11 +49,9 @@ namespace mobile_style_editor
 
         Queue<FileListPopupItem> cache = new Queue<FileListPopupItem>();
 
-		public void Populate(List<object> items)
-		{
-			/*
-             * WOOP! 
-             * 
+        public void Populate(List<object> items)
+        {
+            /*
              * This caching logic reduces average pagination speed from ~450 to ~350
              * (Tested on Android, Samsung Galaxy Tab S2)
              * Not as much as I'd hoped for, but it's something.
@@ -65,56 +63,50 @@ namespace mobile_style_editor
              * not even updating layout, and then hiding some if it's the final page
              * would somewhat improve performance, but is rather unnecessary
              *
+             * Currenty disabled cache, as it caused click event anomalies,
+             * to re-enable, simply add items to cache after adding the views,
+             * and when constructing a FileListPopupItem, check cache.Count > 0
              */
 
-			Children.Clear();
+            Children.Clear();
 
-			foreach (object item in items)
-			{
-                FileListPopupItem view;
+            System.Threading.Tasks.Task.Run(delegate
+            {
+                foreach (object item in items)
+                {
+                    FileListPopupItem
+                        view = new FileListPopupItem();
 
-    //            if (cache.Count > 0)
-    //            {
-    //                view = cache.Dequeue();
-				//}
-                //else
-                //{
-                    view = new FileListPopupItem();
-                //}
+                    if (item is DriveFile)
+                    {
+                        view.DriveFile = (DriveFile)item;
+                    }
+                    else if (item is StoredStyle)
+                    {
+                        view.Style = (StoredStyle)item;
+                    }
+                    else
+                    {
+                        view.GithubFile = (GithubFile)item;
+                    }
 
-                //view.Reset();
+                    view.Initialize();
 
-				if (item is DriveFile)
-				{
-					view.DriveFile = (DriveFile)item;
-				}
-				else if (item is StoredStyle)
-				{
-					view.Style = (StoredStyle)item;
-				}
-				else
-				{
-					view.GithubFile = (GithubFile)item;
-				}
+                    view.Click -= OnItemClick;
+                    view.Click += OnItemClick;
+                    Device.BeginInvokeOnMainThread(delegate
+                    {
+                        AddSubview(view);
+                    });
+                }
 
-				view.Initialize();
+                Device.BeginInvokeOnMainThread(delegate
+                {
+                    LayoutSubviews();
 
-                view.Click -= OnItemClick;
-				view.Click += OnItemClick;
-
-				AddSubview(view);
-			}
-
-            //foreach (var view in Children)
-            //{
-            //    if (view is FileListPopupItem)
-            //    {
-            //        cache.Enqueue(view as FileListPopupItem);
-            //    }
-            //}
-
-			LayoutSubviews();
-		}
+                });
+            });
+        }
 
 		void OnItemClick(object sender, EventArgs e)
 		{
