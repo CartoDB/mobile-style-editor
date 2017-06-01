@@ -162,7 +162,7 @@ namespace mobile_style_editor
 
 
         const string NewLine = "\n";
-		const string Backspace = "\b";
+		const string Backspace = "";
         
 		string current;
 
@@ -262,7 +262,7 @@ namespace mobile_style_editor
 				current = current.Insert(selection, NewLine);
 				Update(current, selection + 1);
 			}
-			else
+            else if (text.Equals(Backspace))
 			{
                 string substring = current.Substring(selection - 1, 1);
                 
