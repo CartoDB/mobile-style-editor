@@ -94,6 +94,7 @@ namespace mobile_style_editor
 
                     view.Click -= OnItemClick;
                     view.Click += OnItemClick;
+
                     Device.BeginInvokeOnMainThread(delegate
                     {
                         AddSubview(view);
@@ -103,7 +104,6 @@ namespace mobile_style_editor
                 Device.BeginInvokeOnMainThread(delegate
                 {
                     LayoutSubviews();
-
                 });
             });
         }

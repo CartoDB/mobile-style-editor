@@ -201,14 +201,6 @@ namespace mobile_style_editor
 
 				current = current.Insert(SelectionStart, NewLine);
 				Update(current, SelectionStart + NewLine.Length);
-
-				//if (EditingEnded != null)
-				//{
-				//	var manager = (InputMethodManager)Context.GetSystemService("input_method");
-				//	manager.ToggleSoftInput(ShowFlags.Forced, 0);
-
-				//	EditingEnded(this, EventArgs.Empty);
-				//}
 			}
 		}
 
@@ -337,6 +329,7 @@ namespace mobile_style_editor
                         }
                     }
                 }
+
                 Device.BeginInvokeOnMainThread(delegate
                 {
 #if __ANDROID__
