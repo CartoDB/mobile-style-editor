@@ -7,7 +7,9 @@ using Android.OS;
 
 namespace mobile_style_editor.Droid
 {
-	[Activity(Icon = "@drawable/icon_app", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Icon = "@drawable/icon_app", 
+              //MainLauncher = true, 
+              Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 		protected override void OnCreate(Bundle bundle)
