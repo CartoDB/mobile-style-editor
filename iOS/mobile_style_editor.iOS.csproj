@@ -250,6 +250,7 @@
     <BundleResource Include="Resources\icon_settings.png" />
     <BundleResource Include="Resources\icon_logout.png" />
     <BundleResource Include="Resources\icon_avatar_template.png" />
+    <BundleResource Include="Resources\icon_close.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="sqlite-net">

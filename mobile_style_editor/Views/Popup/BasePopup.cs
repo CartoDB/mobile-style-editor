@@ -11,6 +11,8 @@ namespace mobile_style_editor
 
         public FileListHeader Header { get; private set; }
 
+        public ImageButton CloseButton { get; set; }
+
 		protected double VerticalPadding { get { return 70; } }
 
 		protected double HorizontalPadding
@@ -57,6 +59,12 @@ namespace mobile_style_editor
             Hide(false);
 
 			Header = new FileListHeader();
+
+            CloseButton = new ImageButton();
+            CloseButton.BackgroundColor = Colors.CartoRed;
+            CloseButton.Source = "icon_close.png";
+
+            CloseButton.Click += OnBackgroundClick;
 		}
 
         public override void LayoutSubviews()
@@ -69,13 +77,26 @@ namespace mobile_style_editor
 			AddSubview(Content, x, y, w, h);
 
 			double padding = 10;
+            double headerY = VerticalPadding - 3 * padding;
 
 			w = ContentWidth;
-			h = VerticalPadding - 3 * padding;
+			h = headerY;
 			x = HorizontalPadding;
 			y = VerticalPadding - h;
 
 			AddSubview(Header, x, y, w, h);
+
+            int halfWidth = 20;
+
+            w = 2 * halfWidth;
+            h = w;
+            x = ContentX + ContentWidth - halfWidth;
+            y = headerY - 1.5 * halfWidth;
+
+            CloseButton.ImagePadding = halfWidth / 3;
+
+            AddSubview(CloseButton, x, y, w, h);
+            CloseButton.CornerRadius = halfWidth;
         }
 
         void OnBackgroundClick(object sender, EventArgs e)
