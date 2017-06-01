@@ -1,6 +1,7 @@
-﻿﻿﻿
+﻿
 using System;
 using Xamarin.Forms;
+using Android.Text;
 
 #if __IOS__
 using Xamarin.Forms.Platform.iOS;
@@ -190,6 +191,11 @@ namespace mobile_style_editor
 			base.OnDraw(canvas);
 		}
 
+        public override IInputConnection OnCreateInputConnection(EditorInfo outAttrs)
+        {
+            return new KeyStrokeListener(this, base.OnCreateInputConnection(outAttrs));
+        }
+
 		public override void OnEditorAction(ImeAction actionCode)
 		{
 			if (actionCode == ImeAction.Done)
@@ -203,6 +209,44 @@ namespace mobile_style_editor
 				Update(current, SelectionStart + NewLine.Length);
 			}
 		}
+
+        protected class KeyStrokeListener : InputConnectionWrapper
+        {
+            EditorField view;
+
+            public KeyStrokeListener(EditorField view, IInputConnection target) : base(target, true)
+            {
+                this.view = view;
+            }
+
+            public override bool SendKeyEvent(KeyEvent e)
+            {
+                var action = e.Action;
+                var code = e.KeyCode;
+
+                if (action == KeyEventActions.Up)
+                {
+                    if (code == Keycode.Del)
+                    {
+                        view.RemoveNewLine();
+                    }
+                }
+                return base.SendKeyEvent(e);
+            }
+        }
+
+        public void RemoveNewLine()
+        {
+            int selection = SelectionStart;
+
+            string substring = current.Substring(selection - 1, 1);
+
+            if (substring.Equals(NewLine))
+            {
+                current = current.Remove(selection - 1, 1);
+                Update(current, selection - 1);
+            }
+        }
 
 #elif __IOS__
 
@@ -218,9 +262,13 @@ namespace mobile_style_editor
 			}
 			else
 			{
-				// TODO check if text.Length == 0 -> if true && line is empty -> remove newline character
-				//current = current.Insert(selection, text);
-				//Update(current, selection);
+                string substring = current.Substring(selection - 1, 1);
+                
+                if (substring.Equals(NewLine))
+                {
+                    current = current.Remove(selection - 1, 1);
+                    Update(current, selection);
+                }
 			}
 
             return true;
