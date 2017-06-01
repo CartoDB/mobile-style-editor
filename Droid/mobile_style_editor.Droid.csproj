@@ -164,10 +164,6 @@
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
     <AndroidResource Include="Resources\layout\Toolbar.axml" />
     <AndroidResource Include="Resources\values\styles.xml" />
-    <AndroidResource Include="Resources\drawable\icon.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_save_white.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_drive.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_refresh.png" />
@@ -182,10 +178,15 @@
     <AndroidResource Include="Resources\drawable-nodpi\icon_settings.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_logout.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_avatar_template.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\icon_app.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SpanBuilder\" />
     <Folder Include="Resources\drawable-nodpi\" />
+    <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\drawable-xxhdpi\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="sqlite-net">

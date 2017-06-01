@@ -2913,7 +2913,7 @@ namespace mobile_style_editor.Droid
 			public const int ic_vol_type_tv_light = 2130837759;
 			
 			// aapt resource value: 0x7f020100
-			public const int icon = 2130837760;
+			public const int icon_app = 2130837760;
 			
 			// aapt resource value: 0x7f020101
 			public const int icon_arrow_back = 2130837761;
