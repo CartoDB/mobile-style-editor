@@ -21,6 +21,7 @@ namespace mobile_style_editor
 			Pages.ContentHeight = 40;
 
             Branches = new BranchContainer();
+            Branches.IsVisible = false;
 		}
 
 		public override void LayoutSubviews()
@@ -38,8 +39,8 @@ namespace mobile_style_editor
 
             x = ContentX + ContentWidth + padding;
             y = HeaderY;
-            w = 150;
-            h = 300;
+            w = 200;
+            h = 400;
 
             Branches.HeaderHeight = HeaderHeight;
             AddSubview(Branches, x, y, w, h);

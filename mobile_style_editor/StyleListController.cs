@@ -259,30 +259,51 @@ namespace mobile_style_editor
 
 		List<List<GithubFile>> storedContents = new List<List<GithubFile>>();
 
-		void OnPopupBackButtonClick(object sender, EventArgs e)
-		{
-			if (ContentView.Loader.IsRunning)
-			{
-				return;
-			}
+        void OnPopupBackButtonClick(object sender, EventArgs e)
+        {
+            if (ContentView.Loader.IsRunning)
+            {
+                return;
+            }
 
-			if (storedContents.Count == 0)
-			{
-				return;
-			}
+            if (storedContents.Count == 0)
+            {
+                return;
+            }
 
-			if (storedContents.Count == 1)
-			{
-				ContentView.FileList.Header.BackButton.Disable();
-				ContentView.FileList.Pages.Show();
-			}
+            if (storedContents.Count == 1)
+            {
+                ContentView.FileList.Header.BackButton.Disable();
+                ContentView.FileList.Pages.Show();
+            }
 
-			List<GithubFile> files = storedContents[storedContents.Count - 1];
-			ContentView.FileList.Show(files);
-			storedContents.Remove(files);
+            List<GithubFile> files = storedContents[storedContents.Count - 1];
+            ContentView.FileList.Show(files);
+            storedContents.Remove(files);
 
-			ContentView.FileList.Header.OnBackPress();
-		}
+            ContentView.FileList.Header.OnBackPress();
+
+            string[] split = ContentView.FileList.Header.Text.Split('/');
+
+            /*
+             * A repository's header text will be "<repository>/", 
+             * meaning it will have one '/' character, meaning that split.Length == 2
+             * the first item will be the repository name and the second item will be empty
+             * 
+             */
+            bool firstItemValued = !string.IsNullOrWhiteSpace(split[split.Length - 2]);
+            bool secondItemEmpty = string.IsNullOrWhiteSpace(split[split.Length - 1]);
+            bool isRepository = split.Length == 2 && firstItemValued && secondItemEmpty;
+
+            if (isRepository)
+            {
+                ContentView.FileList.Branches.IsVisible = true;
+            }
+            else
+            {
+                ContentView.FileList.Branches.IsVisible = false;
+            }
+        }
 
 		async void OnSelectClick(object sender, EventArgs e)
 		{
@@ -562,12 +583,18 @@ namespace mobile_style_editor
 				 */
 				if (item.GithubFile.IsDirectory)
 				{
-					if (item.GithubFile.IsRepository)
-					{
-						GithubOwner = item.GithubFile.Owner;
-						GithubRepo = item.GithubFile.Name;
-						ContentView.FileList.Pages.Hide();
-					}
+                    if (item.GithubFile.IsRepository)
+                    {
+                        GithubOwner = item.GithubFile.Owner;
+                        GithubRepo = item.GithubFile.Name;
+                        ContentView.FileList.Pages.Hide();
+
+                        ContentView.FileList.Branches.IsVisible = true;
+                    }
+                    else
+                    {
+                        ContentView.FileList.Branches.IsVisible = false;
+                    }
 
 					GithubPath = item.GithubFile.Path;
 					await LoadGithubContents();
@@ -587,7 +614,7 @@ namespace mobile_style_editor
 				// Path will be null if we're dealing with a repository
 				GithubPath = "";
 			}
-		
+
  			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, GithubPath);
 			ContentView.FileList.Show(contents.ToGithubFiles());
 			ContentView.HideLoading();

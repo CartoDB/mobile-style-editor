@@ -14,15 +14,24 @@ namespace mobile_style_editor
 		public void OnBackPress()
 		{
 			string[] split = Text.Split('/');
-			string last = split[split.Length - 1];
-
-			if (last.Equals(""))
-			{
-				last = split[split.Length - 2];
-			}
+            string last = GetLast(split, 1);
 
 			Text = Text.Replace(last, "");
+
+            Text = Text.Replace("//", "/");
 		}
+
+        string GetLast(string[] split, int counter, string last = null)
+        {
+            last = split[split.Length - counter];
+
+            if (last.Equals("")) {
+                counter = counter + 1;
+                return GetLast(split, counter, last);
+            }
+
+            return last;
+        }
 
 		public string Text
 		{

@@ -99,7 +99,6 @@ namespace mobile_style_editor
 					Click(this, EventArgs.Empty);
 				}
             });
-            //GestureRecognizers.Add(recognizer);
         }
 
         public static BranchCell FromBranch(Octokit.Branch branch)
