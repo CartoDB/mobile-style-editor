@@ -71,6 +71,8 @@ namespace mobile_style_editor
             ContentView.SettingsButton.Click += OnSettingsClick;
             ContentView.Settings.SettingsContent.GithubInfo.LogoutButton.Click += OnLogoutButtonClicked;
 
+            ContentView.FileList.Branches.CellClick += OnCellClicked;
+
 			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
 #if __ANDROID__
             DriveClientDroid.Instance.DownloadStarted += OnDownloadStarted;
@@ -111,7 +113,10 @@ namespace mobile_style_editor
 			ContentView.SettingsButton.Click -= OnSettingsClick;
             ContentView.Settings.SettingsContent.GithubInfo.LogoutButton.Click -= OnLogoutButtonClicked;
 
+            ContentView.FileList.Branches.CellClick -= OnCellClicked;
+
 			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadStarted;
+
 #if __ANDROID__
             DriveClientDroid.Instance.DownloadStarted -= OnDownloadStarted;
             DriveClientDroid.Instance.DownloadComplete -= OnFileDownloadComplete;
@@ -120,6 +125,13 @@ namespace mobile_style_editor
 			DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
 #endif
 		}
+
+        async void OnCellClicked(object sender, EventArgs e)
+        {
+            BranchCell cell = (BranchCell)sender;
+            var content = await HubClient.Instance.GetContentFromBranch(GithubOwner, GithubRepo, cell.Branch.Name);
+            ContentView.FileList.Show(content.ToGithubFiles());
+        }
 
         async void OnSettingsClick(object sender, EventArgs e)
         {
@@ -559,6 +571,9 @@ namespace mobile_style_editor
 
 					GithubPath = item.GithubFile.Path;
 					await LoadGithubContents();
+
+                    var branches = await HubClient.Instance.GetBranches(GithubOwner, GithubRepo);
+                    ContentView.FileList.Branches.Add(branches);
 				}
 			}
 		}

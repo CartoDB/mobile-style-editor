@@ -98,6 +98,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\ImageButtonRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\ImageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\SaveTimer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\BranchContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
@@ -121,6 +122,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\Settings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\WebViewPopup\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />

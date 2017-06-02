@@ -11,12 +11,16 @@ namespace mobile_style_editor
 
 		public PaginationView Pages { get; private set; }
 
+        public BranchContainer Branches { get; private set; }
+
 		public FileListPopup()
 		{
 			Content = new FileListPopupContent();
 
 			Pages = new PaginationView();
 			Pages.ContentHeight = 40;
+
+            Branches = new BranchContainer();
 		}
 
 		public override void LayoutSubviews()
@@ -29,6 +33,16 @@ namespace mobile_style_editor
 			double y = ContentY + ContentHeight;
 
 			AddSubview(Pages, x, y, w, h);
+
+            double padding = 10;
+
+            x = ContentX + ContentWidth + padding;
+            y = HeaderY;
+            w = 150;
+            h = 300;
+
+            Branches.HeaderHeight = HeaderHeight;
+            AddSubview(Branches, x, y, w, h);
 		}
 
 		public void Show(List<DriveFile> files)

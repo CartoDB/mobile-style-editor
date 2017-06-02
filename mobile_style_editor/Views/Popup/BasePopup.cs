@@ -39,6 +39,12 @@ namespace mobile_style_editor
 
 		protected double ContentHeight { get { return Height - 2 * VerticalPadding; } }
 
+        double padding { get { return 10;  } }
+
+        protected double HeaderHeight { get { return 40; } }
+
+        protected double HeaderY { get { return VerticalPadding - HeaderHeight; } }
+
 		public BasePopup()
         {
             BackgroundColor = Colors.TransparentGray;
@@ -76,11 +82,8 @@ namespace mobile_style_editor
 
 			AddSubview(Content, x, y, w, h);
 
-			double padding = 10;
-            double headerY = VerticalPadding - 3 * padding;
-
 			w = ContentWidth;
-			h = headerY;
+			h = HeaderHeight;
 			x = HorizontalPadding;
 			y = VerticalPadding - h;
 
@@ -91,7 +94,7 @@ namespace mobile_style_editor
             w = 2 * halfWidth;
             h = w;
             x = ContentX + ContentWidth - halfWidth;
-            y = headerY - 1.5 * halfWidth;
+            y = HeaderY - halfWidth;
 
             CloseButton.ImagePadding = halfWidth / 3;
 
