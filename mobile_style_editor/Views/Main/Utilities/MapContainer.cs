@@ -95,7 +95,7 @@ namespace mobile_style_editor
 #endif
             RemoveChild(mapView.ToView());
             AddSubview(mapView.ToView(), 0, 0, Width, Height);
-	
+
             double h = 40;
             double padding = 3;
 
@@ -112,7 +112,7 @@ namespace mobile_style_editor
                 double w = 200;
 
                 AddSubview(SourceLabel, padding, padding, w, h);
-                RaiseChild(SourceLabel); 
+                RaiseChild(SourceLabel);
             }
 
             if (IsRefreshButtonVisibile)
@@ -123,6 +123,7 @@ namespace mobile_style_editor
                 AddSubview(RefreshButton, Width - (size + buttonPadding), size + buttonPadding, size, size);
                 RaiseChild(RefreshButton);
             }
+
         }
 
         public void Update(bool withListener, byte[] data, Action completed, Action<string> failed)
@@ -144,7 +145,10 @@ namespace mobile_style_editor
 
         public void OnMapMoved()
         {
-            zoomLabel.Text = ZoomText;
+            Device.BeginInvokeOnMainThread(delegate
+            {
+                zoomLabel.Text = ZoomText;
+            });
         }
     }
 
