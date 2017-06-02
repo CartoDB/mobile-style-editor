@@ -99,6 +99,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\ImageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\SaveTimer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\BranchContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\BranchCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />

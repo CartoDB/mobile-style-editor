@@ -82,7 +82,7 @@ namespace mobile_style_editor
 			}
 		}
 
-		public override async void Hide(bool animated = true)
+		public override void Hide(bool animated = true)
 		{
 			if (Pages != null)
 			{
@@ -91,5 +91,16 @@ namespace mobile_style_editor
 			base.Hide(animated);
 		}
 
+        double expandedSize = 200;
+
+        public void ExpandBranches()
+        {
+            Branches.UpdateHeight(Branches.Height + expandedSize);
+        }
+
+        public void CollapseBranches()
+        {
+            Branches.UpdateHeight(Branches.Height - expandedSize);
+        }
 	}
 }
