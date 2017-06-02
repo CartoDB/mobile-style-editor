@@ -95,7 +95,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\WebViewPopup\WebviewPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\WebViewPopup\CustomWebView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\LogoutButton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Renderer\BaseViewRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderer\ImageButtonRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\ImageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\SaveTimer.cs" />
   </ItemGroup>
