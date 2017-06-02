@@ -71,7 +71,7 @@ namespace mobile_style_editor
             ContentView.SettingsButton.Click += OnSettingsClick;
             ContentView.Settings.SettingsContent.GithubInfo.LogoutButton.Click += OnLogoutButtonClicked;
 
-            ContentView.FileList.Branches.CellClick += OnCellClicked;
+            ContentView.FileList.Branches.CellClick += OnBranchCellClicked;
 
 			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
 #if __ANDROID__
@@ -113,7 +113,7 @@ namespace mobile_style_editor
 			ContentView.SettingsButton.Click -= OnSettingsClick;
             ContentView.Settings.SettingsContent.GithubInfo.LogoutButton.Click -= OnLogoutButtonClicked;
 
-            ContentView.FileList.Branches.CellClick -= OnCellClicked;
+            ContentView.FileList.Branches.CellClick -= OnBranchCellClicked;
 
 			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadStarted;
 
@@ -126,10 +126,15 @@ namespace mobile_style_editor
 #endif
 		}
 
-        async void OnCellClicked(object sender, EventArgs e)
+        public string CurrentBranch { get; private set; } = HubClient.MasterBranch;
+
+        async void OnBranchCellClicked(object sender, EventArgs e)
         {
             BranchCell cell = (BranchCell)sender;
-            var content = await HubClient.Instance.GetContentFromBranch(GithubOwner, GithubRepo, cell.Branch.Name);
+
+            CurrentBranch = cell.Branch.Name;
+
+            var content = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, CurrentBranch, GithubPath);
             ContentView.FileList.Show(content.ToGithubFiles());
         }
 
@@ -158,7 +163,7 @@ namespace mobile_style_editor
                     ContentView.Settings.SettingsContent.GithubInfo.IsVisible = false;
                     Console.WriteLine("Github not authenticated");    
                 }
-                
+                // TODO Get real drive information
                 ContentView.Settings.SettingsContent.DriveInfo.Update("Nuti Tab", "nutitab@gmail.com", "icon_avatar_template.png");
             }
         }
@@ -275,8 +280,9 @@ namespace mobile_style_editor
             {
                 ContentView.FileList.Header.BackButton.Disable();
                 ContentView.FileList.Pages.Show();
+                CurrentBranch = HubClient.MasterBranch;
             }
-
+            
             List<GithubFile> files = storedContents[storedContents.Count - 1];
             ContentView.FileList.Show(files);
             storedContents.Remove(files);
@@ -615,7 +621,7 @@ namespace mobile_style_editor
 				GithubPath = "";
 			}
 
- 			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, GithubPath);
+ 			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, CurrentBranch, GithubPath);
 			ContentView.FileList.Show(contents.ToGithubFiles());
 			ContentView.HideLoading();
 

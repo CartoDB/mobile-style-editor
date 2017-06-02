@@ -12,6 +12,8 @@ namespace mobile_style_editor
 {
 	public class HubClient
 	{
+        public const string MasterBranch = "master";
+
         public const string CookieDomain = ".github.com";
 
 		public static readonly HubClient Instance = new HubClient();
@@ -158,21 +160,16 @@ namespace mobile_style_editor
             return await client.Repository.Branch.GetAll(owner, name);
         }
 
-        public async Task<IReadOnlyList<RepositoryContent>> GetContentFromBranch(string owner, string name, string branch)
-        {
-            return await client.Repository.Content.GetAllContentsByRef(owner, name, branch);
-        }
-
-		public async Task<IReadOnlyList<RepositoryContent>> GetRepositoryContent(string owner, string name, string path = null)
+		public async Task<IReadOnlyList<RepositoryContent>> GetRepositoryContent(string owner, string name, string branch, string path = null)
 		{
 			try
 			{
 				if (string.IsNullOrWhiteSpace(path))
 				{
-					return await client.Repository.Content.GetAllContents(owner, name);
+					return await client.Repository.Content.GetAllContentsByRef(owner, name, branch);
 				}
 
-				return await client.Repository.Content.GetAllContents(owner, name, path);
+				return await client.Repository.Content.GetAllContentsByRef(owner, name, path, branch);
 			}
 			catch (NotFoundException)
 			{

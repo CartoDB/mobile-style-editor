@@ -184,7 +184,7 @@ namespace mobile_style_editor
 		async void OnGithubButtonClick(object sender, EventArgs e)
 		{
 			ContentView.ShowLoading();
-			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo);
+			var contents = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, "");
 			OnListDownloadComplete(null, new ListDownloadEventArgs { GithubFiles = contents.ToGithubFiles() });
 		}
 
