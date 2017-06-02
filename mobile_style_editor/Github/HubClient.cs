@@ -145,11 +145,18 @@ namespace mobile_style_editor
 			 */
 			if (page != -1)
 			{
-				return await client.Repository.GetAllForCurrent(GetOptions(page));
+                var repositories = await client.Repository.GetAllForCurrent(GetOptions(page));
+
+                return repositories;
 			}
 
 			return await client.Repository.GetAllForCurrent();
 		}
+
+        public async Task<IReadOnlyList<Branch>> GetBranches(string owner, string name)
+        {
+            return await client.Repository.Branch.GetAll(owner, name);
+        }
 
 		public async Task<IReadOnlyList<RepositoryContent>> GetRepositoryContent(string owner, string name, string path = null)
 		{

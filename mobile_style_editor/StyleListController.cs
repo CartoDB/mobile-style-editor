@@ -386,7 +386,7 @@ namespace mobile_style_editor
 
 		int counter = 1;
 
-		async void DownloadRepositories()
+        async void DownloadRepositories()
 		{
 			if (counter == 1)
 			{
