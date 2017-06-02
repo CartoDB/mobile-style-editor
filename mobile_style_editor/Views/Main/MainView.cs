@@ -121,8 +121,22 @@ namespace mobile_style_editor
             AddSubview(Zoom, x, y, w, h);
 #endif
         }
+        
+        public int ActiveIndex
+        {
+            get
+            {
+                if (Data.StyleFileNames.Count > Toolbar.MaxCount)
+                {
+                    return FileTabs.ActiveIndex;
+                }
 
-        ZipData Data;
+                return Toolbar.Tabs.ActiveIndex;
+
+            }
+        }
+
+        public ZipData Data;
 
         public void Initialize(ZipData data)
         {

@@ -31,6 +31,8 @@ namespace mobile_style_editor
             }
         }
 
+        readonly SaveTimer timer = new SaveTimer();
+
         public MainController(string folder, string filename)
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -68,6 +70,7 @@ namespace mobile_style_editor
                     });
                 });
             });
+
             ContentView.NavigationBar.Back.Click += OnBackButtonPressed;
 
             ContentView.FileTabs.OnTabTap += OnTabTapped;
@@ -92,6 +95,8 @@ namespace mobile_style_editor
             ContentView.Zoom.In.Click += ZoomIn;
             ContentView.Zoom.Out.Click += ZoomOut;
 #endif
+
+            timer.Initialize(ContentView);
         }
 
         protected override void OnDisappearing()
@@ -122,6 +127,8 @@ namespace mobile_style_editor
             ContentView.Zoom.In.Click -= ZoomIn;
             ContentView.Zoom.Out.Click -= ZoomOut;
 #endif
+
+            timer.Dispose();
         }
 
         async void OnBackButtonPressed(object sender, EventArgs e)
@@ -304,7 +311,7 @@ namespace mobile_style_editor
 
 		void OnRefresh(object sender, EventArgs e)
 		{
-			int index = ContentView.FileTabs.ActiveIndex;
+			int index = ContentView.ActiveIndex;
 
             if (ContentView.Toolbar.Tabs.IsVisible)
             {
