@@ -390,7 +390,7 @@ namespace mobile_style_editor
 		{
 			if (counter == 1)
 			{
-				ContentView.ShowLoading();
+                ContentView.ShowLoading();
 			}
 
 			var contents = await HubClient.Instance.GetRepositories(counter);
@@ -423,6 +423,14 @@ namespace mobile_style_editor
  			
 			if (HubClient.Instance.IsAuthenticated)
 			{
+                counter = 1;
+
+				ContentView.FileList.Pages.Reset();
+				GithubRepo = "";
+				storedContents.Clear();
+                ContentView.FileList.Header.BackButton.Disable();
+                ContentView.FileList.Pages.Show();
+
 				DownloadRepositories();
 			}
 			else

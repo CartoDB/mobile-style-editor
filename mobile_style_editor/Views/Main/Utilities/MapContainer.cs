@@ -123,7 +123,6 @@ namespace mobile_style_editor
                 AddSubview(RefreshButton, Width - (size + buttonPadding), size + buttonPadding, size, size);
                 RaiseChild(RefreshButton);
             }
-
         }
 
         public void Update(bool withListener, byte[] data, Action completed, Action<string> failed)
