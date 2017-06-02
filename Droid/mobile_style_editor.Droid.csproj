@@ -112,9 +112,6 @@
     <Reference Include="SQLite-net">
       <HintPath>..\packages\sqlite-net-pcl.1.0.11\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
     </Reference>
-    <Reference Include="CartoMobileSDK.Android">
-      <HintPath>..\packages\CartoMobileSDK.Android.4.0.2-pre-332\lib\MonoAndroid230\CartoMobileSDK.Android.dll</HintPath>
-    </Reference>
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
     <Reference Include="Octokit">
@@ -145,6 +142,9 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="CartoMobileSDK.Android">
+      <HintPath>..\packages\CartoMobileSDK.Android.4.1.0-alpha-9\lib\MonoAndroid230\CartoMobileSDK.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
