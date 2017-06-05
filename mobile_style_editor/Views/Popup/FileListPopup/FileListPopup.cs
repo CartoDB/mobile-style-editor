@@ -13,16 +13,16 @@ namespace mobile_style_editor
 
         public BranchContainer Branches { get; private set; }
 
-		public FileListPopup()
-		{
-			Content = new FileListPopupContent();
+        public FileListPopup()
+        {
+            Content = new FileListPopupContent();
 
-			Pages = new PaginationView();
-			Pages.ContentHeight = 40;
+            Pages = new PaginationView();
+            Pages.ContentHeight = 40;
 
             Branches = new BranchContainer();
             Branches.IsVisible = false;
-		}
+        }
 
 		public override void LayoutSubviews()
 		{
@@ -37,12 +37,14 @@ namespace mobile_style_editor
 
             double padding = 10;
 
+			Branches.HeaderHeight = HeaderHeight;
+			Branches.TotalHeight = 400;
+
             x = ContentX + ContentWidth + padding;
             y = HeaderY;
             w = 200;
-            h = 400;
+            h = Branches.HeaderHeight;
 
-            Branches.HeaderHeight = HeaderHeight;
             AddSubview(Branches, x, y, w, h);
 		}
 
@@ -90,17 +92,5 @@ namespace mobile_style_editor
 			}
 			base.Hide(animated);
 		}
-
-        double expandedSize = 200;
-
-        public void ExpandBranches()
-        {
-            Branches.UpdateHeight(Branches.Height + expandedSize);
-        }
-
-        public void CollapseBranches()
-        {
-            Branches.UpdateHeight(Branches.Height - expandedSize);
-        }
 	}
 }

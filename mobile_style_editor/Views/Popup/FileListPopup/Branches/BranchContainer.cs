@@ -10,33 +10,33 @@ namespace mobile_style_editor
     {
         public EventHandler<EventArgs> CellClick;
 
-        Label label;
+        public BranchHeader Header { get; private set; }
 
         TableSection header;
         TableView content;
 
         public double HeaderHeight { get; set; }
+        public double TotalHeight { get; set; }
 
         public BranchContainer()
         {
-            label = new Label();
-            label.BackgroundColor = Colors.CartoNavy;
-            label.Text = "BRANCHES";
-            label.FontSize = 12;
-            label.TextColor = Color.White;
-            label.VerticalTextAlignment = TextAlignment.Center;
-            label.HorizontalTextAlignment = TextAlignment.Center;
-
             header = new TableSection();
 
             content = new TableView();
             content.Root = new TableRoot();
             content.Root.Add(header);
+
+            Header = new BranchHeader();
+
+            Header.Click += delegate
+            {
+                ToggleHeight();
+            };
         }
 
         public override void LayoutSubviews()
         {
-            AddSubview(label, 0, 0, Width, HeaderHeight);
+            AddSubview(Header, 0, 0, Width, HeaderHeight);
             AddSubview(content, 0, HeaderHeight, Width, Height - HeaderHeight);
         }
 
@@ -60,5 +60,51 @@ namespace mobile_style_editor
         {
 			header.Clear();
 		}
+
+        public bool IsExpanded { get { return Height.Equals(TotalHeight); } }
+
+		void ToggleHeight()
+		{
+			if (IsExpanded)
+			{
+				CollapseBranches();
+			}
+			else
+			{
+				ExpandBranches();
+			}
+		}
+
+		public void ExpandBranches()
+		{
+            UpdateHeight(TotalHeight);
+		}
+
+		public void CollapseBranches()
+		{
+            UpdateHeight(HeaderHeight);
+		}
+    }
+
+    public class BranchHeader : ClickView
+	{
+		Label label;
+
+		public BranchHeader()
+        {
+			label = new Label();
+			label.BackgroundColor = Colors.CartoNavy;
+			label.Text = "BRANCHES";
+			label.FontSize = 12;
+			label.TextColor = Color.White;
+			label.VerticalTextAlignment = TextAlignment.Center;
+			label.HorizontalTextAlignment = TextAlignment.Center;
+
+		}
+
+        public override void LayoutSubviews()
+        {
+            AddSubview(label, 0, 0, Width,Height);
+        }
     }
 }
