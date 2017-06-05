@@ -34,6 +34,7 @@ namespace mobile_style_editor
 			separator = new BaseView { BackgroundColor = Color.FromRgb(220, 220, 220) };
 
             RefreshButton = new RefreshButton();
+            RefreshButton.IsVisible = false;
 		}
 
 		double padding = 5;

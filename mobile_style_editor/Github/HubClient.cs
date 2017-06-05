@@ -269,6 +269,24 @@ namespace mobile_style_editor
 			return files;
 		}
 
+        public async void Update(string owner, string name, string branch, List<GithubFile> files, ZipData data, string message)
+        {
+            foreach (GithubFile file in files) {
+
+                for (int i = 0; i < data.StyleFileNames.Count; i++)
+                {
+                    string filename = data.StyleFileNames[i];
+                    if (file.Name.Equals(filename))
+                    {
+                        string content = data.DecompressedFiles[i];
+                        var request = new UpdateFileRequest(message + " (" + filename + ")", content, file.Sha, branch);
+                        await client.Repository.Content.UpdateFile(owner, name, file.Path, request);
+                    }
+                }
+            }
+
+        }
+
 		public async Task<bool> UpdateFile(Repository repository, RepositoryContent file, string content)
 		{
 			string url = file.DownloadUrl.AbsolutePath;
