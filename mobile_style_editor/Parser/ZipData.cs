@@ -18,6 +18,8 @@ namespace mobile_style_editor
 
 		public List<string> StyleFileNames { get; set; }
 
+        public List<string> ChangeList { get; set; }
+
 		public ZipData()
 		{
 			DecompressedFiles = new List<string>();
@@ -25,6 +27,8 @@ namespace mobile_style_editor
 			StyleFilePaths = new List<string>();
 
 			StyleFileNames = new List<string>();
+
+            ChangeList = new List<string>();
 		}
 	}
 }

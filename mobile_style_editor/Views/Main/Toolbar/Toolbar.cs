@@ -32,11 +32,11 @@ namespace mobile_style_editor
             Tabs = new FileTabs();
             Tabs.IsVisible = false;
 
-			UploadButton = new ToolbarButton("UPLOAD");
-
 			SaveButton = new ToolbarButton("SAVE");
 
             EmailButton = new ToolbarButton("EMAIL");
+
+            UploadButton = new ToolbarButton("UPLOAD");
 		}
 
 		public override void LayoutSubviews()
@@ -51,9 +51,12 @@ namespace mobile_style_editor
 
 			double padding = 10;
 
+            // Button count
+            int count = 3;
+
 			w = 100;
 			h = w / 3;
-			x = Width - (2 * w + 3 * padding);
+			x = Width - (count * w + count * padding);
 			y = Height / 2 - h / 2;
 
 			AddSubview(SaveButton, x, y, w, h);
@@ -61,6 +64,10 @@ namespace mobile_style_editor
 			x += w + padding;
 
             AddSubview(EmailButton, x, y, w, h);
+
+            x += w + padding;
+
+            AddSubview(UploadButton, x, y, w, h);
 		}
 
         public const int MaxCount = 4;

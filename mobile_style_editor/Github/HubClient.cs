@@ -269,8 +269,22 @@ namespace mobile_style_editor
 			return files;
 		}
 
-        public async void Update(string owner, string name, string branch, List<GithubFile> files, ZipData data, string message)
+        public async void Update(string owner, string name, string path, string branch, ZipData data, string message)
         {
+            /*
+             * TODO Perhaps it would be better to pass the List<GithubFiles> when pushing MainController,
+             * current we're downloading the content again
+             */
+
+            var contents = await GetRepositoryContent(owner, name, branch, path);
+            var files = contents.ToGithubFiles();
+
+            /*
+             * TODO We assume that these files exist, so they're updated, not created
+             * Additionally, we assume the branch exists. No new branch creation is possible
+             * 
+             */
+
             foreach (GithubFile file in files) {
 
                 for (int i = 0; i < data.StyleFileNames.Count; i++)
@@ -278,13 +292,19 @@ namespace mobile_style_editor
                     string filename = data.StyleFileNames[i];
                     if (file.Name.Equals(filename))
                     {
-                        string content = data.DecompressedFiles[i];
-                        var request = new UpdateFileRequest(message + " (" + filename + ")", content, file.Sha, branch);
-                        await client.Repository.Content.UpdateFile(owner, name, file.Path, request);
+                        if (data.ChangeList.Contains(filename))
+                        {
+                            string content = data.DecompressedFiles[i];
+
+                            // Full path is required; add the filename
+                            path += "/" + filename;
+
+                            var request = new UpdateFileRequest(message + " (" + path + ")", content, file.Sha, branch);
+                            var changeSet = await client.Repository.Content.UpdateFile(owner, name, path, request);
+                        }
                     }
                 }
             }
-
         }
 
 		public async Task<bool> UpdateFile(Repository repository, RepositoryContent file, string content)

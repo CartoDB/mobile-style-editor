@@ -39,6 +39,7 @@ namespace mobile_style_editor
             string text = null;
 
             Xamarin.Forms.Device.BeginInvokeOnMainThread(delegate {
+                
                 text = contentView.Editor.Text;
 
                 System.Threading.Tasks.Task.Run(delegate {
@@ -48,7 +49,17 @@ namespace mobile_style_editor
 						return;
 					}
 
-					contentView.Data.DecompressedFiles[index] = text;
+                    if (!contentView.Data.DecompressedFiles[index].Equals(text))
+                    {
+                        string name = contentView.Data.StyleFileNames[index];
+
+                        if (!contentView.Data.ChangeList.Contains(name))
+                        {
+                            contentView.Data.ChangeList.Add(name);
+                        }
+
+                        contentView.Data.DecompressedFiles[index] = text;
+                    }
 
                 });
             });

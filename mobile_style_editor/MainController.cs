@@ -212,6 +212,7 @@ namespace mobile_style_editor
 
 		void OnUploadButtonClicked(object sender, EventArgs e)
 		{
+            //HubClient.Instance.Update("CartoDB", "mobile-styles", "nutiteq_bright/compiled_continouszoom", "master", ContentView.Data, "Upload test");
 			ShowPopup(PopupType.Upload);
 		}
 
