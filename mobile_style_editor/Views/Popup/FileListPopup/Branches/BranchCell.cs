@@ -15,6 +15,7 @@ namespace mobile_style_editor
 			Branch = branch;
 
 			Text = branch.Name;
+			TextColor = Colors.CartoNavy;
 
 			TapGestureRecognizer recognizer = new TapGestureRecognizer();
 			recognizer.Tapped += delegate

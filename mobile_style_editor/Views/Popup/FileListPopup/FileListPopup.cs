@@ -39,9 +39,10 @@ namespace mobile_style_editor
 
 			Branches.HeaderHeight = HeaderHeight;
 			Branches.TotalHeight = 400;
+            Branches.OriginalY = y + padding;
 
-            x = ContentX + ContentWidth + padding;
-            y = HeaderY;
+            x = ContentX;
+            y = Branches.OriginalY;
             w = 200;
             h = Branches.HeaderHeight;
 

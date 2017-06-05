@@ -17,6 +17,7 @@ namespace mobile_style_editor
 
         public double HeaderHeight { get; set; }
         public double TotalHeight { get; set; }
+        public double OriginalY { get; set; }
 
         public BranchContainer()
         {
@@ -32,7 +33,9 @@ namespace mobile_style_editor
             {
                 ToggleHeight();
             };
-        }
+
+			content.BackgroundColor = Color.FromRgb(240, 240, 240);
+		}
 
         public override void LayoutSubviews()
         {
@@ -49,11 +52,17 @@ namespace mobile_style_editor
                 var cell = BranchCell.FromBranch(branch);
 
                 cell.Click += delegate {
+                    UpdateText(cell.Branch.Name);
                     CellClick(cell, EventArgs.Empty);
                 };
 
                 header.Add(cell);
             }
+        }
+
+        void UpdateText(string text)
+        {
+            Header.Text = "BRANCH: " + text;
         }
 
         public void Clear()
@@ -77,12 +86,12 @@ namespace mobile_style_editor
 
 		public void ExpandBranches()
 		{
-            UpdateHeight(TotalHeight);
+            UpdateLayout(OriginalY - (TotalHeight - HeaderHeight), TotalHeight);
 		}
 
 		public void CollapseBranches()
 		{
-            UpdateHeight(HeaderHeight);
+            UpdateLayout(OriginalY, HeaderHeight);
 		}
     }
 
@@ -90,11 +99,17 @@ namespace mobile_style_editor
 	{
 		Label label;
 
+        public string Text
+        {
+            get { return label.Text; } 
+            set { label.Text = value; } 
+        }
+
 		public BranchHeader()
         {
 			label = new Label();
 			label.BackgroundColor = Colors.CartoNavy;
-			label.Text = "BRANCHES";
+			label.Text = "BRANCH: master";
 			label.FontSize = 12;
 			label.TextColor = Color.White;
 			label.VerticalTextAlignment = TextAlignment.Center;

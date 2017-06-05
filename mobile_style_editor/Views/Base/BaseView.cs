@@ -50,9 +50,9 @@ namespace mobile_style_editor
 			}
 		}
 
-        public void UpdateHeight(double height)
+        public void UpdateLayout(double y, double height)
         {
-            UpdateLayout(X, Y, Width, height);    
+            UpdateLayout(X, y, Width, height);    
         }
 
 		public virtual void RemoveChild(View view)
