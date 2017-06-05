@@ -26,22 +26,33 @@ namespace mobile_style_editor
             {
                 View = e.NewElement as ImageButton;
 
-#if __IOS__
-                Layer.CornerRadius = View.CornerRadius;
-#elif __ANDROID__
+                if (View.CornerRadius!= 0)
+                {
+                    SetCornerRadius(View.CornerRadius);
+                }
 
-#endif
                 View.CornerRadiusSet += OnCornerRadius;
             }
         }
 
         void OnCornerRadius(object sender, EventArgs e)
         {
-#if __IOS__
-            Layer.CornerRadius = (int)sender;
-#elif __ANDROID__
-
-#endif
+            SetCornerRadius((int)sender);
         }
+
+        void SetCornerRadius(int radius)
+        {
+#if __IOS__
+            Layer.CornerRadius = radius;
+#elif __ANDROID__
+			var existing = View.BackgroundColor.ToNativeColor();
+
+			var drawable = new Android.Graphics.Drawables.GradientDrawable();
+			drawable.SetCornerRadius(View.CornerRadius);
+			drawable.SetColor(existing.ToArgb());
+
+            Background = drawable;
+#endif
+		}
     }
 }
