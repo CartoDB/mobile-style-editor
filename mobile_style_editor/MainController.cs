@@ -212,8 +212,22 @@ namespace mobile_style_editor
 
 		void OnUploadButtonClicked(object sender, EventArgs e)
 		{
-            //HubClient.Instance.Update("CartoDB", "mobile-styles", "nutiteq_bright/compiled_continouszoom", "master", ContentView.Data, "Upload test");
-			ShowPopup(PopupType.Upload);
+			/*
+             * TODO
+             * 1. Pass owner, name, sha to this controller
+             * 2. Save aforementioned data to local storage, so it could be accessed later
+             * 3. Open popup 
+             *        3.1 With branch selector with content from HubClient.Instance.GetBranches(owner, name)
+             *        3.2 With "Confirm" button that finalizes the upload
+             * 
+             * Backlog:
+             * 4. Style location & name change logic
+             * 5. "Create new branch" logic
+             * 
+             */
+
+			//HubClient.Instance.Update("CartoDB", "mobile-styles", "nutiteq_bright/compiled_continouszoom", "master", ContentView.Data, "Upload test");
+			//ShowPopup(PopupType.Upload);
 		}
 
 		void OnSaveButtonClicked(object sender, EventArgs e)

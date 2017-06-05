@@ -279,13 +279,16 @@ namespace mobile_style_editor
             var contents = await GetRepositoryContent(owner, name, branch, path);
             var files = contents.ToGithubFiles();
 
-            /*
+			/*
              * TODO We assume that these files exist, so they're updated, not created
              * Additionally, we assume the branch exists. No new branch creation is possible
              * 
+             * Branch creation possible via https://github.com/octokit/octokit.rb/issues/571,
+             * something like:
+             * client.Git.Reference.Create(owner, name, new NewReference("heads/<new-branch-name>", "<sha1-of-something>"));
              */
 
-            foreach (GithubFile file in files) {
+			foreach (GithubFile file in files) {
 
                 for (int i = 0; i < data.StyleFileNames.Count; i++)
                 {
