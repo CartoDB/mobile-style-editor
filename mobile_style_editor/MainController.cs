@@ -135,9 +135,10 @@ namespace mobile_style_editor
         {
             if (ContainsUnsavedChanged)
             {
-				string message = "If you go back now, you will lose unsaved changes";
-				Alert("Attention!", message, null, async delegate {
-                    await Navigation.PopAsync(true);  
+                string message = "If you go back now, you will lose unsaved changes";
+                Alert("Attention!", message, null, async delegate
+                {
+                    await Navigation.PopAsync(true);
                 });
             }
             else
@@ -146,36 +147,37 @@ namespace mobile_style_editor
             }
         }
 
-		protected override bool OnBackButtonPressed()
-		{
-			if (ContainsUnsavedChanged)
-			{
-				HandleUnsavedChanges();
-				return true;
-			}
-			else
-			{
-				return base.OnBackButtonPressed();
-			}
-		}
+        protected override bool OnBackButtonPressed()
+        {
+            if (ContainsUnsavedChanged)
+            {
+                HandleUnsavedChanges();
+                return true;
+            }
+            else
+            {
+                return base.OnBackButtonPressed();
+            }
+        }
 
-		void HandleUnsavedChanges()
-		{
-			string message = "If you go back now, you will lose unsaved changes";
+        void HandleUnsavedChanges()
+        {
+            string message = "If you go back now, you will lose unsaved changes";
             Alert("Attention!", message, null, async delegate
             {
                 await Navigation.PopAsync(true);
             });
-		}
+        }
 
         void OnSourceChanged(object sender, EventArgs e)
         {
-            ContentView.ShowLoading();;
+            ContentView.ShowLoading(); ;
 
             string osm = (sender as SourceLabel).Text;
             MapExtensions.SourceId = osm;
 
-            ContentView.UpdateMap(delegate {
+            ContentView.UpdateMap(delegate
+            {
                 ContentView.HideLoading();
             });
         }
@@ -191,57 +193,50 @@ namespace mobile_style_editor
         }
 
         void NormalizeView(string text)
-		{
-			Device.BeginInvokeOnMainThread(delegate
-			{
-				ContentView.HideLoading();
-				ContentView.GithubUpload.Hide();
-				Toast.Show(text, ContentView);
-			});
-		}
+        {
+            Device.BeginInvokeOnMainThread(delegate
+            {
+                ContentView.HideLoading();
+                ContentView.GithubUpload.Hide();
+                Toast.Show(text, ContentView);
+            });
+        }
 
-		void OnFileTabExpand(object sender, EventArgs e)
-		{
-			ContentView.ToggleTabs();
-		}
+        void OnFileTabExpand(object sender, EventArgs e)
+        {
+            ContentView.ToggleTabs();
+        }
 
-		void OnUploadComplete(object sender, EventArgs e)
-		{
-			NormalizeView("Upload of " + (string)sender + " complete");
-		}
+        void OnUploadComplete(object sender, EventArgs e)
+        {
+            NormalizeView("Upload of " + (string)sender + " complete");
+        }
 
-		async void OnUploadButtonClicked(object sender, EventArgs e)
-		{
-			/*
+        async void OnUploadButtonClicked(object sender, EventArgs e)
+        {
+            /*
              * TODO
-             * 1. Pass owner, name, sha to this controller
-             * 2. Save aforementioned data to local storage, so it could be accessed later
-             * 3. Open popup 
-             *        3.1 With branch selector with content from HubClient.Instance.GetBranches(owner, name)
-             *        3.2 With "Confirm" button that finalizes the upload
-             * 
-             * Backlog:
-             * 4. Style location & name change logic
-             * 5. "Create new branch" logic
-             * 
+             * 1. Style location & name change logic
+             * 2. "Create new branch" logic
              */
 
             ContentView.GithubUpload.Content.ShowBranchLoading();
 
-			ContentView.GithubUpload.Show();
+            ContentView.GithubUpload.Show();
 
-            var branches = await HubClient.Instance.GetBranches("CartoDB", "mobile-styles");
+            var branches = await HubClient.Instance.GetBranches(owner, repository);
 
             ContentView.GithubUpload.Content.ShowBranches(branches);
-            ContentView.GithubUpload.Content.HighlightBranch("master");
+            ContentView.GithubUpload.Content.HighlightBranch(branch);
 
             ContentView.GithubUpload.Content.HideBranchLoading();
-		}
+        }
 
-        string owner = "CartoDB";
-        string repository = "mobile-styles";
-        string path = "nutiteq_bright/compiled_continouszoom";
-        string branch = "master";
+        string owner { get { return StyleListController.GithubOwner; } }
+        string repository { get { return StyleListController.GithubRepo; } }
+        string path { get { return StyleListController.GithubPath; } }
+
+        string branch { get { return StyleListController.CurrentBranch; } }
 
         void OnGithubCommitButtonClicked(object sender, EventArgs e)
 		{

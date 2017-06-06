@@ -7,7 +7,7 @@ namespace mobile_style_editor
 {
 	public class GithubUploadPopupContent : BasePopupContent
 	{
-        BranchContainer container;
+        public BranchContainer Branches { get; private set; }
 
         public EntryWithLabel Comment { get; private set; }
 		
@@ -22,8 +22,8 @@ namespace mobile_style_editor
 			Commit.BackgroundColor = Colors.CartoRed;
 			Commit.TextColor = Color.White;
 
-            container = new BranchContainer();
-            container.BackgroundColor = Color.White;
+            Branches = new BranchContainer();
+            Branches.BackgroundColor = Color.White;
 		}
 
 		public override void LayoutSubviews()
@@ -35,7 +35,7 @@ namespace mobile_style_editor
             double x = Width - (w + padding);
             double y = padding;
 
-            AddSubview(container, x, y, w, h);
+            AddSubview(Branches, x, y, w, h);
 
             x = padding;
             y = padding;
@@ -54,22 +54,22 @@ namespace mobile_style_editor
 
         public void ShowBranches(IReadOnlyList<Octokit.Branch> branches)
         {
-            container.Add(branches);
+            Branches.Add(branches);
         }
 
-        public void HighlightBranch(string v)
+        public void HighlightBranch(string branch)
         {
-            
+            Branches.Highlight(branch);
         }
 
         public void ShowBranchLoading()
         {
-            container.ShowLoading();
+            Branches.ShowLoading();
         }
 
         public void HideBranchLoading()
         {
-            container.HideLoading();
+            Branches.HideLoading();
         }
 
     }

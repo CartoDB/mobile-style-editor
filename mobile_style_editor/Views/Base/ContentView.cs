@@ -10,7 +10,7 @@ namespace mobile_style_editor
 
         BaseView container;
 
-		public new double Width { get { return base.Width; } }
+        public new double Width { get { return base.Width; } }
 
 		public new double Height
 		{

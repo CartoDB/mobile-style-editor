@@ -1,7 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -51,6 +51,32 @@ namespace mobile_style_editor
             base.LayoutSubviews();
         }
 
+        public List<BranchCell> Cells
+        {
+            get { return header.Where(cell => cell is BranchCell).Cast<BranchCell>().ToList(); }
+        }
+
+        public void Highlight(string branch)
+        {
+            Normalize();
+
+            foreach (var cell in Cells)
+            {
+                if (cell.Branch.Name.Equals(branch))
+                {
+                    cell.Highlight();
+                }
+            }
+        }
+
+		public void Normalize()
+		{
+			foreach (var cell in Cells)
+			{
+                cell.Normalize();
+			}
+		}
+
         public void Add(IReadOnlyList<Octokit.Branch> branches)
         {
             Clear();
@@ -60,8 +86,15 @@ namespace mobile_style_editor
                 var cell = BranchCell.FromBranch(branch);
 
                 cell.Click += delegate {
+                    
+                    Normalize();
                     UpdateText(cell.Branch.Name);
-                    CellClick(cell, EventArgs.Empty);
+                    cell.Highlight();
+
+                    if (CellClick != null)
+                    {
+                        CellClick(cell, EventArgs.Empty);
+                    }
                 };
 
                 header.Add(cell);
@@ -101,33 +134,6 @@ namespace mobile_style_editor
 		{
             UpdateLayout(OriginalY, HeaderHeight);
 		}
-    }
 
-    public class BranchHeader : ClickView
-	{
-		Label label;
-
-        public string Text
-        {
-            get { return label.Text; } 
-            set { label.Text = value; } 
-        }
-
-		public BranchHeader()
-        {
-			label = new Label();
-			label.BackgroundColor = Colors.CartoNavy;
-			label.Text = "BRANCH: master";
-			label.FontSize = 12;
-			label.TextColor = Color.White;
-			label.VerticalTextAlignment = TextAlignment.Center;
-			label.HorizontalTextAlignment = TextAlignment.Center;
-
-		}
-
-        public override void LayoutSubviews()
-        {
-            AddSubview(label, 0, 0, Width,Height);
-        }
     }
 }

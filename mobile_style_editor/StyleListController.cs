@@ -18,6 +18,14 @@ namespace mobile_style_editor
 {
     public class StyleListController : BaseController
 	{
+        public static string GithubOwner = "";
+		public static string GithubRepo = "";
+		public static string GithubPath = "";
+
+		public static string CurrentBranch = HubClient.MasterBranch;
+
+		public static string BasePath { get { return (GithubRepo + "/").ToUpper(); } }
+
 		public StyleListView ContentView { get; private set; }
 
 		public StyleListController()
@@ -126,12 +134,13 @@ namespace mobile_style_editor
 #endif
 		}
 
-        public string CurrentBranch { get; private set; } = HubClient.MasterBranch;
-
         async void OnBranchCellClicked(object sender, EventArgs e)
         {
-            BranchCell cell = (BranchCell)sender;
+            ContentView.FileList.Branches.Normalize();
 
+            BranchCell cell = (BranchCell)sender;
+            cell.Highlight();
+            
             CurrentBranch = cell.Branch.Name;
 
             var content = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, CurrentBranch, GithubPath);
@@ -304,6 +313,7 @@ namespace mobile_style_editor
             if (isRepository)
             {
                 ContentView.FileList.Branches.IsVisible = true;
+                ContentView.FileList.Branches.Highlight(CurrentBranch);
             }
             else
             {
@@ -416,11 +426,6 @@ namespace mobile_style_editor
 			ShowMyStyles();
 		}
 
-		string GithubOwner = "";
-		string GithubRepo = "";
-		string GithubPath = "";
-		string BasePath { get { return (GithubRepo + "/").ToUpper(); } }
-
 		bool ClickedGithubButton;
 
 		int counter = 1;
@@ -469,6 +474,7 @@ namespace mobile_style_editor
 				storedContents.Clear();
                 ContentView.FileList.Header.BackButton.Disable();
                 ContentView.FileList.Pages.Show();
+                ContentView.FileList.Branches.IsVisible = false;
 
 				DownloadRepositories();
 			}
@@ -595,7 +601,7 @@ namespace mobile_style_editor
                         GithubRepo = item.GithubFile.Name;
                         ContentView.FileList.Pages.Hide();
 
-                        ContentView.FileList.Branches.IsVisible = true;
+						ContentView.FileList.Branches.IsVisible = true;
                     }
                     else
                     {
@@ -605,8 +611,13 @@ namespace mobile_style_editor
 					GithubPath = item.GithubFile.Path;
 					await LoadGithubContents();
 
-                    var branches = await HubClient.Instance.GetBranches(GithubOwner, GithubRepo);
-                    ContentView.FileList.Branches.Add(branches);
+                    if (item.GithubFile.IsRepository)
+                    {
+                        var branches = await HubClient.Instance.GetBranches(GithubOwner, GithubRepo);
+                        ContentView.FileList.Branches.Add(branches);
+
+                        ContentView.FileList.Branches.Highlight(CurrentBranch);
+                    }
 				}
 			}
 		}

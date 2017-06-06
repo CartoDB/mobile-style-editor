@@ -15,21 +15,8 @@ namespace mobile_style_editor
 			Branch = branch;
 
 			Text = branch.Name;
-			TextColor = Colors.CartoNavy;
+            Normalize();
 
-			TapGestureRecognizer recognizer = new TapGestureRecognizer();
-			recognizer.Tapped += delegate
-			{
-				if (!IsEnabled)
-				{
-					return;
-				}
-
-				if (Click != null)
-				{
-					Click(this, EventArgs.Empty);
-				}
-			};
 			Command = new Command((obj) =>
 			{
 				if (!IsEnabled)
@@ -48,5 +35,15 @@ namespace mobile_style_editor
 		{
 			return new BranchCell(branch);
 		}
+
+        public void Highlight()
+        {
+            TextColor = Colors.CartoNavy;    
+        }
+
+        public void Normalize()
+        {
+            TextColor = Color.Gray;
+        }
 	}
 }
