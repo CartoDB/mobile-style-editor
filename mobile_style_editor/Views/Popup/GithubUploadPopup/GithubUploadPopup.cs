@@ -1,13 +1,13 @@
 ﻿using System;
 namespace mobile_style_editor
 {
-	public class ConfirmationPopup : BasePopup
+	public class GithubUploadPopup : BasePopup
 	{
-		public new ConfirmationPopupContent Content { get { return (ConfirmationPopupContent)base.Content; } }
+		public new GithubUploadPopupContent Content { get { return (GithubUploadPopupContent)base.Content; } }
 
-		public ConfirmationPopup()
+		public GithubUploadPopup()
 		{
-			base.Content = new ConfirmationPopupContent();
+			base.Content = new GithubUploadPopupContent();
 		}
 
 		public override void LayoutSubviews()

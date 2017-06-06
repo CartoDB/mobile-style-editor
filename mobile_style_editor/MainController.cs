@@ -83,7 +83,7 @@ namespace mobile_style_editor
 
             ContentView.MapView.RefreshButton.Click += OnRefresh;
 
-            ContentView.Popup.Content.Confirm.Clicked += OnConfirmButtonClicked;
+            ContentView.GithubUpload.Content.Commit.Clicked += OnGithubCommitButtonClicked;
 
             ContentView.MapView.SourceLabel.Done += OnSourceChanged;
 
@@ -115,7 +115,7 @@ namespace mobile_style_editor
 
             ContentView.MapView.RefreshButton.Click -= OnRefresh;
 
-            ContentView.Popup.Content.Confirm.Clicked -= OnConfirmButtonClicked;
+            ContentView.GithubUpload.Content.Commit.Clicked -= OnGithubCommitButtonClicked;
 
             ContentView.MapView.SourceLabel.Done -= OnSourceChanged;
 
@@ -195,7 +195,7 @@ namespace mobile_style_editor
 			Device.BeginInvokeOnMainThread(delegate
 			{
 				ContentView.HideLoading();
-				ContentView.Popup.Hide();
+				ContentView.GithubUpload.Hide();
 				Toast.Show(text, ContentView);
 			});
 		}
@@ -210,7 +210,7 @@ namespace mobile_style_editor
 			NormalizeView("Upload of " + (string)sender + " complete");
 		}
 
-		void OnUploadButtonClicked(object sender, EventArgs e)
+		async void OnUploadButtonClicked(object sender, EventArgs e)
 		{
 			/*
              * TODO
@@ -226,14 +226,41 @@ namespace mobile_style_editor
              * 
              */
 
-			//HubClient.Instance.Update("CartoDB", "mobile-styles", "nutiteq_bright/compiled_continouszoom", "master", ContentView.Data, "Upload test");
-			if (currentWorkingName == null)
-			{
-				Toast.Show("You don't seem to have made any changes", ContentView);
-				return;
-			}
+            ContentView.GithubUpload.Content.ShowBranchLoading();
 
-			ContentView.Popup.Show(type);
+			ContentView.GithubUpload.Show();
+
+            var branches = await HubClient.Instance.GetBranches("CartoDB", "mobile-styles");
+
+            ContentView.GithubUpload.Content.ShowBranches(branches);
+            ContentView.GithubUpload.Content.HighlightBranch("master");
+
+            ContentView.GithubUpload.Content.HideBranchLoading();
+		}
+
+        string owner = "CartoDB";
+        string repository = "mobile-styles";
+        string path = "nutiteq_bright/compiled_continouszoom";
+        string branch = "master";
+
+        void OnGithubCommitButtonClicked(object sender, EventArgs e)
+		{
+            string message = "Are you sure you wish to commit your changes to Github?";
+            Alert("Warning!", message, null, async delegate {
+
+				ContentView.GithubUpload.ShowLoading();
+
+				string comment = ContentView.GithubUpload.Content.Comment.Text;
+
+				string error = await HubClient.Instance.Update(owner, repository, path, branch, ContentView.Data, comment);
+
+				if (error != null)
+				{
+					Alert("Whoops!", error, null);
+				}
+
+				ContentView.GithubUpload.HideLoading();
+            });
 		}
 
 		void OnSaveButtonClicked(object sender, EventArgs e)
@@ -259,8 +286,7 @@ namespace mobile_style_editor
 
         void OnEmailButtonClicked(object sender, EventArgs e)
         {
-            string path = CalculatedPath;
-            Email.OpenSender(path, delegate {
+            Email.OpenSender(CalculatedPath, delegate {
                 
                 Device.BeginInvokeOnMainThread(delegate {
                     ContainsUnsavedChanged = false;   
@@ -270,51 +296,6 @@ namespace mobile_style_editor
                 Alert("Whoops", obj, null);
             });
         }
-
-		void OnConfirmButtonClicked(object sender, EventArgs e)
-		{
-			Device.BeginInvokeOnMainThread(delegate
-			{
-				ContentView.ShowLoading();
-
-				Task.Run(delegate
-				{
-					string name = ContentView.Popup.Content.Text;
-
-					if (string.IsNullOrWhiteSpace(name))
-					{
-						Toast.Show("Please provide a name for your style", ContentView);
-						return;
-					}
-
-					name += Parser.ZipExtension;
-
-					if (ContentView.Popup.Type == PopupType.Upload)
-					{
-#if __ANDROID__
-						DriveClientDroid.Instance.Upload(name, currentWorkingStream);
-#elif __IOS__
-
-						DriveClientiOS.Instance.Upload(name, currentWorkingStream);
-#endif
-					}
-					else
-					{
-						if (!Directory.Exists(Parser.LocalStyleLocation))
-						{
-							Directory.CreateDirectory(Parser.LocalStyleLocation);
-						}
-
-						string source = Path.Combine(Parser.ApplicationFolder, currentWorkingName);
-						string destination = Path.Combine(Parser.LocalStyleLocation, name);
-						File.Copy(source, destination);
-
-						NormalizeView(name + " saved to local database");
-					}
-				});
-			});
-
-		}
 
 		string currentWorkingName;
 		MemoryStream currentWorkingStream;

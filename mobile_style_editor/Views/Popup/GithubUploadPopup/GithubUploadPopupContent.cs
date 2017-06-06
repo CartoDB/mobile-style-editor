@@ -1,74 +1,118 @@
 
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
 	public class GithubUploadPopupContent : BasePopupContent
 	{
-		Label nameLabel;
-		Entry nameInput;
+        BranchContainer container;
 
-		public Button Confirm { get; private set; }
-
-		public string Text { 
-			get { return nameInput.Text; }
-			set { nameInput.Text = value; }
-		}
+        public EntryWithLabel Comment { get; private set; }
+		
+        public Button Commit { get; private set; }
 
 		public GithubUploadPopupContent()
 		{
+            Comment = new EntryWithLabel();
+
+			Commit = new Button();
+			Commit.Text = "COMMIT";
+			Commit.BackgroundColor = Colors.CartoRed;
+			Commit.TextColor = Color.White;
+
+            container = new BranchContainer();
+            container.BackgroundColor = Color.White;
+		}
+
+		public override void LayoutSubviews()
+		{
+			double padding = 10;
+
+			double w = 200;
+            double h = 400;
+            double x = Width - (w + padding);
+            double y = padding;
+
+            AddSubview(container, x, y, w, h);
+
+            x = padding;
+            y = padding;
+            w = Width - (w + 3 * padding);
+            h = 70;
+
+            AddSubview(Comment, x, y, w, h);
+
+            w = 150;
+            h = w / 4;
+            x = Width - (w + padding);
+            y = Height - (h + padding);
+
+            AddSubview(Commit, x, y, w, h);
+		}
+
+        public void ShowBranches(IReadOnlyList<Octokit.Branch> branches)
+        {
+            container.Add(branches);
+        }
+
+        public void HighlightBranch(string v)
+        {
+            
+        }
+
+        public void ShowBranchLoading()
+        {
+            container.ShowLoading();
+        }
+
+        public void HideBranchLoading()
+        {
+            container.HideLoading();
+        }
+
+    }
+
+    public class EntryWithLabel : BaseView
+    {
+		Label nameLabel;
+		Entry nameInput;
+
+        public string Text
+        {
+            get { return nameInput.Text; }
+            set { nameInput.Text = value; }
+        }
+
+        public EntryWithLabel()
+        {
 			nameLabel = new Label();
 			nameLabel.VerticalTextAlignment = TextAlignment.End;
-			nameLabel.Text = "FILENAME";
+			nameLabel.Text = "COMMENT";
 			nameLabel.TextColor = Color.Gray;
 			nameLabel.FontSize = 12f;
 
 			nameInput = new Entry();
 			nameInput.FontSize = 13f;
 			nameInput.TextColor = Colors.CartoNavy;
-
-			Confirm = new Button();
-			Confirm.Text = "CONFIRM";
-			Confirm.BackgroundColor = Colors.CartoRed;
-			Confirm.TextColor = Color.White;
 		}
 
-		public override void LayoutSubviews()
-		{
-			base.LayoutSubviews();
+        public override void LayoutSubviews()
+        {
+            double padding = 5;
 
-			double padding = 10;
+            double x = padding;
+            double y = 0;
+            double w = Width - 2 * padding;
+            double h = Height / 4;
 
-			double w;
+            AddSubview(nameLabel, x, y, w, h);
 
-			if (Width > Height)
-			{
-				w = Width / 2;
-			}
-			else
-			{
-				w = Height / 2;
-			}
+            y += h;
+            h = Height - h;
 
-			double h = 50;
-
-			double x = Width / 2 - w / 2;
-			double y = padding;
-
-			AddSubview(nameLabel, x, y, w, h);
-
-			y += h;
-
-			AddSubview(nameInput, x, y, w, h);
-
-			y += h;
-
-			w = h * 3;
-			x = Width / 2 - w / 2;
-
-			AddSubview(Confirm, x, y, w, h);
-		}
-
+            AddSubview(nameInput, x, y, w, h);
+        }
 	}
 }

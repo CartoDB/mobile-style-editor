@@ -269,7 +269,7 @@ namespace mobile_style_editor
 			return files;
 		}
 
-        public async void Update(string owner, string name, string path, string branch, ZipData data, string message)
+        public async Task<string> Update(string owner, string name, string path, string branch, ZipData data, string message)
         {
             /*
              * TODO Perhaps it would be better to pass the List<GithubFiles> when pushing MainController,
@@ -279,7 +279,7 @@ namespace mobile_style_editor
             var contents = await GetRepositoryContent(owner, name, branch, path);
             var files = contents.ToGithubFiles();
 
-			/*
+            /*
              * TODO We assume that these files exist, so they're updated, not created
              * Additionally, we assume the branch exists. No new branch creation is possible
              * 
@@ -288,14 +288,15 @@ namespace mobile_style_editor
              * client.Git.Reference.Create(owner, name, new NewReference("heads/<new-branch-name>", "<sha1-of-something>"));
              */
 
-			foreach (GithubFile file in files) {
-
-                for (int i = 0; i < data.StyleFileNames.Count; i++)
+            try
+            {
+                foreach (GithubFile file in files)
                 {
-                    string filename = data.StyleFileNames[i];
-                    if (file.Name.Equals(filename))
+
+                    for (int i = 0; i < data.StyleFileNames.Count; i++)
                     {
-                        if (data.ChangeList.Contains(filename))
+                        string filename = data.StyleFileNames[i];
+                        if (file.Name.Equals(filename) && data.ChangeList.Contains(filename))
                         {
                             string content = data.DecompressedFiles[i];
 
@@ -304,9 +305,17 @@ namespace mobile_style_editor
 
                             var request = new UpdateFileRequest(message + " (" + path + ")", content, file.Sha, branch);
                             var changeSet = await client.Repository.Content.UpdateFile(owner, name, path, request);
+
+                            return null;
                         }
                     }
                 }
+
+                return "You haven't made any changes. What exactly should I commit?";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
             }
         }
 
