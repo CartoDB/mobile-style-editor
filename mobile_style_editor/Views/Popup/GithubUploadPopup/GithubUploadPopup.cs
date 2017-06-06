@@ -3,8 +3,6 @@ namespace mobile_style_editor
 {
 	public class ConfirmationPopup : BasePopup
 	{
-		public PopupType Type;
-
 		public new ConfirmationPopupContent Content { get { return (ConfirmationPopupContent)base.Content; } }
 
 		public ConfirmationPopup()
@@ -35,10 +33,5 @@ namespace mobile_style_editor
 			AddSubview(Content, x, y, w, h);
 		}
 
-		public void Show(PopupType type)
-		{
-			Type = type;
-			base.Show();
-		}
 	}
 }

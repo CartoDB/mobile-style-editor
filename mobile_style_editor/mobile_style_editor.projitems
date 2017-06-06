@@ -28,11 +28,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\ConfirmationPopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\GithubUploadPopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\LocalStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\StoredStyle.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\PopupType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\ConfirmationPopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\GithubUploadPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Toast.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DownloadEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DriveClientDroid.cs" />
@@ -105,7 +104,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\ConfirmationPopup\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileTabPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Github\" />

@@ -227,7 +227,13 @@ namespace mobile_style_editor
              */
 
 			//HubClient.Instance.Update("CartoDB", "mobile-styles", "nutiteq_bright/compiled_continouszoom", "master", ContentView.Data, "Upload test");
-			//ShowPopup(PopupType.Upload);
+			if (currentWorkingName == null)
+			{
+				Toast.Show("You don't seem to have made any changes", ContentView);
+				return;
+			}
+
+			ContentView.Popup.Show(type);
 		}
 
 		void OnSaveButtonClicked(object sender, EventArgs e)
@@ -264,17 +270,6 @@ namespace mobile_style_editor
                 Alert("Whoops", obj, null);
             });
         }
-
-		void ShowPopup(PopupType type)
-		{
-			if (currentWorkingName == null)
-			{
-				Toast.Show("You don't seem to have made any changes", ContentView);
-				return;
-			}
-
-			ContentView.Popup.Show(type);
-		}
 
 		void OnConfirmButtonClicked(object sender, EventArgs e)
 		{

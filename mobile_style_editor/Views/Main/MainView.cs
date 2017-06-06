@@ -27,7 +27,7 @@ namespace mobile_style_editor
 
         public CSSEditorView Editor { get; private set; }
 
-        public ConfirmationPopup Popup { get; private set; }
+        public GithubUploadPopup GithubUpload { get; private set; }
 
         public FileTabPopup FileTabs { get; private set; }
 
@@ -46,7 +46,7 @@ namespace mobile_style_editor
 
             Editor = new CSSEditorView();
 
-            Popup = new ConfirmationPopup();
+            GithubUpload = new GithubUploadPopup();
 
             FileTabs = new FileTabPopup();
 #if __UWP__
@@ -109,7 +109,7 @@ namespace mobile_style_editor
 				FileTabs.Initialize(Data);
 			}
 
-            AddSubview(Popup, 0, 0, Width, Height);
+            AddSubview(GithubUpload, 0, 0, Width, Height);
 
 #if __UWP__
             double zoomPadding = 15;
