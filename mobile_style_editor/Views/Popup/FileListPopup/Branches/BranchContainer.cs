@@ -19,6 +19,12 @@ namespace mobile_style_editor
         public double TotalHeight { get; set; }
         public double OriginalY { get; set; }
 
+        public new Color BackgroundColor
+        {
+            get { return content.BackgroundColor; }
+            set { content.BackgroundColor = value; }
+        }
+
         public BranchContainer()
         {
             header = new TableSection();
@@ -34,13 +40,15 @@ namespace mobile_style_editor
                 ToggleHeight();
             };
 
-			content.BackgroundColor = Color.FromRgb(240, 240, 240);
+			BackgroundColor = Color.FromRgb(240, 240, 240);
 		}
 
         public override void LayoutSubviews()
         {
             AddSubview(Header, 0, 0, Width, HeaderHeight);
             AddSubview(content, 0, HeaderHeight, Width, Height - HeaderHeight);
+
+            base.LayoutSubviews();
         }
 
         public void Add(IReadOnlyList<Octokit.Branch> branches)
