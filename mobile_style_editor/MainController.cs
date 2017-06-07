@@ -44,6 +44,10 @@ namespace mobile_style_editor
             Content = ContentView;
 
             ContentView.NavigationBar.Title.Text = filename.ToUpper();
+
+            var localPath = Path.Combine(folder, filename.Replace(Parser.ZipExtension, ""));
+            var item = LocalStorage.Instance.GetRepositoryData(localPath);
+            Console.WriteLine(item);
         }
 
         protected override void OnAppearing()
