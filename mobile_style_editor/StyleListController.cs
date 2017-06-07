@@ -21,6 +21,7 @@ namespace mobile_style_editor
         public static string GithubOwner = "";
 		public static string GithubRepo = "";
 		public static string GithubPath = "";
+        public static double GithubId = -1;
 
 		public static string CurrentBranch = HubClient.MasterBranch;
 
@@ -382,6 +383,31 @@ namespace mobile_style_editor
 				ContentView.HideLoading();
 			});
 
+            RepositoryData item = new RepositoryData();
+
+            item.GithubId = GithubId;
+
+            item.StyleName = rootFolder;
+            
+            item.Owner = GithubOwner;
+            item.Name = GithubRepo;
+            item.RepositoryPath = GithubPath;
+            //TODO
+            
+            item.Branch = CurrentBranch;
+            item.LocalPath = destination;
+
+            item.ConstructPrimaryKey();
+
+            bool inserted = LocalStorage.Instance.Insert(item);
+            
+            // TODO Theoretically should check this earlier to and then prompt 
+            // the user whether they wish to overwrite an existing style
+            if (!inserted)
+            {
+                LocalStorage.Instance.Update(item);
+            }
+
 			ShowMyStyles();
 		}
 
@@ -591,6 +617,8 @@ namespace mobile_style_editor
                     {
                         GithubOwner = item.GithubFile.Owner;
                         GithubRepo = item.GithubFile.Name;
+                        GithubId = item.GithubFile.Id;
+
                         ContentView.FileList.Pages.Hide();
 
 						ContentView.FileList.Branches.IsVisible = true;

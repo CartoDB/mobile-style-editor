@@ -97,6 +97,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\AddStyleItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\PickerViewItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\StyleListItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\RepositoryData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
