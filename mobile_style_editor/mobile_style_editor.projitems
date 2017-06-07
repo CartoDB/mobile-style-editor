@@ -12,7 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)EditorApplication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\UWPVFS.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PickerController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ColorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\Parser.cs" />
@@ -59,8 +58,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\BackButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\CSSEditorView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\EditorField.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Picker\PickerView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Picker\Subviews\PickerViewItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\FileTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\FileTabs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\Toolbar.cs" />
@@ -114,7 +111,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Editor\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Picker\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Utilities\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\Tabs\" />
