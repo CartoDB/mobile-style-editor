@@ -38,21 +38,14 @@ namespace mobile_style_editor
 
 		public static LocalStorage Instance = new LocalStorage();
 
-        #if __UWP__
-#else
         SQLiteConnection db;
-#endif
+
         LocalStorage()
         {
-#if __UWP__
-            //string folder = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
-#else
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             const string file = "carto_style_editor.db";
 
             db = new SQLiteConnection(System.IO.Path.Combine(folder, file));
-            db.CreateTable<StoredStyle>();
-#endif
 
         }
 

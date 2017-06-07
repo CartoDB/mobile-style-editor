@@ -552,15 +552,7 @@ namespace mobile_style_editor
 				ContentView.ShowLoading();
 			});
 
-			if (item.Style != null)
-			{
-				await Navigation.PushAsync(new MainController(item.Style.Path, item.Style.Name));
-				Device.BeginInvokeOnMainThread(delegate
-				{
-					ContentView.HideLoading();
-				});
-			}
-			else if (item.DriveFile != null)
+			if (item.DriveFile != null)
 			{
 #if __ANDROID__
 				/*

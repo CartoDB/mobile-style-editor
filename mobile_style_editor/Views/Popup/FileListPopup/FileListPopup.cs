@@ -59,12 +59,6 @@ namespace mobile_style_editor
             Header.Text = "GOOGLE DRIVE";
 		}
 
-		public void Show(List<StoredStyle> styles)
-		{
-			Show();
-			FileContent.Populate(styles.ToObjects());
-		}
-
 		public List<GithubFile> GithubFiles { get; private set; }
 
 		public void Show(List<GithubFile> files)

@@ -7,8 +7,7 @@ namespace mobile_style_editor
 	{
 		public DriveFile DriveFile { get; set; }
 		public GithubFile GithubFile { get; set; }
-		public new StoredStyle Style { get; set; }
-
+		
 		BaseView container;
 
 		Image image;
@@ -68,10 +67,6 @@ namespace mobile_style_editor
 			if (DriveFile != null)
 			{
 				text.Text = DriveFile.Name;
-			}
-			else if (Style != null)
-			{
-				text.Text = Style.Name;
 			}
 			else
 			{

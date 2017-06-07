@@ -29,7 +29,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\GithubUploadPopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\LocalStorage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SQLite\StoredStyle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\GithubUploadPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Toast.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Google\DownloadEventArgs.cs" />
@@ -45,12 +44,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Github\GithubFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github\DownloadedGithubFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StyleListController.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseScrollView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleListItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\MapExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleListView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\AddStyleItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\DownloadResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\ClickViewRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\SelectButton.cs" />
@@ -97,6 +93,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\BranchContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\BranchCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\BranchHeader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\List\StyleContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\AddStyleItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\PickerViewItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\StyleListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
@@ -120,6 +120,8 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\WebViewPopup\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\List\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />

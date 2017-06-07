@@ -81,10 +81,6 @@ namespace mobile_style_editor
                     {
                         view.DriveFile = (DriveFile)item;
                     }
-                    else if (item is StoredStyle)
-                    {
-                        view.Style = (StoredStyle)item;
-                    }
                     else
                     {
                         view.GithubFile = (GithubFile)item;
