@@ -336,7 +336,7 @@ namespace mobile_style_editor
 			});
 
 			List<GithubFile> folder = ContentView.FileList.GithubFiles;
-			List<DownloadedGithubFile> files = await HubClient.Instance.DownloadFolder(GithubOwner, GithubRepo, folder);
+            List<DownloadedGithubFile> files = await HubClient.Instance.DownloadFolder(GithubOwner, GithubRepo, CurrentBranch, folder);
 
 			Toast.Show("Saving...", ContentView);
 
@@ -392,10 +392,9 @@ namespace mobile_style_editor
             item.Owner = GithubOwner;
             item.Name = GithubRepo;
             item.RepositoryPath = GithubPath;
-            //TODO
             
             item.Branch = CurrentBranch;
-            item.LocalPath = destination;
+            item.LocalPath = destination + rootFolder;
 
             item.ConstructPrimaryKey();
 

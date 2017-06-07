@@ -237,7 +237,7 @@ namespace mobile_style_editor
 			return result;
 		}
 
-		public async Task<List<DownloadedGithubFile>> DownloadFolder(string owner, string repoName, List<GithubFile> folder)
+		public async Task<List<DownloadedGithubFile>> DownloadFolder(string owner, string repoName, string branch, List<GithubFile> folder)
 		{
 			List<DownloadedGithubFile> files = new List<DownloadedGithubFile>();
 
@@ -246,9 +246,9 @@ namespace mobile_style_editor
 				if (file.IsDirectory)
 				{
 					string path = file.Path;
-					var items = await GetRepositoryContent(owner, repoName, path);
+					var items = await GetRepositoryContent(owner, repoName, branch, path);
 					List<GithubFile> innerFolder = items.ToGithubFiles();
-					List<DownloadedGithubFile> inner = await DownloadFolder(owner, repoName, innerFolder);
+					List<DownloadedGithubFile> inner = await DownloadFolder(owner, repoName, branch, innerFolder);
 					files.AddRange(inner);
 				}
 				else
