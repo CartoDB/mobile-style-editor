@@ -82,10 +82,9 @@ namespace mobile_style_editor
         {
             var list = db.Query<RepositoryData>("SELECT * FROM RepositoryData Where LocalPath = '" +  localPath + "'");
 
-            var temp = db.Query<RepositoryData>("SELECT * FROM RepositoryData");
             if (list.Count != 1)
             {
-                return null;
+                return new RepositoryData();
             }
 
             return list[0];

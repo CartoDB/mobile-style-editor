@@ -35,6 +35,16 @@ namespace mobile_style_editor
 
         readonly SaveTimer timer = new SaveTimer();
 
+        string owner { get { return GithubData.Owner; } }
+
+        string repository { get { return GithubData.Name; } }
+
+        string path { get { return GithubData.RepositoryPath; } }
+
+        string branch { get { return GithubData.Branch; } }
+
+        RepositoryData GithubData;
+
         public MainController(string folder, string filename)
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -50,7 +60,8 @@ namespace mobile_style_editor
             string[] split = folder.Split('/');
             string styleFolder = split[split.Length - 1];
             var localPath = Path.Combine(styleFolder, filename.Replace(Parser.ZipExtension, ""));
-            var item = LocalStorage.Instance.GetRepositoryData(localPath);
+
+            GithubData = LocalStorage.Instance.GetRepositoryData(localPath);
         }
 
         protected override void OnAppearing()
@@ -238,12 +249,6 @@ namespace mobile_style_editor
 
             ContentView.GithubUpload.Content.HideBranchLoading();
         }
-
-        string owner { get { return StyleListController.GithubOwner; } }
-        string repository { get { return StyleListController.GithubRepo; } }
-        string path { get { return StyleListController.GithubPath; } }
-
-        string branch { get { return StyleListController.CurrentBranch; } }
 
         void OnGithubCommitButtonClicked(object sender, EventArgs e)
 		{
