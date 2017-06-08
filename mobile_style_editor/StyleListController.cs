@@ -50,8 +50,16 @@ namespace mobile_style_editor
 			
 			if (LocalStorage.Instance.HasAccessToken)
 			{
-				string token = LocalStorage.Instance.AccessToken;
-				HubClient.Instance.Authenticate(token);
+                if (!HubClient.Instance.IsAuthenticated)
+                {
+					string token = LocalStorage.Instance.AccessToken;
+					HubClient.Instance.Authenticate(token);
+                }
+				
+                // TODO 
+                // We must reload for changes to be displayed,
+                // but this approach is too resource-heavy,
+                // BackButton press takes several seconds even on high-end devices
 				PopulateTemplateList();
 			}
 			else
@@ -193,7 +201,7 @@ namespace mobile_style_editor
 		List<Octokit.RepositoryContent> contents;
         bool FilesDownloaded { get { return contents != null; } }
 
-        async Task<bool> PopulateTemplateList(bool checkLocal = true)
+        async void PopulateTemplateList(bool checkLocal = true)
 		{
 			if (!FilesDownloaded)
 			{
@@ -203,8 +211,9 @@ namespace mobile_style_editor
 				 * Will render the wrong map if the order has somehow changed
 				 * 
 				 */
+
                 contents = await DownloadList();
-				ContentView.Templates.RenderList(contents);
+                ContentView.Templates.RenderList(contents);
 			}
 
 			int index = 0;
@@ -215,8 +224,6 @@ namespace mobile_style_editor
 				ContentView.Templates.RenderMap(result, index);
 				index++;
 			}
-
-			return false;
 		}
 
 		void InitializeAuthentication()
