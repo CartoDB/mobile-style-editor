@@ -394,7 +394,7 @@ namespace mobile_style_editor
             item.RepositoryPath = GithubPath;
             
             item.Branch = CurrentBranch;
-            item.LocalPath = destination + rootFolder;
+            item.LocalPath = Path.Combine(MyStyleFolder, rootFolder);
 
             item.ConstructPrimaryKey();
 

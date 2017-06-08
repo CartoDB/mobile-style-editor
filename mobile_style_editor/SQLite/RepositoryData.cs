@@ -24,9 +24,15 @@ namespace mobile_style_editor
 
         public string StyleName { get; set; }
 
+		public string FullLocalPath
+		{
+			get { return System.IO.Path.Combine(Parser.ApplicationFolder, LocalPath); }
+		}
+
         public void ConstructPrimaryKey()
         {
             Id = GithubId + "-" + RepositoryPath + "-" + Branch;
         }
+
     }
 }

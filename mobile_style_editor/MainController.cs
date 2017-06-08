@@ -43,9 +43,11 @@ namespace mobile_style_editor
             ContentView = new MainView();
             Content = ContentView;
 
-            ContentView.NavigationBar.Title.Text = filename.ToUpper();
+            ContentView.NavigationBar.Title.Text = filename.Replace(Parser.ZipExtension, "").ToUpper();
 
-            var localPath = Path.Combine(folder, filename.Replace(Parser.ZipExtension, ""));
+            string[] split = folder.Split('/');
+            string styleFolder = split[split.Length - 1];
+            var localPath = Path.Combine(styleFolder, filename.Replace(Parser.ZipExtension, ""));
             var item = LocalStorage.Instance.GetRepositoryData(localPath);
             Console.WriteLine(item);
         }
