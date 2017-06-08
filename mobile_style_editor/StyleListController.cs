@@ -436,8 +436,8 @@ namespace mobile_style_editor
 			});
 		}
 
-		const string MyStyleFolder = "my-styles";
-		const string TemplateFolder = "template-styles";
+		public const string MyStyleFolder = "my-styles";
+		public const string TemplateFolder = "template-styles";
 
 		void OnFileDownloadComplete(object sender, DownloadEventArgs e)
 		{

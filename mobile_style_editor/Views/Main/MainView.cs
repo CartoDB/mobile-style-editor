@@ -33,11 +33,11 @@ namespace mobile_style_editor
 
         public ZoomControl Zoom { get; private set; }
 
-        public MainView()
+        public MainView(bool isTemplateFolder)
         {
             IsNavigationBarVisible = true;
 
-			Toolbar = new Toolbar();
+            Toolbar = new Toolbar(isTemplateFolder);
 
             MapView = new MapContainer();
             MapView.IsZoomVisible = true;

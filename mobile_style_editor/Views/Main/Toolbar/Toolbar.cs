@@ -23,8 +23,12 @@ namespace mobile_style_editor
 
         public ToolbarButton EmailButton { get; private set; }
 
-		public Toolbar()
+        bool isTemplateFolder;
+
+		public Toolbar(bool isTemplateFolder)
 		{
+            this.isTemplateFolder = isTemplateFolder;
+
 			BackgroundColor = Colors.CartoNavy;
 
 			ExpandButton = new ExpandButton();
@@ -54,6 +58,11 @@ namespace mobile_style_editor
             // Button count
             int count = 3;
 
+            if (isTemplateFolder)
+            {
+                count -= 1;    
+            }
+
 			w = 100;
 			h = w / 3;
 			x = Width - (count * w + count * padding);
@@ -65,9 +74,12 @@ namespace mobile_style_editor
 
             AddSubview(EmailButton, x, y, w, h);
 
-            x += w + padding;
+            if (!isTemplateFolder)
+            {
+                x += w + padding;
 
-            AddSubview(UploadButton, x, y, w, h);
+                AddSubview(UploadButton, x, y, w, h);
+            }
 		}
 
         public const int MaxCount = 4;

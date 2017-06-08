@@ -16,6 +16,8 @@ namespace mobile_style_editor
 
         string TemporaryName { get { return "temporary-" + data.Filename; } }
 
+        bool IsTemplateFolder { get { return folder.Contains(StyleListController.TemplateFolder); } }
+
         bool ContainsUnsavedChanged { get; set; }
 
         string CalculatedPath
@@ -40,7 +42,7 @@ namespace mobile_style_editor
             this.folder = folder;
             this.filename = filename;
 
-            ContentView = new MainView();
+            ContentView = new MainView(IsTemplateFolder);
             Content = ContentView;
 
             ContentView.NavigationBar.Title.Text = filename.Replace(Parser.ZipExtension, "").ToUpper();
@@ -49,7 +51,6 @@ namespace mobile_style_editor
             string styleFolder = split[split.Length - 1];
             var localPath = Path.Combine(styleFolder, filename.Replace(Parser.ZipExtension, ""));
             var item = LocalStorage.Instance.GetRepositoryData(localPath);
-            Console.WriteLine(item);
         }
 
         protected override void OnAppearing()
