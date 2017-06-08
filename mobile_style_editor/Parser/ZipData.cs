@@ -20,7 +20,16 @@ namespace mobile_style_editor
 
         public List<string> ChangeList { get; set; }
 
-		public ZipData()
+        public int ProjectFileIndex
+        {
+            get
+            { 
+                string file = StyleFileNames.Find(f => f.Equals(Parser.ProjectFile));
+                return StyleFileNames.IndexOf(file);
+            }
+        }
+		
+        public ZipData()
 		{
 			DecompressedFiles = new List<string>();
 

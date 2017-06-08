@@ -5,8 +5,6 @@ namespace mobile_style_editor
 {
 	public class GithubFile
 	{
-		public const string PROJECTFILE = "project.json";
-
         public double Id { get; set; }
 
 		public string Name { get; set; }
@@ -58,7 +56,7 @@ namespace mobile_style_editor
 
 		public bool IsProjectFile
 		{
-			get { return Name.Equals(PROJECTFILE); }
+            get { return Name.Equals(Parser.ProjectFile); }
 		}
 	}
 }

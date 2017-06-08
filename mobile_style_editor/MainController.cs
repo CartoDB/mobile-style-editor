@@ -323,40 +323,47 @@ namespace mobile_style_editor
 				return;
 			}
 
-			ContentView.ShowLoading();
+            UpdateDataAndMap(text, index);
+		}
 
-			Task.Run(delegate
-			{
-				string path = data.StyleFilePaths[index];
+        void UpdateDataAndMap(string text, int index)
+        {
+            ContentView.ShowLoading();
+
+            Task.Run(delegate
+            {
+                string path = data.StyleFilePaths[index];
 
                 // Update file content in ZipData as well, in addition to saving it,
                 data.DecompressedFiles[index] = text;
 
-				FileUtils.OverwriteFileAtPath(path, text);
+                FileUtils.OverwriteFileAtPath(path, text);
+                
                 string name = TemporaryName;
 
-				string zipPath = Parser.Compress(data.DecompressedPath, name);
+                string zipPath = Parser.Compress(data.DecompressedPath, name);
 
-				// Get bytes to update style
-				byte[] zipBytes = FileUtils.PathToByteData(zipPath);
+                // Get bytes to update style
+                byte[] zipBytes = FileUtils.PathToByteData(zipPath);
 
-				Device.BeginInvokeOnMainThread(delegate
-				{
+                Device.BeginInvokeOnMainThread(delegate
+                {
                     // Save current working data (name & bytes as stream) to conveniently upload
                     // Doing this on the main thread to assure thread safety
 
-					currentWorkingName = name;
-					currentWorkingStream = new MemoryStream(zipBytes);
+                    currentWorkingName = name;
+                    currentWorkingStream = new MemoryStream(zipBytes);
 
-					ContentView.UpdateMap(zipBytes, delegate
-					{
-						ContentView.HideLoading();
-					});
+                    ContentView.UpdateMap(zipBytes, delegate
+                    {
+                        ContentView.HideLoading();
+                    });
 
                     ContainsUnsavedChanged = true;
-				});
-			});
-		}
+                });
+            });
+
+        }
 
 		void OnTabTapped(object sender, EventArgs e)
 		{

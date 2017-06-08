@@ -8,7 +8,7 @@ namespace mobile_style_editor
 {
 	public class Parser
 	{
-		const string ProjectFile = "project.json";
+		public const string ProjectFile = "project.json";
 
 		const string MSSExtension = ".mss";
 		public const string ZipExtension = ".zip";

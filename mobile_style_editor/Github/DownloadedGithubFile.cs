@@ -7,7 +7,7 @@ namespace mobile_style_editor
 {
 	public class DownloadedGithubFile
 	{
-		public bool IsProjectFile { get { return Path.Contains(GithubFile.PROJECTFILE); } }
+        public bool IsProjectFile { get { return Path.Contains(Parser.ProjectFile); } }
 
 		public string Name { get; set; }
 
