@@ -39,7 +39,12 @@ namespace mobile_style_editor
             string text = null;
 
             Xamarin.Forms.Device.BeginInvokeOnMainThread(delegate {
-                
+
+                if (contentView == null)
+                {
+                    return;
+                }
+
                 text = contentView.Editor.Text;
 
                 System.Threading.Tasks.Task.Run(delegate {

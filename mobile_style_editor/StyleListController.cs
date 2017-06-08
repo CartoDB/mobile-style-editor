@@ -92,10 +92,10 @@ namespace mobile_style_editor
 #endif
 
 #if __ANDROID__
-            ContentView.ShowMapViews();
+			ContentView.ShowMapViews();
 #endif
 			ShowMyStyles();
-        }
+		}
 
 		protected override void OnDisappearing()
 		{

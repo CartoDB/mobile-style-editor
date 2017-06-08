@@ -100,6 +100,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\RepositoryData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\EntryWithTitle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\LabelWithTitle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />

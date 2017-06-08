@@ -7,7 +7,7 @@ namespace mobile_style_editor
     public class BaseController : ContentPage
     {
 		/// <summary>
-        /// Convenience method of Xamarin.Form's await DisplayAlert(); 
+		/// Convenience method of Xamarin.Form's await DisplayAlert(); 
 		///  If "ok" is null, "cancel" functions as ok()
 		/// </summary>
 		public async void Alert(string title, string message, Action cancel, Action ok = null)
