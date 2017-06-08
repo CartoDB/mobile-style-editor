@@ -98,6 +98,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\PickerViewItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\StyleListItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\RepositoryData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\EntryWithTitle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\LabelWithTitle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />

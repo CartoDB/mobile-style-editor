@@ -237,17 +237,8 @@ namespace mobile_style_editor
              * 1. Style location & name change logic
              * 2. "Create new branch" logic
              */
-
-            ContentView.GithubUpload.Content.ShowBranchLoading();
-
+            ContentView.GithubUpload.Content.Update(owner, repository, path, branch);
             ContentView.GithubUpload.Show();
-
-            var branches = await HubClient.Instance.GetBranches(owner, repository);
-
-            ContentView.GithubUpload.Content.ShowBranches(branches);
-            ContentView.GithubUpload.Content.HighlightBranch(branch);
-
-            ContentView.GithubUpload.Content.HideBranchLoading();
         }
 
         void OnGithubCommitButtonClicked(object sender, EventArgs e)
