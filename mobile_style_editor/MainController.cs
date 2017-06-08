@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Carto.Core;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -62,6 +63,8 @@ namespace mobile_style_editor
             var localPath = Path.Combine(styleFolder, filename.Replace(Parser.ZipExtension, ""));
 
             GithubData = LocalStorage.Instance.GetRepositoryData(localPath);
+
+
         }
 
         protected override void OnAppearing()
@@ -73,6 +76,7 @@ namespace mobile_style_editor
             Task.Run(delegate
             {
                 data = Parser.GetZipData(folder, filename);
+
                 Device.BeginInvokeOnMainThread(delegate
                 {
                     ContentView.Initialize(data);
@@ -87,6 +91,7 @@ namespace mobile_style_editor
                         ContentView.HideLoading();
                     });
                 });
+
             });
 
             ContentView.NavigationBar.Back.Click += OnBackButtonPressed;
