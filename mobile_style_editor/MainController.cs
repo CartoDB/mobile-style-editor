@@ -255,7 +255,13 @@ namespace mobile_style_editor
 				if (error != null)
 				{
 					Alert("Whoops!", error, null);
-				}
+                } else
+                {
+                    ContentView.GithubUpload.Hide();
+
+                    message = "Changes committed to " + repository + "/" + path + " (" + branch + ")";
+                    Alert("Great success!", message, null);
+                }
 
 				ContentView.GithubUpload.HideLoading();
             });

@@ -118,9 +118,8 @@ namespace mobile_style_editor
             if (IsRefreshButtonVisibile)
             {
                 double size = 50;
-                double buttonPadding = size / 2;
 
-                AddSubview(RefreshButton, Width - (size + buttonPadding), size + buttonPadding, size, size);
+                AddSubview(RefreshButton, Width - (size + padding), size + padding, size, size);
                 RaiseChild(RefreshButton);
             }
         }
@@ -167,24 +166,18 @@ namespace mobile_style_editor
 
     }
 
-public class RefreshButton : ClickView
+    public class RefreshButton : ImageButton
     {
-		Image image;
-
         public RefreshButton()
         {
-            image = new Image();
-
             string folder = "";
 #if __UWP__
             folder = "Assets/";
 #endif
-            image.Source = new FileImageSource { File = folder + "icon_refresh_2.png" };
-        }
-
-        public override void LayoutSubviews()
-        {
-            AddSubview(image, 0, 0, Width, Height);
+            Source = new FileImageSource { File = folder + "icon_refresh.png" };
+            ImagePadding = 5;
+            BackgroundColor = Colors.CartoNavyTransparentDark;
+            CornerRadius = 5;
         }
     }
 }
