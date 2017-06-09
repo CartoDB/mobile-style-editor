@@ -17,131 +17,131 @@ using Xamarin.Forms.Platform.UWP;
 namespace mobile_style_editor
 {
     public class StyleListController : BaseController
-	{
+    {
         public static string GithubOwner = "";
-		public static string GithubRepo = "";
-		public static string GithubPath = "";
+        public static string GithubRepo = "";
+        public static string GithubPath = "";
         public static double GithubId = -1;
 
-		public static string CurrentBranch = HubClient.MasterBranch;
+        public static string CurrentBranch = HubClient.MasterBranch;
 
-		public static string BasePath { get { return (GithubRepo + "/").ToUpper(); } }
+        public static string BasePath { get { return (GithubRepo + "/").ToUpper(); } }
 
-		public StyleListView ContentView { get; private set; }
+        public StyleListView ContentView { get; private set; }
 
-		public StyleListController()
-		{
-			NavigationPage.SetHasNavigationBar(this, false);
+        public StyleListController()
+        {
+            NavigationPage.SetHasNavigationBar(this, false);
 
-			ContentView = new StyleListView();
-			Content = ContentView;
+            ContentView = new StyleListView();
+            Content = ContentView;
 
             ContentView.NavigationBar.IsBackButtonVisible = false;
-			ContentView.NavigationBar.Title.Text = "CARTO STYLE EDITOR";
+            ContentView.NavigationBar.Title.Text = "CARTO STYLE EDITOR";
 
 #if __IOS__
-			DriveClientiOS.Instance.Authenticate();
+            DriveClientiOS.Instance.Authenticate();
 #endif
-		}
+        }
 
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
-			
-			if (LocalStorage.Instance.HasAccessToken)
-			{
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (LocalStorage.Instance.HasAccessToken)
+            {
                 if (!HubClient.Instance.IsAuthenticated)
                 {
-					string token = LocalStorage.Instance.AccessToken;
-					HubClient.Instance.Authenticate(token);
+                    string token = LocalStorage.Instance.AccessToken;
+                    HubClient.Instance.Authenticate(token);
                 }
-				
+
                 // TODO 
                 // We must reload for changes to be displayed,
                 // but this approach is too resource-heavy,
                 // BackButton press takes several seconds even on high-end devices
-				PopulateTemplateList();
-			}
-			else
-			{
-				InitializeAuthentication();
-			}
+                PopulateTemplateList();
+            }
+            else
+            {
+                InitializeAuthentication();
+            }
 
-			ContentView.AddStyle.Drive.Click += OnDriveButtonClick;
-			ContentView.AddStyle.Github.Click += OnGithubButtonClick;
+            ContentView.AddStyle.Drive.Click += OnDriveButtonClick;
+            ContentView.AddStyle.Github.Click += OnGithubButtonClick;
 
-			ContentView.MyStyles.ItemClick += OnStyleClick;
-			ContentView.Templates.ItemClick += OnStyleClick;
+            ContentView.MyStyles.ItemClick += OnStyleClick;
+            ContentView.Templates.ItemClick += OnStyleClick;
 
             ContentView.Templates.RefreshButton.Click += OnTemplateRefreshClick;
 
-			ContentView.Tabs.TabClicked += OnTabClick;
+            ContentView.Tabs.TabClicked += OnTabClick;
 
-			ContentView.Webview.Authenticated += OnCodeReceived;
+            ContentView.Webview.Authenticated += OnCodeReceived;
 
-			ContentView.FileList.Header.BackButton.Click += OnPopupBackButtonClick;
-			ContentView.FileList.Header.Select.Click += OnSelectClick;
+            ContentView.FileList.Header.BackButton.Click += OnPopupBackButtonClick;
+            ContentView.FileList.Header.Select.Click += OnSelectClick;
 
-			ContentView.FileList.FileContent.ItemClick += OnItemClicked;
-			ContentView.FileList.Pages.PageClicked += OnPageClick;
+            ContentView.FileList.FileContent.ItemClick += OnItemClicked;
+            ContentView.FileList.Pages.PageClicked += OnPageClick;
 
             ContentView.SettingsButton.Click += OnSettingsClick;
             ContentView.Settings.SettingsContent.GithubInfo.LogoutButton.Click += OnLogoutButtonClicked;
 
             ContentView.FileList.Branches.CellClick += OnBranchCellClicked;
 
-			HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
+            HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
 #if __ANDROID__
             DriveClientDroid.Instance.DownloadStarted += OnDownloadStarted;
             DriveClientDroid.Instance.DownloadComplete += OnFileDownloadComplete;
 #elif __IOS__
-			DriveClientiOS.Instance.DownloadComplete += OnFileDownloadComplete;
-			DriveClientiOS.Instance.ListDownloadComplete += OnListDownloadComplete;
+            DriveClientiOS.Instance.DownloadComplete += OnFileDownloadComplete;
+            DriveClientiOS.Instance.ListDownloadComplete += OnListDownloadComplete;
 #endif
 
 #if __ANDROID__
 			ContentView.ShowMapViews();
 #endif
-			ShowMyStyles();
-		}
+            ShowMyStyles();
+        }
 
-		protected override void OnDisappearing()
-		{
-			base.OnDisappearing();
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
 
-			ContentView.AddStyle.Drive.Click -= OnDriveButtonClick;
-			ContentView.AddStyle.Github.Click -= OnGithubButtonClick;
+            ContentView.AddStyle.Drive.Click -= OnDriveButtonClick;
+            ContentView.AddStyle.Github.Click -= OnGithubButtonClick;
 
-			ContentView.MyStyles.ItemClick -= OnStyleClick;
-			ContentView.Templates.ItemClick -= OnStyleClick;
+            ContentView.MyStyles.ItemClick -= OnStyleClick;
+            ContentView.Templates.ItemClick -= OnStyleClick;
 
-			ContentView.Templates.RefreshButton.Click -= OnTemplateRefreshClick;
+            ContentView.Templates.RefreshButton.Click -= OnTemplateRefreshClick;
 
-			ContentView.Tabs.TabClicked += OnTabClick;
+            ContentView.Tabs.TabClicked += OnTabClick;
 
-			ContentView.Webview.Authenticated -= OnCodeReceived;
+            ContentView.Webview.Authenticated -= OnCodeReceived;
 
-			ContentView.FileList.Header.BackButton.Click -= OnPopupBackButtonClick;
-			ContentView.FileList.Header.Select.Click -= OnSelectClick;
+            ContentView.FileList.Header.BackButton.Click -= OnPopupBackButtonClick;
+            ContentView.FileList.Header.Select.Click -= OnSelectClick;
 
-			ContentView.FileList.FileContent.ItemClick -= OnItemClicked;
-			ContentView.FileList.Pages.PageClicked -= OnPageClick;
+            ContentView.FileList.FileContent.ItemClick -= OnItemClicked;
+            ContentView.FileList.Pages.PageClicked -= OnPageClick;
 
-			ContentView.SettingsButton.Click -= OnSettingsClick;
+            ContentView.SettingsButton.Click -= OnSettingsClick;
             ContentView.Settings.SettingsContent.GithubInfo.LogoutButton.Click -= OnLogoutButtonClicked;
 
             ContentView.FileList.Branches.CellClick -= OnBranchCellClicked;
 
-			HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadStarted;
+            HubClient.Instance.FileDownloadStarted -= OnGithubFileDownloadStarted;
 
 #if __ANDROID__
             DriveClientDroid.Instance.DownloadStarted -= OnDownloadStarted;
             DriveClientDroid.Instance.DownloadComplete -= OnFileDownloadComplete;
 #elif __IOS__
-			DriveClientiOS.Instance.DownloadComplete -= OnFileDownloadComplete;
-			DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
+            DriveClientiOS.Instance.DownloadComplete -= OnFileDownloadComplete;
+            DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
 #endif
-		}
+        }
 
         async void OnBranchCellClicked(object sender, EventArgs e)
         {
@@ -149,7 +149,7 @@ namespace mobile_style_editor
 
             BranchCell cell = (BranchCell)sender;
             cell.Highlight();
-            
+
             CurrentBranch = cell.Branch.Name;
 
             var content = await HubClient.Instance.GetRepositoryContent(GithubOwner, GithubRepo, CurrentBranch, GithubPath);
@@ -175,14 +175,18 @@ namespace mobile_style_editor
 
                     Stream stream = await HubClient.Instance.GetUserAvatar(user.AvatarUrl);
                     ContentView.Settings.SettingsContent.GithubInfo.Update(stream);
-				} 
+                }
                 else
                 {
                     ContentView.Settings.SettingsContent.GithubInfo.IsVisible = false;
-                    Console.WriteLine("Github not authenticated");    
+                    Console.WriteLine("Github not authenticated");
                 }
+#if __IOS__
                 // TODO Get real drive information
                 ContentView.Settings.SettingsContent.DriveInfo.Update("Nuti Tab", "nutitab@gmail.com", "icon_avatar_template.png");
+#elif __ANDROID__
+
+#endif
             }
         }
 
