@@ -90,6 +90,8 @@ namespace mobile_style_editor
             }
         }
 #endif
+        System.Timers.Timer updateTimer;
+
         public EditorField()
 #if __ANDROID__
 		: base(Forms.Context)
@@ -125,6 +127,7 @@ namespace mobile_style_editor
             AutocorrectionType = UITextAutocorrectionType.No;
 
             RegisterForKeyboardNotifications();
+
 #elif __UWP__
             Window.Current.CoreWindow.KeyDown += (s, e) =>
             {
@@ -158,13 +161,26 @@ namespace mobile_style_editor
             
             IsSpellCheckEnabled = false;
 #endif
+            updateTimer = new System.Timers.Timer(1000);
+            updateTimer.Elapsed += UpdateText;
+            updateTimer.Start();
         }
 
+        public void UpdateText(object sender, EventArgs e)
+        {
+            Console.WriteLine("Update! (" + currentSelection + ")");
+
+            if (currentText != null && currentSelection != -1)
+            {
+                Update(currentText, currentSelection);
+            }
+        }
 
         const string NewLine = "\n";
 		const string Backspace = "";
-        
-		string current;
+
+        int currentSelection = - 1;
+		string currentText;
 
 #if __ANDROID__
 		Android.Graphics.Rect rect;
@@ -252,34 +268,40 @@ namespace mobile_style_editor
 
 #elif __IOS__
 
-		[Foundation.Export("textView:shouldChangeTextInRange:replacementText:")]
+        [Foundation.Export("textView:shouldChangeTextInRange:replacementText:")]
         public new bool ShouldChangeText(UITextView textView, Foundation.NSRange range, string text)
         {
-			int selection = (int)range.Location;
-
-			if (text.Equals(NewLine))
-			{
-				//current = current.Insert(selection, NewLine);
-				//Update(current, selection + 1);
-			}
-            else if (text.Equals(Backspace))
-			{
-                //string substring = current.Substring(selection - 1, 1);
-                
-                //if (substring.Equals(NewLine))
-                //{
-                //    current = current.Remove(selection - 1, 1);
-                //    Update(current, selection);
-                //}
-			}
-
+            int selection = (int)range.Location;
+            if (text.Equals(Backspace))
+            {
+                currentText = currentText.Remove(selection, 1);
+            }
+            else
+            {
+                currentText = currentText.Insert(selection, text);
+            }
             return true;
+        }
+
+        [Foundation.Export("textViewDidChangeSelection:")]
+        public void SelectionChanged(UITextView textView)
+        {
+            currentSelection = (int)textView.SelectedRange.Location;
+        }
+        
+        [Foundation.Export("scrollViewWillBeginDragging:")]
+        public void DraggingStarted(UIScrollView scrollView)
+        {
+            if (IsFirstResponder)
+            {
+                ResignFirstResponder();
+            }
         }
 #endif
 
         public void Update(string text, int selection = -1)
         {
-            current = text;
+            currentText = text;
 
             var watch = new System.Diagnostics.Stopwatch();
             watch.Start();
@@ -392,7 +414,7 @@ namespace mobile_style_editor
 #elif __IOS__
                     AttributedText = builder.Build();
                     SetNeedsDisplay();
-                    
+
                     if (selection != -1)
                     {
                         SelectedRange = new Foundation.NSRange(selection, 0);
