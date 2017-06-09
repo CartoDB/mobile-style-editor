@@ -75,11 +75,6 @@ namespace mobile_style_editor
             {
                 data = Parser.GetZipData(folder, filename);
 
-                if (data.ContainsNutiParameters)
-                {
-                    Console.WriteLine(data.NutiParameters);
-                }
-
                 Device.BeginInvokeOnMainThread(delegate
                 {
                     ContentView.Initialize(data);

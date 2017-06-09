@@ -46,23 +46,23 @@ namespace mobile_style_editor
 			{
 				List<NutiParameter> parameters = new List<NutiParameter>();
 
-				Variant json = Variant.FromString(ProjectFile).GetObjectElement("nutiparameters");
+                Variant json = Variant.FromString(ProjectFile).GetObjectElement(NutiConst.Parameters);
 
-                List<NutiEnum> enums = Enum.GetValues(typeof(NutiEnum)).Cast<NutiEnum>().ToList();
+                List<NutiEnum> enums = NutiConst.ParameterList;
 
                 foreach (NutiEnum item in enums)
                 {
                     Variant child = json.GetObjectElement(item.ToString());
 
-                    if (child.String != "null")
+                    if (child.String != NutiConst.NullValue)
                     {
 						var parameter = new NutiParameter();
 						parameter.Type = item;
 
                         List<string> keys = null;
-						Variant values = child.GetObjectElement("values");
+                        Variant values = child.GetObjectElement(NutiConst.Values);
 
-                        Variant defaultValue = child.GetObjectElement("default");
+                        Variant defaultValue = child.GetObjectElement(NutiConst.DefaultValue);
 
 						if (parameter.IsBoolean)
                         {
@@ -84,7 +84,7 @@ namespace mobile_style_editor
                         {
                             parameter.DefaultValue = defaultValue.String;
 							keys = new List<string> { "", "en", "de", "fr", "it", "es", "ru", "et", "zh" };
-                        } 
+                        }
                         else if (parameter.IsScale)
                         {
                             parameter.DefaultValue = defaultValue.Double;
