@@ -223,8 +223,8 @@ namespace mobile_style_editor
 					return;
 				}
 
-				current = current.Insert(SelectionStart, NewLine);
-				Update(current, SelectionStart + NewLine.Length);
+                currentText = currentText.Insert(SelectionStart, NewLine);
+				Update(currentText, SelectionStart + NewLine.Length);
 			}
 		}
 
@@ -257,13 +257,29 @@ namespace mobile_style_editor
         {
             int selection = SelectionStart;
 
-            string substring = current.Substring(selection - 1, 1);
+            string substring = currentText.Substring(selection - 1, 1);
 
             if (substring.Equals(NewLine))
             {
-                current = current.Remove(selection - 1, 1);
-                Update(current, selection - 1);
+                currentText = currentText.Remove(selection - 1, 1);
+                Update(currentText, selection - 1);
             }
+        }
+
+        protected override void OnScrollChanged(int l, int t, int oldl, int oldt)
+        {
+            ClearFocus();
+
+            CloseKeyboard();
+
+            base.OnScrollChanged(l, t, oldl, oldt);
+        }
+
+        void CloseKeyboard()
+        {
+            var service = Forms.Context.GetSystemService(Android.Content.Context.InputMethodService);
+            var manager = (InputMethodManager)service;
+            manager.HideSoftInputFromWindow(WindowToken, 0);
         }
 
 #elif __IOS__
