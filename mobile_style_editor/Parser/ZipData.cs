@@ -90,6 +90,11 @@ namespace mobile_style_editor
                             parameter.DefaultValue = defaultValue.Double;
                             keys = null;
                         }
+                        else if (parameter.IsSource)
+                        {
+                            parameter.DefaultValue = defaultValue.String;
+                            keys = null;
+                        }
 
                         if (keys != null)
                         {

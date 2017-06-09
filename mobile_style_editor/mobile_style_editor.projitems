@@ -101,7 +101,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\EntryWithTitle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\LabelWithTitle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TestController.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Parser\NutiEnumeter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parser\NutiParameter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
