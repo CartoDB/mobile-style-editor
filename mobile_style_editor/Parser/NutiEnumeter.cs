@@ -21,6 +21,10 @@ namespace mobile_style_editor
 
         public bool IsBoolean { get { return Key.Contains("3d"); } }
 
+        public bool IsScale { get { return Key.Contains("scale"); } }
+
+        public bool IsLanguage { get { return Key.Contains("lang"); } }
+
         public string Key { get { return Type.ToString(); } }
 
 		public object DefaultValue { get; set; }

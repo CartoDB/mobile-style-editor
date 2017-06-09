@@ -59,13 +59,13 @@ namespace mobile_style_editor
 						var parameter = new NutiParameter();
 						parameter.Type = item;
 
-                        if (parameter.IsBoolean)
+                        List<string> keys = null;
+						Variant values = child.GetObjectElement("values");
+
+                        Variant defaultValue = child.GetObjectElement("default");
+
+						if (parameter.IsBoolean)
                         {
-                            List<string> keys = new List<string> { "0", "1" };
-                            Variant values = child.GetObjectElement("values");
-
-                            Variant defaultValue = child.GetObjectElement("default");
-
                             if (item == NutiEnum.buildings3d)
                             {
                                 // Only buildingd3d has values as false/true,
@@ -77,11 +77,34 @@ namespace mobile_style_editor
                             {
                                 parameter.DefaultValue = defaultValue.String;
                             }
+							
+                            keys = new List<string> { "0", "1" };
+						}
+                        else if (parameter.IsLanguage)
+                        {
+                            parameter.DefaultValue = defaultValue.String;
+							keys = new List<string> { "", "en", "de", "fr", "it", "es", "ru", "et", "zh" };
+                        } 
+                        else if (parameter.IsScale)
+                        {
+                            parameter.DefaultValue = defaultValue.Double;
+                            keys = null;
+                        }
 
+                        if (keys != null)
+                        {
                             foreach (string key in keys)
                             {
-                                string value = values.GetObjectElement(key).String;
-                                parameter.Values.Add(key, value);
+                                if (item == NutiEnum.buildings3d)
+                                {
+                                    bool value = values.GetObjectElement(key).Bool;
+                                    parameter.Values.Add(key, value);
+                                }
+                                else
+                                {
+                                    string value = values.GetObjectElement(key).String;
+                                    parameter.Values.Add(key, value);
+                                }
                             }
                         }
 

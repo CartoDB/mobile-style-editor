@@ -63,8 +63,6 @@ namespace mobile_style_editor
             var localPath = Path.Combine(styleFolder, filename.Replace(Parser.ZipExtension, ""));
 
             GithubData = LocalStorage.Instance.GetRepositoryData(localPath);
-
-
         }
 
         protected override void OnAppearing()
@@ -76,6 +74,11 @@ namespace mobile_style_editor
             Task.Run(delegate
             {
                 data = Parser.GetZipData(folder, filename);
+
+                if (data.ContainsNutiParameters)
+                {
+                    Console.WriteLine(data.NutiParameters);
+                }
 
                 Device.BeginInvokeOnMainThread(delegate
                 {
