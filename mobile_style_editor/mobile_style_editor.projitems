@@ -87,9 +87,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\WebViewPopup\WebviewPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\WebViewPopup\CustomWebView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\SettingsPopup\LogoutButton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Renderer\ImageButtonRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderer\BaseViewRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\ImageButton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\SaveTimer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\BranchContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\BranchCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\BranchHeader.cs" />
@@ -102,7 +101,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\LabelWithTitle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TestController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\NutiParameter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\CartoCSSParser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\Utils\CartoCSSParser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\Utils\SaveTimer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\WarningPopup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
@@ -128,6 +129,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Branches\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\List\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Editor\Utils\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />

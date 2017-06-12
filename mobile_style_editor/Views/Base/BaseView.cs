@@ -7,6 +7,21 @@ namespace mobile_style_editor
 {
 	public class BaseView : RelativeLayout
 	{
+		public EventHandler<EventArgs> CornerRadiusSet;
+		int cornerRadius;
+		public int CornerRadius
+		{
+			get { return cornerRadius; }
+			set
+			{
+				cornerRadius = value;
+				if (CornerRadiusSet != null)
+				{
+					CornerRadiusSet(cornerRadius, EventArgs.Empty);
+				}
+			}
+		}
+
 		const string ConstraintProperty_Height = "height";
 
 		public static readonly double MatchParent = -1;
@@ -17,6 +32,7 @@ namespace mobile_style_editor
 		{
 			get { return GetConstraint(0); }
 		}
+
 		public BaseView()
 		{
 			SizeChanged += OnSizeChanged;

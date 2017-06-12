@@ -6,21 +6,6 @@ namespace mobile_style_editor
 {
     public class ImageButton : ClickView
     {
-		public EventHandler<EventArgs> CornerRadiusSet;
-		int cornerRadius;
-		public int CornerRadius
-		{
-			get { return cornerRadius; }
-			set
-			{
-				cornerRadius = value;
-				if (CornerRadiusSet != null)
-				{
-					CornerRadiusSet(cornerRadius, EventArgs.Empty);
-				}
-			}
-		}
-
 		Image image;
 
         double padding;

@@ -11,12 +11,12 @@ using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.UWP;
 #endif
 
-[assembly: ExportRenderer(typeof(ImageButton), typeof(ImageButtonRenderer))]
+[assembly: ExportRenderer(typeof(ImageButton), typeof(BaseViewRenderer))]
 namespace mobile_style_editor
 {
-    public class ImageButtonRenderer : VisualElementRenderer<RelativeLayout>
+    public class BaseViewRenderer : VisualElementRenderer<RelativeLayout>
     {
-        ImageButton View { get; set; }
+        BaseView View { get; set; }
 
         protected override void OnElementChanged(ElementChangedEventArgs<RelativeLayout> e)
         {
@@ -24,7 +24,7 @@ namespace mobile_style_editor
 
             if (e.NewElement != null)
             {
-                View = e.NewElement as ImageButton;
+                View = e.NewElement as BaseView;
 
                 if (View.CornerRadius!= 0)
                 {
