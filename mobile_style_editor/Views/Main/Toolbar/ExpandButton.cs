@@ -24,6 +24,7 @@ namespace mobile_style_editor
 			folder = "Assets/";
 #endif
 			icon_path = folder + "icon_expand_more.png";
+            BackgroundColor = Colors.CartoNavyTransparentDark;
 		}
 
 		public override void LayoutSubviews()

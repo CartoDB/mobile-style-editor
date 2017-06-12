@@ -36,41 +36,33 @@ namespace mobile_style_editor
             Tabs = new FileTabs();
             Tabs.IsVisible = false;
 
-			SaveButton = new ToolbarButton("SAVE");
+            double padding = 5;
 
-            EmailButton = new ToolbarButton("EMAIL");
+            SaveButton = new ToolbarButton();
+            SaveButton.Source = "icon_save.png";
+            SaveButton.ImagePadding = padding;
 
-            UploadButton = new ToolbarButton("UPLOAD");
+            EmailButton = new ToolbarButton();
+            EmailButton.Source = "icon_email.png";
+            EmailButton.ImagePadding = padding;
+
+            UploadButton = new ToolbarButton();
+            UploadButton.Source = "icon_upload.png";
+            UploadButton.ImagePadding = padding;
 		}
 
 		public override void LayoutSubviews()
 		{
-			double x = 0;
-			double y = 0;
-			double w = Width / 3;
-			double h = Height;
+			double padding = 5;
 
-			AddSubview(ExpandButton, x, y, w, h);
-            AddSubview(Tabs, x, y, Width, h);
+			double x = padding;
+            double y = padding;
+            double h = Height - 2 * padding;
+            double w = h;
 
-			double padding = 10;
+            AddSubview(SaveButton, x, y, w, h);
 
-            // Button count
-            int count = 3;
-
-            if (isTemplateFolder)
-            {
-                count -= 1;    
-            }
-
-			w = 100;
-			h = w / 3;
-			x = Width - (count * w + count * padding);
-			y = Height / 2 - h / 2;
-
-			AddSubview(SaveButton, x, y, w, h);
-
-			x += w + padding;
+            x += w + padding;
 
             AddSubview(EmailButton, x, y, w, h);
 
@@ -79,6 +71,25 @@ namespace mobile_style_editor
                 x += w + padding;
 
                 AddSubview(UploadButton, x, y, w, h);
+            }
+
+            if (Tabs.IsVisible)
+            {
+                x = Width - (Tabs.CalculatedWidth + padding);
+                y = 0;
+                w = Width - x;
+                h = Height;
+
+                AddSubview(Tabs, x, y, Width, h);    
+            } 
+            else
+            {
+                x = Width - (250 + padding);
+                y = padding;
+                w = Width - (x + padding);
+                h = Height - 2 * padding;
+
+                AddSubview(ExpandButton, x, y, w, h);    
             }
 		}
 
@@ -100,6 +111,8 @@ namespace mobile_style_editor
             {
                 ExpandButton.Update(data.StyleFileNames[0]);
             }
+
+            LayoutSubviews();
         }
 
 	}

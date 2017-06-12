@@ -49,6 +49,7 @@ namespace mobile_style_editor
             GithubUpload = new GithubUploadPopup();
 
             FileTabs = new FileTabPopup();
+            FileTabs.Hide();
 #if __UWP__
             Zoom = new ZoomControl();
 #endif
@@ -94,13 +95,14 @@ namespace mobile_style_editor
 
 				h = rowCount * rowHeight;
 				w = Width / 3;
-				x = 0;
+                x = Width - w;
 				y = rowHeight;
 
 				FileTabs.RowCount = rowCount;
 
                 if (Data.StyleFileNames.Count > Toolbar.MaxCount)
                 {
+                    FileTabs.Show();
                     AddSubview(FileTabs, x, y, w, h);
                 }
 

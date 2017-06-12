@@ -3,9 +3,14 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class ToolbarButton : ClickView
+    public class ToolbarButton : ImageButton
 	{
 		Label label;
+
+        public ToolbarButton() : base()
+        {
+            BackgroundColor = Colors.CartoNavyTransparentDark;
+        }
 
 		public ToolbarButton(string text)
 		{
@@ -22,12 +27,14 @@ namespace mobile_style_editor
 
 		public override void LayoutSubviews()
 		{
-			double x = 0;
-			double y = 0;
-			double w = Width;
-			double h = Height;
+			base.LayoutSubviews();
 
-			AddSubview(label, x, y, w, h);
+			//double x = 0;
+			//double y = 0;
+			//double w = Width;
+			//double h = Height;
+
+			//AddSubview(label, x, y, w, h);
 		}
 
 	}

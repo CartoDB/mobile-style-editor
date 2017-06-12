@@ -7,6 +7,8 @@ namespace mobile_style_editor
 {
 	public class FileTabs : BaseView
 	{
+        public static readonly double TabWidth = 100;
+
 		public int ActiveIndex 
 		{
 			get
@@ -27,6 +29,10 @@ namespace mobile_style_editor
 
 		List<FileTab> items;
 
+        public int Count { get { return items.Count; } }
+
+        public double CalculatedWidth { get { return TabWidth * Count; } }
+
 		public FileTabs()
 		{
 			items = new List<FileTab>();
@@ -37,9 +43,10 @@ namespace mobile_style_editor
 			Children.Clear();
 			items.Clear();
 
+
 			double x = 0;
 			double y = 0;
-            double w = 100;
+            double w = TabWidth;
 			double h = Height;
 
 			List<string> names = data.StyleFileNames;
