@@ -55,12 +55,15 @@ namespace mobile_style_editor
 
 			x = 0;
 			y = 0;
-			w = h * 3;
 
 			if (IsBackButtonVisible)
 			{
+                w = h * 2;
 				container.AddSubview(Back, x, y, w, h);
-			}
+            } else
+            {
+                w = h;    
+            }
 
 
 			x = w;
