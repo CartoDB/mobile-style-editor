@@ -8,6 +8,16 @@ namespace mobile_style_editor
     {
 		static float size = 1f;
 
+		/*
+         * Color scheme taken from: https://carto.com/carto-colors
+         * 
+         * Diverging schemes (except general and comment):
+         * Highlight values above and below an interesting mid-point in quantitative data with these schemes. 
+         * The middle color is assigned to the critical value with 
+         * two sequential type palettes at either end assigned to values above or below.
+         * (fourth from first row)
+         */
+
 		// White
 		static readonly Color generalColor = Color.White;
 		// Light gray
@@ -16,16 +26,16 @@ namespace mobile_style_editor
 		static readonly Color constantColor = Color.FromRgb(0, 147, 146);
 		// DarkGreen
 		static readonly Color blockHeaderColor = Color.FromRgb(57, 177, 133);
-		// LightGreen
-		static readonly Color color3 = Color.FromRgb(156, 203, 134);
-		// Wheat
-		static readonly Color color4 = Color.FromRgb(233, 226, 156);
 		// Pink Wheat
 		static readonly Color classColor = Color.FromRgb(238, 180, 121);
-		// Pink
-		static readonly Color color6 = Color.FromRgb(232, 132, 113);
 		// Dark Pink (magenta-ish)
 		static readonly Color idColor = Color.FromRgb(207, 89, 126);
+		// Pink
+		static readonly Color unused1 = Color.FromRgb(232, 132, 113);
+		// LightGreen
+		static readonly Color unused2 = Color.FromRgb(156, 203, 134);
+		// Wheat
+		static readonly Color unused3 = Color.FromRgb(233, 226, 156);
 
 		public static
 #if __ANDROID__

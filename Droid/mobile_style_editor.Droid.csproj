@@ -165,7 +165,6 @@
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
     <AndroidResource Include="Resources\layout\Toolbar.axml" />
     <AndroidResource Include="Resources\values\styles.xml" />
-    <AndroidResource Include="Resources\drawable-nodpi\icon_save_white.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_drive.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_refresh.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_database.png" />
@@ -182,6 +181,9 @@
     <AndroidResource Include="Resources\drawable-nodpi\icon_app.png" />
     <AndroidResource Include="Resources\drawable-nodpi\splash_screen.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_close.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\icon_email.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\icon_save.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\icon_upload.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SpanBuilder\" />
