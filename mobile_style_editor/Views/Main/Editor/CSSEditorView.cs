@@ -17,12 +17,15 @@ namespace mobile_style_editor
         ZipData items;
 
         public EditorField Field { get; private set; }
+        public WarningPopup Popup { get; private set; }
 
         public string Text { get { return Field.Text; } }
 
         public CSSEditorView()
         {
             Field = new EditorField();
+
+            Popup = new WarningPopup();
         }
 
         public override void LayoutSubviews()
@@ -43,6 +46,9 @@ namespace mobile_style_editor
             }
 #endif
             AddSubview(Field.ToView(), x, y, w, h);
+
+            AddSubview(Popup, x, y, w, h);
+            RaiseChild(Popup);
         }
 
         public void Initialize(ZipData items)

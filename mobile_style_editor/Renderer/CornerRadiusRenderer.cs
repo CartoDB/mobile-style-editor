@@ -11,10 +11,10 @@ using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.UWP;
 #endif
 
-[assembly: ExportRenderer(typeof(ImageButton), typeof(BaseViewRenderer))]
+[assembly: ExportRenderer(typeof(BaseView), typeof(CornerRadiusRenderer))]
 namespace mobile_style_editor
 {
-    public class BaseViewRenderer : VisualElementRenderer<RelativeLayout>
+    public class CornerRadiusRenderer : VisualElementRenderer<RelativeLayout>
     {
         BaseView View { get; set; }
 
