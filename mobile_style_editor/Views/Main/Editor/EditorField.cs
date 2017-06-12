@@ -304,9 +304,21 @@ namespace mobile_style_editor
             return true;
         }
 
+        bool initialized;
+
         [Foundation.Export("textViewDidChangeSelection:")]
         public void SelectionChanged(UITextView textView)
         {
+            if (!initialized)
+            {
+                // iOS calls this after text is initially entered,
+                // with SelectedRange.Location == Text.Length;
+                // Ignore the set so it wouldn't screw up selection 
+                initialized = true;
+                currentSelection = -1;
+                return;
+            }
+
             currentSelection = (int)textView.SelectedRange.Location;
         }
 
