@@ -79,7 +79,28 @@ namespace mobile_style_editor
                 }
                 else if (trimmed.StartsWith("@", StringComparison.Ordinal))
                 {
-                    builder.Append(withNewLine, constantColor.ToNativeColor(), size);
+                    Color color = constantColor;
+
+                    if (trimmed.Contains(":"))
+                    {
+                        string first = trimmed.Substring(0, 1);
+                        string last = trimmed.Substring(trimmed.Length - 1, 1);
+
+                        if (first.Equals(":") || last.Equals(":"))
+                        {
+                            color = generalColor;
+                        }
+                        else
+                        {
+                            color = constantColor;
+                        }
+                    }
+                    else
+                    {
+                        color = generalColor;
+                    }
+
+                    builder.Append(withNewLine, color.ToNativeColor(), size);
                 }
                 else if (trimmed.Contains("/*"))
                 {
