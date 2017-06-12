@@ -139,7 +139,7 @@ namespace mobile_style_editor
             ContentView.Toolbar.ExpandButton.Click -= OnFileTabExpand;
             ContentView.Toolbar.UploadButton.Click -= OnUploadButtonClicked;
             ContentView.Toolbar.SaveButton.Click -= OnSaveButtonClicked;
-            ContentView.Toolbar.EmailButton.Click = OnEmailButtonClicked;
+            ContentView.Toolbar.EmailButton.Click -= OnEmailButtonClicked;
 
             ContentView.MapView.RefreshButton.Click -= OnRefresh;
 
