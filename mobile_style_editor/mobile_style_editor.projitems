@@ -102,6 +102,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\GithubUploadPopup\LabelWithTitle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TestController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\NutiParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\CartoCSSParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
