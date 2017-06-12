@@ -48,7 +48,7 @@ namespace mobile_style_editor
 			var existing = View.BackgroundColor.ToNativeColor();
 
 			var drawable = new Android.Graphics.Drawables.GradientDrawable();
-			drawable.SetCornerRadius(View.CornerRadius);
+            drawable.SetCornerRadius(View.CornerRadius * Forms.Context.Resources.DisplayMetrics.Density);
 			drawable.SetColor(existing.ToArgb());
 
             Background = drawable;
