@@ -8,6 +8,27 @@ namespace mobile_style_editor
     {
 		static float size = 1f;
 
+		/*
+		// White
+		static readonly Color generalColor = Color.White;
+		// Light gray
+		static readonly Color commentColor = Color.FromRgb(120, 120, 120);
+		// Teal
+		static readonly Color color1 = Color.FromRgb(0, 147, 146);
+		// DarkGreen
+		static readonly Color color2 = Color.FromRgb(57, 177, 133);
+		// LightGreen
+		static readonly Color color3 = Color.FromRgb(156, 203, 134);
+		// Wheat
+		static readonly Color color4 = Color.FromRgb(233, 226, 156);
+		// Pink Wheat
+		static readonly Color color5 = Color.FromRgb(238, 180, 121);
+		// Pink
+		static readonly Color color6 = Color.FromRgb(232, 132, 113);
+		// Dark Pink (magenta-ish)
+		static readonly Color color7 = Color.FromRgb(207, 89, 126);
+        */
+
 		// White
 		static readonly Color generalColor = Color.White;
 		// Light gray
