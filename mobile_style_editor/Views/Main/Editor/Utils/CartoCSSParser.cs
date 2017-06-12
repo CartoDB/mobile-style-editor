@@ -153,7 +153,7 @@ namespace mobile_style_editor
                         builder.Append(withNewLine, blockHeaderColor.ToNativeColor(), size);
                     }
                 }
-                else if (trimmed.Contains("#"))
+                else if (trimmed.StartsWith("#", StringComparison.Ordinal))
                 {
                     builder.Append(withNewLine, idColor.ToNativeColor(), size);
                 }
