@@ -163,7 +163,10 @@ namespace mobile_style_editor
             updateTimer.Start();
         }
 
-        public void UpdateText(object sender, EventArgs e)
+        // Currently only used in iOS, as Droid does not have a solid API for recognizing scroll
+		public bool IsScrolling { get; private set; }
+
+		public void UpdateText(object sender, EventArgs e)
         {
             Console.WriteLine("Update! (" + currentSelection + ")");
 
@@ -306,8 +309,6 @@ namespace mobile_style_editor
         {
             currentSelection = (int)textView.SelectedRange.Location;
         }
-
-        public bool IsScrolling { get; private set; }
 
         [Foundation.Export("scrollViewWillBeginDragging:")]
         public void DraggingStarted(UIScrollView scrollView)
