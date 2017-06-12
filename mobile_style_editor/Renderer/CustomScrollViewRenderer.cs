@@ -33,7 +33,50 @@ namespace mobile_style_editor
         }
 
 #if __ANDROID__
+        static readonly VelocityTracker tracker = VelocityTracker.Obtain();
+        System.Timers.Timer timer;
 
+        public override bool OnTouchEvent(MotionEvent ev)
+        {
+            if (ev.Action == MotionEventActions.Move)
+            {
+                tracker.AddMovement(ev);
+            }
+            if (ev.Action == MotionEventActions.Up)
+            {
+                tracker.ComputeCurrentVelocity(1000);
+                var velocity = tracker.XVelocity;
+                Console.WriteLine("Velocity: " + velocity);
+                tracker.Clear();
+
+                if (Math.Abs(velocity) > 1000)
+                {
+                    timer = new System.Timers.Timer(125);
+                    timer.Start();
+                    timer.Elapsed += delegate
+                    {
+                        CallHandler();
+                        timer.Stop();
+                        timer.Dispose();
+                        timer = null;
+                    };
+                }
+                else
+                {
+                    CallHandler();
+                }
+            }
+
+            return base.OnTouchEvent(ev);
+        }
+
+        void CallHandler()
+        {
+            if (View.DecelerationEnded != null)
+            {
+                View.DecelerationEnded(null, EventArgs.Empty);
+            }
+        }
 #endif
     }
 }

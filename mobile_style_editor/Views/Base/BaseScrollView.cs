@@ -6,6 +6,8 @@ namespace mobile_style_editor
 {
 	public class BaseScrollView : ScrollView
 	{
+        public EventHandler<EventArgs> DecelerationEnded;
+
         public bool ScrollEnabled { get; set; } = true;
 
 		BaseView content;

@@ -67,6 +67,8 @@ namespace mobile_style_editor
                 InitializeAuthentication();
             }
 
+            ContentView.Container.DecelerationEnded += OnScrollViewDecelerationEnd;
+
             ContentView.AddStyle.Drive.Click += OnDriveButtonClick;
             ContentView.AddStyle.Github.Click += OnGithubButtonClick;
 
@@ -109,6 +111,8 @@ namespace mobile_style_editor
         {
             base.OnDisappearing();
 
+            ContentView.Container.DecelerationEnded -= OnScrollViewDecelerationEnd;
+
             ContentView.AddStyle.Drive.Click -= OnDriveButtonClick;
             ContentView.AddStyle.Github.Click -= OnGithubButtonClick;
 
@@ -141,6 +145,25 @@ namespace mobile_style_editor
             DriveClientiOS.Instance.DownloadComplete -= OnFileDownloadComplete;
             DriveClientiOS.Instance.ListDownloadComplete -= OnListDownloadComplete;
 #endif
+        }
+
+        void OnScrollViewDecelerationEnd(object sender, EventArgs e)
+        {
+            double x = ContentView.Container.ScrollX;
+            double total = ContentView.Container.Width;
+
+            if (x <= total / 2)
+            {
+				ContentView.Tabs.ScrollToMyStyles();
+				ContentView.ScrollTabToMyStyles();
+            }
+            else
+            {
+				ContentView.Tabs.ScrollToTemplates();
+				ContentView.ScrollTabToTemplates();
+            }
+
+            Console.WriteLine("X: " + x);
         }
 
         async void OnBranchCellClicked(object sender, EventArgs e)

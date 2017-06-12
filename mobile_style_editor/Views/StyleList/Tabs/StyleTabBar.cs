@@ -63,6 +63,23 @@ namespace mobile_style_editor
 				TabClicked(sender, e);
 			}
 		}
+
+        public void ScrollToMyStyles()
+        {
+            ScrollTo(MyStyles);
+        }
+
+        public void ScrollToTemplates()
+        {
+            ScrollTo(Templates);
+        }
+
+        public void ScrollTo(StyleTab tab)
+        {
+            Device.BeginInvokeOnMainThread(delegate {
+               Indicator.MoveTo(tab.X); 
+            });
+        }
 	}
 
 	public class StyleIndicator : BaseView
