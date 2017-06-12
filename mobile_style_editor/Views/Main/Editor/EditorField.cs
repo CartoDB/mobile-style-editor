@@ -18,6 +18,7 @@ using Android.Text;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+
 #endif
 
 namespace mobile_style_editor
@@ -27,7 +28,7 @@ namespace mobile_style_editor
 #elif __ANDROID__
 	public class EditorField : EditText
 #elif __UWP__
-        public class EditorField : Windows.UI.Xaml.Controls.RichEditBox
+    public class EditorField : Windows.UI.Xaml.Controls.RichEditBox
 #endif
     {
         public EventHandler<EventArgs> EditingEnded;
@@ -126,8 +127,6 @@ namespace mobile_style_editor
             Delegate = this;
             AutocorrectionType = UITextAutocorrectionType.No;
 
-            RegisterForKeyboardNotifications();
-
 #elif __UWP__
             Window.Current.CoreWindow.KeyDown += (s, e) =>
             {
@@ -142,8 +141,6 @@ namespace mobile_style_editor
             };
             
             BorderThickness = new Windows.UI.Xaml.Thickness(0, 0, 0, 0);
-
-            Console.WriteLine(Resources);
 
             string hover = "PointerOver";
             string focused = "Focused";
@@ -358,48 +355,5 @@ namespace mobile_style_editor
             });
         }
 
-#if __ANDROID__
-		public int ContentHeight
-		{
-			get
-			{
-				int padding = CompoundPaddingTop + CompoundPaddingBottom;
-
-				if ((int)Android.OS.Build.VERSION.SdkInt >= 16)
-				{
-
-					return (int)Math.Round((LineCount * (LineHeight + LineSpacingExtra) * LineSpacingMultiplier)) + padding;
-				}
-
-				return LineCount * LineHeight + padding;
-
-			}
-		}
-#elif __IOS__
-
-        void RegisterForKeyboardNotifications()
-        {
-			UIKeyboard.Notifications.ObserveWillShow(OnKeyboardShow);
-			UIKeyboard.Notifications.ObserveWillHide(OnKeyboardHide);            
-        }
-
-		void OnKeyboardShow(object sender, UIKeyboardEventArgs e)
-		{
-			// Need to calculate keyboard exact size due to Apple suggestions
-			ScrollEnabled = true;
-			float size = (float)e.FrameEnd.Height;
-
-			var inset = new UIEdgeInsets(0, 0, size, 0);
-			ContentInset = inset;
-		}
-
-		void OnKeyboardHide(object sender, UIKeyboardEventArgs e)
-        {
-            ContentInset = new UIEdgeInsets(0, 0, 0, 0);
-		}
-
-#endif
-
     }
-
 }
