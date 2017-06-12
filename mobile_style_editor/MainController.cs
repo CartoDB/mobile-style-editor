@@ -63,6 +63,11 @@ namespace mobile_style_editor
             var localPath = Path.Combine(styleFolder, filename.Replace(Parser.ZipExtension, ""));
 
             GithubData = LocalStorage.Instance.GetRepositoryData(localPath);
+
+            if (!LocalStorage.Instance.WarningPopupShown)
+            {
+                ContentView.Editor.Popup.Show();
+            }
         }
 
         protected override void OnAppearing()
@@ -108,6 +113,8 @@ namespace mobile_style_editor
 
             ContentView.MapView.SourceLabel.Done += OnSourceChanged;
 
+            ContentView.Editor.Popup.Box.Button.Click += OnWarningPopupButtonClicked;
+
 #if __ANDROID__
 			DriveClientDroid.Instance.UploadComplete += OnUploadComplete;
 #elif __IOS__
@@ -139,6 +146,8 @@ namespace mobile_style_editor
             ContentView.GithubUpload.Content.Commit.Clicked -= OnGithubCommitButtonClicked;
 
             ContentView.MapView.SourceLabel.Done -= OnSourceChanged;
+
+            ContentView.Editor.Popup.Box.Button.Click -= OnWarningPopupButtonClicked;
 
 #if __ANDROID__
 			DriveClientDroid.Instance.UploadComplete -= OnUploadComplete;
@@ -389,5 +398,10 @@ namespace mobile_style_editor
             }
 		}
 
+        void OnWarningPopupButtonClicked(object sender, EventArgs e)
+        {
+            LocalStorage.Instance.WarningPopupShown = true;
+            ContentView.Editor.Popup.Hide();
+        }
 	}
 }

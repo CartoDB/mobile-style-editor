@@ -13,6 +13,8 @@ namespace mobile_style_editor
             BackgroundColor = Colors.CartoNavyTransparent;
 
             Box = new WarningPopupBox();
+
+            Hide(false);
         }
 
         public override void LayoutSubviews()
@@ -26,6 +28,35 @@ namespace mobile_style_editor
 
             AddSubview(Box, x, y, w, h);
         }
+
+        public void Show(bool animated = true)
+        {
+            IsVisible = true;
+
+            if (!animated)
+            {
+                Opacity = 1;
+            }
+            else
+            {
+                this.FadeTo(1);
+            }
+        }
+
+        public async void Hide(bool animated = true)
+        {
+            if (!animated)
+            {
+                Opacity = 0;
+            }
+            else
+            {
+                await this.FadeTo(0);
+            }
+
+            IsVisible = false;
+        }
+
     }
 
     public class WarningPopupBox : BaseView
@@ -110,5 +141,6 @@ namespace mobile_style_editor
 			
 			AddSubview(Button, x, y, w, h);
 		}
-    }
+
+	}
 }

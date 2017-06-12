@@ -28,6 +28,7 @@ namespace mobile_style_editor
         #region Github Access Token
 
         const string ACCESSTOKEN = "access_token";
+        const string POPUPSHOWN = "popup_shown";
 
         public bool HasAccessToken
         {
@@ -58,6 +59,24 @@ namespace mobile_style_editor
             Application.Current.SavePropertiesAsync();
         }
         #endregion
+
+        public bool WarningPopupShown
+        {
+            get { return Application.Current.Properties.ContainsKey(POPUPSHOWN) && (bool)Application.Current.Properties[POPUPSHOWN] == true; }
+            set
+            {
+				if (!WarningPopupShown)
+				{
+					Application.Current.Properties.Add(POPUPSHOWN, value);
+				}
+				else
+				{
+					Application.Current.Properties[POPUPSHOWN] = value;
+				}
+
+				Application.Current.SavePropertiesAsync();
+            }
+        }
 
         #region RepositoryData
 
