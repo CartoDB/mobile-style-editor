@@ -169,15 +169,20 @@ namespace mobile_style_editor
 
             if (currentText != null && currentSelection != -1)
             {
+                if (IsScrolling)
+                {
+                    return;
+                }
+
                 Update(currentText, currentSelection);
             }
         }
 
         const string NewLine = "\n";
-		const string Backspace = "";
+        const string Backspace = "";
 
-        int currentSelection = - 1;
-		string currentText;
+        int currentSelection = -1;
+        string currentText;
 
 #if __ANDROID__
 		Android.Graphics.Rect rect;
@@ -301,7 +306,9 @@ namespace mobile_style_editor
         {
             currentSelection = (int)textView.SelectedRange.Location;
         }
-        
+
+        public bool IsScrolling { get; private set; }
+
         [Foundation.Export("scrollViewWillBeginDragging:")]
         public void DraggingStarted(UIScrollView scrollView)
         {
@@ -309,6 +316,23 @@ namespace mobile_style_editor
             {
                 ResignFirstResponder();
             }
+
+            IsScrolling = true;
+        }
+
+        [Foundation.Export("scrollViewDidEndDragging:willDecelerate:")]
+        public void DraggingEnded(UIScrollView scrollView, bool willDecelerate)
+        {
+            if (!willDecelerate)
+            {
+                IsScrolling = false;
+            }
+        }
+
+        [Foundation.Export("scrollViewDidEndDecelerating:")]
+        public void DecelerationEnded(UIScrollView scrollView)
+        {
+            IsScrolling = false;
         }
 #endif
 
