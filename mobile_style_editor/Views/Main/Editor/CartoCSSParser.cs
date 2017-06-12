@@ -8,36 +8,24 @@ namespace mobile_style_editor
     {
 		static float size = 1f;
 
-		/*
 		// White
 		static readonly Color generalColor = Color.White;
 		// Light gray
 		static readonly Color commentColor = Color.FromRgb(120, 120, 120);
 		// Teal
-		static readonly Color color1 = Color.FromRgb(0, 147, 146);
+		static readonly Color constantColor = Color.FromRgb(0, 147, 146);
 		// DarkGreen
-		static readonly Color color2 = Color.FromRgb(57, 177, 133);
+		static readonly Color blockHeaderColor = Color.FromRgb(57, 177, 133);
 		// LightGreen
 		static readonly Color color3 = Color.FromRgb(156, 203, 134);
 		// Wheat
 		static readonly Color color4 = Color.FromRgb(233, 226, 156);
 		// Pink Wheat
-		static readonly Color color5 = Color.FromRgb(238, 180, 121);
+		static readonly Color classColor = Color.FromRgb(238, 180, 121);
 		// Pink
 		static readonly Color color6 = Color.FromRgb(232, 132, 113);
 		// Dark Pink (magenta-ish)
-		static readonly Color color7 = Color.FromRgb(207, 89, 126);
-        */
-
-		// White
-		static readonly Color generalColor = Color.White;
-		// Light gray
-		static readonly Color commentColor = Color.FromRgb(120, 120, 120);
-		// Carto green
-		static readonly Color blockHeaderColor = Color.FromRgb(145, 198, 112);
-        static readonly Color classColor = Color.FromRgb(145, 198, 112);
-		// Teal
-		static readonly Color constantColor = Color.FromRgb(0, 150, 150);
+		static readonly Color idColor = Color.FromRgb(207, 89, 126);
 
 		public static
 #if __ANDROID__
@@ -105,20 +93,38 @@ namespace mobile_style_editor
                 }
                 else if (trimmed.Contains("{"))
                 {
+                    Color color = blockHeaderColor;
+
+                    if (trimmed.Contains("class"))
+                    {
+                        color = classColor;
+                    }
+                    else if (trimmed.Contains("#"))
+                    {
+                        color = idColor;    
+                    }
+
                     int bracketIndex = line.IndexOf("{", StringComparison.Ordinal);
                     string blockHeader = line.Substring(0, bracketIndex);
                     string remaining = line.Substring(bracketIndex, line.Length - bracketIndex);
 
-                    builder.Append(blockHeader, blockHeaderColor.ToNativeColor(), size);
+                    builder.Append(blockHeader, color.ToNativeColor(), size);
                     builder.Append(remaining + "\n", generalColor.ToNativeColor(), size);
                 }
                 else if (trimmed.Contains("["))
                 {
-                    builder.Append(withNewLine, blockHeaderColor.ToNativeColor(), size);
+                    if (trimmed.Contains("class"))
+                    {
+                        builder.Append(withNewLine, classColor.ToNativeColor(), size);
+                    }
+                    else
+                    {
+                        builder.Append(withNewLine, blockHeaderColor.ToNativeColor(), size);
+                    }
                 }
                 else if (trimmed.Contains("#"))
                 {
-                    builder.Append(withNewLine, blockHeaderColor.ToNativeColor(), size);
+                    builder.Append(withNewLine, idColor.ToNativeColor(), size);
                 }
                 else
                 {
