@@ -181,5 +181,16 @@ namespace mobile_style_editor
             MapView.SourceLabel.Text = MapExtensions.SourceId;
         }
 
+        public void DisableEditor()
+        {
+            Editor.Popup.Show();
+            Toolbar.ShowOverlay();
+        }
+
+        public void EnableEditor()
+        {
+            Editor.Popup.Hide();
+            Toolbar.HideOverlay();
+        }
     }
 }

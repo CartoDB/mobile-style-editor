@@ -66,7 +66,7 @@ namespace mobile_style_editor
 
             if (!LocalStorage.Instance.WarningPopupShown)
             {
-                ContentView.Editor.Popup.Show();
+                ContentView.DisableEditor();
             }
         }
 
@@ -401,7 +401,7 @@ namespace mobile_style_editor
         void OnWarningPopupButtonClicked(object sender, EventArgs e)
         {
             LocalStorage.Instance.WarningPopupShown = true;
-            ContentView.Editor.Popup.Hide();
+            ContentView.EnableEditor();
         }
 	}
 }

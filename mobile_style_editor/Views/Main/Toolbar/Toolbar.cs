@@ -25,6 +25,8 @@ namespace mobile_style_editor
 
         bool isTemplateFolder;
 
+        public BaseView Overlay { get; private set; }
+
 		public Toolbar(bool isTemplateFolder)
 		{
             this.isTemplateFolder = isTemplateFolder;
@@ -49,6 +51,10 @@ namespace mobile_style_editor
             UploadButton = new ToolbarButton();
             UploadButton.Source = "icon_upload.png";
             UploadButton.ImagePadding = padding;
+
+            Overlay = new BaseView();
+            Overlay.BackgroundColor = Colors.CartoNavyTransparent;
+            HideOverlay(false);
 		}
 
 		public override void LayoutSubviews()
@@ -91,6 +97,9 @@ namespace mobile_style_editor
 
                 AddSubview(ExpandButton, x, y, w, h);    
             }
+
+            AddSubview(Overlay, 0, 0, Width, Height);
+            RaiseChild(Overlay);
 		}
 
         public const int MaxCount = 4;
@@ -114,6 +123,34 @@ namespace mobile_style_editor
 
             LayoutSubviews();
         }
+
+		public void ShowOverlay(bool animated = true)
+		{
+			Overlay.IsVisible = true;
+
+			if (!animated)
+			{
+				Overlay.Opacity = 1;
+			}
+			else
+			{
+				Overlay.FadeTo(1);
+			}
+		}
+
+		public virtual async void HideOverlay(bool animated = true)
+		{
+			if (!animated)
+			{
+				Overlay.Opacity = 0;
+			}
+			else
+			{
+				await Overlay.FadeTo(0);
+			}
+
+			Overlay.IsVisible = false;
+		}
 
 	}
 }
