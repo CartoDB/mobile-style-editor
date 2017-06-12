@@ -343,7 +343,6 @@ namespace mobile_style_editor
 					}
 #elif __IOS__
                     AttributedText = (Foundation.NSMutableAttributedString)result;
-                    SetNeedsDisplay();
 
                     if (selection != -1)
                     {
