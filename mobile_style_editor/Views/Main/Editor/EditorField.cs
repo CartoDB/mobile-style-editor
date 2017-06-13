@@ -161,9 +161,18 @@ namespace mobile_style_editor
             updateTimer = new System.Timers.Timer(1000);
             updateTimer.Elapsed += UpdateText;
             updateTimer.Start();
+
+#if __IOS__
+
+#endif
         }
 
-        // Currently only used in iOS, as Droid does not have a solid API for recognizing scroll
+#if __IOS__
+
+#endif
+
+		// Currently only used in iOS, 
+		// as Droid does not have a solid API for recognizing scroll, nor is it necessary
 		public bool IsScrolling { get; private set; }
 
         public void UpdateText(object sender, EventArgs e)
@@ -316,7 +325,7 @@ namespace mobile_style_editor
         bool initialized;
 
         [Foundation.Export("textViewDidChangeSelection:")]
-        public void SelectionChanged(UITextView textView)
+        public new void SelectionChanged(UITextView textView)
         {
             if (!initialized)
             {
@@ -332,7 +341,7 @@ namespace mobile_style_editor
         }
 
         [Foundation.Export("scrollViewWillBeginDragging:")]
-        public void DraggingStarted(UIScrollView scrollView)
+        public new void DraggingStarted(UIScrollView scrollView)
         {
             if (IsFirstResponder)
             {
@@ -343,7 +352,7 @@ namespace mobile_style_editor
         }
 
         [Foundation.Export("scrollViewDidEndDragging:willDecelerate:")]
-        public void DraggingEnded(UIScrollView scrollView, bool willDecelerate)
+        public new void DraggingEnded(UIScrollView scrollView, bool willDecelerate)
         {
             if (!willDecelerate)
             {
@@ -352,10 +361,11 @@ namespace mobile_style_editor
         }
 
         [Foundation.Export("scrollViewDidEndDecelerating:")]
-        public void DecelerationEnded(UIScrollView scrollView)
+        public new void DecelerationEnded(UIScrollView scrollView)
         {
             IsScrolling = false;
         }
+
 #endif
 
         public void Update(string text, int selection = -1)
