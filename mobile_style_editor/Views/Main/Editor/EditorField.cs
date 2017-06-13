@@ -1,6 +1,7 @@
 ﻿
 using System;
 using Xamarin.Forms;
+using System.Collections.Generic;
 
 #if __IOS__
 using Xamarin.Forms.Platform.iOS;
@@ -126,7 +127,7 @@ namespace mobile_style_editor
             ReturnKeyType = UIReturnKeyType.Done;
             Delegate = this;
             AutocorrectionType = UITextAutocorrectionType.No;
-
+            
 #elif __UWP__
             Window.Current.CoreWindow.KeyDown += (s, e) =>
             {
@@ -161,15 +162,7 @@ namespace mobile_style_editor
             updateTimer = new System.Timers.Timer(1000);
             updateTimer.Elapsed += UpdateText;
             updateTimer.Start();
-
-#if __IOS__
-
-#endif
         }
-
-#if __IOS__
-
-#endif
 
 		// Currently only used in iOS, 
 		// as Droid does not have a solid API for recognizing scroll, nor is it necessary
@@ -364,6 +357,17 @@ namespace mobile_style_editor
         public new void DecelerationEnded(UIScrollView scrollView)
         {
             IsScrolling = false;
+        }
+
+        public EventHandler<EventArgs> OffsetChanged;
+
+        [Foundation.Export("scrollViewDidScroll:")]
+        public new void Scrolled(UIScrollView scrollView)
+        {
+            if (OffsetChanged != null)
+            {
+                OffsetChanged(null, EventArgs.Empty);
+            }
         }
 
 #endif

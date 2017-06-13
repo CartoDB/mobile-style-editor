@@ -12,7 +12,7 @@ namespace mobile_style_editor.iOS
 
 		public List<AttributeSection> Attributes { get; private set; }
 
-		public AttributedTextBuilder()
+        public AttributedTextBuilder()
 		{
 			Text = "";
 			Attributes = new List<AttributeSection>();
@@ -39,7 +39,7 @@ namespace mobile_style_editor.iOS
 
 		NSDictionary GetColorAttributes(UIColor color)
 		{
-			return new UIStringAttributes { ForegroundColor = color }.Dictionary;
+            return new UIStringAttributes { ForegroundColor = color, Font = CSSEditorView.Font }.Dictionary;
 		}
 	}
 

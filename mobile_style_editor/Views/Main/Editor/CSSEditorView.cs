@@ -14,8 +14,14 @@ namespace mobile_style_editor
 {
     public class CSSEditorView : BaseView
     {
+#if __IOS__
+        public static UIKit.UIFont Font = UIKit.UIFont.FromName("Menlo-Regular", 11);
+#endif
         ZipData items;
 
+#if __IOS__
+        UIKit.UITextView lineNumbers;
+#endif
         public EditorField Field { get; private set; }
         public WarningPopup Popup { get; private set; }
 
@@ -26,6 +32,15 @@ namespace mobile_style_editor
             Field = new EditorField();
 
             Popup = new WarningPopup();
+
+#if __IOS__
+            lineNumbers = new UIKit.UITextView();
+            lineNumbers.BackgroundColor = Field.BackgroundColor.ToNativeColor();
+
+		    Field.OffsetChanged += delegate {
+		        lineNumbers.ContentOffset = Field.ContentOffset;
+		    };
+#endif
         }
 
         public override void LayoutSubviews()
@@ -36,6 +51,13 @@ namespace mobile_style_editor
             double y = 0;
             double w = Width;
             double h = Height;
+
+#if __IOS__
+            w = 25;
+            AddSubview(lineNumbers.ToView(), x, y, w, h);
+            x += w;
+            w = Width - w;
+#endif
 
 #if __ANDROID__
 			Field.RemoveFromParent();
@@ -59,7 +81,44 @@ namespace mobile_style_editor
 
         public void Update(int index)
         {
-            Field.Update(items.DecompressedFiles[index]);
+            string text = items.DecompressedFiles[index];
+            Field.Update(text);
+#if __IOS__
+            string[] lines = text.Split('\n');
+            nfloat padding = 2;
+
+            nfloat x = padding;
+            nfloat y = 8;
+            nfloat w = lineNumbers.Frame.Width - 2 * padding;
+            nfloat h = Font.LineHeight;
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                var label = new UIKit.UILabel();
+                label.TextColor = Color.LightGray.ToNativeColor();
+                label.TextAlignment = UIKit.UITextAlignment.Right;
+
+                label.Font = Font;
+                string number = i.ToString();
+
+                if (i < 10)
+		        {
+		            number.Insert(0, "0");
+		        }
+		        label.Text = number;
+
+                lineNumbers.AddSubview(label);
+
+                label.Frame = new CoreGraphics.CGRect(x, y, w, h);
+                y += h;
+
+                var line = lines[i];
+                if (line.Length > 50)
+                {
+                    Console.WriteLine("Line length: " + line.Length + "; Field frame: " + Field.Frame);
+                }
+		    }
+#endif
         }
     }
 
