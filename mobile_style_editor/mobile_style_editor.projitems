@@ -107,6 +107,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\ClickLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\ImageButtonRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\WarningPopupRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\DeviceInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />

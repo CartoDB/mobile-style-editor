@@ -61,6 +61,15 @@ namespace mobile_style_editor
         {
             base.LayoutSubviews();
 
+            bool isSmall = DeviceInfo.IsSmallScreen;
+            
+            if (isSmall)
+            {
+                MapView.IsRefreshButtonVisibile = false;
+                AddSubview(MapView, 0, 0, Width, Height);
+                return;
+            }
+
             toolbarHeight = 60;
 
             double x = 0;
