@@ -125,6 +125,8 @@ namespace mobile_style_editor
 #endif
 
             timer.Initialize(ContentView);
+
+            ContentView.Editor.Field.InitializeTimer();
         }
 
         protected override void OnDisappearing()
@@ -159,6 +161,8 @@ namespace mobile_style_editor
 #endif
 
             timer.Dispose();
+
+            ContentView.Editor.Field.DisposeTimer();
         }
 
         async void OnBackButtonPressed(object sender, EventArgs e)

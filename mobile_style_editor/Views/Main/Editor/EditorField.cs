@@ -159,10 +159,21 @@ namespace mobile_style_editor
             
             IsSpellCheckEnabled = false;
 #endif
-            updateTimer = new System.Timers.Timer(1000);
-            updateTimer.Elapsed += UpdateText;
-            updateTimer.Start();
         }
+        
+		public void InitializeTimer()
+		{
+            updateTimer = new System.Timers.Timer(1000);
+			updateTimer.Elapsed += UpdateText;
+			updateTimer.Start();
+		}
+
+		public void DisposeTimer()
+		{
+            updateTimer.Stop();
+            updateTimer.Dispose();
+            updateTimer = null;
+		}
 
 		// Currently only used in iOS, 
 		// as Droid does not have a solid API for recognizing scroll, nor is it necessary

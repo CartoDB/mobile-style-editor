@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 using System;
 using Xamarin.Forms;
 
@@ -114,23 +114,23 @@ namespace mobile_style_editor
 
                 label.Frame = new CoreGraphics.CGRect(x, y, w, h);
                 y += h;
+				// TODO WordWrapping -> Currently multi-line lines are counted as two sepate lines
+				//    var line = lines[i];
+				//    var nsstring = new Foundation.NSString(line);
 
-            //    var line = lines[i];
-            //    var nsstring = new Foundation.NSString(line);
+				//    var max = Field.Frame.Width / (h / 1.4);
+				//    if (line.Length > max)
+				//    {
+				//        y += h;
+				//        Console.WriteLine("Line 1: " + line + " " + line.Length + ", max: " + max + ")");
+				//    }
 
-            //    var max = Field.Frame.Width / (h / 1.4);
-            //    if (line.Length > max)
-            //    {
-            //        y += h;
-            //        Console.WriteLine("Line 1: " + line + " " + line.Length + ", max: " + max + ")");
-            //    }
-
-            //    if (line.Length > max * 2)
-            //    {
-            //        y += h;
-            //Console.WriteLine("Line 2: " + line + " " + line.Length + ", max: " + max + ")");
-                //}
-            }
+				//    if (line.Length > max * 2)
+				//    {
+				//        y += h;
+				//Console.WriteLine("Line 2: " + line + " " + line.Length + ", max: " + max + ")");
+				//}
+			}
 #endif
         }
     }
