@@ -166,19 +166,28 @@ namespace mobile_style_editor
         // Currently only used in iOS, as Droid does not have a solid API for recognizing scroll
 		public bool IsScrolling { get; private set; }
 
-		public void UpdateText(object sender, EventArgs e)
+        public void UpdateText(object sender, EventArgs e)
         {
-            Console.WriteLine("Update! (" + currentSelection + ")");
-
-            if (currentText != null && currentSelection != -1)
+            if (currentText == null)
             {
-                if (IsScrolling)
-                {
-                    return;
-                }
-
-                Update(currentText, currentSelection);
+                Console.WriteLine("Won't update Text: currentText == null");
+                return;
             }
+
+			if (currentSelection == -1)
+			{
+				Console.WriteLine("Won't update Text: currentSelection == -1");
+                return;
+			}
+
+			if (IsScrolling)
+			{
+				Console.WriteLine("Won't update Text: IsScrolling");
+				return;
+			}
+
+            Console.WriteLine("Updating Editor Text");
+            Update(currentText, currentSelection);
         }
 
         const string NewLine = "\n";
@@ -376,6 +385,7 @@ namespace mobile_style_editor
 						SetSelection(selection);
 					}
 #elif __IOS__
+
                     AttributedText = (Foundation.NSMutableAttributedString)result;
 
                     if (selection != -1)
