@@ -86,38 +86,51 @@ namespace mobile_style_editor
 #if __IOS__
             string[] lines = text.Split('\n');
             nfloat padding = 2;
+            nfloat fieldInset = 8;
 
             nfloat x = padding;
-            nfloat y = 8;
+            nfloat y = fieldInset;
             nfloat w = lineNumbers.Frame.Width - 2 * padding;
             nfloat h = Font.LineHeight;
+
+            foreach (var subview in lineNumbers.Subviews)
+            {
+                if (subview is UIKit.UILabel)
+                {
+                    subview.RemoveFromSuperview();
+                }
+            }
 
             for (int i = 0; i < lines.Length; i++)
             {
                 var label = new UIKit.UILabel();
                 label.TextColor = Color.LightGray.ToNativeColor();
                 label.TextAlignment = UIKit.UITextAlignment.Right;
-
                 label.Font = Font;
-                string number = i.ToString();
-
-                if (i < 10)
-		        {
-		            number.Insert(0, "0");
-		        }
-		        label.Text = number;
+                
+                label.Text = i.ToString();
 
                 lineNumbers.AddSubview(label);
 
                 label.Frame = new CoreGraphics.CGRect(x, y, w, h);
                 y += h;
 
-                var line = lines[i];
-                if (line.Length > 50)
-                {
-                    Console.WriteLine("Line length: " + line.Length + "; Field frame: " + Field.Frame);
-                }
-		    }
+            //    var line = lines[i];
+            //    var nsstring = new Foundation.NSString(line);
+
+            //    var max = Field.Frame.Width / (h / 1.4);
+            //    if (line.Length > max)
+            //    {
+            //        y += h;
+            //        Console.WriteLine("Line 1: " + line + " " + line.Length + ", max: " + max + ")");
+            //    }
+
+            //    if (line.Length > max * 2)
+            //    {
+            //        y += h;
+            //Console.WriteLine("Line 2: " + line + " " + line.Length + ", max: " + max + ")");
+                //}
+            }
 #endif
         }
     }
