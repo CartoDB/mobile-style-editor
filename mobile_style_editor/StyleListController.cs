@@ -317,12 +317,12 @@ namespace mobile_style_editor
 
             if (storedContents.Count == 0)
             {
+                ContentView.FileList.Hide();
                 return;
             }
 
             if (storedContents.Count == 1)
             {
-                ContentView.FileList.Header.BackButton.Disable();
                 ContentView.FileList.Pages.Show();
                 CurrentBranch = HubClient.MasterBranch;
             }
@@ -531,7 +531,6 @@ namespace mobile_style_editor
 				ContentView.FileList.Pages.Reset();
 				GithubRepo = "";
 				storedContents.Clear();
-                ContentView.FileList.Header.BackButton.Disable();
                 ContentView.FileList.Pages.Show();
                 ContentView.FileList.Branches.IsVisible = false;
 
@@ -691,7 +690,6 @@ namespace mobile_style_editor
 
 			Device.BeginInvokeOnMainThread(delegate
 			{
-				ContentView.FileList.Header.BackButton.Enable();
 				ContentView.FileList.Header.Text = BasePath + GithubPath.ToUpper();
 			});
 
