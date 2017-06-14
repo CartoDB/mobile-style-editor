@@ -40,6 +40,22 @@ namespace mobile_style_editor
             get { return !Variant.FromString(ProjectFile).GetObjectElement("nutiparameters").String.Equals("null"); }
         }
 
+        public string Source
+        {
+            get
+            {
+                Variant variant = Variant.FromString(ProjectFile);
+                Variant source = variant.GetObjectElement("source");
+
+                if (source.String.Equals(NutiConst.NullValue))
+                {
+                    return null;
+                }
+
+                return source.String;
+            }
+        }
+
 		public List<NutiParameter> NutiParameters
 		{
 			get

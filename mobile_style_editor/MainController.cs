@@ -80,11 +80,10 @@ namespace mobile_style_editor
             {
 				data = Parser.GetZipData(folder, filename);
 				
-                NutiParameter source = data.NutiParameters.Find(param => param.IsSource);
-
+                string source = data.Source;
 				if (source != null)
 				{
-					MapExtensions.SourceId = (string)source.DefaultValue;
+                    MapExtensions.SourceId = source;
 				}
 
 				Device.BeginInvokeOnMainThread(delegate
