@@ -11,7 +11,7 @@ namespace mobile_style_editor
 		Label label;
         BaseEntry field;
 
-		public string Text { get { return field.Text; } set { field.Text = value; } }
+        public string Text { get { return field.Text; } set { field.Text = value; } }
 
 		public SourceLabel()
 		{

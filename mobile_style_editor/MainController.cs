@@ -277,7 +277,8 @@ namespace mobile_style_editor
 				if (error != null)
 				{
 					Alert("Whoops!", error, null);
-                } else
+                }
+                else
                 {
                     ContentView.GithubUpload.Hide();
 
