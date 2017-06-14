@@ -14,8 +14,7 @@ namespace mobile_style_editor
         buildings3d,
         _pixelscale,
         _fontscale,
-        lang,
-        source
+        lang
     }
 
     public class NutiConst
@@ -46,8 +45,6 @@ namespace mobile_style_editor
         public bool IsScale { get { return Key.Contains("scale"); } }
 
         public bool IsLanguage { get { return Key.Contains("lang"); } }
-
-        public bool IsSource { get { return Key.Contains("source"); } }
 
         public NutiParameter()
         {
