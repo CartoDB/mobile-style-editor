@@ -9,8 +9,6 @@ namespace mobile_style_editor
 
 		public Label Label { get; private set; }
 
-		public SelectButton Select { get; private set; }
-
 		public void OnBackPress()
 		{
 			string[] split = Text.Split('/');
@@ -50,8 +48,6 @@ namespace mobile_style_editor
 
 			BackButton = new BackButton();
 
-			Select = new SelectButton();
-
 			var recognizer = new TapGestureRecognizer();
 			recognizer.Tapped += delegate {
 				// Do nothing, just to catch clicks and not close the popup
@@ -62,31 +58,21 @@ namespace mobile_style_editor
 
 		public override void LayoutSubviews()
 		{
-			double backSize = Height * 2;
-			double selectSize = Height * 3;
-
 			double x = 0;
 			double y = 0;
 			double h = Height;
-			double w = backSize;
+            double w = Width;
 
-			AddSubview(BackButton, x, y, w, h);
+            AddSubview(Label, x, y, w, h);
 
-			x += w;
-			w = Width - (backSize + selectSize);
+            w = Height * 2;
 
-			AddSubview(Label, x, y, w, h);
-
-			x += w;
-			w = selectSize;
-
-			AddSubview(Select, x, y, w, h);
+            AddSubview(BackButton, x, y, w, h);
 		}
 
         public void ShowButtons()
         {
             BackButton.IsVisible = true;
-            Select.IsVisible = true;
 
             BackgroundColor = Color.Transparent;
         }
@@ -94,7 +80,6 @@ namespace mobile_style_editor
         public void HideButtons()
         {
             BackButton.IsVisible = false;
-            Select.IsVisible = false;
 
             BackgroundColor = Colors.CartoNavy;
         }

@@ -47,6 +47,13 @@ namespace mobile_style_editor
             h = Branches.HeaderHeight;
 
             AddSubview(Branches, x, y, w, h);
+
+            w = 3 * h;
+            h = Pages.ContentHeight;
+            x = (ContentX + ContentWidth - w);
+            y = ContentY + ContentHeight;
+
+            AddSubview(Select, x, y, w, h);
 		}
 
 		public void Show(List<DriveFile> files)
@@ -57,12 +64,16 @@ namespace mobile_style_editor
             Header.HideButtons();
 
             Header.Text = "GOOGLE DRIVE";
+
+            Select.IsVisible = false;
 		}
 
 		public List<GithubFile> GithubFiles { get; private set; }
 
 		public void Show(List<GithubFile> files)
 		{
+            Select.IsVisible = true;
+
             Header.ShowButtons();
 
 			Show();
@@ -71,11 +82,11 @@ namespace mobile_style_editor
 
 			if (files.Any(file => file.IsProjectFile))
 			{
-				Header.Select.Enable();
+				Select.Enable();
 			}
 			else
 			{
-				Header.Select.Disable();
+				Select.Disable();
 			}
 		}
 

@@ -13,21 +13,36 @@ namespace mobile_style_editor
 
         public ImageButton CloseButton { get; set; }
 
-		protected double VerticalPadding { get { return 70; } }
+        public SelectButton Select { get; private set; }
+
+		protected double VerticalPadding 
+        { 
+            get 
+            {
+				if (DeviceInfo.IsSmallScreen)
+				{
+					return 0;
+				}
+
+                return 70;
+            }
+        }
 
 		protected double HorizontalPadding
 		{
 			get
 			{
+                if (DeviceInfo.IsSmallScreen)
+                {
+                    return 0;
+                }
+
 				if (Width > Height)
 				{
 					return Width / 6;
 				}
-				else
-				{
-					return Width / 15;
-				}
-
+				
+				return Width / 15;
 			}
 		}
 
@@ -71,6 +86,9 @@ namespace mobile_style_editor
             CloseButton.Source = "icon_close.png";
 
             CloseButton.Click += OnBackgroundClick;
+
+            Select = new SelectButton();
+
 		}
 
         public override void LayoutSubviews()

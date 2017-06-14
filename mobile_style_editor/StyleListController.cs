@@ -82,7 +82,7 @@ namespace mobile_style_editor
             ContentView.Webview.Authenticated += OnCodeReceived;
 
             ContentView.FileList.Header.BackButton.Click += OnPopupBackButtonClick;
-            ContentView.FileList.Header.Select.Click += OnSelectClick;
+            ContentView.FileList.Select.Click += OnSelectClick;
 
             ContentView.FileList.FileContent.ItemClick += OnItemClicked;
             ContentView.FileList.Pages.PageClicked += OnPageClick;
@@ -126,7 +126,7 @@ namespace mobile_style_editor
             ContentView.Webview.Authenticated -= OnCodeReceived;
 
             ContentView.FileList.Header.BackButton.Click -= OnPopupBackButtonClick;
-            ContentView.FileList.Header.Select.Click -= OnSelectClick;
+            ContentView.FileList.Select.Click -= OnSelectClick;
 
             ContentView.FileList.FileContent.ItemClick -= OnItemClicked;
             ContentView.FileList.Pages.PageClicked -= OnPageClick;
