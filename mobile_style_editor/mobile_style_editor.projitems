@@ -22,8 +22,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parser\FileUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Colors.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\BasePopup.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\BasePopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\FileListPopupItem.cs" />
@@ -49,9 +47,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\StyleListView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\DownloadResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\ClickViewRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\SelectButton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\PopupHeader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\BackButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\CSSEditorView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\EditorField.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\FileTab.cs" />
@@ -110,6 +105,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\DeviceInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\CustomLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\CustomLoaderRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\Base\BasePopup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\Base\BasePopupContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\SelectButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\Base\BackButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\Base\PopupHeader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
@@ -121,7 +121,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Github\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\" />
     <Folder Include="$(MSBuildThisFileDirectory)Renderer\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Editor\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Toolbar\" />
@@ -136,6 +135,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\List\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Editor\Utils\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\Base\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />

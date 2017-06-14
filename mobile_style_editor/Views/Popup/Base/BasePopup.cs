@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using Xamarin.Forms;
 
 namespace mobile_style_editor
@@ -56,7 +56,7 @@ namespace mobile_style_editor
 
         double padding { get { return 10;  } }
 
-        protected double HeaderHeight { get { return 40; } }
+        protected double HeaderHeight { get { return NavigationBar.HEIGHT; } }
 
         protected double HeaderY { get { return VerticalPadding - HeaderHeight; } }
 
@@ -107,17 +107,20 @@ namespace mobile_style_editor
 
 			AddSubview(Header, x, y, w, h);
 
-            int halfWidth = 20;
+            if (!DeviceInfo.IsSmallScreen)
+            {
+				int halfWidth = 20;
 
-            w = 2 * halfWidth;
-            h = w;
-            x = ContentX + ContentWidth - halfWidth;
-            y = HeaderY - halfWidth;
+				w = 2 * halfWidth;
+				h = w;
+				x = ContentX + ContentWidth - halfWidth;
+				y = HeaderY - halfWidth;
 
-            CloseButton.ImagePadding = halfWidth / 3;
+				CloseButton.ImagePadding = halfWidth / 3;
 
-            AddSubview(CloseButton, x, y, w, h);
-            CloseButton.CornerRadius = halfWidth;
+                AddSubview(CloseButton, x, y, w, h);
+                CloseButton.CornerRadius = halfWidth;
+            }
         }
 
         void OnBackgroundClick(object sender, EventArgs e)

@@ -6,11 +6,13 @@ namespace mobile_style_editor
 {
 	public class NavigationBar : BaseView
 	{
+        public static readonly double HEIGHT = 50;
+
 		public bool IsBackButtonVisible { get; set; } = true;
 
 		public double BaseY { get { return Device.OnPlatform(20, 0, 0); } }
 
-		public new double Height { get { return 50 + BaseY; } }
+		public new double Height { get { return HEIGHT + BaseY; } }
 
 		BaseView statusbar, container;
 
