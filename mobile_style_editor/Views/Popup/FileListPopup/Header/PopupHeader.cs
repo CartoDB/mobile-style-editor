@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace mobile_style_editor
 {
-	public class FileListHeader : BaseView
+	public class PopupHeader : BaseView
 	{
 		public BackButton BackButton { get; private set; }
 
@@ -37,7 +37,7 @@ namespace mobile_style_editor
 			set { Label.Text = value; }
 		}
 
-		public FileListHeader()
+		public PopupHeader()
 		{
 			Label = new Label();
 			Label.VerticalTextAlignment = TextAlignment.Center;

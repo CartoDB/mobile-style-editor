@@ -50,7 +50,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\StyleList\DownloadResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\ClickViewRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\SelectButton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\FileListHeader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\PopupHeader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\Header\BackButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\CSSEditorView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Main\Editor\EditorField.cs" />
