@@ -234,38 +234,35 @@ namespace mobile_style_editor
 
         async void PopulateTemplateList(bool checkLocal = true)
 		{
-            if (LastClickedItem != null)
+            await Task.Run(async () =>
             {
-                bool rendered = ContentView.Templates.RenderMap(LastClickedItem);
-
-                if (rendered)
+                if (!FilesDownloaded)
                 {
-                    return;    
+                    contents = await DownloadList();
+
+                    Device.BeginInvokeOnMainThread(delegate
+                    {
+                        ContentView.Templates.RenderList(contents);
+                    });
                 }
 
-            }
+                int index = 0;
 
-			if (!FilesDownloaded)
-			{
-				/*
-				 * TODO
-				 * The following logic relies on the fact that it is an ordered list.
-				 * Will render the wrong map if the order has somehow changed
-				 * 
-				 */
+                List<DownloadResult> results = new List<DownloadResult>();
 
-                contents = await DownloadList();
-                ContentView.Templates.RenderList(contents);
-			}
+                foreach (var content in contents)
+                {
+                    DownloadResult result = await DownloadFile(content, checkLocal);
 
-			int index = 0;
+                    results.Add(result);
+                    index++;
+                }
 
-			foreach (var content in contents)
-			{
-                DownloadResult result = await DownloadFile(content, checkLocal);
-				ContentView.Templates.RenderMap(result, index);
-				index++;
-			}
+                Device.BeginInvokeOnMainThread(delegate
+                {
+                    ContentView.Templates.ShowStyles(results);
+                });
+            });
 		}
 
 		void InitializeAuthentication()
@@ -475,16 +472,19 @@ namespace mobile_style_editor
 			ShowMyStyles();
 		}
 
-		void ShowMyStyles()
-		{
-			List<string> paths = FileUtils.GetStylesFromFolder(MyStyleFolder);
-			List<DownloadResult> data = FileUtils.GetDataFromPaths(paths);
+        void ShowMyStyles()
+        {
+            Task.Run(delegate
+            {
+                List<string> paths = FileUtils.GetStylesFromFolder(MyStyleFolder);
+                List<DownloadResult> data = FileUtils.GetDataFromPaths(paths);
 
-			Device.BeginInvokeOnMainThread(delegate
-			{
-				ContentView.MyStyles.ShowSampleStyles(data);
+                Device.BeginInvokeOnMainThread(delegate
+                {
+                    ContentView.MyStyles.ShowStyles(data);
+                });
             });
-		}
+        }
 
 		public void OnGithubFileDownloadStarted(object sender, EventArgs e)
 		{
@@ -739,13 +739,9 @@ namespace mobile_style_editor
 #endif
 		}
 
-        DownloadResult LastClickedItem { get; set; }
-
 		void OnStyleClick(object sender, EventArgs e)
 		{
 			StyleListItem item = (StyleListItem)sender;
-
-            LastClickedItem = item.Data;
 
 			Device.BeginInvokeOnMainThread(async delegate
 			{

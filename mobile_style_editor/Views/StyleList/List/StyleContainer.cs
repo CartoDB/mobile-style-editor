@@ -126,7 +126,7 @@ namespace mobile_style_editor
             item.Update(result);
         }
 
-		public void ShowSampleStyles(List<DownloadResult> results)
+		public void ShowStyles(List<DownloadResult> results)
 		{
 			styleList.Clear();	
 
