@@ -35,11 +35,9 @@ namespace mobile_style_editor
 
 			AddSubview(Pages, x, y, w, h);
 
-            double padding = 10;
-
-			Branches.HeaderHeight = HeaderHeight;
+            Branches.HeaderHeight = Pages.ContentHeight;
 			Branches.TotalHeight = 400;
-            Branches.OriginalY = y + padding;
+            Branches.OriginalY = y;
 
             x = ContentX;
             y = Branches.OriginalY;
@@ -72,8 +70,6 @@ namespace mobile_style_editor
 
 		public void Show(List<GithubFile> files)
 		{
-            Select.IsVisible = true;
-
             Header.ShowButtons();
 
 			Show();
@@ -82,11 +78,11 @@ namespace mobile_style_editor
 
 			if (files.Any(file => file.IsProjectFile))
 			{
-				Select.Enable();
+                Select.IsVisible = true;
 			}
 			else
 			{
-				Select.Disable();
+                Select.IsVisible = false;
 			}
 		}
 

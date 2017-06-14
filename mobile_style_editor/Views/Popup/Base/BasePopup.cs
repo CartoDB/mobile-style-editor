@@ -19,10 +19,10 @@ namespace mobile_style_editor
         { 
             get 
             {
-				if (DeviceInfo.IsSmallScreen)
-				{
-					return 0;
-				}
+                if (DeviceInfo.IsSmallScreen)
+                {
+                    return 60;
+                }
 
                 return 70;
             }
@@ -34,7 +34,7 @@ namespace mobile_style_editor
 			{
                 if (DeviceInfo.IsSmallScreen)
                 {
-                    return 0;
+                    return 5;
                 }
 
 				if (Width > Height)

@@ -10,8 +10,11 @@ namespace mobile_style_editor
 		public SettingsPopup()
 		{
             Content = new SettingsPopupContent();
-			
-            Header.HideButtons();
+
+            if (!DeviceInfo.IsSmallScreen)
+            {
+                Header.HideButtons();
+            }
 
             Header.Text = "SETTINGS";
         }

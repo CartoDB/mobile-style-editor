@@ -89,10 +89,13 @@ namespace mobile_style_editor
 
             ContentView.SettingsButton.Click += OnSettingsClick;
             ContentView.Settings.SettingsContent.GithubInfo.LogoutButton.Click += OnLogoutButtonClicked;
+            ContentView.Settings.Header.BackButton.Click += OnSettingsBackButtonClick;
 
             ContentView.FileList.Branches.CellClick += OnBranchCellClicked;
 
             HubClient.Instance.FileDownloadStarted += OnGithubFileDownloadStarted;
+
+
 #if __ANDROID__
             DriveClientDroid.Instance.DownloadStarted += OnDownloadStarted;
             DriveClientDroid.Instance.DownloadComplete += OnFileDownloadComplete;
@@ -133,6 +136,7 @@ namespace mobile_style_editor
 
             ContentView.SettingsButton.Click -= OnSettingsClick;
             ContentView.Settings.SettingsContent.GithubInfo.LogoutButton.Click -= OnLogoutButtonClicked;
+            ContentView.Settings.Header.BackButton.Click -= OnSettingsBackButtonClick;
 
             ContentView.FileList.Branches.CellClick -= OnBranchCellClicked;
 
@@ -317,6 +321,11 @@ namespace mobile_style_editor
             }
 
 			return base.OnBackButtonPressed();
+        }
+
+        void OnSettingsBackButtonClick(object sender, EventArgs e)
+        {
+            ContentView.Settings.Hide();
         }
 
         void OnPopupBackButtonClick(object sender, EventArgs e)
