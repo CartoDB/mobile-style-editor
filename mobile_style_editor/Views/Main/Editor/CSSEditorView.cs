@@ -101,7 +101,10 @@ namespace mobile_style_editor
                 }
             }
 
-            for (int i = 0; i < lines.Length; i++)
+            // HACK Increase line count to account for wrapping
+            lines = new string[lines.Length + 50];        
+
+            for (int i = 1; i < lines.Length + 1; i++)
             {
                 var label = new UIKit.UILabel();
                 label.TextColor = Color.LightGray.ToNativeColor();
