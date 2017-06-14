@@ -308,6 +308,17 @@ namespace mobile_style_editor
 
 		List<List<GithubFile>> storedContents = new List<List<GithubFile>>();
 
+        protected override bool OnBackButtonPressed()
+        {
+            if (ContentView.FileList.IsVisible)
+            {
+                OnPopupBackButtonClick(null, EventArgs.Empty);
+                return true;
+            }
+
+			return base.OnBackButtonPressed();
+        }
+
         void OnPopupBackButtonClick(object sender, EventArgs e)
         {
             if (ContentView.Loader.IsRunning)

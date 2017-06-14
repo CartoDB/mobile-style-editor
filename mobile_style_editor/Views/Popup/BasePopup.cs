@@ -9,7 +9,7 @@ namespace mobile_style_editor
 
         public BasePopupContent Content { get; protected set; }
 
-        public FileListHeader Header { get; private set; }
+        public PopupHeader Header { get; private set; }
 
         public ImageButton CloseButton { get; set; }
 
@@ -79,7 +79,7 @@ namespace mobile_style_editor
 
             Hide(false);
 
-			Header = new FileListHeader();
+			Header = new PopupHeader();
 
             CloseButton = new ImageButton();
             CloseButton.BackgroundColor = Colors.CartoRed;
