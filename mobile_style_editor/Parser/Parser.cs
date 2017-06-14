@@ -44,7 +44,8 @@ namespace mobile_style_editor
 			 */
 			foreach (string path in paths)
 			{
-				if (path.Contains(ProjectFile))
+                string[] split = path.Split('/');
+                if (split[split.Length - 1].Equals(ProjectFile))
 				{
 #if __UWP__
                     using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
@@ -74,6 +75,15 @@ namespace mobile_style_editor
 							 * 
 							 */
 							continue;
+						}
+
+                        if (path.Contains(".DS_Store"))
+                        {
+                            /*
+                             * DS_Store is a file that stores custom attributes of its containing folder, 
+                             * such as the position of icons or the choice of a background image.
+                             */
+                            continue;
 						}
 
 						string content = streamReader.ReadToEnd();
