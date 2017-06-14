@@ -101,13 +101,15 @@ namespace mobile_style_editor
                 }
             }
 
+            var color = UIKit.UIColor.FromRGBA(150, 150, 150, 150);
+
             // HACK Increase line count to account for wrapping
             lines = new string[lines.Length + 50];        
 
             for (int i = 1; i < lines.Length + 1; i++)
             {
                 var label = new UIKit.UILabel();
-                label.TextColor = Color.LightGray.ToNativeColor();
+                label.TextColor = color;
                 label.TextAlignment = UIKit.UITextAlignment.Right;
                 label.Font = Font;
                 
