@@ -101,7 +101,7 @@ namespace mobile_style_editor
 			{
 				double rowCount = Math.Ceiling((double)Data.DecompressedFiles.Count / 3);
 				double rowHeight = Toolbar.Height;
-
+    
 				h = rowCount * rowHeight;
 				w = Width / 3;
                 x = Width - w;

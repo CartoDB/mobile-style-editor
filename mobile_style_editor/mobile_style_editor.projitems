@@ -108,6 +108,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\ImageButtonRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\WarningPopupRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\DeviceInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\CustomLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderer\CustomLoaderRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />

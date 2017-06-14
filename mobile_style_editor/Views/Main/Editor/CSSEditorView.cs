@@ -138,29 +138,6 @@ namespace mobile_style_editor
 			}
 #endif
         }
-    }
 
-    public class ContainerView : BaseView
-    {
-        public Image image;
-
-        public ContainerView()
-        {
-            image = new Image();
-        }
-
-        public override void LayoutSubviews()
-        {
-            base.LayoutSubviews();
-
-            double padding = Width / 10;
-
-            double x = padding;
-            double y = padding;
-            double w = Width - 2 * padding;
-            double h = Height - 2 * padding;
-
-            AddSubview(image, x, y, w, h);
-        }
     }
 }

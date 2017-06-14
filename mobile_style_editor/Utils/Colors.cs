@@ -24,6 +24,8 @@ namespace mobile_style_editor
 
 		public static Color TransparentGray = Color.FromRgba(100, 100, 100, 180);
 
+        public static Color LightTransparentGray = Color.FromRgba(100, 100, 100, 100);
+
 		public static Color NearWhite = Color.FromRgb(240, 240, 240);
 
 		public static Color PaleSky = Color.FromRgb(99, 109, 114);

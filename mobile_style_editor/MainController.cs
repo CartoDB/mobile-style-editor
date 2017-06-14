@@ -78,9 +78,16 @@ namespace mobile_style_editor
 
             Task.Run(delegate
             {
-                data = Parser.GetZipData(folder, filename);
+				data = Parser.GetZipData(folder, filename);
+				
+                NutiParameter source = data.NutiParameters.Find(param => param.IsSource);
 
-                Device.BeginInvokeOnMainThread(delegate
+				if (source != null)
+				{
+					MapExtensions.SourceId = (string)source.DefaultValue;
+				}
+
+				Device.BeginInvokeOnMainThread(delegate
                 {
                     ContentView.Initialize(data);
                 });
