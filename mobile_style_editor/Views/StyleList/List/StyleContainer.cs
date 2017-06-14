@@ -107,6 +107,19 @@ namespace mobile_style_editor
 			UpdateListLayout();
 		}
 
+        public bool RenderMap(DownloadResult result)
+        {
+            var item = Items.Find(i => i.Data.Filename == result.Filename && i.Data.Path == result.Path);
+
+            if (item != null)
+            {
+                item.Update(result);
+                return true;
+            }
+
+            return false;
+        }
+
 		public void RenderMap(DownloadResult result, int index)
 		{
             StyleListItem item = Items[index];

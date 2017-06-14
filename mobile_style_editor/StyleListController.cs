@@ -234,6 +234,17 @@ namespace mobile_style_editor
 
         async void PopulateTemplateList(bool checkLocal = true)
 		{
+            if (LastClickedItem != null)
+            {
+                bool rendered = ContentView.Templates.RenderMap(LastClickedItem);
+
+                if (rendered)
+                {
+                    return;    
+                }
+
+            }
+
 			if (!FilesDownloaded)
 			{
 				/*
@@ -728,9 +739,13 @@ namespace mobile_style_editor
 #endif
 		}
 
+        DownloadResult LastClickedItem { get; set; }
+
 		void OnStyleClick(object sender, EventArgs e)
 		{
 			StyleListItem item = (StyleListItem)sender;
+
+            LastClickedItem = item.Data;
 
 			Device.BeginInvokeOnMainThread(async delegate
 			{
