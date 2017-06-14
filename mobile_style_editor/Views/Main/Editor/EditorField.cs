@@ -317,7 +317,7 @@ namespace mobile_style_editor
             int selection = (int)range.Location;
             if (text.Equals(Backspace))
             {
-                currentText = currentText.Remove(selection, 1);
+            currentText = currentText.Remove(selection, (int)range.Length);
             }
             else
             {
@@ -415,7 +415,7 @@ namespace mobile_style_editor
 
                     if (selection != -1)
                     {
-                        SelectedRange = new Foundation.NSRange(selection, 0);
+                        SelectedRange = new Foundation.NSRange(selection, SelectedRange.Length);
                         SetContentOffset(ContentOffset, true);
                     }
 #elif __UWP__
