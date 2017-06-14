@@ -199,7 +199,6 @@ namespace mobile_style_editor
 				return;
 			}
 
-            Console.WriteLine("Updating Editor Text");
             Update(currentText, currentSelection);
         }
 
@@ -208,6 +207,7 @@ namespace mobile_style_editor
 
         int currentSelection = -1;
         string currentText;
+        string previousText;
 
 #if __ANDROID__
 		Android.Graphics.Rect rect;
@@ -385,10 +385,31 @@ namespace mobile_style_editor
 
         public void Update(string text, int selection = -1)
         {
-            currentText = text;
+            if (currentText == null)
+            {
+				currentText = text;
+            }       
 
             var watch = new System.Diagnostics.Stopwatch();
             watch.Start();
+
+            bool shouldReturn = false;
+
+            Device.BeginInvokeOnMainThread(delegate
+            {
+                if (previousText == null)
+                {
+                    return;
+                }
+
+                string trimmedExisting = previousText.Trim();
+                string trimmedNew = text.Trim();
+                
+                if (trimmedExisting.Equals(trimmedNew))
+                {
+                    shouldReturn = true;
+                }
+            });
 
             System.Threading.Tasks.Task.Run(delegate
             {
@@ -398,7 +419,7 @@ namespace mobile_style_editor
 	                Text = text;
 	            });
 #endif
-				object result = CartoCSSParser.Parse(text);
+                object result = CartoCSSParser.Parse(text);
 
                 Device.BeginInvokeOnMainThread(delegate
                 {
@@ -410,8 +431,15 @@ namespace mobile_style_editor
 						SetSelection(selection);
 					}
 #elif __IOS__
+					if (shouldReturn)
+					{
+						Console.WriteLine("Not updating Editor, as text hasn't changed (elapsed: " + watch.ElapsedMilliseconds + ")");
+						watch.Stop();
+						return;
+					}
 
                     AttributedText = (Foundation.NSMutableAttributedString)result;
+                    previousText = text;
 
                     if (selection != -1)
                     {
@@ -421,8 +449,8 @@ namespace mobile_style_editor
 #elif __UWP__
                     Document.ApplyDisplayUpdates();
 #endif
-					System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
-					watch.Stop();
+                    System.Diagnostics.Debug.WriteLine("Text highlighting took: " + watch.ElapsedMilliseconds + " milliseconds");
+                    watch.Stop();
                 });
             });
         }
