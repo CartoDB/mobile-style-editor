@@ -10,7 +10,16 @@ namespace mobile_style_editor
 
 		public bool IsBackButtonVisible { get; set; } = true;
 
-		public double BaseY { get { return Device.OnPlatform(20, 0, 0); } }
+        public bool IsTitleEditVisible { get; set; }
+
+        public double BaseY
+        {
+            get
+            {
+                if (Device.RuntimePlatform.Equals("iOS")) { return 20; }
+                return 0;
+            }
+        }
 
 		public new double Height { get { return HEIGHT + BaseY; } }
 
@@ -18,18 +27,22 @@ namespace mobile_style_editor
 
 		public NavigationBackButton Back { get; private set; }
 
-		public Label Title { get; private set; }
+        public TitleEditButton Edit { get; private set; }
+
+        public MeasuredLabel Title { get; private set; }
 
         BaseView rightItem;
 
 		public NavigationBar()
 		{
+            Console.WriteLine(Device.RuntimePlatform);
+
 			BackgroundColor = Colors.CartoNavyLight;
 
 			statusbar = new BaseView { BackgroundColor = Colors.CartoNavyLight };
 			container = new BaseView();
 
-			Title = new Label();
+			Title = new MeasuredLabel();
 			Title.TextColor = Color.White;
 			Title.FontAttributes = FontAttributes.Bold;
 			Title.VerticalTextAlignment = TextAlignment.Center;
@@ -37,6 +50,16 @@ namespace mobile_style_editor
 			Title.FontSize = 14;
 
 			Back = new NavigationBackButton();
+
+            Edit = new TitleEditButton();
+
+			Title.Measured += delegate
+			{
+                double x = Width / 2 - Title.MeasuredWidth / 2;
+
+                Title.UpdateLayout(x, BaseY, Title.MeasuredWidth, Height - BaseY);
+                Edit.UpdateX(x + Title.MeasuredWidth);
+			};
 		}
 
 		public override void LayoutSubviews()
@@ -67,13 +90,21 @@ namespace mobile_style_editor
                 w = h;    
             }
 
-
 			x = w;
 			y = BaseY;
-			w = Width - 2 * w;
+            w = Title.MeasuredWidth;
 			h = Height - statusbarHeight;
 
 			AddSubview(Title, x, y, w, h);
+
+            if (IsTitleEditVisible)
+            {
+                x = Title.X + Title.Width;
+                w = Height / 2;
+                h = w;
+
+                AddSubview(Edit, x, y, w, h);
+            }
 
             if (rightItem != null) 
             {

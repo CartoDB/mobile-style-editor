@@ -71,6 +71,11 @@ namespace mobile_style_editor
             UpdateLayout(X, y, Width, height);
         }
 
+        public void UpdateX(double x)
+        {
+            UpdateLayout(x, Y, Width, Height);
+        }
+
         public virtual void RemoveChild(View view)
         {
             Children.Remove(view);

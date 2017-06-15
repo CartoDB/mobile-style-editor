@@ -110,6 +110,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\FileListPopup\SelectButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\Base\BackButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Popup\Base\PopupHeader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\Navigation\TitleEditButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\MeasuredLabel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderer\MeasuredLabelRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />

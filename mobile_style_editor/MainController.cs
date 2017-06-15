@@ -55,8 +55,9 @@ namespace mobile_style_editor
 
             ContentView = new MainView(IsTemplateFolder);
             Content = ContentView;
-
-            ContentView.NavigationBar.Title.Text = filename.Replace(Parser.ZipExtension, "").ToUpper();
+			
+            ContentView.NavigationBar.IsTitleEditVisible = true;
+			ContentView.NavigationBar.Title.Text = filename.Replace(Parser.ZipExtension, "").ToUpper();
 
             string[] split = folder.Split('/');
             string styleFolder = split[split.Length - 1];

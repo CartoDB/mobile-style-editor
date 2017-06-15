@@ -15,6 +15,36 @@ namespace mobile_style_editor
             set { padding = value; }
         }
 
+		double topPadding = -1;
+		public double TopPadding
+		{
+			get
+			{
+				if (topPadding > 0)
+				{
+					return topPadding;
+				}
+
+				return ImagePadding;
+			}
+			set { leftPadding = value; }
+		}
+
+        double leftPadding = - 1;
+        public double LeftPadding
+        {
+            get
+            {
+                if (leftPadding > 0)
+                {
+                    return leftPadding;
+                }
+
+                return ImagePadding;
+            }
+            set { leftPadding = value; }
+        }
+
         public string Source 
         {
             get { return image.Source.StyleId; } 
@@ -28,8 +58,8 @@ namespace mobile_style_editor
 
         public override void LayoutSubviews()
         {
-            double x = padding;
-            double y = padding;
+            double x = LeftPadding;
+            double y = ImagePadding;
             double h = Height - 2 * padding;
             double w = Width - 2 * padding;
 

@@ -275,6 +275,7 @@
     <BundleResource Include="Resources\icon_email.png" />
     <BundleResource Include="Resources\icon_save.png" />
     <BundleResource Include="Resources\icon_upload.png" />
+    <BundleResource Include="Resources\icon_edit.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="sqlite-net">

@@ -184,6 +184,7 @@
     <AndroidResource Include="Resources\drawable-nodpi\icon_email.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_save.png" />
     <AndroidResource Include="Resources\drawable-nodpi\icon_upload.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\icon_edit.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SpanBuilder\" />
