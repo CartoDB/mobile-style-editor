@@ -228,6 +228,7 @@ namespace mobile_style_editor
             {
                 string text = (string)sender;
                 ContentView.NavigationBar.UpdateText(text);
+                ContentView.NavigationBar.CloseTitleEditor();
 
                 string newFolder = StyleListController.MyStyleFolder;
                 string newName = text + Parser.ZipExtension;

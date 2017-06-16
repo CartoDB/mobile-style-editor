@@ -157,15 +157,28 @@ namespace mobile_style_editor
 			field.Unfocused -= CloseTitleEditor;
         }
 
+        void ShowTitleField(bool value)
+        {
+            // I have no idea why this is necessary,
+            // but we have to raise Title view, else it'll stay hidden... somewhere
+
+            if (value) 
+            {
+                RaiseChild(Title);
+            }
+
+            field.IsVisible = !value;
+            Edit.IsVisible = value;
+            Title.IsVisible = value;
+        }
+
         BaseEntry field;
         System.Timers.Timer focusTimer;
         bool didJustFocus;
 
         public void OpenTitleEditor()
         {
-            field.IsVisible = true;
-            Edit.IsVisible = false;
-            Title.IsVisible = false;
+            ShowTitleField(false);
 
             didJustFocus = true;
 
@@ -184,25 +197,14 @@ namespace mobile_style_editor
             };
         }
 
-        public void CloseTitleEditor(bool completed)
+        public void CloseTitleEditor()
         {
-            // I have no idea why this is necessary,
-            // but we have to raise Title view, else it'll stay hidden... somewhere
-            RaiseChild(Title);
-
-            Edit.IsVisible = true;
-            Title.IsVisible = true;
-            field.IsVisible = false;
-
-            if (completed)
-            {
-                EditingEnded?.Invoke(field.Text, EventArgs.Empty);   
-            }
+            ShowTitleField(true);
         }
 
 		void OnEditingCompleted(object sender, EventArgs e)
         {
-            CloseTitleEditor(true);
+			EditingEnded?.Invoke(field.Text, EventArgs.Empty);
         }
 
         void CloseTitleEditor(object sender, FocusEventArgs e)
@@ -220,7 +222,7 @@ namespace mobile_style_editor
                 return;
             }
 
-            CloseTitleEditor(false);
+            CloseTitleEditor();
         }
 
         public void Revert()
