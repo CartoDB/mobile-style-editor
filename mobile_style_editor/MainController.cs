@@ -124,10 +124,12 @@ namespace mobile_style_editor
 
             ContentView.NavigationBar.Edit.Click += OnTitleEditClicked;
 
+			ContentView.NavigationBar.EditingEnded += OnTitleEditComplete;
+
 #if __ANDROID__
 			DriveClientDroid.Instance.UploadComplete += OnUploadComplete;
 #elif __IOS__
-            DriveClientiOS.Instance.UploadComplete += OnUploadComplete;
+			DriveClientiOS.Instance.UploadComplete += OnUploadComplete;
 #elif __UWP__
             ContentView.Zoom.In.Click += ZoomIn;
             ContentView.Zoom.Out.Click += ZoomOut;
@@ -163,6 +165,8 @@ namespace mobile_style_editor
             ContentView.Editor.Popup.Box.Button.Click -= OnWarningPopupButtonClicked;
 
             ContentView.NavigationBar.Edit.Click -= OnTitleEditClicked;
+
+            ContentView.NavigationBar.EditingEnded -= OnTitleEditComplete;
 
 #if __ANDROID__
 			DriveClientDroid.Instance.UploadComplete -= OnUploadComplete;
@@ -212,6 +216,27 @@ namespace mobile_style_editor
         void OnTitleEditClicked(object sender, EventArgs e)
         {
             ContentView.NavigationBar.OpenTitleEditor();
+        }
+
+        void OnTitleEditComplete(object sender, EventArgs e)
+        {
+            string title = "Are you sure you wish to rename the style?";
+            string message = "You won't be able to upload the style to Github anymore";
+
+            if (IsTemplateFolder)
+            {
+                message = "When you rename a template style, it will be added to your styles";
+            }
+
+            Alert(title, message, delegate
+            {
+                ContentView.NavigationBar.Revert();
+            }, delegate
+            {
+                string text = (string)sender;
+                ContentView.NavigationBar.UpdateText(text);
+                Console.WriteLine("Done");
+            });
         }
 
         void HandleUnsavedChanges()

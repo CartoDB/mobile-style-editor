@@ -183,15 +183,8 @@ namespace mobile_style_editor
             };
         }
 
-        public void CloseTitleEditor(bool change = false)
+        public void CloseTitleEditor(bool completed)
         {
-			string text = field.Text;
-
-			if (change)
-            {
-                Title.Text = text;    
-            }
-
             // I have no idea why this is necessary,
             // but we have to raise Title view, else it'll stay hidden... somewhere
             RaiseChild(Title);
@@ -200,15 +193,11 @@ namespace mobile_style_editor
             Title.IsVisible = true;
             field.IsVisible = false;
 
-            Console.WriteLine("Closed");
-
-            EditingEnded?.Invoke(text, EventArgs.Empty);
+            if (completed)
+            {
+                EditingEnded?.Invoke(field.Text, EventArgs.Empty);   
+            }
         }
-
-		void OnFieldFocus(object sender, FocusEventArgs e)
-		{
-			Console.WriteLine("wat");
-		}
 
 		void OnEditingCompleted(object sender, EventArgs e)
         {
@@ -226,12 +215,23 @@ namespace mobile_style_editor
                  * God damnit. 
                  * Implemented special timer to check whether focus happened within 100ms or not.
                  */
-                Console.WriteLine("Did just focus");
                 field.Focus();
                 return;
             }
 
-            CloseTitleEditor();
+            CloseTitleEditor(false);
+        }
+
+        public void Revert()
+        {
+			field.Text = "";
+		}
+
+        public void UpdateText(string text)
+        {
+            Title.Text = text;
+
+            field.Text = "";
         }
 	}
 
