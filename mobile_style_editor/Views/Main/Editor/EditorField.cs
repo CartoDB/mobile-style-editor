@@ -160,7 +160,18 @@ namespace mobile_style_editor
             IsSpellCheckEnabled = false;
 #endif
         }
-        
+        bool log;
+
+        void Log(string text)
+        {
+            if (!log)
+            {
+                return;
+            }
+
+            Console.WriteLine(text);
+        }
+
 		public void InitializeTimer()
 		{
             updateTimer = new System.Timers.Timer(1000);
@@ -183,19 +194,19 @@ namespace mobile_style_editor
         {
             if (currentText == null)
             {
-                Console.WriteLine("Won't update Text: currentText == null");
+                Log("Won't update Text: currentText == null");
                 return;
             }
 
 			if (currentSelection == -1)
 			{
-				Console.WriteLine("Won't update Text: currentSelection == -1");
+				Log("Won't update Text: currentSelection == -1");
                 return;
 			}
 
 			if (IsScrolling)
 			{
-				Console.WriteLine("Won't update Text: IsScrolling");
+				Log("Won't update Text: IsScrolling");
 				return;
 			}
 
@@ -433,7 +444,7 @@ namespace mobile_style_editor
 #elif __IOS__
 					if (shouldReturn)
 					{
-						Console.WriteLine("Not updating Editor, as text hasn't changed (elapsed: " + watch.ElapsedMilliseconds + ")");
+						Log("Not updating Editor, as text hasn't changed (elapsed: " + watch.ElapsedMilliseconds + ")");
 						watch.Stop();
 						return;
 					}
