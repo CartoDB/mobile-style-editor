@@ -240,8 +240,11 @@ namespace mobile_style_editor
                 }
                 else
                 {
-                    FileUtils.RenameFile(newFolder, filename, newName);    
+                    FileUtils.RenameFile(newFolder, filename, newName);
                 }
+
+                folder = newFolder;
+				filename = newName;
 
             });
         }

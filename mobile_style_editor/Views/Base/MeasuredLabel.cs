@@ -14,6 +14,8 @@ namespace mobile_style_editor
 
         public double MeasuredWidth { get; set; }
 
+        public int NumberOfLines { get; set; }
+
         public EventHandler<EventArgs> TextUpdate;
 
         public EventHandler<EventArgs> Measured;

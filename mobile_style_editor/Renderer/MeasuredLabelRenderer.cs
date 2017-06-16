@@ -21,9 +21,12 @@ namespace mobile_style_editor
         protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
         {
             base.OnElementChanged(e);
+
             if (e.NewElement != null)
             {
                 View = (MeasuredLabel)e.NewElement;
+
+                Control.Lines = View.NumberOfLines;
 
                 Measure();
 

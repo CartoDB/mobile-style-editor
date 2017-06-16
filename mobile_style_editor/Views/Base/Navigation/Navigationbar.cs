@@ -50,6 +50,7 @@ namespace mobile_style_editor
 			Title.VerticalTextAlignment = TextAlignment.Center;
 			Title.HorizontalTextAlignment = TextAlignment.Center;
 			Title.FontSize = 14;
+            Title.NumberOfLines = 1;
 
 			field = new BaseEntry();
 			field.BackgroundColor = Colors.CartoNavyLight;
@@ -72,40 +73,41 @@ namespace mobile_style_editor
 			};
 		}
 
-		public override void LayoutSubviews()
-		{
-			double statusbarHeight = BaseY;
+        public override void LayoutSubviews()
+        {
+            double statusbarHeight = BaseY;
 
-			double x = 0;
-			double y = 0;
-			double w = Width;
-			double h = statusbarHeight;
+            double x = 0;
+            double y = 0;
+            double w = Width;
+            double h = statusbarHeight;
 
-			AddSubview(statusbar, x, y, w, h);
+            AddSubview(statusbar, x, y, w, h);
 
-			y += h;
-			h = Height - statusbarHeight;
+            y += h;
+            h = Height - statusbarHeight;
 
-			AddSubview(container, x, y, w, h);
+            AddSubview(container, x, y, w, h);
 
-			x = 0;
-			y = 0;
+            x = 0;
+            y = 0;
 
-			if (IsBackButtonVisible)
-			{
-                w = h * 2;
-				container.AddSubview(Back, x, y, w, h);
-            } else
+            if (IsBackButtonVisible)
             {
-                w = h;    
+                w = h * 2;
+                container.AddSubview(Back, x, y, w, h);
+            }
+            else
+            {
+                w = h;
             }
 
             w = Title.MeasuredWidth;
             h = Title.MeasuredHeight;
-			x = w;
+            x = w;
             y = Height / 2 - h / 2 + BaseY;
 
-			AddSubview(Title, x, y, w, h);
+            AddSubview(Title, x, y, w, h);
 
             if (IsTitleEditVisible)
             {
@@ -117,22 +119,21 @@ namespace mobile_style_editor
                 AddSubview(Edit, x, y, w, h);
             }
 
-            if (rightItem != null) 
+            if (rightItem != null)
             {
                 h = Height - statusbarHeight;
                 w = h;
                 x = Width - w;
                 y = BaseY;
 
-                AddSubview(rightItem, x, y, w, h);   
+                AddSubview(rightItem, x, y, w, h);
             }
 
-
-                double extra = Title.Width / 3;
-                x = Title.X - extra;
-                w = Title.Width + (2 * extra);
-                AddSubview(field, x, Title.Y, w, Title.Height);
-		}
+            double extra = Title.Width / 3;
+            x = Title.X - extra;
+            w = Title.Width + (2 * extra);
+            AddSubview(field, x, Title.Y, w, Title.Height);
+        }
 
 		public void Add(BaseView parent, double width)
 		{
