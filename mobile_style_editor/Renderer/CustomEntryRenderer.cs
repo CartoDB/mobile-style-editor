@@ -15,7 +15,10 @@ using Xamarin.Forms.Platform.UWP;
 namespace mobile_style_editor
 {
     public class CustomEntryRenderer : EntryRenderer
+
     {
+        BaseEntry View;
+
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
             base.OnElementChanged(e);
@@ -27,6 +30,36 @@ namespace mobile_style_editor
                 Control.SetPadding(5, 0, 0, 0);
                 Control.Gravity = Android.Views.GravityFlags.CenterVertical;
             }
+#elif __IOS__
+            if (e.NewElement != null)
+            {
+                View = (BaseEntry)e.NewElement;
+
+                if (View.AutoCorrectEnabled)
+                {
+                    EnableAutoCorrect();
+                }
+                else
+                {
+                    DisableAutoCorrect();
+                }
+            }
+#endif
+        }
+
+        void DisableAutoCorrect()
+        {
+#if __IOS__
+            Control.AutocorrectionType = UIKit.UITextAutocorrectionType.No;
+#elif __ANDROID__
+#endif
+        }
+
+        void EnableAutoCorrect()
+        {
+#if __IOS__
+            Control.AutocorrectionType = UIKit.UITextAutocorrectionType.Yes;
+#elif __ANDROID__
 #endif
         }
 

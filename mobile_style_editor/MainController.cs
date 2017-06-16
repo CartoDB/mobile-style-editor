@@ -122,6 +122,8 @@ namespace mobile_style_editor
 
             ContentView.Editor.Popup.Box.Button.Click += OnWarningPopupButtonClicked;
 
+            ContentView.NavigationBar.Edit.Click += OnTitleEditClicked;
+
 #if __ANDROID__
 			DriveClientDroid.Instance.UploadComplete += OnUploadComplete;
 #elif __IOS__
@@ -134,6 +136,8 @@ namespace mobile_style_editor
             timer.Initialize(ContentView);
 
             ContentView.Editor.Field.InitializeTimer();
+
+            ContentView.NavigationBar.AttachHandlers();
         }
 
         protected override void OnDisappearing()
@@ -158,6 +162,8 @@ namespace mobile_style_editor
 
             ContentView.Editor.Popup.Box.Button.Click -= OnWarningPopupButtonClicked;
 
+            ContentView.NavigationBar.Edit.Click -= OnTitleEditClicked;
+
 #if __ANDROID__
 			DriveClientDroid.Instance.UploadComplete -= OnUploadComplete;
 #elif __IOS__
@@ -170,6 +176,8 @@ namespace mobile_style_editor
             timer.Dispose();
 
             ContentView.Editor.Field.DisposeTimer();
+
+            ContentView.NavigationBar.DetachHandlers();
         }
 
         async void OnBackButtonPressed(object sender, EventArgs e)
@@ -199,6 +207,11 @@ namespace mobile_style_editor
             {
                 return base.OnBackButtonPressed();
             }
+        }
+
+        void OnTitleEditClicked(object sender, EventArgs e)
+        {
+            ContentView.NavigationBar.OpenTitleEditor();
         }
 
         void HandleUnsavedChanges()

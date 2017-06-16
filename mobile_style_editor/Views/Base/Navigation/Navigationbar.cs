@@ -8,6 +8,8 @@ namespace mobile_style_editor
 	{
         public static readonly double HEIGHT = 50;
 
+        public EventHandler<EventArgs> EditingEnded;
+
 		public bool IsBackButtonVisible { get; set; } = true;
 
         public bool IsTitleEditVisible { get; set; }
@@ -48,6 +50,14 @@ namespace mobile_style_editor
 			Title.VerticalTextAlignment = TextAlignment.Center;
 			Title.HorizontalTextAlignment = TextAlignment.Center;
 			Title.FontSize = 14;
+
+			field = new BaseEntry();
+			field.BackgroundColor = Colors.CartoNavyLight;
+			field.TextColor = Title.TextColor;
+			field.FontSize = Title.FontSize;
+			field.AutoCorrectEnabled = false;
+            field.FontAttributes = Title.FontAttributes;
+            field.IsVisible = false;
 
 			Back = new NavigationBackButton();
 
@@ -90,16 +100,17 @@ namespace mobile_style_editor
                 w = h;    
             }
 
-			x = w;
-			y = BaseY;
             w = Title.MeasuredWidth;
-			h = Height - statusbarHeight;
+            h = Title.MeasuredHeight;
+			x = w;
+            y = Height / 2 - h / 2 + BaseY;
 
 			AddSubview(Title, x, y, w, h);
 
             if (IsTitleEditVisible)
             {
                 x = Title.X + Title.Width;
+                y = BaseY;
                 w = Height / 2;
                 h = w;
 
@@ -115,6 +126,12 @@ namespace mobile_style_editor
 
                 AddSubview(rightItem, x, y, w, h);   
             }
+
+
+                double extra = Title.Width / 3;
+                x = Title.X - extra;
+                w = Title.Width + (2 * extra);
+                AddSubview(field, x, Title.Y, w, Title.Height);
 		}
 
 		public void Add(BaseView parent, double width)
@@ -125,6 +142,96 @@ namespace mobile_style_editor
         public void AddRightBarButton(BaseView view)
         {
             rightItem = view;
+        }
+
+        public void AttachHandlers()
+        {
+			field.Completed += OnEditingCompleted;
+			field.Unfocused += CloseTitleEditor;
+        }
+
+        public void DetachHandlers()
+        {
+			field.Completed -= OnEditingCompleted;
+			field.Unfocused -= CloseTitleEditor;
+        }
+
+        BaseEntry field;
+        System.Timers.Timer focusTimer;
+        bool didJustFocus;
+
+        public void OpenTitleEditor()
+        {
+            field.IsVisible = true;
+            Edit.IsVisible = false;
+            Title.IsVisible = false;
+
+            didJustFocus = true;
+
+            field.Focus();
+
+            focusTimer = new System.Timers.Timer(100);
+            focusTimer.Start();
+
+            focusTimer.Elapsed += delegate
+            {
+                didJustFocus = false;
+
+                focusTimer.Stop();
+                focusTimer.Dispose();
+                focusTimer = null;
+            };
+        }
+
+        public void CloseTitleEditor(bool change = false)
+        {
+			string text = field.Text;
+
+			if (change)
+            {
+                Title.Text = text;    
+            }
+
+            // I have no idea why this is necessary,
+            // but we have to raise Title view, else it'll stay hidden... somewhere
+            RaiseChild(Title);
+
+            Edit.IsVisible = true;
+            Title.IsVisible = true;
+            field.IsVisible = false;
+
+            Console.WriteLine("Closed");
+
+            EditingEnded?.Invoke(text, EventArgs.Empty);
+        }
+
+		void OnFieldFocus(object sender, FocusEventArgs e)
+		{
+			Console.WriteLine("wat");
+		}
+
+		void OnEditingCompleted(object sender, EventArgs e)
+        {
+            CloseTitleEditor(true);
+        }
+
+        void CloseTitleEditor(object sender, FocusEventArgs e)
+        {
+            if (didJustFocus)
+            {
+                /*
+                 * Xamarin forms bug. 
+                 * Seemingly randomly, sometimes Unfocused is called immediately after focus. 
+                 * But not always. 
+                 * God damnit. 
+                 * Implemented special timer to check whether focus happened within 100ms or not.
+                 */
+                Console.WriteLine("Did just focus");
+                field.Focus();
+                return;
+            }
+
+            CloseTitleEditor();
         }
 	}
 
