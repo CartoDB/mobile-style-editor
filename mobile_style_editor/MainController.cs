@@ -56,6 +56,7 @@ namespace mobile_style_editor
             var localPath = Path.Combine(styleFolder, filename.Replace(Parser.ZipExtension, ""));
 
             GithubData = LocalStorage.Instance.GetRepositoryData(localPath);
+            ContentView.Toolbar.CanUploadToGithub = GithubData.CanUploadToGithub;
 
             if (!LocalStorage.Instance.WarningPopupShown)
             {
@@ -231,16 +232,26 @@ namespace mobile_style_editor
                 string newFolder = StyleListController.MyStyleFolder;
                 string newName = text + Parser.ZipExtension;
 
+                GithubData.LocalPath = Path.Combine(newFolder, text);
+                GithubData.StyleName = text;
+                GithubData.CanUploadToGithub = false;
+
+                ContentView.Toolbar.UploadButton.IsVisible = false;
+
                 if (IsTemplateFolder)
                 {
                     byte[] bytes = FileUtils.ReadFileFromFolder(StyleListController.TemplateFolder, filename);
                     Stream stream = new MemoryStream(bytes);
 
 					FileUtils.SaveFileToFolder(stream, newFolder, newName);
+
+                    LocalStorage.Instance.Insert(GithubData);
                 }
                 else
                 {
                     FileUtils.RenameFile(newFolder, filename, newName);
+
+                    LocalStorage.Instance.Update(GithubData);
                 }
 
                 folder = newFolder;

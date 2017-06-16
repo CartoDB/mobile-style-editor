@@ -457,6 +457,7 @@ namespace mobile_style_editor
             
             item.Branch = CurrentBranch;
             item.LocalPath = Path.Combine(MyStyleFolder, rootFolder);
+            item.CanUploadToGithub = true;
 
             item.ConstructPrimaryKey();
 

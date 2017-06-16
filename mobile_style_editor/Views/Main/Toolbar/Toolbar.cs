@@ -25,7 +25,9 @@ namespace mobile_style_editor
 
         bool isTemplateFolder;
 
-        public BaseView Overlay { get; private set; }
+		public bool CanUploadToGithub { get; set; }
+
+		public BaseView Overlay { get; private set; }
 
 		public Toolbar(bool isTemplateFolder)
 		{
@@ -72,7 +74,7 @@ namespace mobile_style_editor
 
             AddSubview(EmailButton, x, y, w, h);
 
-            if (!isTemplateFolder)
+            if (!isTemplateFolder && CanUploadToGithub)
             {
                 x += w + padding;
 

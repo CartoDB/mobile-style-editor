@@ -22,7 +22,19 @@ namespace mobile_style_editor
 
             db = new SQLiteConnection(System.IO.Path.Combine(folder, file));
 
+            //RefreshTables();
             db.CreateTable<RepositoryData>();
+        }
+
+        void RefreshTables()
+        {
+            List<RepositoryData> data = db.Query<RepositoryData>("SELECT * from RepositoryData");
+
+            db.DropTable<RepositoryData>();
+            db.CreateTable<RepositoryData>();
+
+            db.InsertAll(data);
+
         }
 
         #region Github Access Token
