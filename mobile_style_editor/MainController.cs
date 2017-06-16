@@ -235,7 +235,22 @@ namespace mobile_style_editor
             {
                 string text = (string)sender;
                 ContentView.NavigationBar.UpdateText(text);
-                Console.WriteLine("Done");
+
+                string newFolder = StyleListController.MyStyleFolder;
+                string newName = text + Parser.ZipExtension;
+
+                if (IsTemplateFolder)
+                {
+                    byte[] bytes = FileUtils.ReadFileFromFolder(StyleListController.TemplateFolder, filename);
+                    Stream stream = new MemoryStream(bytes);
+
+					FileUtils.SaveFileToFolder(stream, newFolder, newName);
+                }
+                else
+                {
+                    FileUtils.RenameFile(newFolder, filename, newName);    
+                }
+
             });
         }
 

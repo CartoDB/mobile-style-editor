@@ -426,7 +426,7 @@ namespace mobile_style_editor
 			foreach (DownloadedGithubFile file in files)
 			{
 				file.Path = file.Path.Replace(repoRootFolder, "");
-				FileUtils.SaveToAppFolder(file.Stream, file.Path, file.Name);
+				FileUtils.SaveFileToFolder(file.Stream, file.Path, file.Name);
 			}
 
 			string zipname = rootFolder + Parser.ZipExtension;
@@ -506,7 +506,7 @@ namespace mobile_style_editor
 
 		void OnFileDownloadComplete(object sender, DownloadEventArgs e)
 		{
-			FileUtils.SaveToAppFolder(e.Stream, MyStyleFolder, e.Name);
+			FileUtils.SaveFileToFolder(e.Stream, MyStyleFolder, e.Name);
 
 			Device.BeginInvokeOnMainThread(delegate
 			{
@@ -776,7 +776,7 @@ namespace mobile_style_editor
             if (!existsLocally)
             {
                 var file = await HubClient.Instance.DownloadFile(content);
-                List<string> data = FileUtils.SaveToAppFolder(file.Stream, TemplateFolder, file.Name);
+                List<string> data = FileUtils.SaveFileToFolder(file.Stream, TemplateFolder, file.Name);
 
                 path = data[1];
                 filename = data[0];

@@ -53,29 +53,22 @@ namespace mobile_style_editor
 			return File.ReadAllBytes(path);
 		}
 
-		/*
-		 * Always returns a list of strings where:
-		 * 0: filename
-		 * 1: folder
-		 * 2: combined full path
-		 */
-		public static List<string> SaveToAppFolder(Stream input, string filename)
-		{
-			string folder = Parser.ApplicationFolder;
+        public static byte[] ReadFileFromFolder(string folder, string filename)
+        {
+            string path = Path.Combine(Path.Combine(Parser.ApplicationFolder, folder), filename);
+            return PathToByteData(path);
+        }
 
-			string path = Path.Combine(folder, filename);
+        public static void RenameFile(string folder, string oldName, string newName)
+        {
+            string appFolder = Parser.ApplicationFolder;
+            folder = Path.Combine(appFolder, folder);
 
-			using (Stream output = File.Create(path))
-			{
-#if __IOS__
-				// Move to 0 position, may not always be the case when dealing with MemoryStreams
-				input.Seek(0, SeekOrigin.Begin);
-#endif
-				input.CopyTo(output);
-			}
+            string oldPath = Path.Combine(folder, oldName);
+            string newPath = Path.Combine(folder, newName);
 
-			return new List<string> { filename, folder, path };
-		}
+            File.Move(oldPath, newPath);
+        }
 
 		/*
 		* Always returns a list of strings where:
@@ -83,7 +76,7 @@ namespace mobile_style_editor
 		* 1: folder
 		* 2: combined full path
 		*/
-		public static List<string> SaveToAppFolder(Stream input, string folderPath, string filename)
+		public static List<string> SaveFileToFolder(Stream input, string folderPath, string filename)
 		{
 			string baseFolder = Parser.ApplicationFolder;
 			string path = Path.Combine(baseFolder, folderPath);
