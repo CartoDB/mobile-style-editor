@@ -36,14 +36,6 @@ namespace mobile_style_editor
 
         readonly SaveTimer timer = new SaveTimer();
 
-        string owner { get { return GithubData.Owner; } }
-
-        string repository { get { return GithubData.Name; } }
-
-        string path { get { return GithubData.RepositoryPath; } }
-
-        string branch { get { return GithubData.Branch; } }
-
         RepositoryData GithubData;
 
         public MainController(string folder, string filename)
@@ -313,7 +305,12 @@ namespace mobile_style_editor
              * 1. Style location & name change logic
              * 2. "Create new branch" logic
              */
-            ContentView.GithubUpload.Content.Update(owner, repository, path, branch);
+            ContentView.GithubUpload.Content.Update(
+                GithubData.Owner, 
+                GithubData.Name, 
+                GithubData.RepositoryPath, 
+                GithubData.Branch
+            );
             ContentView.GithubUpload.Show();
         }
 
@@ -326,17 +323,28 @@ namespace mobile_style_editor
 
 				string comment = ContentView.GithubUpload.Content.Comment.Text;
 
-				string error = await HubClient.Instance.Update(owner, repository, path, branch, ContentView.Data, comment);
+				string error = await HubClient.Instance.Update(
+                    GithubData.Owner, 
+                    GithubData.Name, 
+                    GithubData.RepositoryPath, 
+                    GithubData.Branch, 
+                    ContentView.Data, 
+                    comment
+                );
 
-				if (error != null)
-				{
-					Alert("Whoops!", error, null);
+                if (error != null)
+                {
+                    Alert("Whoops!", error, null);
                 }
                 else
                 {
                     ContentView.GithubUpload.Hide();
 
-                    message = "Changes committed to " + repository + "/" + path + " (" + branch + ")";
+                    message = "Changes committed to "
+                        + GithubData.Name + "/"
+                        + GithubData.RepositoryPath + " ("
+                        + GithubData.Branch + ")";
+                    
                     Alert("Great success!", message, null);
                 }
 
