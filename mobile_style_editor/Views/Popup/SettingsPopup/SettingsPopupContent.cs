@@ -16,7 +16,7 @@ namespace mobile_style_editor
             GithubInfo = new UserInfo();
 
             DriveInfo = new UserInfo();
-            DriveInfo.LogoutButton.IsVisible = false;
+            DriveInfo.LogoutButton.Disable(false);
 
             separator1 = new BaseView();
             separator1.BackgroundColor = Colors.CartoNavyTransparent;
