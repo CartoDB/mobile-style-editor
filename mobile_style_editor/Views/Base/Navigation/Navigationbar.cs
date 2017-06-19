@@ -102,9 +102,11 @@ namespace mobile_style_editor
                 w = h;
             }
 
+            Title.Measure();
+
             w = Title.MeasuredWidth;
             h = Title.MeasuredHeight;
-            x = w;
+            x = Width / 2 - w / 2;
             y = Height / 2 - h / 2 + BaseY;
 
             AddSubview(Title, x, y, w, h);

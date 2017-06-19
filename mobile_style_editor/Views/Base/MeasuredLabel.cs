@@ -27,8 +27,13 @@ namespace mobile_style_editor
             {
                 base.Text = value;
 
-                TextUpdate?.Invoke(this, EventArgs.Empty);
+                Measure();
             }
+        }
+
+        public void Measure()
+        {
+            TextUpdate?.Invoke(this, EventArgs.Empty);
         }
     }
 }
