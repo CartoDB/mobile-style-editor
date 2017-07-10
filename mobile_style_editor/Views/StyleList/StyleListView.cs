@@ -30,7 +30,7 @@ namespace mobile_style_editor
             Container.Orientation = ScrollOrientation.Horizontal;
             Container.ScrollEnabled = false;
 
-            BackgroundColor = Colors.CartoRed;
+            BackgroundColor = Colors.NearWhite;
 
             MyStyles = new StyleContainer();
             MyStyles.Header = StyleContainer.GetHeaderLabel("MY STYLES");

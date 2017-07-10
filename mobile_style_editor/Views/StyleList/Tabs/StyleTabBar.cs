@@ -86,7 +86,7 @@ namespace mobile_style_editor
 	{
 		public StyleIndicator()
 		{
-			BackgroundColor = Colors.CartoPurple;
+            BackgroundColor = Colors.CartoNavy;
 		}
 
 		public void MoveTo(double x)

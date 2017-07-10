@@ -19,7 +19,7 @@ namespace mobile_style_editor
 
 		public PickerViewItem(string resource, string text)
 		{
-			BackgroundColor = Color.FromRgb(240, 240, 240);
+            BackgroundColor = Colors.NearWhite;
 
 			Image = new Image();
 			Image.Source = ImageSource.FromFile(resource);

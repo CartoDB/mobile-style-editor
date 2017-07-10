@@ -27,12 +27,13 @@ namespace mobile_style_editor
 
         public StyleListItem()
         {
-            BackgroundColor = Colors.CartoRedDark;
+            BackgroundColor = Colors.CartoNavy;
 
             label = new Label();
             label.VerticalTextAlignment = TextAlignment.Center;
             label.TextColor = Color.White;
-            label.FontSize = 11;
+            label.FontSize = 13;
+            label.FontAttributes = FontAttributes.Bold;
 
             MapView = new MapContainer();
 

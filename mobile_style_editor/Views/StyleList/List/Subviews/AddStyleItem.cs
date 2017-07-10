@@ -15,13 +15,13 @@ namespace mobile_style_editor
 
 		public AddStyleItem()
 		{
-			BackgroundColor = Color.White;
+            BackgroundColor = Colors.CartoNavy;
 
 			container = new BaseView();
-			container.BackgroundColor = Colors.NearWhite;
+			//container.BackgroundColor = Colors.NearWhite;
 
 			titleLabel = new Label();
-			titleLabel.TextColor = Colors.CartoNavy;
+            titleLabel.TextColor = Colors.NearWhite;
 			titleLabel.FontSize = 13;
 			titleLabel.FontAttributes = FontAttributes.Bold;
 
@@ -29,7 +29,7 @@ namespace mobile_style_editor
 			titleLabel.Text = "ADD STYLE";
 
 			separator = new BaseView();
-			separator.BackgroundColor = Colors.CartoNavy;
+            separator.BackgroundColor = Color.White;
 
             string folder = "";
 
@@ -42,7 +42,7 @@ namespace mobile_style_editor
 			Drive = new PickerViewItem(folder + "icon_drive.png", "GOOGLE DRIVE");
 			Drive.TextSize = 10;
 
-			Color buttonColor = Color.FromRgb(230, 230, 230);
+            Color buttonColor = Color.White;
 			Github.BackgroundColor = buttonColor;
 			Drive.BackgroundColor = buttonColor;
 		}
