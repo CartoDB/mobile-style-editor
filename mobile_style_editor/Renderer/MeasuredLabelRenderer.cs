@@ -26,9 +26,12 @@ namespace mobile_style_editor
             {
                 View = (MeasuredLabel)e.NewElement;
 
-                Control.Lines = View.NumberOfLines;
+#if __ANDROID__
 
-                Measure();
+#elif __IOS__
+                Control.Lines = View.NumberOfLines;
+#endif
+				Measure();
 
                 View.TextUpdate += (sender, args) =>
                 {
