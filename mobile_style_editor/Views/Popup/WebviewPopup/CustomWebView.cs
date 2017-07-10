@@ -17,6 +17,8 @@ namespace mobile_style_editor
             if (OnCookieDelete != null) {
                 OnCookieDelete(domain, EventArgs.Empty);
             }
+
+
         }
     }
 }
