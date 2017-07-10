@@ -216,8 +216,8 @@ namespace mobile_style_editor
         const string NewLine = "\n";
         const string Backspace = "";
 
-        int currentSelection = -1;
-        string currentText;
+        public int currentSelection = -1;
+        public string currentText;
         string previousText;
 
 #if __ANDROID__

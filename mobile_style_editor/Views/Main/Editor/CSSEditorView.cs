@@ -82,6 +82,8 @@ namespace mobile_style_editor
         public void Update(int index)
         {
             string text = items.DecompressedFiles[index];
+			Field.currentSelection = -1;
+            Field.currentText = null;
             Field.Update(text);
 #if __IOS__
             string[] lines = text.Split('\n');
