@@ -111,7 +111,7 @@ namespace mobile_style_editor
 
                 if (Data.StyleFileNames.Count > Toolbar.MaxCount)
                 {
-                    FileTabs.Show();
+                    //FileTabs.Show();
                     AddSubview(FileTabs, x, y, w, h);
                 }
 

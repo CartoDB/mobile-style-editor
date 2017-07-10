@@ -148,9 +148,6 @@
       <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="CartoMobileSDK.iOS">
-      <HintPath>..\packages\CartoMobileSDK.iOS.4.1.0-alpha-9\lib\Xamarin.iOS10\CartoMobileSDK.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="PInvoke.Windows.Core">
       <HintPath>..\packages\PInvoke.Windows.Core.0.3.2\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.Windows.Core.dll</HintPath>
     </Reference>
@@ -173,6 +170,9 @@
       <HintPath>..\packages\Xamarin.Auth.1.5.0\lib\Xamarin.iOS10\Xamarin.Auth.dll</HintPath>
     </Reference>
     <Reference Include="System.Json" />
+    <Reference Include="CartoMobileSDK.iOS">
+      <HintPath>..\packages\CartoMobileSDK.iOS.4.1.0-alpha-92\lib\Xamarin.iOS10\CartoMobileSDK.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

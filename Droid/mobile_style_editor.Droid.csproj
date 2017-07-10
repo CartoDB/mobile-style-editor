@@ -144,7 +144,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="CartoMobileSDK.Android">
-      <HintPath>..\packages\CartoMobileSDK.Android.4.1.0-alpha-9\lib\MonoAndroid230\CartoMobileSDK.Android.dll</HintPath>
+      <HintPath>..\packages\CartoMobileSDK.Android.4.1.0-alpha-92\lib\MonoAndroid230\CartoMobileSDK.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

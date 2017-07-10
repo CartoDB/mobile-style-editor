@@ -41,10 +41,14 @@ namespace mobile_style_editor
 #elif __UWP__
             MapView.RegisterLicense(CartoLicense);
 #endif
+            Carto.Utils.Log.ShowInfo = true;
+	        Carto.Utils.Log.ShowWarn = true;
+	        Carto.Utils.Log.ShowDebug = true;
+	        Carto.Utils.Log.ShowError = true;
 
 
 #if __IOS__
-			HockeyApp.iOS.BITHockeyManager manager = HockeyApp.iOS.BITHockeyManager.SharedHockeyManager;
+            HockeyApp.iOS.BITHockeyManager manager = HockeyApp.iOS.BITHockeyManager.SharedHockeyManager;
 			manager.Configure(HockeyId);
 			manager.DisableUpdateManager = false;
 			manager.StartManager();
