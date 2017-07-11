@@ -74,12 +74,6 @@ namespace mobile_style_editor
             {
 				data = Parser.GetZipData(folder, filename);
 				
-                string source = data.Source;
-				if (source != null)
-				{
-                    MapExtensions.SourceId = source;
-				}
-
 				Device.BeginInvokeOnMainThread(delegate
                 {
                     ContentView.Initialize(data);
@@ -111,7 +105,7 @@ namespace mobile_style_editor
 
             ContentView.GithubUpload.Content.Commit.Clicked += OnGithubCommitButtonClicked;
 
-            ContentView.MapView.SourceLabel.Done += OnSourceChanged;
+            //ContentView.MapView.SourceLabel.Done += OnSourceChanged;
 
             ContentView.Editor.Popup.Box.Button.Click += OnWarningPopupButtonClicked;
 
@@ -153,7 +147,7 @@ namespace mobile_style_editor
 
             ContentView.GithubUpload.Content.Commit.Clicked -= OnGithubCommitButtonClicked;
 
-            ContentView.MapView.SourceLabel.Done -= OnSourceChanged;
+            //ContentView.MapView.SourceLabel.Done -= OnSourceChanged;
 
             ContentView.Editor.Popup.Box.Button.Click -= OnWarningPopupButtonClicked;
 
@@ -270,18 +264,18 @@ namespace mobile_style_editor
             });
         }
 
-        void OnSourceChanged(object sender, EventArgs e)
-        {
-            ContentView.ShowLoading(); ;
+        //void OnSourceChanged(object sender, EventArgs e)
+        //{
+        //    ContentView.ShowLoading(); ;
 
-            string osm = (sender as SourceLabel).Text;
-            MapExtensions.SourceId = osm;
+        //    string osm = (sender as SourceLabel).Text;
+        //    MapExtensions.DefaultSourceId = osm;
 
-            ContentView.UpdateMap(delegate
-            {
-                ContentView.HideLoading();
-            });
-        }
+        //    ContentView.UpdateMap(delegate
+        //    {
+        //        ContentView.HideLoading();
+        //    });
+        //}
 
         void ZoomIn(object sender, EventArgs e)
         {

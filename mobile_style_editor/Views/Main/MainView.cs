@@ -187,7 +187,7 @@ namespace mobile_style_editor
                         });
                     });
 
-            MapView.SourceLabel.Text = MapExtensions.SourceId;
+            MapView.SourceLabel.Text = MapExtensions.DefaultSourceId;
         }
 
         public void DisableEditor()

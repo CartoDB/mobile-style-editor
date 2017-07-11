@@ -9,9 +9,9 @@ namespace mobile_style_editor
         public EventHandler<EventArgs> Done;
 
 		Label label;
-        BaseEntry field;
+        Label field;
 
-        public string Text { get { return field.Text; } set { field.Text = value; } }
+        public string Text { get { return field.Text.Trim(); } set { field.Text = " " + value; } }
 
 		public SourceLabel()
 		{
@@ -25,19 +25,20 @@ namespace mobile_style_editor
 			label.FontSize = 12;
 			label.TextColor = Color.White;
 
-			field = new BaseEntry();
+			field = new Label();
 			field.FontSize = 12;
 			field.FontAttributes = FontAttributes.Bold;
 			field.BackgroundColor = Colors.CartoNavyTransparent;
+            field.VerticalTextAlignment = TextAlignment.Center;
 			field.TextColor = Color.White;
-
-            field.Completed += (sender, e) => {
+            //field.IsEnabled = false;
+            //field.Completed += (sender, e) => {
                 
-                if (Done != null)
-                {
-                    Done(this, e);
-                }
-            };
+            //    if (Done != null)
+            //    {
+            //        Done(this, e);
+            //    }
+            //};
 		}
 
 		public override void LayoutSubviews()

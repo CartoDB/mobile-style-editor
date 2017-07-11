@@ -24,6 +24,42 @@ namespace mobile_style_editor
             }
         }
 
+        const string SourceKey = "source";
+        const string NullString = "null";
+
+        public static string GetSourceFromData(byte[] data)
+        {
+            var zip = new ZipFile(new MemoryStream(data));
+            foreach (ZipEntry file in zip)
+            {
+                if (!file.IsFile)
+                {
+                    // Ignore directories
+                    continue;
+                }
+                if (file.Name == ProjectFile) {
+                    Stream stream = zip.GetInputStream(file);
+
+                    using (var reader = new StreamReader(stream))
+					{
+						string content = reader.ReadToEnd();
+                        Variant json = Variant.FromString(content);
+
+                        string result = json.GetObjectElement(SourceKey).String;
+
+                        if (result.Equals(NullString))
+                        {
+                            return null;
+                        }
+
+                        return result;
+					}
+                }
+            }
+
+            return null;
+        }
+
 		public static ZipData GetZipData(string folder, string filename)
 		{
 			ZipData data = new ZipData();

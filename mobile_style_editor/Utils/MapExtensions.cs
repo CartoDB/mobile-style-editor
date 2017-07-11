@@ -12,13 +12,14 @@ namespace mobile_style_editor
 {
 	public static class MapExtensions
 	{
-		public static string SourceId = "carto.streets";
-        static string CurrentSourceId;
+		public static string DefaultSourceId = "carto.streets";
 
         public static void Update(this MapView MapView, bool withListener, byte[] data, Action completed, Action<string> failed = null)
         {
             System.Threading.Tasks.Task.Run(delegate
             {
+                var sourceId = Parser.GetSourceFromData(data);
+
                 BinaryData styleAsset = new BinaryData(data);
 
                 var package = new ZippedAssetPackage(styleAsset);
@@ -42,19 +43,15 @@ namespace mobile_style_editor
                     }
 				});
 #else           
-                if (MapView.Layers.Count > 0)
-                {
-                    if (!SourceId.Equals(CurrentSourceId))
-                    {
-                        // If SourceId has changed, clear layers and rebuild everything
-                        MapView.Layers.Clear();
-                    }
-                }
 
                 if (MapView.Layers.Count == 0)
                 {
-                    var source = new CartoOnlineTileDataSource(SourceId);
-                    CurrentSourceId = SourceId;
+                    if (sourceId == null)
+                    {
+                        sourceId = DefaultSourceId;
+                    }
+
+                    var source = new CartoOnlineTileDataSource(sourceId);
 
                     MBVectorTileDecoder decoder = null;
 
