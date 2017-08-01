@@ -44,7 +44,7 @@
 	<key>CFBundleName</key>
 	<string>Style Studio</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1</string>
+	<string>0.0.1</string>
 	<key>XSLaunchImageAssets</key>
 	<string>Assets.xcassets/LaunchImage.launchimage</string>
 </dict>
