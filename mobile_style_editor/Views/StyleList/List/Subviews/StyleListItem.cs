@@ -15,6 +15,8 @@ namespace mobile_style_editor
 {
 	public class StyleListItem : ClickView
 	{
+        public static readonly Color Background = Colors.LightTransparentGray;
+
 		public DownloadResult Data { get; private set; }
 
 #if __IOS__
@@ -27,7 +29,7 @@ namespace mobile_style_editor
 
         public StyleListItem()
         {
-            BackgroundColor = Colors.CartoNavy;
+            BackgroundColor = Background;
 
             label = new Label();
             label.VerticalTextAlignment = TextAlignment.Center;

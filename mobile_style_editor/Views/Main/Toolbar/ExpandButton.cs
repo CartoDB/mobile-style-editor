@@ -62,7 +62,7 @@ namespace mobile_style_editor
 
 		public void UpdateText(string filename)
 		{
-			label.Text = "CURRENT STYLE: " + filename.ToUpper();
+			label.Text = "CURRENT FILE: " + filename.ToUpper();
 		}
 
 		public void UpdateImage()

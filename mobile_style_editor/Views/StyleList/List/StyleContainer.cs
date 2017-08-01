@@ -31,7 +31,7 @@ namespace mobile_style_editor
 		{
 			styleList = new BaseScrollView();
 
-            separator = new BaseView { BackgroundColor = Colors.CartoNavy };
+            separator = new BaseView { BackgroundColor = Color.Black };
 
             RefreshButton = new RefreshButton();
             RefreshButton.IsVisible = false;
@@ -180,7 +180,7 @@ namespace mobile_style_editor
 			Label label = new Label();
 			label.Text = text;
 			label.VerticalTextAlignment = TextAlignment.End;
-            label.TextColor = Colors.CartoNavy;
+            label.TextColor = Color.Black;
 			label.Margin = new Thickness(0, 0);
 			label.FontAttributes = FontAttributes.Bold;
 			label.FontSize = 15f;

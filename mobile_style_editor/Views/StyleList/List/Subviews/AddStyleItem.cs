@@ -15,7 +15,7 @@ namespace mobile_style_editor
 
 		public AddStyleItem()
 		{
-            BackgroundColor = Colors.CartoNavy;
+            BackgroundColor = StyleListItem.Background;
 
 			container = new BaseView();
 			//container.BackgroundColor = Colors.NearWhite;
