@@ -29,13 +29,17 @@ namespace mobile_style_editor
 
         public StyleListItem()
         {
-            BackgroundColor = Background;
-
+            BorderWidth = 1;
+            BorderColor = Colors.CartoNavyLight;
+            Elevated = true;
+            BackgroundColor = StyleListView.Background;
+            
             label = new Label();
             label.VerticalTextAlignment = TextAlignment.Center;
-            label.TextColor = Color.White;
+            label.TextColor = Colors.CartoNavy;
+
             label.FontSize = 13;
-            label.FontAttributes = FontAttributes.Bold;
+            label.FontAttributes = FontAttributes.None;
 
             MapView = new MapContainer();
 

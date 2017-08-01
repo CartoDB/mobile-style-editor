@@ -113,6 +113,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\Navigation\TitleEditButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Base\MeasuredLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\MeasuredLabelRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderer\AddStyleItemRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderer\StyleListItemRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />

@@ -6,6 +6,8 @@ namespace mobile_style_editor
 {
     public class StyleListView : ContentView
     {
+        public static readonly Color Background = Colors.NearWhite;
+
         public BaseScrollView Container { get; private set; }
 
         public StyleContainer MyStyles { get; private set; }
@@ -30,7 +32,7 @@ namespace mobile_style_editor
             Container.Orientation = ScrollOrientation.Horizontal;
             Container.ScrollEnabled = false;
 
-            BackgroundColor = Colors.NearWhite;
+            BackgroundColor = Background;
 
             MyStyles = new StyleContainer();
             MyStyles.Header = StyleContainer.GetHeaderLabel("MY STYLES");

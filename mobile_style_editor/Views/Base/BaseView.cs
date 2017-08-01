@@ -9,6 +9,14 @@ namespace mobile_style_editor
     {
         public EventHandler<EventArgs> CornerRadiusSet;
         int cornerRadius;
+
+
+        public int BorderWidth { get; set; }
+
+        public Color BorderColor { get; set; }
+
+        public bool Elevated { get; set; }
+
         public int CornerRadius
         {
             get { return cornerRadius; }

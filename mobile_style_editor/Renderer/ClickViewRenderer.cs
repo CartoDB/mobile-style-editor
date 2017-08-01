@@ -18,26 +18,17 @@ using Xamarin.Forms.Platform.UWP;
 [assembly: ExportRenderer(typeof(ClickView), typeof(ClickViewRenderer))]
 namespace mobile_style_editor
 {
-	public class ClickViewRenderer : ViewRenderer
-	{
-		ClickView View { get; set; }
+    public class ClickViewRenderer : VisualElementRenderer<RelativeLayout>
+    {
+        ClickView View { get; set; }
 
-		protected override void OnElementChanged(ElementChangedEventArgs<View> e)
-		{
-			base.OnElementChanged(e);
+        protected override void OnElementChanged(ElementChangedEventArgs<RelativeLayout> e)
+        {
+            base.OnElementChanged(e);
 
-			if (Control == null)
-			{
-#if __IOS__
-				SetNativeControl(new UIKit.UIView());
-#elif __ANDROID__
-#elif __UWP__
-#endif
-			}
-
-			if (e.NewElement != null)
-			{
-				View = e.NewElement as ClickView;
+            if (e.NewElement != null)
+            {
+                View = e.NewElement as ClickView;
 #if __ANDROID__
 				SetBackgroundColor(View.BackgroundColor.ToNativeColor());
 
@@ -66,10 +57,12 @@ namespace mobile_style_editor
 					}
 				};
 #else
-				Control.BackgroundColor = View.BackgroundColor.ToNativeColor();
+                BackgroundColor = View.BackgroundColor.ToNativeColor();
 #endif
-			}
+
+            }
 		}
+
 #if __IOS__
 		public override void TouchesBegan(Foundation.NSSet touches, UIKit.UIEvent evt)
 		{
@@ -91,6 +84,7 @@ namespace mobile_style_editor
 #elif __UWP__
 
 #endif
+
 	}
 }
 #endif

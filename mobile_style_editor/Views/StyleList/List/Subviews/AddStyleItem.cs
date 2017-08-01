@@ -15,21 +15,23 @@ namespace mobile_style_editor
 
 		public AddStyleItem()
 		{
-            BackgroundColor = StyleListItem.Background;
+			BorderWidth = 1;
+			BorderColor = Colors.CartoNavyLight;
+			//Elevated = true;
+            BackgroundColor = StyleListView.Background;
 
 			container = new BaseView();
-			//container.BackgroundColor = Colors.NearWhite;
-
+			
 			titleLabel = new Label();
-            titleLabel.TextColor = Colors.NearWhite;
+            titleLabel.TextColor = Colors.CartoNavy;
 			titleLabel.FontSize = 13;
-			titleLabel.FontAttributes = FontAttributes.Bold;
+            titleLabel.FontAttributes = FontAttributes.None;
 
 			titleLabel.VerticalTextAlignment = TextAlignment.Center;
 			titleLabel.Text = "ADD STYLE";
 
 			separator = new BaseView();
-            separator.BackgroundColor = Color.White;
+            separator.BackgroundColor = Colors.CartoNavy;
 
             string folder = "";
 
