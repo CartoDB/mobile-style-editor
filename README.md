@@ -1,4 +1,4 @@
-## CARTOMobileSDK Style Studio
+## CARTO Style Studio Alpha Preview
 
 ###### Mobile app to Preview & Fix CARTO basemap styles (based on CartoCSS); written in Xamarin.Forms
 
