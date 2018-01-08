@@ -2,6 +2,21 @@
 
 ###### Mobile app to Preview & Fix CARTO basemap styles (based on CartoCSS); written in Xamarin.Forms
 
+#### IMPORTANT
+
+You need to create your own `github_info.json` with the format:
+
+```
+{
+	"username": "<your-username>",
+	"pa_token": "<your-public-access-token>",
+	"client_id": "<your-client-id>",
+	"client_secret": "<your-client-secret>"
+}
+```
+
+`client_id` and `client_secret` are the only required keys used in production mode, other keys are/were for debugging and development purposes.
+
 #### DISCLAIMER
 
 This application is (relatively) untested, crashes, bugs and other "unexpected features" are bound to arise, expected even.
@@ -22,7 +37,7 @@ There are three options to store your edited styles:
 2. Via email (just enter your email address and the style's .zip will be mailed to you
 3. Upload to Github
 
-Notes:
+##### NOTES
 
 * The third option is only available if it's downloaded gtom Github and you haven't renamed the style.
 * Changes will not be stored permanently unless you manually save your changes locally.
