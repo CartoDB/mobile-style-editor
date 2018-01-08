@@ -4,7 +4,7 @@
 
 #### IMPORTANT
 
-You need to create your own `github_info.json` with the format:
+Github authentication logic is not stored in the repository, you need to create your own `github_info.json` with the format:
 
 ```
 {
@@ -16,6 +16,21 @@ You need to create your own `github_info.json` with the format:
 ```
 
 `client_id` and `client_secret` are the only required keys used in production mode, other keys are/were for debugging and development purposes.
+
+Additional infomation available in Hubclient.cs: https://github.com/CartoDB/mobile-style-editor/blob/master/mobile_style_editor/Github/HubClient.cs
+
+Additionally, the iOS and UWP versions require that you also create your own `drive_client_ids.json` with the following format:
+
+```
+{
+	"user": "<your-user-name>",
+	"description": "Identifiers to request data from Google Drive for com.carto.style.editor via Google Drive API for user {user} (refresh_token is user-specific",
+	"client_id": "<your-client-id>",
+	"client_secret": "<your-client-secret",
+	"refresh_token": "<your-refresh-token>"
+}
+```
+Additional information available in DriveClientiOS.cs: https://github.com/CartoDB/mobile-style-editor/blob/master/mobile_style_editor/Google/DriveClientiOS.cs
 
 #### DISCLAIMER
 
