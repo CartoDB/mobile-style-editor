@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace mobile_style_editor.Networking
+namespace mobile_style_editor
 {
     public static class Networking
     {
@@ -11,7 +11,7 @@ namespace mobile_style_editor.Networking
         {
             string baseUrl = "https://nutifront.s3.amazonaws.com/";
             string folder = "style_editor_sample_styles/";
-            string url = baseUrl + folder + name + ".zip";
+            string url = baseUrl + folder + name;
 
             using (var client = new HttpClient())
             {

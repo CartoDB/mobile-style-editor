@@ -48,24 +48,7 @@ namespace mobile_style_editor
         {
             base.OnAppearing();
 
-            if (LocalStorage.Instance.HasAccessToken)
-            {
-                if (!HubClient.Instance.IsAuthenticated)
-                {
-                    string token = LocalStorage.Instance.AccessToken;
-                    HubClient.Instance.Authenticate(token);
-                }
-
-                // TODO 
-                // We must reload for changes to be displayed,
-                // but this approach is too resource-heavy,
-                // BackButton press takes several seconds even on high-end devices
-                PopulateTemplateList();
-            }
-            else
-            {
-                InitializeAuthentication();
-            }
+            PopulateTemplateList();
 
             ContentView.Container.DecelerationEnded += OnScrollViewDecelerationEnd;
 
@@ -229,30 +212,23 @@ namespace mobile_style_editor
             });
         }
 
-		List<Octokit.RepositoryContent> contents;
-        bool FilesDownloaded { get { return contents != null; } }
+        List<TemplateStyle> templates = new List<TemplateStyle> {
+            new TemplateStyle { Name = "voyager.zip" },
+            new TemplateStyle { Name = "positron.zip" },
+            new TemplateStyle { Name = "darkmatter.zip" }
+        };
 
         async void PopulateTemplateList(bool checkLocal = true)
 		{
             await Task.Run(async () =>
             {
-                if (!FilesDownloaded)
-                {
-                    contents = await DownloadList();
-
-                    Device.BeginInvokeOnMainThread(delegate
-                    {
-                        ContentView.Templates.RenderList(contents);
-                    });
-                }
-
                 int index = 0;
 
                 List<DownloadResult> results = new List<DownloadResult>();
 
-                foreach (var content in contents)
+                foreach (var template in templates)
                 {
-                    DownloadResult result = await DownloadFile(content, checkLocal);
+                    DownloadResult result = await DownloadFile(template.Name, checkLocal);
 
                     results.Add(result);
                     index++;
@@ -273,7 +249,7 @@ namespace mobile_style_editor
                   
         void OnTemplateRefreshClick(object sender, EventArgs e)
         {
-            contents = null;
+            templates = null;
             PopulateTemplateList(false);
         }
 
@@ -753,18 +729,13 @@ namespace mobile_style_editor
 			});
 		}
 
-		public async Task<List<Octokit.RepositoryContent>> DownloadList()
-		{
-			return await HubClient.Instance.GetZipFiles("CartoDB", "mobile-sample-styles");
-		}
-
-        public async Task<DownloadResult> DownloadFile(Octokit.RepositoryContent content, bool checkLocal = true)
+        public async Task<DownloadResult> DownloadFile(string name, bool checkLocal = true)
         {
             bool existsLocally = true;
 
             if (checkLocal)
             {
-                existsLocally = FileUtils.HasLocalCopy(TemplateFolder, content.Name);
+                existsLocally = FileUtils.HasLocalCopy(TemplateFolder, name);
             }
             else
             {
@@ -776,8 +747,8 @@ namespace mobile_style_editor
 
             if (!existsLocally)
             {
-                var file = await HubClient.Instance.DownloadFile(content);
-                List<string> data = FileUtils.SaveFileToFolder(file.Stream, TemplateFolder, file.Name);
+                var stream = await Networking.GetStyle(name);
+                List<string> data = FileUtils.SaveFileToFolder(stream, TemplateFolder, name);
 
                 path = data[1];
                 filename = data[0];
@@ -785,7 +756,7 @@ namespace mobile_style_editor
             else
             {
                 path = FileUtils.GetLocalPath(TemplateFolder);
-                filename = content.Name;
+                filename =name;
             }
 
             return new DownloadResult { Path = path, Filename = filename };
