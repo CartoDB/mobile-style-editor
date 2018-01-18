@@ -123,15 +123,6 @@
     <Reference Include="Octokit">
       <HintPath>..\packages\Octokit.0.24.1-alpha0001\lib\netstandard1.1\Octokit.dll</HintPath>
     </Reference>
-    <Reference Include="ToastIOS">
-      <HintPath>..\Components\ToastIOS-1.6\lib\ios-unified\ToastIOS.dll</HintPath>
-    </Reference>
-    <Reference Include="HockeySDK">
-      <HintPath>..\Components\hockeyappios-4.1.2.0\lib\ios-unified\HockeySDK.dll</HintPath>
-    </Reference>
-    <Reference Include="HockeySDK.iOSBindings">
-      <HintPath>..\Components\hockeyappios-4.1.2.0\lib\ios-unified\HockeySDK.iOSBindings.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Forms.Core">
       <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
       <Private>False</Private>
@@ -172,6 +163,15 @@
     <Reference Include="System.Json" />
     <Reference Include="CartoMobileSDK.iOS">
       <HintPath>..\packages\CartoMobileSDK.iOS.4.1.0-alpha-92\lib\Xamarin.iOS10\CartoMobileSDK.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="ToastIOS">
+      <HintPath>..\Components\ToastIOS-1.6\lib\ios-unified\ToastIOS.dll</HintPath>
+    </Reference>
+    <Reference Include="HockeySDK">
+      <HintPath>..\Components\hockeyappios-4.1.2.0\lib\ios-unified\HockeySDK.dll</HintPath>
+    </Reference>
+    <Reference Include="HockeySDK.iOSBindings">
+      <HintPath>..\Components\hockeyappios-4.1.2.0\lib\ios-unified\HockeySDK.iOSBindings.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

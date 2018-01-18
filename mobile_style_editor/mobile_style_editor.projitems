@@ -115,6 +115,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\MeasuredLabelRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\AddStyleItemRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer\StyleListItemRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Networking\Networking.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
@@ -141,6 +142,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\StyleList\List\Subviews\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Main\Editor\Utils\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Popup\Base\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Networking\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Github\github_info.json" />
