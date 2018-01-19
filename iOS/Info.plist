@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.carto.style.editor</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -44,8 +42,10 @@
 	<key>CFBundleName</key>
 	<string>Style Studio</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.1</string>
+	<string>0.0.3</string>
 	<key>XSLaunchImageAssets</key>
 	<string>Assets.xcassets/LaunchImage.launchimage</string>
+	<key>CFBundleVersion</key>
+	<string>3</string>
 </dict>
 </plist>
