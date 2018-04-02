@@ -1,10 +1,11 @@
-## CARTO Style Studio Alpha Preview
+## CARTO Style Editor (Alpha Preview)
 
 ###### Mobile app to preview and edit CARTO basemap styles (based on CartoCSS); written in Xamarin.Forms
 
 ## Get started
 
-* Installer for Android [here](https://rink.hockeyapp.net/apps/c005e5b5e4de4567a5bb6b82248005c4) (allow unknown sources)
+* Installer for **Android tablets** [here](https://rink.hockeyapp.net/apps/c005e5b5e4de4567a5bb6b82248005c4) (allow unknown sources)
+* Installer for **iPad / iPhone** is not available, you would need to use free Xamarin SDK and this src project to build your own
 * On phone it works read-only. Only with tablets and iPad you can also **edit styles**.
 * In first start it requires github login. Use any account. This enables to load and save styles in your repos.
 * Three sample styles (Voyager, Positron, Darkmatter) will be downloaded automatically,
